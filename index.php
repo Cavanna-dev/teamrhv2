@@ -13,11 +13,11 @@
     </head>
     <body>
 <?php
-switch ($_SESSION['user']['type']):
+switch (isset($_SESSION['user']['type'])):
     case "SUPERADMIN":
         $navbar = Array(
             "Candidat" => Array(
-                "candidat.php" => "Candidat",
+                "candidat.php?default" => "Candidat",
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
@@ -140,6 +140,8 @@ switch ($_SESSION['user']['type']):
             )
         );
     break;
+    default:
+        $navbar = Array();
 endswitch;
 ?>
 <nav class="navbar navbar-default">
@@ -151,7 +153,7 @@ endswitch;
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../index.php">TeamRH</a>
+            <a class="navbar-brand" href="/index.php">TeamRH</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -182,7 +184,7 @@ endswitch;
             <?php if (isset($_SESSION['user'])) { ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Bienvenue <?php echo $_SESSION['user']['first'] . " " . $_SESSION['user']['last'] ?>!</a></li>
-                    <li><a href="../logout.php">Se deconnecter!</a></li>
+                    <li><a href="/logout.php">Se deconnecter!</a></li>
                 </ul>
             <?php } ?>
         </div>
