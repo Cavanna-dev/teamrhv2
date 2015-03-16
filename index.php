@@ -23,7 +23,7 @@ switch (isset($_SESSION['user']['type'])):
                 "rendezvous.php" => "Rendez-vous",
             ),
             "Client" => Array(
-                "societe.php" => "Société",
+                "client.php" => "Société",
                 "contact.php" => "Contact",
                 "poste.php" => "Poste",
                 "entretien.php" => "Entretien",
@@ -153,7 +153,7 @@ endswitch;
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/index.php">TeamRH</a>
+            <a class="navbar-brand" href="index.php">TeamRH</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -171,7 +171,7 @@ endswitch;
                             <?php
                             foreach ($navlink as $key => $value):
                                 ?>
-                                <li><a href="<?php echo strtolower($dropdown) . DIRECTORY_SEPARATOR . $key; ?>"><?php echo $value; ?></a></li>
+                                <li><a href="<?php echo strtolower($dropdown) . "/" . $key; ?>"><?php echo $value; ?></a></li>
                                 <?php
                             endforeach;
                             ?>

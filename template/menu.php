@@ -9,7 +9,7 @@ switch ($_SESSION['user']['type']):
                 "rendezvous.php" => "Rendez-vous",
             ),
             "Client" => Array(
-                "societe.php" => "Société",
+                "client.php" => "Société",
                 "contact.php" => "Contact",
                 "poste.php" => "Poste",
                 "entretien.php" => "Entretien",
@@ -155,7 +155,7 @@ endswitch;
                             <?php
                             foreach ($navlink as $key => $value):
                                 ?>
-                                <li><a href="<?php echo ".." . DIRECTORY_SEPARATOR . strtolower($dropdown) . DIRECTORY_SEPARATOR . $key; ?>"><?php echo $value; ?></a></li>
+                                <li><a href="<?php echo "../" . strtolower($dropdown) . "/" . $key; ?>"><?php echo $value; ?></a></li>
                                 <?php
                             endforeach;
                             ?>
