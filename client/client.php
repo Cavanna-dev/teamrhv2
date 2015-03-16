@@ -2,6 +2,7 @@
 include '../template/header.php';
 include '../template/menu.php';
 include '../functions/connection_db.php';
+include '../functions/bootstrap.php';
 ?>
 
 <div class="container">
@@ -12,21 +13,21 @@ include '../functions/connection_db.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="inputName" class="col-lg-2 control-label">Dénomination</label>
+                            <label for="input_name" class="col-lg-2 control-label">Dénomination</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="inputName" name="inputName" placeholder="Nom" type="text" value="<?= isset($_POST['inputName']) ? $_POST['inputName'] : ""; ?>">
+                                <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_POST['input_name']) ? $_POST['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputContactSupp" class="col-lg-2 control-label">Responsable du compte Support</label>
+                            <label for="input_contact_supp" class="col-lg-2 control-label">Responsable du compte Support</label>
                             <div class="col-lg-10">
-                                <?php include '../functions/getAllUsers.php' ?>
-                                <select class="form-control" name="inputContactSupp" id="inputContactSupp">
+                                <?php $r_users = getAllUsers($db); ?>
+                                <select class="form-control" name="input_contact_supp" id="input_contact_supp">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_user = $users_r->fetch(PDO::FETCH_OBJ)) {
+                                    while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $r_user->id; ?>" <?php if (isset($_POST['inputContactSupp']) && $_POST['inputContactSupp'] == $r_user->id) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
+                                        <option value="<?php echo $r_user->id; ?>" <?php if (isset($_POST['input_contact_supp']) && $_POST['input_contact_supp'] == $r_user->id) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -44,13 +45,13 @@ include '../functions/connection_db.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="inputCountry" class="col-lg-2 control-label">Pays</label>
+                            <label for="input_country" class="col-lg-2 control-label">Pays</label>
                             <div class="col-lg-10">
-                                <?php include '../functions/getAllCountries.php' ?>
-                                <select class="form-control" name="inputCountry" id="inputCountry">
+                                <?php $r_countries = getAllCountries($db); ?>
+                                <select class="form-control" name="input_country" id="input_country">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_country = $countries_r->fetch(PDO::FETCH_OBJ)) {
+                                    while ($r_country = $r_countries->fetch(PDO::FETCH_OBJ)) {
                                         ?>
                                         <option value="<?php echo $r_country->id; ?>" <?php if ($r_country->id == 70) echo "selected"; ?>><?php echo $r_country->name; ?></option>
                                         <?php
@@ -60,15 +61,15 @@ include '../functions/connection_db.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputContactLaw" class="col-lg-2 control-label">Responsable du compte Avocat</label>
+                            <label for="input_contact_law" class="col-lg-2 control-label">Responsable du compte Avocat</label>
                             <div class="col-lg-10">
-                                <?php include '../functions/getAllUsers.php' ?>
-                                <select class="form-control" name="inputContactLaw" id="inputContactLaw">
+                                <?php $r_users = getAllUsers($db); ?>
+                                <select class="form-control" name="input_contact_law" id="input_contact_law">
                                     <option value=""></option>
                                     <?php
-                                    while ($user_r = $users_r->fetch(PDO::FETCH_OBJ)) {
+                                    while ($user_r = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_POST['inputContactLaw']) && $_POST['inputContactLaw'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
+                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_POST['input_contact_law']) && $_POST['input_contact_law'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -83,8 +84,10 @@ include '../functions/connection_db.php';
         <h1>Résultats</h1>
         <?php
         if ($_POST) {
-            include '../functions/getCustomers.php';
-            if ($customers_r) {
+            //include '../functions/getCustomers.php';
+
+            $r_customers = searchCustomers($db);
+            if ($r_customers) {
                 ?>
 
                 <div class="jumbotron">
@@ -100,35 +103,37 @@ include '../functions/connection_db.php';
                         </thead>
                         <tbody>
                             <?php
-                            while ($customer_r = $customers_r->fetch(PDO::FETCH_OBJ)) {
+                            $count_r = 1;
+                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
                                 ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td><a href="read_client.php?id=<?= $customer_r->id; ?>"><?= $customer_r->nom; ?></a></td>
+                                    <td><?= $count_r ?></td>
+                                    <td><?= $r_customer->nom; ?></td>
                                     <td>
-                                        <?php include '../functions/getAllUsers.php'; ?>
+                                        <?php $r_users = getAllUsers($db); ?>
                                         <?php
-                                        while ($user_r = $users_r->fetch(PDO::FETCH_OBJ)) {
-                                            if ($customer_r->mngt_law == $user_r->id)
-                                                echo $user_r->prenom . " " . $user_r->nom;
+                                        while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
+                                            if ($r_customer->mngt_law == $r_user->id)
+                                                echo $r_user->prenom . " " . $r_user->nom;
                                         }
                                         ?>
                                     </td>
                                     <td>
-                                        <?php include '../functions/getAllUsers.php'; ?>
+                                        <?php $r_users = getAllUsers($db); ?>
                                         <?php
-                                        while ($user_r = $users_r->fetch(PDO::FETCH_OBJ)) {
-                                            if ($customer_r->mngt_supp == $user_r->id)
-                                                echo $user_r->prenom . " " . $user_r->nom;
+                                        while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
+                                            if ($r_customer->mngt_supp == $r_user->id)
+                                                echo $r_user->prenom . " " . $r_user->nom;
                                         }
                                         ?>
                                     </td>
                                     <td>
-                                        <a href="del_client.php?id=<?= $customer_r->id; ?>" onclick="return confirm('omg')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                                        <a href="upd_client.php?id=<?= $customer_r->id; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                        <a href="del_client.php?id=<?= $r_customer->id; ?>" onclick="return confirm('omg')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                        <a href="upd_client.php?id=<?= $r_customer->id; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                                     </td>
                                 </tr>
                                 <?php
+                                $count_r++;
                             }
                             ?>
                         </tbody>
