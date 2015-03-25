@@ -3,7 +3,7 @@ switch ($_SESSION['user']['type']):
     case "SUPERADMIN":
         $navbar = Array(
             "Candidat" => Array(
-                "candidat.php?default" => "Candidat",
+                "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
@@ -38,7 +38,7 @@ switch ($_SESSION['user']['type']):
     case "ADMIN":
         $navbar = Array(
             "Candidat" => Array(
-                "candidat.php" => "Candidat",
+                "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
@@ -73,7 +73,7 @@ switch ($_SESSION['user']['type']):
     case "CONSULT":
         $navbar = Array(
             "Candidat" => Array(
-                "candidat.php" => "Candidat",
+                "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
@@ -101,7 +101,7 @@ switch ($_SESSION['user']['type']):
     case "ASSIST":
         $navbar = Array(
             "Candidat" => Array(
-                "candidat.php" => "Candidat",
+                "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
