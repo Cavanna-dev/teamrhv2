@@ -1,11 +1,16 @@
 .form-horizontal .control-label {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .navbar {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 table, .table {
-    font-size: 14px;
+    font-size: 18px;
+}
+
+.container .jumbotron, .container-fluid .jumbotron {
+  padding-left: 20px;
+  padding-right: 20px;
 }

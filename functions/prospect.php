@@ -1,43 +1,30 @@
 <?php
 
-function getAllCustomers($db)
-{
-    $sql = "SELECT id, nom "
-            . "FROM client "
-            . "ORDER BY nom";
-
-    $r_customer = $db->prepare($sql);
-    $r_customer->execute();
-    
-    return $r_customer;
-}
-
-function getOneCustomerById($db, $id)
+function getOneProspectById($db, $id)
 {
     $sql = "SELECT id, nom, secteur, adresse1, ville, postal, "
-            . "country_fk, nationalite, tel_std, fax, url, metro, remarque, "
-            . "mngt_law, mngt_supp, status_fk, raison_factu, civilite_factu, nom_factu, prenom_factu, "
-            . "titre_factu, adr1_factu, ville_factu, postal_factu, country_factu_fk, tel_factu, fax_factu, email_factu "
-            . "FROM client "
+            . "country_fk, nationalite, tel_std, url, metro, remarque, "
+            . "mngt_law, mngt_supp, niveau, status_fk "
+            . "FROM prospect "
             . "WHERE id=" . $id;
-    $r_customer = $db->prepare($sql);
-    $r_customer->execute();
-    $r = $r_customer->fetch(PDO::FETCH_OBJ);
+    $r_prospect = $db->prepare($sql);
+    $r_prospect->execute();
+    $r = $r_prospect->fetch(PDO::FETCH_OBJ);
 
     return $r;
 }
 
-function searchCustomers($db)
+function searchProspect($db)
 {
     $name = htmlspecialchars($_POST['input_name']);
     $zone = htmlspecialchars($_POST['input_zone']);
     $contact_s = htmlspecialchars($_POST['input_contact_supp']);
     $contact_l = htmlspecialchars($_POST['input_contact_law']);
 
-    $sql = "SELECT id, nom, mngt_law, mngt_supp, tel_std "
-            . "FROM client ";
+    $sql = "SELECT id, nom, secteur, mngt_law, mngt_supp "
+            . "FROM prospect ";
 
-    if (!empty($name) || !empty($zone) || !empty($contact_s) || !empty($contact_l))
+    if (!empty($name) || !empty($zone) ||  !empty($contact_s) || !empty($contact_l))
         $sql .= "WHERE ";
     if (!empty($name))
         $sql .= "nom like '%" . $name . "%' ";
@@ -55,9 +42,9 @@ function searchCustomers($db)
         $sql .= "mngt_law = '" . $contact_l . "' ";
 
     $sql .= "ORDER BY nom";
-
+    
     $r = $db->prepare($sql);
     $r->execute();
-
+    
     return $r;
 }

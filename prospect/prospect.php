@@ -6,20 +6,20 @@ include '../functions/bootstrap.php';
 ?>
 
 <div class="container">
-    <form class="form-horizontal" method="POST" action="client.php" id="form_customer">
-        <h1>Gestion des clients</h1>
+    <form class="form-horizontal" method="POST" action="prospect.php" id="form_customer">
+        <h1>Recherche prospect</h1>
         <div class="jumbotron">
             <div class="row">
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_name" class="col-lg-2 control-label">Dénomination</label>
+                            <label for="input_name" class="col-lg-2 control-label">Nom</label>
                             <div class="col-lg-10">
                                 <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_POST['input_name']) ? $_POST['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_contact_law" class="col-lg-2 control-label">Responsable Avocat</label>
+                            <label for="input_contact_law" class="col-lg-2 control-label">Responsable du compte Avocat</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_contact_law" id="input_contact_law">
@@ -60,7 +60,7 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_contact_supp" class="col-lg-2 control-label">Responsable Support</label>
+                            <label for="input_contact_supp" class="col-lg-2 control-label">Responsable du compte Support</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_contact_supp" id="input_contact_supp">
@@ -83,15 +83,16 @@ include '../functions/bootstrap.php';
         <h1>Résultats</h1>
         <?php
         if ($_POST) {
-            $r_customers = searchCustomers($db);
-            if ($r_customers) {
+            $r_prospects = searchProspect($db);
+            if ($r_prospects) {
                 ?>
 
                 <div class="jumbotron">
                     <table class="table table-striped table-hover ">
                         <thead>
                             <tr>
-                                <th>Dénomination Client</th>
+                                <th>Nom</th>
+                                <th>Secteur</th>
                                 <th>Responsable Avocat</th>
                                 <th>Responsable Support</th>
                                 <th>Action</th>
@@ -99,29 +100,33 @@ include '../functions/bootstrap.php';
                         </thead>
                         <tbody>
                             <?php
-                            $count_r = 1;
-                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
+                            while ($r_prospect = $r_prospects->fetch(PDO::FETCH_OBJ)) {
                                 ?>
                                 <tr>
+                                    <td><a href="upd_prospect.php?id=<?= $r_prospect->id; ?>"><?= $r_prospect->nom; ?></a></td>
                                     <td>
-                                        <a href="upd_client.php?id=<?= $r_customer->id; ?>">
-                                            <?= $r_customer->nom; ?>
-                                        </a>
+                                        <?php
+                                        $r_zone = getOneZoneById($db, $r_prospect->secteur);
+                                        echo $r_zone->libelle;
+                                        ?>
                                     </td>
                                     <td>
-                                        <?php $r_user_law = getUserById($db, $r_customer->mngt_law); ?>
-                                        <?= $r_user_law->initiale; ?>
+                                        <?php
+                                        $r_user_law = getUserById($db, $r_prospect->mngt_law);
+                                        echo $r_user_law->initiale;
+                                        ?>
                                     </td>
                                     <td>
-                                        <?php $r_user_supp = getUserById($db, $r_customer->mngt_supp); ?>
-                                        <?= $r_user_supp->initiale; ?>
+                                        <?php
+                                        $r_user_sup = getUserById($db, $r_prospect->mngt_supp);
+                                        echo $r_user_sup->initiale;
+                                        ?>
                                     </td>
                                     <td>
-                                        <a href="del_client.php?id=<?= $r_customer->id; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                        <a href="del_prospect.php?id=<?= $r_prospect->id; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                                     </td>
                                 </tr>
                                 <?php
-                                $count_r++;
                             }
                             ?>
                         </tbody>

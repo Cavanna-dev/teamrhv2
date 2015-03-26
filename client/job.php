@@ -6,28 +6,28 @@ include '../functions/bootstrap.php';
 ?>
 
 <div class="container">
-    <form class="form-horizontal" method="POST" action="client.php" id="form_customer">
-        <h1>Gestion des clients</h1>
+    <form class="form-horizontal" method="POST" action="job.php" id="form_customer">
+        <h1>Gestion des postes</h1>
         <div class="jumbotron">
             <div class="row">
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_name" class="col-lg-2 control-label">Dénomination</label>
+                            <label for="input_name" class="col-lg-2 control-label">Libellé</label>
                             <div class="col-lg-10">
                                 <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_POST['input_name']) ? $_POST['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_contact_law" class="col-lg-2 control-label">Responsable Avocat</label>
+                            <label for="input_contact" class="col-lg-2 control-label">Consultant</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
-                                <select class="form-control" name="input_contact_law" id="input_contact_law">
+                                <select class="form-control" name="input_contact" id="input_contact">
                                     <option value=""></option>
                                     <?php
                                     while ($user_r = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_POST['input_contact_law']) && $_POST['input_contact_law'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
+                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_POST['input_contact']) && $_POST['input_contact'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -44,31 +44,15 @@ include '../functions/bootstrap.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_zone" class="col-lg-2 control-label">Secteur</label>
+                            <label for="input_customer" class="col-lg-2 control-label">Client</label>
                             <div class="col-lg-10">
-                                <?php $r_zones = getAllZones($db); ?>
-                                <select class="form-control" name="input_zone" id="input_zone">
+                                <?php $r_customers = getAllCustomers($db); ?>
+                                <select class="form-control" name="input_customer" id="input_customer">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_zone = $r_zones->fetch(PDO::FETCH_OBJ)) {
+                                    while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $r_zone->id; ?>" <?php if (isset($_POST['input_zone']) && $_POST['input_zone'] == $r_zone->id) echo "selected"; ?>><?php echo $r_zone->libelle; ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="input_contact_supp" class="col-lg-2 control-label">Responsable Support</label>
-                            <div class="col-lg-10">
-                                <?php $r_users = getAllUsers($db); ?>
-                                <select class="form-control" name="input_contact_supp" id="input_contact_supp">
-                                    <option value=""></option>
-                                    <?php
-                                    while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
-                                        ?>
-                                        <option value="<?php echo $r_user->id; ?>" <?php if (isset($_POST['input_contact_supp']) && $_POST['input_contact_supp'] == $r_user->id) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
+                                        <option value="<?= $r_customer->id ?>" <?php if (isset($_POST['input_customer']) && $_POST['input_customer'] == $r_customer->id) echo "selected"; ?>><?= $r_customer->nom ?></option>
                                         <?php
                                     }
                                     ?>
@@ -83,38 +67,47 @@ include '../functions/bootstrap.php';
         <h1>Résultats</h1>
         <?php
         if ($_POST) {
-            $r_customers = searchCustomers($db);
-            if ($r_customers) {
+            $r_jobs = searchJobs($db);
+            if ($r_jobs) {
                 ?>
 
                 <div class="jumbotron">
                     <table class="table table-striped table-hover ">
                         <thead>
                             <tr>
-                                <th>Dénomination Client</th>
-                                <th>Responsable Avocat</th>
-                                <th>Responsable Support</th>
+                                <th>Libelle</th>
+                                <th>Client</th>
+                                <th>Titre</th>
+                                <th>Consultant</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $count_r = 1;
-                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
+                            while ($r_job = $r_jobs->fetch(PDO::FETCH_OBJ)) {
                                 ?>
                                 <tr>
                                     <td>
-                                        <a href="upd_client.php?id=<?= $r_customer->id; ?>">
-                                            <?= $r_customer->nom; ?>
+                                        <a href="upd_job.php?id=<?= $r_job->id; ?>">
+                                            <?= $r_job->libelle; ?>
                                         </a>
                                     </td>
                                     <td>
-                                        <?php $r_user_law = getUserById($db, $r_customer->mngt_law); ?>
-                                        <?= $r_user_law->initiale; ?>
+                                        <?php $r_customer = getOneCustomerById($db, $r_job->client); ?>
+                                        <a href="upd_client.php?id=<?= $r_customer->id ?>">
+                                            <?php if ($r_customer) echo $r_customer->nom; ?>
+                                        </a>
                                     </td>
                                     <td>
-                                        <?php $r_user_supp = getUserById($db, $r_customer->mngt_supp); ?>
-                                        <?= $r_user_supp->initiale; ?>
+                                        <?php $r_title = getOneTitleById($db, $r_job->titre); ?>
+                                            <?php if ($r_title) echo $r_title->libelle; ?>
+                                    </td>
+                                    <td>
+                                        <?php $r_user = getUserById($db, $r_job->consultant); ?>
+                                        <?php
+                                        if ($r_user)
+                                            echo $r_user->initiale;
+                                        ?>
                                     </td>
                                     <td>
                                         <a href="del_client.php?id=<?= $r_customer->id; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>

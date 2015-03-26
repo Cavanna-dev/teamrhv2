@@ -2,7 +2,7 @@
 
 function getJobById($db, $id)
 {
-    $sql = "SELECT id, client, titre, diplome, libelle, description, "
+    $sql = "SELECT id, client, titre, diplome, experience, libelle, description, "
             . "commentaire, contrat, duree, lieux, salaire, horaires, "
             . "date_deb, vitesse, communication, word, excel, powerpoint, "
             . "internet, autre_appli1, autre_appli2, niveau_fr, niveau_en, "
@@ -12,6 +12,22 @@ function getJobById($db, $id)
 
     $r = $db->prepare($sql);
     $r->execute();
+    return $r;
+}
+
+function getOneJobById($db, $id)
+{
+    $sql = "SELECT id, client, titre, diplome, experience, libelle, description, "
+            . "commentaire, contrat, duree, lieux, salaire, horaires, "
+            . "date_deb, vitesse, communication, word, excel, powerpoint, "
+            . "internet, autre_appli1, autre_appli2, niveau_fr, niveau_en, "
+            . "pourvu, pourcentage, garantie, forfait, formule, consultant, signature "
+            . "FROM poste "
+            . "WHERE id='" . $id . "'";
+
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetch(PDO::FETCH_OBJ);
     return $r;
 }
 
@@ -26,6 +42,36 @@ function getJobByCustomer($db, $id)
 
     $r = $db->prepare($sql);
     $r->execute();
+    return $r;
+}
+
+function searchJobs($db)
+{
+    $name = htmlspecialchars($_POST['input_name']);
+    $customer = htmlspecialchars($_POST['input_customer']);
+    $contact = htmlspecialchars($_POST['input_contact']);
+
+    $sql = "SELECT id, client, titre, libelle, consultant "
+            . "FROM poste ";
+
+    if (!empty($name) || !empty($customer) || !empty($contact))
+        $sql .= "WHERE ";
+    if (!empty($name))
+        $sql .= "libelle like '%" . $name . "%' ";
+    if (!empty($name) && (!empty($customer) || !empty($contact)))
+        $sql .= " AND ";
+    if (!empty($customer))
+        $sql .= "client = '" . $zone . "' ";
+    if (!empty($customer) && !empty($contact))
+        $sql .= " AND ";
+    if (!empty($contact))
+        $sql .= "consultant = '" . $contact . "' ";
+    
+    $sql .= "ORDER BY libelle";
+
+    $r = $db->prepare($sql);
+    $r->execute();
+
     return $r;
 }
 

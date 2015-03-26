@@ -7,11 +7,12 @@ switch ($_SESSION['user']['type']):
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
+                "refus.php" => "Refus",
             ),
             "Client" => Array(
                 "client.php" => "Société",
                 "contact.php" => "Contact",
-                "poste.php" => "Poste",
+                "job.php" => "Poste",
                 "entretien.php" => "Entretien",
                 "placement.php" => "Placement",
                 "agenda.php" => "Agenda",
@@ -34,7 +35,7 @@ switch ($_SESSION['user']['type']):
                 "notedefrais.php" => "Notes de frais",
             ),
         );
-    break;
+        break;
     case "ADMIN":
         $navbar = Array(
             "Candidat" => Array(
@@ -42,11 +43,12 @@ switch ($_SESSION['user']['type']):
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
+                "refus.php" => "Refus",
             ),
             "Client" => Array(
-                "societe.php" => "Société",
+                "client.php" => "Société",
                 "contact.php" => "Contact",
-                "poste.php" => "Poste",
+                "job.php" => "Poste",
                 "entretien.php" => "Entretien",
                 "placement.php" => "Placement",
                 "agenda.php" => "Agenda",
@@ -69,7 +71,36 @@ switch ($_SESSION['user']['type']):
                 "notedefrais.php" => "Notes de frais",
             ),
         );
-    break;
+        break;
+    case "ASSOC":
+        $navbar = Array(
+            "Candidat" => Array(
+                "applicant.php" => "Candidat",
+                "evaluation.php" => "Evaluation",
+                "recherche.php" => "Recherche",
+                "rendezvous.php" => "Rendez-vous",
+                "refus.php" => "Refus",
+            ),
+            "Client" => Array(
+                "client.php" => "Société",
+                "contact.php" => "Contact",
+                "job.php" => "Poste",
+                "entretien.php" => "Entretien",
+                "placement.php" => "Placement",
+                "agenda.php" => "Agenda",
+            ),
+            "Prospect" => Array(
+                "prospect.php" => "Prospect",
+                "contact.php" => "Contact",
+                "planning.php" => "Planning",
+            ),
+            "Fournisseur" => Array(
+                "fournisseur.php" => "Fournisseur",
+                "contact.php" => "Contact",
+                "media.php" => "Media",
+            )
+        );
+        break;
     case "CONSULT":
         $navbar = Array(
             "Candidat" => Array(
@@ -77,11 +108,12 @@ switch ($_SESSION['user']['type']):
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
+                "refus.php" => "Refus",
             ),
             "Client" => Array(
-                "societe.php" => "Société",
+                "client.php" => "Société",
                 "contact.php" => "Contact",
-                "poste.php" => "Poste",
+                "job.php" => "Poste",
                 "entretien.php" => "Entretien",
                 "placement.php" => "Placement",
                 "agenda.php" => "Agenda",
@@ -97,7 +129,7 @@ switch ($_SESSION['user']['type']):
                 "media.php" => "Media",
             )
         );
-    break;
+        break;
     case "ASSIST":
         $navbar = Array(
             "Candidat" => Array(
@@ -105,11 +137,12 @@ switch ($_SESSION['user']['type']):
                 "evaluation.php" => "Evaluation",
                 "recherche.php" => "Recherche",
                 "rendezvous.php" => "Rendez-vous",
+                "refus.php" => "Refus",
             ),
             "Client" => Array(
-                "societe.php" => "Société",
+                "client.php" => "Société",
                 "contact.php" => "Contact",
-                "poste.php" => "Poste",
+                "job.php" => "Poste",
                 "entretien.php" => "Entretien",
                 "placement.php" => "Placement",
                 "agenda.php" => "Agenda",
@@ -125,7 +158,9 @@ switch ($_SESSION['user']['type']):
                 "media.php" => "Media",
             )
         );
-    break;
+        break;
+    default:
+        $navbar = Array();
 endswitch;
 ?>
 <nav class="navbar navbar-default">

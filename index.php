@@ -13,7 +13,7 @@
     </head>
     <body>
         <?php
-        switch (isset($_SESSION['user']['type'])):
+        switch ($_SESSION['user']['type']):
             case "SUPERADMIN":
                 $navbar = Array(
                     "Candidat" => Array(
@@ -21,11 +21,12 @@
                         "evaluation.php" => "Evaluation",
                         "recherche.php" => "Recherche",
                         "rendezvous.php" => "Rendez-vous",
+                        "refus.php" => "Refus",
                     ),
                     "Client" => Array(
                         "client.php" => "Société",
                         "contact.php" => "Contact",
-                        "poste.php" => "Poste",
+                        "job.php" => "Poste",
                         "entretien.php" => "Entretien",
                         "placement.php" => "Placement",
                         "agenda.php" => "Agenda",
@@ -56,11 +57,12 @@
                         "evaluation.php" => "Evaluation",
                         "recherche.php" => "Recherche",
                         "rendezvous.php" => "Rendez-vous",
+                        "refus.php" => "Refus",
                     ),
                     "Client" => Array(
-                        "societe.php" => "Société",
+                        "client.php" => "Société",
                         "contact.php" => "Contact",
-                        "poste.php" => "Poste",
+                        "job.php" => "Poste",
                         "entretien.php" => "Entretien",
                         "placement.php" => "Placement",
                         "agenda.php" => "Agenda",
@@ -84,6 +86,35 @@
                     ),
                 );
                 break;
+            case "ASSOC":
+                $navbar = Array(
+                    "Candidat" => Array(
+                        "applicant.php" => "Candidat",
+                        "evaluation.php" => "Evaluation",
+                        "recherche.php" => "Recherche",
+                        "rendezvous.php" => "Rendez-vous",
+                        "refus.php" => "Refus",
+                    ),
+                    "Client" => Array(
+                        "client.php" => "Société",
+                        "contact.php" => "Contact",
+                        "job.php" => "Poste",
+                        "entretien.php" => "Entretien",
+                        "placement.php" => "Placement",
+                        "agenda.php" => "Agenda",
+                    ),
+                    "Prospect" => Array(
+                        "prospect.php" => "Prospect",
+                        "contact.php" => "Contact",
+                        "planning.php" => "Planning",
+                    ),
+                    "Fournisseur" => Array(
+                        "fournisseur.php" => "Fournisseur",
+                        "contact.php" => "Contact",
+                        "media.php" => "Media",
+                    )
+                );
+                break;
             case "CONSULT":
                 $navbar = Array(
                     "Candidat" => Array(
@@ -91,11 +122,12 @@
                         "evaluation.php" => "Evaluation",
                         "recherche.php" => "Recherche",
                         "rendezvous.php" => "Rendez-vous",
+                        "refus.php" => "Refus",
                     ),
                     "Client" => Array(
-                        "societe.php" => "Société",
+                        "client.php" => "Société",
                         "contact.php" => "Contact",
-                        "poste.php" => "Poste",
+                        "job.php" => "Poste",
                         "entretien.php" => "Entretien",
                         "placement.php" => "Placement",
                         "agenda.php" => "Agenda",
@@ -119,11 +151,12 @@
                         "evaluation.php" => "Evaluation",
                         "recherche.php" => "Recherche",
                         "rendezvous.php" => "Rendez-vous",
+                        "refus.php" => "Refus",
                     ),
                     "Client" => Array(
-                        "societe.php" => "Société",
+                        "client.php" => "Société",
                         "contact.php" => "Contact",
-                        "poste.php" => "Poste",
+                        "job.php" => "Poste",
                         "entretien.php" => "Entretien",
                         "placement.php" => "Placement",
                         "agenda.php" => "Agenda",

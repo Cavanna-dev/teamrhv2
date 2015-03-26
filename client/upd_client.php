@@ -7,16 +7,15 @@ include '../functions/bootstrap.php';
 $r = getOneCustomerById($db, $_GET['id']);
 ?>
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
             <div class="row">
-                <div class = "col-lg-9">
+                <div class="col-lg-9">
                     <h1>Suivi du client</h1>
                 </div>
-                <div class = "col-lg-3">
-                    <h1><button type = "submit" class = "btn btn-primary">Ajouter un commentaire</button></h1>
+                <div class="col-lg-3">
+                    <h1><button type="submit" class="btn btn-primary">Ajouter un commentaire</button></h1>
                 </div>
             </div>
             <div class="jumbotron">
@@ -32,22 +31,22 @@ $r = getOneCustomerById($db, $_GET['id']);
                 <?php } ?>
             </div>
         </div>
-        <div class = "col-md-6">
-            <form class = "form-horizontal" method = "POST" action = "../functions/updCustomer.php" id = "form_upd_customer">
-                <div class = "row">
-                    <div class = "col-lg-10">
-                        <input type = "hidden" name = "input_id" value = "<?= $_GET['id'] ?>"/>
+        <div class="col-md-6">
+            <form class="form-horizontal" method="POST" action="../functions/upd_customer.php" id="form_upd_customer">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <input type="hidden" name="input_id" value="<?= $_GET['id'] ?>"/>
                         <h1>Fiche client</h1>
                     </div>
-                    <div class = "col-lg-2">
+                    <div class="col-lg-2">
                         <h1><button type = "submit" class = "btn btn-primary">Enregistrer</button></h1>
                     </div>
                 </div>
-                <div class = "">
-                    <div class = "form-group">
-                        <label for = "input_remarque" class = "col-lg-1 control-label">Informations Générales</label>
-                        <div class = "col-lg-11">
-                            <textarea class = "form-control" id = "input_remarque" name = "input_remarque" placeholder = "Remarque" type = "text" rows = "15"><?= $r->remarque; ?>
+                <div class="jumbotron">
+                    <div class="form-group">
+                        <label for="input_remarque" class = "col-lg-1 control-label">Informations Générales</label>
+                        <div class="col-lg-11">
+                            <textarea class="form-control" id="input_remarque" name="input_remarque" placeholder = "Remarque" type = "text" rows = "15"><?= $r->remarque; ?>
                             </textarea>
                         </div>
                     </div>
@@ -306,8 +305,7 @@ $r = getOneCustomerById($db, $_GET['id']);
                             <tr>
                                 <td>
                                     <?php
-                                    $consultant = getUserById($db, $r_send_cv->consultant);
-                                    $r_consult = $consultant->fetch(PDO::FETCH_OBJ);
+                                    $r_consult = getUserById($db, $r_send_cv->consultant);
                                     if ($r_consult)
                                         echo $r_consult->initiale;
                                     ?>
@@ -317,7 +315,7 @@ $r = getOneCustomerById($db, $_GET['id']);
                                     <?php
                                     $r_appli = getOneApplicantById($db, $r_send_cv->candidat);
                                     if ($r_appli)
-                                        echo '<a href="../candidat/upd_applicant.php?id='.$r_appli->id.'">'.$r_appli->nom . " " . $r_appli->prenom.'</a>';
+                                        echo '<a href="../candidat/upd_applicant.php?id=' . $r_appli->id . '">' . $r_appli->nom . " " . $r_appli->prenom . '</a>';
                                     ?>
                                 </td>
                                 <td>

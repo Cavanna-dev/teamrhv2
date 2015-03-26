@@ -16,8 +16,9 @@ function getUserById($db, $id)
     $sql = "SELECT id, nom, prenom, login, pwd, type, actif, color, arrival, sorting, initiale "
             . "FROM utilisateur "
             . "WHERE (type = 'CONSULT' or type = 'ADMIN' or type = 'ASSOC') AND id='" . $id . "'";
-    $r = $db->prepare($sql);
-    $r->execute();
+    $r_user = $db->prepare($sql);
+    $r_user->execute();
+    $r = $r_user->fetch(PDO::FETCH_OBJ);
 
     return $r;
 }
