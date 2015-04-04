@@ -20,6 +20,7 @@ $email = htmlspecialchars($_POST['input_email']);
 $media = htmlspecialchars($_POST['input_media']);
 $refus = htmlspecialchars($_POST['input_refusal']);
 $motif = htmlspecialchars($_POST['input_why_refusal']);
+$mail_birthday = htmlspecialchars($_POST['input_mail_birthday']);
 $id_applicant = htmlspecialchars($_POST['input_id']);
 
 try{
@@ -41,7 +42,8 @@ $sql = "UPDATE candidat SET "
         . "email = :email, "
         . "media = :media, "
         . "refus = :refus, "
-        . "motif = :motif "
+        . "motif = :motif, "
+        . "anniversaire = :anniversaire "
             . "WHERE id = :id_applicant";
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':name', $name, PDO::PARAM_STR);
@@ -62,6 +64,7 @@ $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 $stmt->bindParam(':media', $media, PDO::PARAM_INT);
 $stmt->bindParam(':refus', $refus, PDO::PARAM_STR);
 $stmt->bindParam(':motif', $motif, PDO::PARAM_STR);
+$stmt->bindParam(':anniversaire', $mail_birthday, PDO::PARAM_STR);
 $stmt->bindParam(':id_applicant', $id_applicant, PDO::PARAM_INT);
 $stmt->execute();
 

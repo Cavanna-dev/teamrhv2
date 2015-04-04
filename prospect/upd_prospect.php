@@ -136,7 +136,13 @@ $r = getOneProspectById($db, $_GET['id']);
                         <div class="form-group">
                             <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="input_nation" name="input_nation" placeholder="Nationalité" type="text" value="<?= $r->nationalite; ?>">
+                                <select class="form-control" name="input_nation" id="input_nation">
+                                    <option value="Autre" <?php if ($r->nationalite == "Autre" || $r->nationalite == "" || $r->nationalite == NULL) echo "selected"; ?>>Autre</option>
+                                    <option value="Anglais" <?php if ($r->nationalite == "Anglais") echo "selected"; ?>>Anglais</option>
+                                    <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américain</option>
+                                    <option value="Britannique" <?php if ($r->nationalite == "Britannique") echo "selected"; ?>>Britannique</option>
+                                    <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Francais</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group" style="visibility: hidden;">

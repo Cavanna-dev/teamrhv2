@@ -19,9 +19,9 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_email" class="col-lg-2 control-label">Email</label>
+                            <label for="input_first" class="col-lg-2 control-label">Prénom</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="input_email" name="input_email" placeholder="Email" type="text" value="<?= isset($_POST['input_email']) ? $_POST['input_email'] : ""; ?>">
+                                <input class="form-control" id="input_first" name="input_first" placeholder="Prénom" type="text" value="<?= isset($_POST['input_first']) ? $_POST['input_first'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">

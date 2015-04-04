@@ -3,22 +3,21 @@
 function searchApplicant($db)
 {
     $name = htmlspecialchars($_POST['input_name']);
-    $mail = htmlspecialchars($_POST['input_email']);
+    $first = htmlspecialchars($_POST['input_first']);
 
     $sql = "SELECT id, nom, prenom, email "
             . "FROM candidat ";
 
-    if (!empty($name) || !empty($mail))
+    if (!empty($name) || !empty($first))
         $sql .= "WHERE ";
     if (!empty($name))
         $sql .= "nom like '%" . $name . "%'";
-    if (!empty($name) && !empty($mail))
+    if (!empty($name) && !empty($first))
         $sql .= " AND ";
-    if (!empty($mail))
-        $sql .= "email like '%" . $mail . "%'";
+    if (!empty($first))
+        $sql .= "prenom like '%" . $first . "%'";
 
     $sql .= " ORDER BY nom";
-    //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();
 
@@ -28,7 +27,7 @@ function searchApplicant($db)
 function getOneApplicantById($db, $id)
 {
     $sql = "SELECT id, nom, prenom, naissance, sexe, statut, nationalite, adresse1, ville, postal, "
-            . "country_fk, metro, tel_bureau, tel_perso, tel_port, email, media, refus, motif "
+            . "country_fk, metro, tel_bureau, tel_perso, tel_port, email, media, refus, motif, anniversaire "
             . "FROM candidat "
             . "WHERE id='" . $id . "'";
     $r_applicant = $db->prepare($sql);

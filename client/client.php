@@ -60,6 +60,18 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" name="input_nation" id="input_nation">
+                                    <option value="Autre" <?php if (isset($_POST['input_nation']) && ($_POST['input_nation'] == "Autre" || $_POST['input_nation'] == "" || $_POST['input_nation'] == NULL)) echo "selected"; ?>>Autre</option>
+                                    <option value="Anglais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Anglais") echo "selected"; ?>>Anglais</option>
+                                    <option value="Américain" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Américain") echo "selected"; ?>>Américain</option>
+                                    <option value="Britannique" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
+                                    <option value="Francais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Francais") echo "selected"; ?>>Francais</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="input_contact_supp" class="col-lg-2 control-label">Responsable Support</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
@@ -92,8 +104,9 @@ include '../functions/bootstrap.php';
                         <thead>
                             <tr>
                                 <th>Dénomination Client</th>
-                                <th>Responsable Avocat</th>
-                                <th>Responsable Support</th>
+                                <th>Secteur</th>
+                                <th>Resp. Avocat</th>
+                                <th>Resp. Support</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -108,13 +121,26 @@ include '../functions/bootstrap.php';
                                             <?= $r_customer->nom; ?>
                                         </a>
                                     </td>
-                                    <td>
-                                        <?php $r_user_law = getUserById($db, $r_customer->mngt_law); ?>
-                                        <?= $r_user_law->initiale; ?>
+                                    <td class="text-right">
+                                        <?php $r_zone_search = getOneZoneById($db, $r_customer->secteur); ?>
+                                        <?php 
+                                        if(isset($r_zone_search->libelle)) 
+                                            echo $r_zone_search->libelle; 
+                                        ?>
                                     </td>
-                                    <td>
+                                    <td class="text-right">
+                                        <?php $r_user_law = getUserById($db, $r_customer->mngt_law); ?>
+                                        <?php 
+                                        if(isset($r_user_law->initiale)) 
+                                            echo $r_user_law->initiale; 
+                                        ?>
+                                    </td>
+                                    <td class="text-right">
                                         <?php $r_user_supp = getUserById($db, $r_customer->mngt_supp); ?>
-                                        <?= $r_user_supp->initiale; ?>
+                                        <?php 
+                                        if(isset($r_user_supp->initiale)) 
+                                            echo $r_user_supp->initiale; 
+                                        ?>
                                     </td>
                                     <td>
                                         <a href="del_client.php?id=<?= $r_customer->id; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>

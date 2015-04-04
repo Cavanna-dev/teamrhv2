@@ -44,7 +44,7 @@ $r = getOneCustomerById($db, $_GET['id']);
                 </div>
                 <div class="jumbotron">
                     <div class="form-group">
-                        <label for="input_remarque" class = "col-lg-1 control-label">Informations Générales</label>
+                        <label for="input_remarque" class = "col-lg-1 control-label">Inform. Générales</label>
                         <div class="col-lg-11">
                             <textarea class="form-control" id="input_remarque" name="input_remarque" placeholder = "Remarque" type = "text" rows = "15"><?= $r->remarque; ?>
                             </textarea>
@@ -54,32 +54,32 @@ $r = getOneCustomerById($db, $_GET['id']);
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_name" class="col-lg-2 control-label"><b>Dénomination</b></label>
-                                    <div class="col-lg-10">
+                                    <label for="input_name" class="col-lg-3 control-label"><b>Dénomination</b></label>
+                                    <div class="col-lg-9">
                                         <b><input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= $r->nom; ?>"></b>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_addr" class="col-lg-2 control-label">Adresse</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_addr" class="col-lg-3 control-label">Adresse</label>
+                                    <div class="col-lg-9">
                                         <input class="form-control" id="input_addr" name="input_addr" placeholder="Adresse" type="text" value="<?= $r->adresse1; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_town" class="col-lg-2 control-label">Ville</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_town" class="col-lg-3 control-label">Ville</label>
+                                    <div class="col-lg-9">
                                         <input class="form-control" id="input_town" name="input_town" placeholder="Ville" type="text" value="<?= $r->ville; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_tel" class="col-lg-2 control-label">Téléphone</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_tel" class="col-lg-3 control-label">Téléphone</label>
+                                    <div class="col-lg-9">
                                         <input class="form-control" id="input_tel" name="input_tel" placeholder="Téléphone" type="text" value="<?= $r->tel_std; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_status" class="col-lg-2 control-label">Status</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_status" class="col-lg-3 control-label">Statut</label>
+                                    <div class="col-lg-9">
                                         <?php $r_status = getAllStatus($db); ?>
                                         <select class="form-control" name="input_status" id="input_status">
                                             <option value=""></option>
@@ -94,8 +94,14 @@ $r = getOneCustomerById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_contact_law" class="col-lg-2 control-label">Responsable Avocat</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_url" class="col-lg-3 control-label">URL</label>
+                                    <div class="col-lg-9">
+                                        <a href="<?= $r->url; ?>" target="_blank"><input class="form-control" id="input_url" name="input_url" placeholder="URL" type="text" value="<?= $r->url; ?>"></a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_contact_law" class="col-lg-3 control-label">Resp. Avocat</label>
+                                    <div class="col-lg-9">
                                         <?php $r_users = getAllUsers($db); ?>
                                         <select class="form-control" name="input_contact_law" id="input_contact_law">
                                             <option value=""></option>
@@ -109,19 +115,13 @@ $r = getOneCustomerById($db, $_GET['id']);
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="input_url" class="col-lg-2 control-label">URL</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control" id="input_url" name="input_url" placeholder="URL" type="text" value="<?= $r->url; ?>">
-                                    </div>
-                                </div>
                             </fieldset>
                         </div>
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_zone" class="col-lg-2 control-label">Secteur</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_zone" class="col-lg-3 control-label">Secteur</label>
+                                    <div class="col-lg-9">
                                         <?php $r_zones = getAllZones($db); ?>
                                         <select class="form-control" name="input_zone" id="input_zone">
                                             <option value=""></option>
@@ -136,14 +136,14 @@ $r = getOneCustomerById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_postal" class="col-lg-2 control-label">Code Postal</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_postal" class="col-lg-3 control-label">Code Postal</label>
+                                    <div class="col-lg-9">
                                         <input class="form-control" id="input_postal" name="input_postal" placeholder="Code Postal" type="text" value="<?= $r->postal; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_country" class="col-lg-2 control-label">Pays</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_country" class="col-lg-3 control-label">Pays</label>
+                                    <div class="col-lg-9">
                                         <?php $r_countries = getAllCountries($db); ?>
                                         <select class="form-control" name="input_country" id="input_country">
                                             <option value=""></option>
@@ -158,20 +158,32 @@ $r = getOneCustomerById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control" id="input_nation" name="input_nation" placeholder="Nationalité" type="text" value="<?= $r->nationalite; ?>">
+                                    <label for="input_nation" class="col-lg-3 control-label">Nationalité</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" name="input_nation" id="input_nation">
+                                            <option value="Autre" <?php if ($r->nationalite == "Autre" || $r->nationalite == "" || $r->nationalite == NULL) echo "selected"; ?>>Autre</option>
+                                            <option value="Anglais" <?php if ($r->nationalite == "Anglais") echo "selected"; ?>>Anglais</option>
+                                            <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américain</option>
+                                            <option value="Britannique" <?php if ($r->nationalite == "Britannique") echo "selected"; ?>>Britannique</option>
+                                            <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Francais</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group" style="visibility: hidden;">
-                                    <label for="input_nation" class="col-lg-2 control-label"></label>
-                                    <div class="col-lg-10">
+                                    <label for="input_nation" class="col-lg-3 control-label"></label>
+                                    <div class="col-lg-9">
                                         <input class="form-control" id="" name="" placeholder="" type="text" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_contact_supp" class="col-lg-2 control-label">Responsable Support</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_metro" class="col-lg-3 control-label">Accès</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" id="input_metro" name="input_metro" placeholder="Metro" type="text" value="<?= $r->metro; ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_contact_supp" class="col-lg-3 control-label">Resp. Support</label>
+                                    <div class="col-lg-9">
                                         <?php $r_users = getAllUsers($db); ?>
                                         <select class="form-control" name="input_contact_supp" id="input_contact_supp">
                                             <option value=""></option>
@@ -183,12 +195,6 @@ $r = getOneCustomerById($db, $_GET['id']);
                                             }
                                             ?>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_metro" class="col-lg-2 control-label">Accès</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control" id="input_metro" name="input_metro" placeholder="Metro" type="text" value="<?= $r->metro; ?>">
                                     </div>
                                 </div>
                             </fieldset>

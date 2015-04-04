@@ -19,7 +19,7 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_contact_law" class="col-lg-2 control-label">Responsable du compte Avocat</label>
+                            <label for="input_contact_law" class="col-lg-2 control-label">Resp. compte Avocat</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_contact_law" id="input_contact_law">
@@ -60,7 +60,7 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_contact_supp" class="col-lg-2 control-label">Responsable du compte Support</label>
+                            <label for="input_contact_supp" class="col-lg-2 control-label">Resp. compte Support</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_contact_supp" id="input_contact_supp">

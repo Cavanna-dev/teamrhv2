@@ -13,169 +13,173 @@
     </head>
     <body>
         <?php
-        switch ($_SESSION['user']['type']):
-            case "SUPERADMIN":
-                $navbar = Array(
-                    "Candidat" => Array(
-                        "applicant.php" => "Candidat",
-                        "evaluation.php" => "Evaluation",
-                        "recherche.php" => "Recherche",
-                        "rendezvous.php" => "Rendez-vous",
-                        "refus.php" => "Refus",
-                    ),
-                    "Client" => Array(
-                        "client.php" => "Société",
-                        "contact.php" => "Contact",
-                        "job.php" => "Poste",
-                        "entretien.php" => "Entretien",
-                        "placement.php" => "Placement",
-                        "agenda.php" => "Agenda",
-                    ),
-                    "Prospect" => Array(
-                        "prospect.php" => "Prospect",
-                        "contact.php" => "Contact",
-                        "planning.php" => "Planning",
-                    ),
-                    "Fournisseur" => Array(
-                        "fournisseur.php" => "Fournisseur",
-                        "contact.php" => "Contact",
-                        "media.php" => "Media",
-                    ),
-                    "Facturation" => Array(
-                        "encaisse.php" => "Encaisse",
-                        "decaisse.php" => "Decaisse",
-                    ),
-                    "Comptabilité" => Array(
-                        "notedefrais.php" => "Notes de frais",
-                    ),
-                );
-                break;
-            case "ADMIN":
-                $navbar = Array(
-                    "Candidat" => Array(
-                        "applicant.php" => "Candidat",
-                        "evaluation.php" => "Evaluation",
-                        "recherche.php" => "Recherche",
-                        "rendezvous.php" => "Rendez-vous",
-                        "refus.php" => "Refus",
-                    ),
-                    "Client" => Array(
-                        "client.php" => "Société",
-                        "contact.php" => "Contact",
-                        "job.php" => "Poste",
-                        "entretien.php" => "Entretien",
-                        "placement.php" => "Placement",
-                        "agenda.php" => "Agenda",
-                    ),
-                    "Prospect" => Array(
-                        "prospect.php" => "Prospect",
-                        "contact.php" => "Contact",
-                        "planning.php" => "Planning",
-                    ),
-                    "Fournisseur" => Array(
-                        "fournisseur.php" => "Fournisseur",
-                        "contact.php" => "Contact",
-                        "media.php" => "Media",
-                    ),
-                    "Facturation" => Array(
-                        "encaisse.php" => "Encaisse",
-                        "decaisse.php" => "Decaisse",
-                    ),
-                    "Comptabilité" => Array(
-                        "notedefrais.php" => "Notes de frais",
-                    ),
-                );
-                break;
-            case "ASSOC":
-                $navbar = Array(
-                    "Candidat" => Array(
-                        "applicant.php" => "Candidat",
-                        "evaluation.php" => "Evaluation",
-                        "recherche.php" => "Recherche",
-                        "rendezvous.php" => "Rendez-vous",
-                        "refus.php" => "Refus",
-                    ),
-                    "Client" => Array(
-                        "client.php" => "Société",
-                        "contact.php" => "Contact",
-                        "job.php" => "Poste",
-                        "entretien.php" => "Entretien",
-                        "placement.php" => "Placement",
-                        "agenda.php" => "Agenda",
-                    ),
-                    "Prospect" => Array(
-                        "prospect.php" => "Prospect",
-                        "contact.php" => "Contact",
-                        "planning.php" => "Planning",
-                    ),
-                    "Fournisseur" => Array(
-                        "fournisseur.php" => "Fournisseur",
-                        "contact.php" => "Contact",
-                        "media.php" => "Media",
-                    )
-                );
-                break;
-            case "CONSULT":
-                $navbar = Array(
-                    "Candidat" => Array(
-                        "applicant.php" => "Candidat",
-                        "evaluation.php" => "Evaluation",
-                        "recherche.php" => "Recherche",
-                        "rendezvous.php" => "Rendez-vous",
-                        "refus.php" => "Refus",
-                    ),
-                    "Client" => Array(
-                        "client.php" => "Société",
-                        "contact.php" => "Contact",
-                        "job.php" => "Poste",
-                        "entretien.php" => "Entretien",
-                        "placement.php" => "Placement",
-                        "agenda.php" => "Agenda",
-                    ),
-                    "Prospect" => Array(
-                        "prospect.php" => "Prospect",
-                        "contact.php" => "Contact",
-                        "planning.php" => "Planning",
-                    ),
-                    "Fournisseur" => Array(
-                        "fournisseur.php" => "Fournisseur",
-                        "contact.php" => "Contact",
-                        "media.php" => "Media",
-                    )
-                );
-                break;
-            case "ASSIST":
-                $navbar = Array(
-                    "Candidat" => Array(
-                        "applicant.php" => "Candidat",
-                        "evaluation.php" => "Evaluation",
-                        "recherche.php" => "Recherche",
-                        "rendezvous.php" => "Rendez-vous",
-                        "refus.php" => "Refus",
-                    ),
-                    "Client" => Array(
-                        "client.php" => "Société",
-                        "contact.php" => "Contact",
-                        "job.php" => "Poste",
-                        "entretien.php" => "Entretien",
-                        "placement.php" => "Placement",
-                        "agenda.php" => "Agenda",
-                    ),
-                    "Prospect" => Array(
-                        "prospect.php" => "Prospect",
-                        "contact.php" => "Contact",
-                        "planning.php" => "Planning",
-                    ),
-                    "Fournisseur" => Array(
-                        "fournisseur.php" => "Fournisseur",
-                        "contact.php" => "Contact",
-                        "media.php" => "Media",
-                    )
-                );
-                break;
-            default:
-                $navbar = Array();
-        endswitch;
+        if (isset($_SESSION['user']['type'])):
+            switch ($_SESSION['user']['type']):
+                case "SUPERADMIN":
+                    $navbar = Array(
+                        "Candidat" => Array(
+                            "applicant.php" => "Candidat",
+                            "evaluation.php" => "Evaluation",
+                            "recherche.php" => "Recherche",
+                            "rendezvous.php" => "Rendez-vous",
+                            "refus.php" => "Refus",
+                        ),
+                        "Client" => Array(
+                            "client.php" => "SociÃ©tÃ©",
+                            "contact.php" => "Contact",
+                            "job.php" => "Poste",
+                            "entretien.php" => "Entretien",
+                            "placement.php" => "Placement",
+                            "agenda.php" => "Agenda",
+                        ),
+                        "Prospect" => Array(
+                            "prospect.php" => "Prospect",
+                            "contact.php" => "Contact",
+                            "planning.php" => "Planning",
+                        ),
+                        "Fournisseur" => Array(
+                            "fournisseur.php" => "Fournisseur",
+                            "contact.php" => "Contact",
+                            "media.php" => "Media",
+                        ),
+                        "Facturation" => Array(
+                            "encaisse.php" => "Encaisse",
+                            "decaisse.php" => "Decaisse",
+                        ),
+                        "Comptabilité" => Array(
+                            "notedefrais.php" => "Notes de frais",
+                        ),
+                    );
+                    break;
+                case "ADMIN":
+                    $navbar = Array(
+                        "Candidat" => Array(
+                            "applicant.php" => "Candidat",
+                            "evaluation.php" => "Evaluation",
+                            "recherche.php" => "Recherche",
+                            "rendezvous.php" => "Rendez-vous",
+                            "refus.php" => "Refus",
+                        ),
+                        "Client" => Array(
+                            "client.php" => "SociÃ©tÃ©",
+                            "contact.php" => "Contact",
+                            "job.php" => "Poste",
+                            "entretien.php" => "Entretien",
+                            "placement.php" => "Placement",
+                            "agenda.php" => "Agenda",
+                        ),
+                        "Prospect" => Array(
+                            "prospect.php" => "Prospect",
+                            "contact.php" => "Contact",
+                            "planning.php" => "Planning",
+                        ),
+                        "Fournisseur" => Array(
+                            "fournisseur.php" => "Fournisseur",
+                            "contact.php" => "Contact",
+                            "media.php" => "Media",
+                        ),
+                        "Facturation" => Array(
+                            "encaisse.php" => "Encaisse",
+                            "decaisse.php" => "Decaisse",
+                        ),
+                        "ComptabilitÃ©" => Array(
+                            "notedefrais.php" => "Notes de frais",
+                        ),
+                    );
+                    break;
+                case "ASSOC":
+                    $navbar = Array(
+                        "Candidat" => Array(
+                            "applicant.php" => "Candidat",
+                            "evaluation.php" => "Evaluation",
+                            "recherche.php" => "Recherche",
+                            "rendezvous.php" => "Rendez-vous",
+                            "refus.php" => "Refus",
+                        ),
+                        "Client" => Array(
+                            "client.php" => "SociÃ©tÃ©",
+                            "contact.php" => "Contact",
+                            "job.php" => "Poste",
+                            "entretien.php" => "Entretien",
+                            "placement.php" => "Placement",
+                            "agenda.php" => "Agenda",
+                        ),
+                        "Prospect" => Array(
+                            "prospect.php" => "Prospect",
+                            "contact.php" => "Contact",
+                            "planning.php" => "Planning",
+                        ),
+                        "Fournisseur" => Array(
+                            "fournisseur.php" => "Fournisseur",
+                            "contact.php" => "Contact",
+                            "media.php" => "Media",
+                        )
+                    );
+                    break;
+                case "CONSULT":
+                    $navbar = Array(
+                        "Candidat" => Array(
+                            "applicant.php" => "Candidat",
+                            "evaluation.php" => "Evaluation",
+                            "recherche.php" => "Recherche",
+                            "rendezvous.php" => "Rendez-vous",
+                            "refus.php" => "Refus",
+                        ),
+                        "Client" => Array(
+                            "client.php" => "SociÃ©tÃ©",
+                            "contact.php" => "Contact",
+                            "job.php" => "Poste",
+                            "entretien.php" => "Entretien",
+                            "placement.php" => "Placement",
+                            "agenda.php" => "Agenda",
+                        ),
+                        "Prospect" => Array(
+                            "prospect.php" => "Prospect",
+                            "contact.php" => "Contact",
+                            "planning.php" => "Planning",
+                        ),
+                        "Fournisseur" => Array(
+                            "fournisseur.php" => "Fournisseur",
+                            "contact.php" => "Contact",
+                            "media.php" => "Media",
+                        )
+                    );
+                    break;
+                case "ASSIST":
+                    $navbar = Array(
+                        "Candidat" => Array(
+                            "applicant.php" => "Candidat",
+                            "evaluation.php" => "Evaluation",
+                            "recherche.php" => "Recherche",
+                            "rendezvous.php" => "Rendez-vous",
+                            "refus.php" => "Refus",
+                        ),
+                        "Client" => Array(
+                            "client.php" => "SociÃ©tÃ©",
+                            "contact.php" => "Contact",
+                            "job.php" => "Poste",
+                            "entretien.php" => "Entretien",
+                            "placement.php" => "Placement",
+                            "agenda.php" => "Agenda",
+                        ),
+                        "Prospect" => Array(
+                            "prospect.php" => "Prospect",
+                            "contact.php" => "Contact",
+                            "planning.php" => "Planning",
+                        ),
+                        "Fournisseur" => Array(
+                            "fournisseur.php" => "Fournisseur",
+                            "contact.php" => "Contact",
+                            "media.php" => "Media",
+                        )
+                    );
+                    break;
+                default:
+                    $navbar = Array();
+            endswitch;
+        else:
+            $navbar = Array();
+        endif;
         ?>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -259,7 +263,7 @@
         <?php } else { ?>
             <div class="container">
                 <div class="jumbotron">
-                    <p>Bienvenue sur l'intranet de TeamRH !</p>
+                    <p>Bienvenue sur l'Intranet de TeamRH !</p>
                 </div>
             </div>
         <?php } ?>

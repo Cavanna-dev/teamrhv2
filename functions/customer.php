@@ -31,17 +31,22 @@ function searchCustomers($db)
 {
     $name = htmlspecialchars($_POST['input_name']);
     $zone = htmlspecialchars($_POST['input_zone']);
+    $nation = htmlspecialchars($_POST['input_nation']);
     $contact_s = htmlspecialchars($_POST['input_contact_supp']);
     $contact_l = htmlspecialchars($_POST['input_contact_law']);
 
-    $sql = "SELECT id, nom, mngt_law, mngt_supp, tel_std "
+    $sql = "SELECT id, nom, secteur, mngt_law, mngt_supp, tel_std "
             . "FROM client ";
 
-    if (!empty($name) || !empty($zone) || !empty($contact_s) || !empty($contact_l))
+    if (!empty($name) || !empty($zone) || !empty($nation) || !empty($contact_s) || !empty($contact_l))
         $sql .= "WHERE ";
     if (!empty($name))
         $sql .= "nom like '%" . $name . "%' ";
-    if (!empty($name) && (!empty($zone) || !empty($contact_s) || !empty($contact_l)))
+    if (!empty($name) && (!empty($zone) || !empty($nation) || !empty($contact_s) || !empty($contact_l)))
+        $sql .= " AND ";
+    if (!empty($nation))
+        $sql .= "nationalite = '" . $nation . "' ";
+    if (!empty($nation) && !empty($zone))
         $sql .= " AND ";
     if (!empty($zone))
         $sql .= "secteur = '" . $zone . "' ";
@@ -58,6 +63,6 @@ function searchCustomers($db)
 
     $r = $db->prepare($sql);
     $r->execute();
-
+    
     return $r;
 }
