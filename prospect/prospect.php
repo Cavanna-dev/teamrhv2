@@ -93,8 +93,8 @@ include '../functions/bootstrap.php';
                             <tr>
                                 <th>Nom</th>
                                 <th>Secteur</th>
-                                <th>Responsable Avocat</th>
-                                <th>Responsable Support</th>
+                                <th>Resp. Avocat</th>
+                                <th>Resp. Support</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -107,19 +107,22 @@ include '../functions/bootstrap.php';
                                     <td>
                                         <?php
                                         $r_zone = getOneZoneById($db, $r_prospect->secteur);
-                                        echo $r_zone->libelle;
+                                        if(!empty($r_zone))
+                                            echo $r_zone->libelle;
                                         ?>
                                     </td>
                                     <td>
                                         <?php
                                         $r_user_law = getUserById($db, $r_prospect->mngt_law);
-                                        echo $r_user_law->initiale;
+                                        if(!empty($r_user_law))
+                                            echo $r_user_law->initiale;
                                         ?>
                                     </td>
                                     <td>
                                         <?php
                                         $r_user_sup = getUserById($db, $r_prospect->mngt_supp);
-                                        echo $r_user_sup->initiale;
+                                        if(!empty($r_user_sup))  
+                                            echo $r_user_sup->initiale;
                                         ?>
                                     </td>
                                     <td>

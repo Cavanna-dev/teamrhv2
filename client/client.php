@@ -13,14 +13,14 @@ include '../functions/bootstrap.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_name" class="col-lg-2 control-label">Dénomination</label>
-                            <div class="col-lg-10">
+                            <label for="input_name" class="col-lg-3 control-label">Dénomination</label>
+                            <div class="col-lg-9">
                                 <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_POST['input_name']) ? $_POST['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_contact_law" class="col-lg-2 control-label">Responsable Avocat</label>
-                            <div class="col-lg-10">
+                            <label for="input_contact_law" class="col-lg-3 control-label">Resp. Avocat</label>
+                            <div class="col-lg-9">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_contact_law" id="input_contact_law">
                                     <option value=""></option>
@@ -35,8 +35,16 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                            <label for="input_nation" class="col-lg-3 control-label">Nationalité</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" name="input_nation" id="input_nation">
+                                    <option value="" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "") echo "selected"; ?>></option>
+                                    <option value="Autre" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Autre") echo "selected"; ?>>Autre</option>
+                                    <option value="Anglais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Anglais") echo "selected"; ?>>Anglais</option>
+                                    <option value="Américain" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Américain") echo "selected"; ?>>Américain</option>
+                                    <option value="Britannique" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
+                                    <option value="Francais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Francais") echo "selected"; ?>>Francais</option>
+                                </select>
                             </div>
                         </div>
                     </fieldset>
@@ -44,8 +52,8 @@ include '../functions/bootstrap.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_zone" class="col-lg-2 control-label">Secteur</label>
-                            <div class="col-lg-10">
+                            <label for="input_zone" class="col-lg-3 control-label">Secteur</label>
+                            <div class="col-lg-9">
                                 <?php $r_zones = getAllZones($db); ?>
                                 <select class="form-control" name="input_zone" id="input_zone">
                                     <option value=""></option>
@@ -60,20 +68,8 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
-                            <div class="col-lg-10">
-                                <select class="form-control" name="input_nation" id="input_nation">
-                                    <option value="Autre" <?php if (isset($_POST['input_nation']) && ($_POST['input_nation'] == "Autre" || $_POST['input_nation'] == "" || $_POST['input_nation'] == NULL)) echo "selected"; ?>>Autre</option>
-                                    <option value="Anglais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Anglais") echo "selected"; ?>>Anglais</option>
-                                    <option value="Américain" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Américain") echo "selected"; ?>>Américain</option>
-                                    <option value="Britannique" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
-                                    <option value="Francais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Francais") echo "selected"; ?>>Francais</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="input_contact_supp" class="col-lg-2 control-label">Responsable Support</label>
-                            <div class="col-lg-10">
+                            <label for="input_contact_supp" class="col-lg-3 control-label">Resp. Support</label>
+                            <div class="col-lg-9">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_contact_supp" id="input_contact_supp">
                                     <option value=""></option>
@@ -85,6 +81,11 @@ include '../functions/bootstrap.php';
                                     }
                                     ?>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-9">
+                                <button type="submit" class="btn btn-primary">Rechercher</button>
                             </div>
                         </div>
                     </fieldset>

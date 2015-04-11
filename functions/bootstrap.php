@@ -5,6 +5,7 @@ include '../functions/com_customer.php';
 include '../functions/country.php';
 include '../functions/customer.php';
 include '../functions/diplome.php';
+include '../functions/evaluation.php';
 include '../functions/jobs.php';
 include '../functions/media.php';
 include '../functions/prospect.php';

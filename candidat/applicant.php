@@ -27,6 +27,9 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <button type="submit" class="btn btn-primary">Rechercher</button>
+                                <a href="add_applicant.php">
+                                    <button type="button" class="btn btn-primary">Nouveau Candidat</button>
+                                </a>
                             </div>
                         </div>
                     </fieldset>
