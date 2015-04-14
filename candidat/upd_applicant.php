@@ -26,7 +26,18 @@ $r = getOneApplicantById($db, $_GET['id']);
                             <div class="col-lg-5">
                                 <input type="date" class="form-control" name="input_birthday" id="input_birthday" value="<?= $r->naissance ?>">
                             </div>
-                            <label class="col-lg-2 control-label"><?= (date('Y') - date('Y', strtotime($r->naissance))); ?> ans </label>
+                            <label class="col-lg-2 control-label">
+                                <?php
+                                $am = explode('/', date('d/m/Y', strtotime($r->naissance)));
+                                $an = explode('/', date('d/m/Y'));
+
+                                if (($am[1] < $an[1]) || (($am[1] == $an[1]) && ($am[0] <= $an[0])))
+                                    echo $an[2] - $am[2];
+                                else
+                                    echo $an[2] - $am[2] - 1;
+                                ?>
+                                 ans
+                            </label>
                         </div>
                         <div class="form-group">
                             <label for="input_civil" class="col-lg-2 control-label">Etat civil</label>

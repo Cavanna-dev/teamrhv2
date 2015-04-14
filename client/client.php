@@ -40,7 +40,6 @@ include '../functions/bootstrap.php';
                                 <select class="form-control" name="input_nation" id="input_nation">
                                     <option value="" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "") echo "selected"; ?>></option>
                                     <option value="Autre" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Autre") echo "selected"; ?>>Autre</option>
-                                    <option value="Anglais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Anglais") echo "selected"; ?>>Anglais</option>
                                     <option value="Américain" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Américain") echo "selected"; ?>>Américain</option>
                                     <option value="Britannique" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
                                     <option value="Francais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Francais") echo "selected"; ?>>Francais</option>

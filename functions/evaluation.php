@@ -10,10 +10,12 @@ function searchEval($db)
     $sal_mini = (isset($_GET['input_salaire_mini'])) ? htmlspecialchars($_GET['input_salaire_mini']) : "";
     $sal_maxi = (isset($_GET['input_salaire_maxi'])) ? htmlspecialchars($_GET['input_salaire_maxi']) : "";
 
-    $sql = "SELECT id, candidat, disponible, secteur_actuel, titre1_actuel "
+    $sql = "SELECT id, candidat, disponible, secteur_actuel, titre1_actuel, titre1_rech, salaire_actuel "
             . "FROM evaluation ";
 
-    if (!empty($dispo) || !empty($secteur) || !empty($titre) || !empty($titre_rech))
+    if (!empty($dispo) || !empty($secteur) || !empty($titre) 
+            || !empty($titre_rech) || !empty($remarque) || !empty($sal_mini)
+             || !empty($sal_maxi))
         $sql .= "WHERE ";
     if (!empty($dispo))
         $sql .= "disponible = '".$dispo."' ";
@@ -36,12 +38,12 @@ function searchEval($db)
     if (!empty($sal_mini) && (!empty($titre) || !empty($secteur) || !empty($titre_rech) || !empty($remarque)))
         $sql .= "AND ";
     if (!empty($sal_mini))
-        $sql .= "sal_min_rech > '".$sal_mini."' ";
+        $sql .= "salaire_actuel > '".$sal_mini."' ";
     if (!empty($sal_maxi) && (!empty($titre) || !empty($secteur) || !empty($titre_rech) || !empty($remarque) || !empty($sal_mini)))
         $sql .= "AND ";
     if (!empty($sal_maxi))
-        $sql .= "sal_min_rech > '".$sal_maxi."' ";
-
+        $sql .= "salaire_actuel < '".$sal_maxi."' ";
+    
     $r = $db->prepare($sql);
     $r->execute();
     

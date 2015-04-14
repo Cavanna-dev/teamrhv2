@@ -2,8 +2,8 @@
 
 function searchApplicant($db)
 {
-    $name = htmlspecialchars($_POST['input_name']);
-    $first = htmlspecialchars($_POST['input_first']);
+    $name = htmlspecialchars($_GET['input_name']) ? htmlspecialchars($_GET['input_name']) : '';
+    $first = htmlspecialchars($_GET['input_first']) ? htmlspecialchars($_GET['input_first']) : '';
 
     $sql = "SELECT id, nom, prenom, email "
             . "FROM candidat ";
