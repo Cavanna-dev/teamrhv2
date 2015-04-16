@@ -5,23 +5,36 @@ function searchApplicant($db)
     $name = htmlspecialchars($_GET['input_name']) ? htmlspecialchars($_GET['input_name']) : '';
     $first = htmlspecialchars($_GET['input_first']) ? htmlspecialchars($_GET['input_first']) : '';
 
-    $sql = "SELECT id, nom, prenom, email "
-            . "FROM candidat ";
+    $sql = "SELECT c.id as id, c.nom as nom, c.prenom as prenom, c.email as email, e.id as eval_id "
+            . "FROM candidat c "
+            . "LEFT JOIN evaluation e ON e.candidat = c.id ";
 
     if (!empty($name) || !empty($first))
         $sql .= "WHERE ";
     if (!empty($name))
-        $sql .= "nom like '%" . $name . "%'";
+        $sql .= "c.nom like '%" . $name . "%'";
     if (!empty($name) && !empty($first))
         $sql .= " AND ";
     if (!empty($first))
-        $sql .= "prenom like '%" . $first . "%'";
+        $sql .= "c.prenom like '%" . $first . "%'";
 
     $sql .= " ORDER BY nom";
     $r = $db->prepare($sql);
     $r->execute();
 
     return $r;
+}
+
+function getAllApplicants($db)
+{
+    $sql = "SELECT c.id as id, c.nom as nom, c.nom as prenom, e.id as eval_id "
+            . "FROM `candidat` c "
+            . "LEFT JOIN evaluation e ON e.candidat = c.id";
+
+    $r_applicant = $db->prepare($sql);
+    $r_applicant->execute();
+    
+    return $r_applicant;
 }
 
 function getOneApplicantById($db, $id)

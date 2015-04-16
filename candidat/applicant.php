@@ -66,7 +66,24 @@ include '../functions/bootstrap.php';
                                         <tr>
                                             <td><a href="upd_applicant.php?id=<?= $r_appli->id; ?>"><?= $r_appli->nom . " " . $r_appli->prenom; ?></a></td>
                                             <td>
-                                                <a href="del_applicant.php?id=<?= $r_appli->id; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                                <a href="del_applicant.php?id=<?= $r_appli->id; ?>" 
+                                                   onclick="return confirm('Pas disponible pour le moment.')">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                                                    </span>
+                                                </a>
+                                                <?php
+                                                if (!empty($r_appli->eval_id)) :
+                                                    ?>
+                                                    <a href="upd_evaluation.php?id=<?= $r_appli->eval_id; ?>">
+                                                        <span class="glyphicon glyphicon-th-list" aria-hidden="true">
+                                                        </span>
+                                                    </a>
+                                                <?php else : ?>
+                                                    <a href="evaluation.php?tab=new&id=<?= $r_appli->id; ?>">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true">
+                                                        </span>
+                                                    </a>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                         <?php
@@ -263,3 +280,8 @@ include '../functions/bootstrap.php';
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(window).ready(function(){
+        $("a.tooltipLink").tooltip();
+    });
+</script>

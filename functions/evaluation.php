@@ -49,3 +49,18 @@ function searchEval($db)
     
     return $r;
 }
+
+
+function getOneEvalById($db, $id)
+{
+    $sql = "SELECT * "
+            . "FROM evaluation "
+            . "WHERE id='" . $id . "'";
+    $r_eval = $db->prepare($sql);
+    $r_eval->execute();
+    $r = $r_eval->fetch(PDO::FETCH_OBJ);
+
+    return $r;
+}
+
+?>
