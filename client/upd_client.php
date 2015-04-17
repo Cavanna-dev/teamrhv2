@@ -169,7 +169,6 @@ $r = getOneCustomerById($db, $_GET['id']);
                                     <div class="col-lg-9">
                                         <select class="form-control" name="input_nation" id="input_nation">
                                             <option value="Autre" <?php if ($r->nationalite == "Autre" || $r->nationalite == "" || $r->nationalite == NULL) echo "selected"; ?>>Autre</option>
-                                            <option value="Anglais" <?php if ($r->nationalite == "Anglais") echo "selected"; ?>>Anglais</option>
                                             <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américain</option>
                                             <option value="Britannique" <?php if ($r->nationalite == "Britannique") echo "selected"; ?>>Britannique</option>
                                             <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Francais</option>

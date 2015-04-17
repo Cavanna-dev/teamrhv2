@@ -28,15 +28,17 @@ $r = getOneApplicantById($db, $_GET['id']);
                             </div>
                             <label class="col-lg-2 control-label">
                                 <?php
-                                $am = explode('/', date('d/m/Y', strtotime($r->naissance)));
-                                $an = explode('/', date('d/m/Y'));
+                                if ($r->naissance) {
+                                    $am = explode('/', date('d/m/Y', strtotime($r->naissance)));
+                                    $an = explode('/', date('d/m/Y'));
 
-                                if (($am[1] < $an[1]) || (($am[1] == $an[1]) && ($am[0] <= $an[0])))
-                                    echo $an[2] - $am[2];
-                                else
-                                    echo $an[2] - $am[2] - 1;
-                                ?>
-                                 ans
+                                    if (($am[1] < $an[1]) || (($am[1] == $an[1]) && ($am[0] <= $an[0])))
+                                        echo $an[2] - $am[2];
+                                    else
+                                        echo $an[2] - $am[2] - 1;
+                                    ?>
+                                    ans
+                                <?php } ?>
                             </label>
                         </div>
                         <div class="form-group">
@@ -44,7 +46,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                             <div class="col-lg-10">
                                 <select class="form-control" name="input_civil" id="select">
                                     <option value="" <?php if ($r->statut == "") echo "selected" ?>></option>
-                                    <option value="Marié(e)" <?php if ($r->statut == "Marié(e)") echo "selected" ?>>Marié</option>
+                                    <option value="Marié(e)" <?php if ($r->statut == "Marié(e)") echo "selected" ?>>Marié(e)</option>
                                     <option value="Célibataire" <?php if ($r->statut == "Célibataire") echo "selected" ?>>Célibataire</option>
                                 </select>
                             </div>
@@ -116,7 +118,12 @@ $r = getOneApplicantById($db, $_GET['id']);
                         <div class="form-group">
                             <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="input_nation" id="input_nation" value="<?= $r->nationalite ?>" placeholder="Nationalité">
+                                <select class="form-control" name="input_nation" id="input_nation">
+                                    <option value="Autre" <?php if ($r->nationalite == "Autre" || $r->nationalite == "" || $r->nationalite == NULL) echo "selected"; ?>>Autre</option>
+                                    <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américain</option>
+                                    <option value="Britannique" <?php if ($r->nationalite == "Britannique") echo "selected"; ?>>Britannique</option>
+                                    <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Francais</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
