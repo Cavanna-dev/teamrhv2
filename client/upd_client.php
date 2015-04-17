@@ -7,29 +7,37 @@ include '../functions/bootstrap.php';
 $r = getOneCustomerById($db, $_GET['id']);
 ?>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-lg-9">
-                    <h1>Suivi du client</h1>
+<div class="container-fluid">    
+    <div class = "row">
+        <div class = "col-md-6">
+            <form action = "../functions/upd_client_com.php" method = "POST">
+                <input type = "hidden" name = "input_id" value = "<?= $_GET['id'] ?>"/>
+                <div class = "row">
+                    <div class = "col-lg-9">
+                        <h1>Suivi du client</h1>
+                    </div>
+                    <div class = "col-lg-3">
+                        <h1 class = "pull-right"><button type = "submit" class = "btn btn-primary">Enregistrer commentaire</button></h1>
+                    </div>
                 </div>
-                <div class="col-lg-3">
-                    <h1><button type="submit" class="btn btn-primary">Ajouter un commentaire</button></h1>
-                </div>
-            </div>
-            <div class="jumbotron">
-                <?php $coms = getComByCustomer($db, $_GET['id']) ?>
+                <?php $coms = getComByCustomer($db, $r->id)
+                ?>
                 <?php
                 while ($com = $coms->fetch(PDO::FETCH_OBJ)) {
                     $linefeed = "\r\n";
                     $remarque = str_replace('"', '\\\'', str_replace($linefeed, '<BR />', str_replace('\'', '\\\'', $com->remarque)));
                     $remarque = str_replace('\\', '', str_replace('\'\'', '\'', str_replace('"', '\'', $remarque)));
                     ?>
-                    <?= $remarque . "..."; ?>
-                    <br /><br />
+                    <div class="jumbotron" style="margin: 2px 0;padding: 15px;">
+                        <p><?= $remarque . "..."; ?>
+                            <a href="com_client.php?id=<?= $com->id; ?>">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </a>
+                        </p>
+                    </div>
+
                 <?php } ?>
-            </div>
+            </form>
         </div>
         <div class="col-md-6">
             <form class="form-horizontal" method="POST" action="../functions/upd_customer.php" id="form_upd_customer">
@@ -39,15 +47,14 @@ $r = getOneCustomerById($db, $_GET['id']);
                         <h1>Fiche client</h1>
                     </div>
                     <div class="col-lg-2">
-                        <h1><button type = "submit" class = "btn btn-primary">Enregistrer</button></h1>
+                        <h1 class="pull-right"><button type = "submit" class = "btn btn-primary">Enregistrer</button></h1>
                     </div>
                 </div>
                 <div class="jumbotron">
                     <div class="form-group">
                         <label for="input_remarque" class = "col-lg-1 control-label">Inform. Générales</label>
                         <div class="col-lg-11">
-                            <textarea class="form-control" id="input_remarque" name="input_remarque" placeholder = "Remarque" type = "text" rows = "15"><?= $r->remarque; ?>
-                            </textarea>
+                            <textarea class="form-control" id="input_remarque" name="input_remarque" placeholder = "Remarque" type = "text" rows = "15"><?= $r->remarque; ?></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -342,3 +349,12 @@ $r = getOneCustomerById($db, $_GET['id']);
         </div>
     </div>
 </div>
+<?php if (isset($_GET['success'])) { ?>
+    <script type="text/javascript">
+        $(window).load(function () {
+            alert('Commentaire modifié');
+        });
+    </script>
+<?php }
+?>
+</body>

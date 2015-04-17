@@ -54,7 +54,7 @@ try {
     $stmt->bindParam(':anniversaire', $mail_birthday, PDO::PARAM_STR);
     $stmt->execute();
     
-    header('Location:../candidat/applicant.php');
+    header('Location:../candidat/applicant.php?success=c');
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
 }

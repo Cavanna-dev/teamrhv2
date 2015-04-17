@@ -2,6 +2,7 @@
 include '../functions/applicants.php';
 include '../functions/contact.php';
 include '../functions/com_customer.php';
+include '../functions/com_prospect.php';
 include '../functions/country.php';
 include '../functions/customer.php';
 include '../functions/diplome.php';

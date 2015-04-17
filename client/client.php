@@ -104,10 +104,10 @@ include '../functions/bootstrap.php';
                         <thead>
                             <tr>
                                 <th>Dénomination Client</th>
-                                <th>Secteur</th>
-                                <th>Resp. Avocat</th>
-                                <th>Resp. Support</th>
-                                <th>Action</th>
+                                <th class="text-right">Secteur</th>
+                                <th class="text-right">Resp. Avocat</th>
+                                <th class="text-right">Resp. Support</th>
+                                <th class="text-right">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -142,7 +142,7 @@ include '../functions/bootstrap.php';
                                             echo $r_user_supp->initiale; 
                                         ?>
                                     </td>
-                                    <td>
+                                    <td class="text-right">
                                         <a href="del_client.php?id=<?= $r_customer->id; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                                     </td>
                                 </tr>

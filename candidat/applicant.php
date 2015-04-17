@@ -46,7 +46,7 @@ include '../functions/bootstrap.php';
 
                 <h1>Résultats</h1>
                 <?php
-                if (!empty($_GET)) {
+                if (!empty($_GET) && !array_key_exists('success', $_GET)) {
                     $r_applis = searchApplicant($db);
                     if ($r_applis->fetch(PDO::FETCH_OBJ)) {
                         ?>
@@ -280,8 +280,12 @@ include '../functions/bootstrap.php';
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(window).ready(function(){
-        $("a.tooltipLink").tooltip();
-    });
-</script>
+<?php if (isset($_GET['success'])) { ?>
+    <script type="text/javascript">
+        $(window).load(function () {
+            alert('Candidat ajouté.');
+        });
+    </script>
+<?php }
+?>
+</body>
