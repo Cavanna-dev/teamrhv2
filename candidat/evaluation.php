@@ -24,11 +24,11 @@ include '../functions/bootstrap.php';
     <?php } ?>
     <h1>Gestion Evaluation</h1>
     <ul class="nav nav-tabs">
-        <li <?= $_GET['tab'] == "search" || isset($_GET['tab']) ? '' : 'class="active"' ?>><a href="#search" data-toggle="tab">Rechercher</a></li>
-        <li <?= $_GET['tab'] == "new" ? 'class="active"' : '' ?>><a href="#add" data-toggle="tab">Ajouter</a></li>
+        <li <?= (isset($_GET['tab']) && $_GET['tab'] == "search") || isset($_GET['tab']) ? '' : 'class="active"' ?>><a href="#search" data-toggle="tab">Rechercher</a></li>
+        <li <?= isset($_GET['tab']) && $_GET['tab'] == "new" ? 'class="active"' : '' ?>><a href="#add" data-toggle="tab">Ajouter</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade <?= $_GET['tab'] == "new" ? "" : "active in" ?>" id="search">
+        <div class="tab-pane fade <?= isset($_GET['tab']) && $_GET['tab'] == "new" ? "" : "active in" ?>" id="search">
             <form class="form-horizontal" method="GET" action="evaluation.php" id="form_customer">
                 <div class="jumbotron">
                     <div class="row">
@@ -87,14 +87,14 @@ include '../functions/bootstrap.php';
                                         <input type="number" class="form-control" 
                                                name="input_salaire_mini" id="input_salaire_mini" 
                                                placeholder="Salaire mini."
-                                               value="<?= $_GET['input_salaire_mini'] ? $_GET['input_salaire_mini'] : "" ?>">
+                                               value="<?= isset($_GET['input_salaire_mini']) ? $_GET['input_salaire_mini'] : "" ?>">
                                     </div>
                                     <label for="input_salaire_maxi" class="col-lg-3 control-label">Salaire maxi.</label>
                                     <div class="col-lg-3">
                                         <input type="number" class="form-control" 
                                                name="input_salaire_maxi" id="input_salaire_maxi" 
                                                placeholder="Salaire mini."
-                                               value="<?= $_GET['input_salaire_maxi'] ? $_GET['input_salaire_maxi'] : "" ?>">
+                                               value="<?= isset($_GET['input_salaire_maxi']) ? $_GET['input_salaire_maxi'] : "" ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -120,7 +120,7 @@ include '../functions/bootstrap.php';
                                 <div class="form-group">
                                     <label for="input_remarque" class="col-lg-1 control-label">Remarque</label>
                                     <div class="col-lg-11">
-                                        <textarea class="form-control" rows="6" name="input_remarque" id="input_remarque"><?= $_GET['input_remarque'] ?></textarea>
+                                        <textarea class="form-control" rows="6" name="input_remarque" id="input_remarque"><?= isset($_GET['input_remarque']) ? $_GET['input_remarque'] : '' ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -213,10 +213,15 @@ include '../functions/bootstrap.php';
                                         <?php $r_applicant_eval = getOneApplicantById($db, $id_applicant_eval); ?>
                                         <input type="hidden" 
                                                name="input_candidat" id="input_candidat" 
-                                               value="<?= $r_applicant_eval->id ?>">
+                                               value="<?= isset($r_applicant_eval->id) ? $r_applicant_eval->id : '' ?>">
+                                               <?php 
+                                                $candidat = isset($r_applicant_eval->nom) ? $r_applicant_eval->nom : ''; 
+                                                $candidat .= " ";
+                                                $candidat .= isset($r_applicant_eval->prenom) ? $r_applicant_eval->prenom : '';
+                                               ?>
                                         <input type="text" 
                                                class="form-control"
-                                               value="<?= $r_applicant_eval->nom . " " . $r_applicant_eval->prenom; ?>" disabled />
+                                               value="<?= $candidat; ?>" disabled />
                                     </div>
                                 </div>
                             </fieldset>
