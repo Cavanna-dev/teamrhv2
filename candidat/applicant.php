@@ -63,7 +63,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($r_appli = $r_applis->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <tr>
+                                    <tr>
                                             <td><a href="upd_applicant.php?id=<?= $r_appli->id; ?>"><?= $r_appli->nom . " " . $r_appli->prenom; ?></a></td>
                                             <td>
                                                 <a href="del_applicant.php?id=<?= $r_appli->id; ?>" 
@@ -200,9 +200,9 @@ include '../functions/bootstrap.php';
                                         <select class="form-control" name="input_nation" id="input_nation">
                                             <option value=""></option>
                                             <option value="Autre">Autre</option>
-                                            <option value="Américain">Américain</option>
+                                            <option value="Américain">Américaine</option>
                                             <option value="Britannique">Britannique</option>
-                                            <option value="Francais">Francais</option>
+                                            <option value="Francais">Française</option>
                                         </select>
                                     </div>
                                 </div>

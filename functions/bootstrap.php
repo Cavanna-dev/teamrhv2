@@ -11,6 +11,7 @@ include '../functions/jobs.php';
 include '../functions/media.php';
 include '../functions/prospect.php';
 include '../functions/sendCv.php';
+include '../functions/speciality.php';
 include '../functions/status.php';
 include '../functions/title.php';
 include '../functions/users.php';

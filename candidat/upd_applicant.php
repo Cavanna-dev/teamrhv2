@@ -120,9 +120,9 @@ $r = getOneApplicantById($db, $_GET['id']);
                             <div class="col-lg-10">
                                 <select class="form-control" name="input_nation" id="input_nation">
                                     <option value="Autre" <?php if ($r->nationalite == "Autre" || $r->nationalite == "" || $r->nationalite == NULL) echo "selected"; ?>>Autre</option>
-                                    <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américain</option>
+                                    <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américaine</option>
                                     <option value="Britannique" <?php if ($r->nationalite == "Britannique") echo "selected"; ?>>Britannique</option>
-                                    <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Francais</option>
+                                    <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Française</option>
                                 </select>
                             </div>
                         </div>
@@ -166,9 +166,9 @@ $r = getOneApplicantById($db, $_GET['id']);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_subway" class="col-lg-2 control-label">Métro</label>
+                            <label for="input_subway" class="col-lg-2 control-label">Transport</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="input_subway" id="input_subway" value="<?= $r->metro ?>" placeholder="Métro">
+                                <input type="text" class="form-control" name="input_subway" id="input_subway" value="<?= $r->metro ?>" placeholder="Transport">
                             </div>
                         </div>
                         <div class="form-group">
@@ -190,6 +190,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                <a href="upd_evaluation.php?id=<?= $r->eval_id ?>"><button type="button" class="btn btn-primary">Evaluation</button></a>
                             </div>
                         </div>
                     </fieldset>

@@ -2,25 +2,25 @@
 
 include './connection_db.php';
 
-$name = htmlspecialchars($_POST['input_name']);
-$last = htmlspecialchars($_POST['input_last']);
-$birthday = htmlspecialchars($_POST['input_birthday']);
-$sexe = htmlspecialchars($_POST['input_sexe']);
-$statut = htmlspecialchars($_POST['input_civil']);
-$nationalite = htmlspecialchars($_POST['input_nation']);
-$adresse1 = htmlspecialchars($_POST['input_address']);
-$ville = htmlspecialchars($_POST['input_town']);
-$postal = htmlspecialchars($_POST['input_postal']);
-$country_fk = htmlspecialchars($_POST['input_country']);
-$metro = htmlspecialchars($_POST['input_subway']);
-$tel_bureau = htmlspecialchars($_POST['input_phone_work']);
-$tel_perso = htmlspecialchars($_POST['input_phone_home']);
-$tel_port = htmlspecialchars($_POST['input_phone_port']);
-$email = htmlspecialchars($_POST['input_email']);
-$media = htmlspecialchars($_POST['input_media']);
-$refus = htmlspecialchars($_POST['input_refusal']);
-$motif = htmlspecialchars($_POST['input_why_refusal']);
-$mail_birthday = htmlspecialchars($_POST['input_mail_birthday']);
+$name = isset($_POST['input_name']) ? htmlspecialchars($_POST['input_name']) : '';
+$last = isset($_POST['input_last']) ? htmlspecialchars($_POST['input_last']) : '';
+$birthday = isset($_POST['input_birthday']) ? htmlspecialchars($_POST['input_birthday']) : '';
+$sexe = isset($_POST['input_sexe']) ? htmlspecialchars($_POST['input_sexe']) : '';
+$statut = isset($_POST['input_civil']) ? htmlspecialchars($_POST['input_civil']) : '';
+$nationalite = isset($_POST['input_nation']) ? htmlspecialchars($_POST['input_nation']) : '';
+$adresse1 = isset($_POST['input_address']) ? htmlspecialchars($_POST['input_address']) : '';
+$ville = isset($_POST['input_town']) ? htmlspecialchars($_POST['input_town']) : '';
+$postal = isset($_POST['input_postal']) ? htmlspecialchars($_POST['input_postal']) : '';
+$country_fk = isset($_POST['input_country']) ? htmlspecialchars($_POST['input_country']) : '';
+$metro = isset($_POST['input_subway']) ? htmlspecialchars($_POST['input_subway']) : '';
+$tel_bureau = isset($_POST['input_phone_work']) ? htmlspecialchars($_POST['input_phone_work']) : '';
+$tel_perso = isset($_POST['input_phone_home']) ? htmlspecialchars($_POST['input_phone_home']) : '';
+$tel_port = isset($_POST['input_phone_port']) ? htmlspecialchars($_POST['input_phone_port']) : '';
+$email = isset($_POST['input_email']) ? htmlspecialchars($_POST['input_email']) : '';
+$media = isset($_POST['input_media']) ? htmlspecialchars($_POST['input_media']) : '';
+$refus = isset($_POST['input_refusal']) ? htmlspecialchars($_POST['input_refusal']) : '';
+$motif = isset($_POST['input_why_refusal']) ? htmlspecialchars($_POST['input_why_refusal']) : '';
+$mail_birthday = isset($_POST['input_mail_birthday']) ? htmlspecialchars($_POST['input_mail_birthday']) : '';
 
 try {
     $sql = "INSERT INTO `candidat`"

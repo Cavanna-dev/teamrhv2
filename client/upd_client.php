@@ -29,7 +29,7 @@ $r = getOneCustomerById($db, $_GET['id']);
                     $remarque = str_replace('\\', '', str_replace('\'\'', '\'', str_replace('"', '\'', $remarque)));
                     ?>
                     <div class="jumbotron" style="margin: 2px 0;padding: 15px;">
-                        <p><?= $remarque . "..."; ?>
+                        <p style="font-size: 14px;"><?= $remarque . "..."; ?>
                             <a href="com_client.php?id=<?= $com->id; ?>">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </a>
@@ -169,9 +169,9 @@ $r = getOneCustomerById($db, $_GET['id']);
                                     <div class="col-lg-9">
                                         <select class="form-control" name="input_nation" id="input_nation">
                                             <option value="Autre" <?php if ($r->nationalite == "Autre" || $r->nationalite == "" || $r->nationalite == NULL) echo "selected"; ?>>Autre</option>
-                                            <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américain</option>
+                                            <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américaine</option>
                                             <option value="Britannique" <?php if ($r->nationalite == "Britannique") echo "selected"; ?>>Britannique</option>
-                                            <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Francais</option>
+                                            <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Française</option>
                                         </select>
                                     </div>
                                 </div>
