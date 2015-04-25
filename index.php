@@ -61,7 +61,7 @@
                             "refus.php" => "Refus",
                         ),
                         "Client" => Array(
-                            "client.php" => "SociÃ©tÃ©",
+                            "client.php" => "Société",
                             "contact.php" => "Contact",
                             "job.php" => "Poste",
                             "entretien.php" => "Entretien",

@@ -170,7 +170,7 @@ include '../functions/bootstrap.php';
                                         </td>
                                         <td>
                                             <?php $r_zone = getOneZoneById($db, $r_eval->secteur_actuel); ?>
-                                            <?= $r_zone->libelle ? $r_zone->libelle : ''; ?>
+                                            <?= $r_zone ? $r_zone->libelle : ''; ?>
                                         </td>
                                         <td>
                                             <?php $r_title = getOneTitleById($db, $r_eval->titre1_actuel); ?>

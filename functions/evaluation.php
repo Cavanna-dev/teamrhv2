@@ -19,7 +19,8 @@ function searchEval($db)
         $sql .= "WHERE ";
     if (!empty($dispo))
         $sql .= "disponible = '".$dispo."' ";
-    if (!empty($dispo) && (!empty($secteur) || !empty($titre) || !empty($titre_rech)))
+    if (!empty($dispo) && (!empty($secteur) || !empty($titre) 
+        || !empty($titre_rech) || !empty($remarque) || !empty($sal_mini) || !empty($sal_maxi)))
         $sql .= "AND ";
     if (!empty($secteur))
         $sql .= "secteur_actuel = '".$secteur."' ";
@@ -43,7 +44,7 @@ function searchEval($db)
         $sql .= "AND ";
     if (!empty($sal_maxi))
         $sql .= "salaire_actuel < '".$sal_maxi."' ";
-    
+
     $r = $db->prepare($sql);
     $r->execute();
     
