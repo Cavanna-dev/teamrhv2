@@ -165,7 +165,7 @@ include '../functions/bootstrap.php';
                                         <td>
                                             <a href="upd_applicant.php?id=<?= $r_eval->candidat; ?>">
                                                 <?php $r_applicant = getOneApplicantById($db, $r_eval->candidat); ?>
-                                                <?= $r_applicant->nom . " " . $r_applicant->prenom; ?>
+                                                <?= $r_applicant ? $r_applicant->nom . " " . $r_applicant->prenom : ''; ?>
                                             </a>
                                         </td>
                                         <td>
@@ -174,11 +174,11 @@ include '../functions/bootstrap.php';
                                         </td>
                                         <td>
                                             <?php $r_title = getOneTitleById($db, $r_eval->titre1_actuel); ?>
-                                            <?= $r_title->libelle ? $r_title->libelle : ''; ?>
+                                            <?= $r_title ? $r_title->libelle : ''; ?>
                                         </td>
                                         <td>
                                             <?php $r_title2 = getOneTitleById($db, $r_eval->titre1_rech); ?>
-                                            <?= $r_title2->libelle ? $r_title2->libelle : ''; ?>
+                                            <?= $r_title2 ? $r_title2->libelle : ''; ?>
                                         </td>
                                         <td>
                                             <?= $r_eval->salaire_actuel ? $r_eval->salaire_actuel : ''; ?>

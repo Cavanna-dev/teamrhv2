@@ -26,7 +26,7 @@ $r = getOneProspectById($db, $_GET['id']);
                 $remarque = str_replace('"', '\\\'', str_replace($linefeed, '<BR />', str_replace('\'', '\\\'', $com->remarque)));
                 $remarque = str_replace('\\', '', str_replace('\'\'', '\'', str_replace('"', '\'', $remarque)));
                 ?>
-                <p><?= $remarque . "..."; ?>
+                <p style="font-size: 14px;"><?= $remarque . "..."; ?>
                     <a href="com_prospect.php?id=<?= $com->id; ?>">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>

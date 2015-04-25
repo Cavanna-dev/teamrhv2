@@ -10,14 +10,13 @@ $r = getOneCustomerById($db, $_GET['id']);
 <div class="container-fluid">    
     <div class = "row">
         <div class = "col-md-6">
-            <form action = "../functions/upd_client_com.php" method = "POST">
                 <input type = "hidden" name = "input_id" value = "<?= $_GET['id'] ?>"/>
                 <div class = "row">
                     <div class = "col-lg-9">
                         <h1>Suivi du client</h1>
                     </div>
                     <div class = "col-lg-3">
-                        <h1 class = "pull-right"><button type = "submit" class = "btn btn-primary">Enregistrer commentaire</button></h1>
+                        <h1 class = "pull-right"><a href="com_client_new.php?id=<?= $r->id; ?>"><button type = "button" class = "btn btn-primary">Enregistrer commentaire</button></a></h1>
                     </div>
                 </div>
                 <?php $coms = getComByCustomer($db, $r->id)
@@ -37,7 +36,6 @@ $r = getOneCustomerById($db, $_GET['id']);
                     </div>
 
                 <?php } ?>
-            </form>
         </div>
         <div class="col-md-6">
             <form class="form-horizontal" method="POST" action="../functions/upd_customer.php" id="form_upd_customer">

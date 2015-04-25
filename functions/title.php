@@ -15,7 +15,8 @@ function getOneTitleById($db, $id)
 function getAllTitles($db)
 {
     $sql = "SELECT id, libelle "
-            . "FROM titre";
+            . "FROM titre " 
+            . "ORDER BY libelle";
     $r = $db->prepare($sql);
     $r->execute();
 
