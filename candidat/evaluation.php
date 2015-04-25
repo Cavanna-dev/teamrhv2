@@ -207,13 +207,19 @@ include '../functions/bootstrap.php';
                         <div class="form-group col-lg-12">
                             <label for="input_candidat" class="col-lg-1 control-label">Candidat</label>
                             <div class="col-lg-4">
-                                <?php $r_applicant_eval = getOneApplicantById($db, $_GET['id']); ?>
+                                <?php 
+
+                                if(isset($_GET['id'])){
+                                    $r_applicant_eval = getOneApplicantById($db, $_GET['id']); 
+                                }
+
+                                ?>
                                 <input type="hidden" 
                                        name="input_candidat" id="input_eval" 
-                                       value="<?= $r_applicant_eval->id ?>">
+                                       value="<?= isset($r_applicant_eval) ? $r_applicant_eval->id : '' ?>">
                                 <input type="text" 
                                        class="form-control"
-                                       value="<?= $r_applicant_eval->nom . " " . $r_applicant_eval->prenom; ?>" disabled />
+                                       value="<?= isset($r_applicant_eval) ? $r_applicant_eval->nom . " " . $r_applicant_eval->prenom : '' ; ?>" disabled />
                             </div>
                             <label for="input_disponible" class="col-lg-2 control-label">Disponible</label>
                             <div class="col-lg-2">
