@@ -6,7 +6,7 @@ include '../functions/bootstrap.php';
 ?>
 
 <div class="container">
-    <form class="form-horizontal" method="POST" action="job.php" id="form_customer">
+    <form class="form-horizontal" method="GET" action="job.php" id="form_customer">
         <h1>Gestion des postes</h1>
         <div class="jumbotron">
             <div class="row">
@@ -15,7 +15,7 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_name" class="col-lg-2 control-label">Libellé</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_POST['input_name']) ? $_POST['input_name'] : ""; ?>">
+                                <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_GET['input_name']) ? $_GET['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -27,7 +27,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($user_r = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_POST['input_contact']) && $_POST['input_contact'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
+                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_GET['input_contact']) && $_GET['input_contact'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -52,7 +52,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?= $r_customer->id ?>" <?php if (isset($_POST['input_customer']) && $_POST['input_customer'] == $r_customer->id) echo "selected"; ?>><?= $r_customer->nom ?></option>
+                                        <option value="<?= $r_customer->id ?>" <?php if (isset($_GET['input_customer']) && $_GET['input_customer'] == $r_customer->id) echo "selected"; ?>><?= $r_customer->nom ?></option>
                                         <?php
                                     }
                                     ?>
@@ -64,13 +64,14 @@ include '../functions/bootstrap.php';
             </div>
         </div>
 
-        <h1>Résultats</h1>
         <?php
-        if ($_POST) {
+        if (!empty($_GET)) {
             $r_jobs = searchJobs($db);
-            if ($r_jobs) {
+            $result_search = $r_jobs->fetchAll(PDO::FETCH_OBJ);
+            if ($result_search) {
                 ?>
 
+                <h1>Résultats - <?= count($result_search) ?> postes</h1>
                 <div class="jumbotron">
                     <table class="table table-striped table-hover ">
                         <thead>
@@ -84,7 +85,7 @@ include '../functions/bootstrap.php';
                         </thead>
                         <tbody>
                             <?php
-                            while ($r_job = $r_jobs->fetch(PDO::FETCH_OBJ)) {
+                            foreach ($result_search as $r_job) {
                                 ?>
                                 <tr>
                                     <td>
@@ -100,7 +101,7 @@ include '../functions/bootstrap.php';
                                     </td>
                                     <td>
                                         <?php $r_title = getOneTitleById($db, $r_job->titre); ?>
-                                            <?php if ($r_title) echo $r_title->libelle; ?>
+                                        <?php if ($r_title) echo $r_title->libelle; ?>
                                     </td>
                                     <td>
                                         <?php $r_user = getUserById($db, $r_job->consultant); ?>

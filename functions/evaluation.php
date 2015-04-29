@@ -27,11 +27,11 @@ function searchEval($db)
     if (!empty($secteur) && !empty($titre))
         $sql .= "AND ";
     if (!empty($titre))
-        $sql .= "titre1_actuel = '".$titre."' ";
+        $sql .= "(titre1_actuel = '".$titre."' OR titre2_actuel = '".$titre."' OR titre3_actuel = '".$titre."') ";
     if (!empty($titre_rech) && (!empty($titre) || !empty($secteur)))
         $sql .= "AND ";
     if (!empty($titre_rech))
-        $sql .= "titre1_rech = '".$titre."' ";
+        $sql .= "(titre1_rech = '".$titre."' OR titre2_rech = '".$titre."' OR titre3_rech = '".$titre."') ";
     if (!empty($remarque) && (!empty($titre) || !empty($secteur) || !empty($titre_rech)))
         $sql .= "AND ";
     if (!empty($remarque))

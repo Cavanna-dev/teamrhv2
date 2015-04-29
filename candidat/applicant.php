@@ -44,13 +44,14 @@ include '../functions/bootstrap.php';
                     </div>
                 </div>
 
-                <h1>Résultats</h1>
                 <?php
                 if (!empty($_GET) && !array_key_exists('success', $_GET)) {
                     $r_applis = searchApplicant($db);
-                    if ($r_applis->fetch(PDO::FETCH_OBJ)) {
+                    $result_search = $r_applis->fetchAll(PDO::FETCH_OBJ);
+                    if ($result_search) {
                         ?>
 
+                <h1>Résultats - <?= count($result_search) ?></h1>
                         <div class="jumbotron">
                             <table class="table table-striped table-hover ">
                                 <thead>
@@ -61,7 +62,7 @@ include '../functions/bootstrap.php';
                                 </thead>
                                 <tbody>
                                     <?php
-                                    while ($r_appli = $r_applis->fetch(PDO::FETCH_OBJ)) {
+                                    foreach($result_search as $r_appli) {
                                         ?>
                                     <tr>
                                             <td><a href="upd_applicant.php?id=<?= $r_appli->id; ?>"><?= $r_appli->nom . " " . $r_appli->prenom; ?></a></td>

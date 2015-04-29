@@ -136,10 +136,11 @@ include '../functions/bootstrap.php';
             <?php
             if (!empty($_GET) && !isset($_GET['tab']) && !isset($_GET['success']) && !isset($_GET['error'])) {
                 $r_evals = searchEval($db);
-                if ($r_evals->fetch(PDO::FETCH_OBJ)) {
+                $result_search = $r_evals->fetchAll(PDO::FETCH_OBJ);
+                if ($result_search) {
                     ?>
 
-                    <h1>Résultats</h1>
+                    <h1>Résultats - <?= count($result_search) ?></h1>
                     <div class="jumbotron">
                         <table class="table table-striped table-hover ">
                             <thead>
@@ -154,7 +155,7 @@ include '../functions/bootstrap.php';
                             </thead>
                             <tbody>
                                 <?php
-                                while ($r_eval = $r_evals->fetch(PDO::FETCH_OBJ)) {
+                                foreach($result_search as $r_eval) {
                                     ?>
                                     <tr>
                                         <td>

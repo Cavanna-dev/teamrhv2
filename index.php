@@ -261,10 +261,8 @@
                 </form>
             </div>
         <?php } else { ?>
-            <div class="container">
-                <div class="jumbotron">
-                    <p>Bienvenue sur l'Intranet de TeamRH !</p>
-                </div>
+            <div class="container-fluid">
+                <?php include 'calendar.php'; ?>
             </div>
         <?php } ?>
     </body>

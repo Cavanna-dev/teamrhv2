@@ -29,11 +29,11 @@ function getOneCustomerById($db, $id)
 
 function searchCustomers($db)
 {
-    $name = htmlspecialchars($_POST['input_name']);
-    $zone = htmlspecialchars($_POST['input_zone']);
-    $nation = htmlspecialchars($_POST['input_nation']);
-    $contact_s = htmlspecialchars($_POST['input_contact_supp']);
-    $contact_l = htmlspecialchars($_POST['input_contact_law']);
+    $name = htmlspecialchars($_GET['input_name']);
+    $zone = htmlspecialchars($_GET['input_zone']);
+    $nation = htmlspecialchars($_GET['input_nation']);
+    $contact_s = htmlspecialchars($_GET['input_contact_supp']);
+    $contact_l = htmlspecialchars($_GET['input_contact_law']);
 
     $sql = "SELECT id, nom, secteur, mngt_law, mngt_supp, tel_std "
             . "FROM client ";
@@ -46,11 +46,11 @@ function searchCustomers($db)
         $sql .= " AND ";
     if (!empty($nation))
         $sql .= "nationalite = '" . $nation . "' ";
-    if (!empty($nation) && !empty($zone))
+    if (!empty($nation) && (!empty($zone) || !empty($contact_s) || !empty($contact_l)))
         $sql .= " AND ";
     if (!empty($zone))
         $sql .= "secteur = '" . $zone . "' ";
-    if (!empty($zone) && !empty($contact_s))
+    if (!empty($zone) && (!empty($contact_s) || !empty($contact_l)))
         $sql .= " AND ";
     if (!empty($contact_s))
         $sql .= "mngt_supp = '" . $contact_s . "' ";

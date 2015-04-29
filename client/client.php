@@ -6,7 +6,7 @@ include '../functions/bootstrap.php';
 ?>
 
 <div class="container">
-    <form class="form-horizontal" method="POST" action="client.php" id="form_customer">
+    <form class="form-horizontal" method="GET" action="client.php" id="form_customer">
         <h1>Gestion des clients</h1>
         <div class="jumbotron">
             <div class="row">
@@ -15,7 +15,7 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_name" class="col-lg-3 control-label">Dénomination</label>
                             <div class="col-lg-9">
-                                <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_POST['input_name']) ? $_POST['input_name'] : ""; ?>">
+                                <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_GET['input_name']) ? $_GET['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -27,7 +27,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($user_r = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_POST['input_contact_law']) && $_POST['input_contact_law'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
+                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_GET['input_contact_law']) && $_GET['input_contact_law'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -38,11 +38,11 @@ include '../functions/bootstrap.php';
                             <label for="input_nation" class="col-lg-3 control-label">Nationalité</label>
                             <div class="col-lg-9">
                                 <select class="form-control" name="input_nation" id="input_nation">
-                                    <option value="" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "") echo "selected"; ?>></option>
-                                    <option value="Autre" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Autre") echo "selected"; ?>>Autre</option>
-                                    <option value="Américain" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Américain") echo "selected"; ?>>Américaine</option>
-                                    <option value="Britannique" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
-                                    <option value="Francais" <?php if (isset($_POST['input_nation']) && $_POST['input_nation'] == "Francais") echo "selected"; ?>>Française</option>
+                                    <option value="" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "") echo "selected"; ?>></option>
+                                    <option value="Autre" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Autre") echo "selected"; ?>>Autre</option>
+                                    <option value="Américain" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Américain") echo "selected"; ?>>Américaine</option>
+                                    <option value="Britannique" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
+                                    <option value="Francais" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Francais") echo "selected"; ?>>Française</option>
                                 </select>
                             </div>
                         </div>
@@ -59,7 +59,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($r_zone = $r_zones->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $r_zone->id; ?>" <?php if (isset($_POST['input_zone']) && $_POST['input_zone'] == $r_zone->id) echo "selected"; ?>><?php echo $r_zone->libelle; ?></option>
+                                        <option value="<?php echo $r_zone->id; ?>" <?php if (isset($_GET['input_zone']) && $_GET['input_zone'] == $r_zone->id) echo "selected"; ?>><?php echo $r_zone->libelle; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -75,7 +75,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $r_user->id; ?>" <?php if (isset($_POST['input_contact_supp']) && $_POST['input_contact_supp'] == $r_user->id) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
+                                        <option value="<?php echo $r_user->id; ?>" <?php if (isset($_GET['input_contact_supp']) && $_GET['input_contact_supp'] == $r_user->id) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -92,13 +92,14 @@ include '../functions/bootstrap.php';
             </div>
         </div>
 
-        <h1>Résultats</h1>
         <?php
-        if ($_POST) {
+        if (!empty($_GET)) {
             $r_customers = searchCustomers($db);
-            if ($r_customers) {
+            $result_search = $r_customers->fetchAll(PDO::FETCH_OBJ);
+            if ($result_search) {
                 ?>
 
+                <h1>Résultats - <?= count($result_search) ?> clients</h1>
                 <div class="jumbotron">
                     <table class="table table-striped table-hover ">
                         <thead>
@@ -112,8 +113,7 @@ include '../functions/bootstrap.php';
                         </thead>
                         <tbody>
                             <?php
-                            $count_r = 1;
-                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
+                            foreach($result_search as $r_customer) {
                                 ?>
                                 <tr>
                                     <td>
@@ -123,23 +123,23 @@ include '../functions/bootstrap.php';
                                     </td>
                                     <td class="text-right">
                                         <?php $r_zone_search = getOneZoneById($db, $r_customer->secteur); ?>
-                                        <?php 
-                                        if(isset($r_zone_search->libelle)) 
-                                            echo $r_zone_search->libelle; 
+                                        <?php
+                                        if (isset($r_zone_search->libelle))
+                                            echo $r_zone_search->libelle;
                                         ?>
                                     </td>
                                     <td class="text-right">
                                         <?php $r_user_law = getUserById($db, $r_customer->mngt_law); ?>
-                                        <?php 
-                                        if(isset($r_user_law->initiale)) 
-                                            echo $r_user_law->initiale; 
+                                        <?php
+                                        if (isset($r_user_law->initiale))
+                                            echo $r_user_law->initiale;
                                         ?>
                                     </td>
                                     <td class="text-right">
                                         <?php $r_user_supp = getUserById($db, $r_customer->mngt_supp); ?>
-                                        <?php 
-                                        if(isset($r_user_supp->initiale)) 
-                                            echo $r_user_supp->initiale; 
+                                        <?php
+                                        if (isset($r_user_supp->initiale))
+                                            echo $r_user_supp->initiale;
                                         ?>
                                     </td>
                                     <td class="text-right">
@@ -147,7 +147,6 @@ include '../functions/bootstrap.php';
                                     </td>
                                 </tr>
                                 <?php
-                                $count_r++;
                             }
                             ?>
                         </tbody>

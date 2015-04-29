@@ -19,8 +19,7 @@ function searchApplicant($db)
         $sql .= "c.prenom LIKE '%" . $first . "%'";
 
     $sql .= " ORDER BY nom";
-    //var_dump($sql);die;
-    //$sql2 = "SELECT * FROM `candidat` WHERE nom like '%teston%'";
+    
     $r = $db->prepare($sql);
     $r->execute();
 

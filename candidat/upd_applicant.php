@@ -118,12 +118,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                         <div class="form-group">
                             <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
                             <div class="col-lg-10">
-                                <select class="form-control" name="input_nation" id="input_nation">
-                                    <option value="Autre" <?php if ($r->nationalite == "Autre" || $r->nationalite == "" || $r->nationalite == NULL) echo "selected"; ?>>Autre</option>
-                                    <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américaine</option>
-                                    <option value="Britannique" <?php if ($r->nationalite == "Britannique") echo "selected"; ?>>Britannique</option>
-                                    <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Française</option>
-                                </select>
+                                <input type="text" class="form-control" name="input_nation" id="input_nation" value="<?= $r->nationalite ?>" placeholder="Nationalité">
                             </div>
                         </div>
                         <div class="form-group">

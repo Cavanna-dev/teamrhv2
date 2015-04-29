@@ -47,9 +47,9 @@ function getJobByCustomer($db, $id)
 
 function searchJobs($db)
 {
-    $name = htmlspecialchars($_POST['input_name']);
-    $customer = htmlspecialchars($_POST['input_customer']);
-    $contact = htmlspecialchars($_POST['input_contact']);
+    $name = htmlspecialchars($_GET['input_name']);
+    $customer = htmlspecialchars($_GET['input_customer']);
+    $contact = htmlspecialchars($_GET['input_contact']);
 
     $sql = "SELECT id, client, titre, libelle, consultant "
             . "FROM poste ";
