@@ -1,6 +1,6 @@
 <?php
 include './functions/connection_db.php';
-
+error_reporting(0);
 // Par défaut on prend le planning de la semaine courante.
 if ($param == "") {
     $param = date("Y") . "-" . date("m") . "-" . date("d");
@@ -575,7 +575,7 @@ foreach($r as $enregistrement){
         $str .= "	</TR>";
         $str .= "	<TR>";
         $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size=10px ;  fontweight=bold\" colspan=2>";
-        $str .= "				<A  href=\"#\" class=\"lien\"><U><font style=\"font-size=11px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
+        $str .= "				<A  href=\"#\" class=\"lien\" style=\"font-size:11px;\"><U><font style=\"font-size=6px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
         $str .= "		</TD>";
         $str .= "	</TR>";
         $str .= "   <TR>  ";
@@ -597,7 +597,7 @@ foreach($r as $enregistrement){
         $str .= "	</TR>";
         $str .= "	<TR>";
         $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size=10px ;  fontweight=bold\" colspan=2>";
-        $str .= "				<A  href=\"#\" class=\"lien\"><U><font style=\"font-size=11px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
+        $str .= "				<A  href=\"#\" class=\"lien\" style=\"font-size:11px;\"><U><font style=\"font-size=6px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
         $str .= "		</TD>";
         $str .= "	</TR>";
         $str .= "   <TR>  ";

@@ -18,7 +18,7 @@ $r = getOneEvalById($db, $_GET['id']);
     <form class="form-horizontal" method="POST" action="../functions/upd_eval.php" id="form_customer">
         <div class="jumbotron">
             <div class="row">
-                <div class="col-lg-9" style="min-height: 250px;">
+                <div class="col-lg-9" style="min-height: 150px;margin-left:30px;">
                     <fieldset>
                         <div class="form-group col-lg-12">
                             <label for="input_candidat" class="col-lg-1 control-label">Candidat</label>
@@ -54,7 +54,7 @@ $r = getOneEvalById($db, $_GET['id']);
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
-                            <label for="input_title1" class="col-lg-1 control-label">Titre actuel 1</label>
+                            <label for="input_title1" class="col-lg-1 control-label">Titre act 1</label>
                             <div class="col-lg-3">
                                 <?php $r_titles = getAllTitles($db); ?>
                                 <select class="form-control" name="input_title1" id="input_title1">
@@ -70,7 +70,7 @@ $r = getOneEvalById($db, $_GET['id']);
                                     ?>
                                 </select>
                             </div>
-                            <label for="input_title2" class="col-lg-1 control-label">Titre actuel 2</label>
+                            <label for="input_title2" class="col-lg-1 control-label">Titre act 2</label>
                             <div class="col-lg-3">
                                 <?php $r_titles = getAllTitles($db); ?>
                                 <select class="form-control" name="input_title2" id="input_title2">
@@ -86,7 +86,7 @@ $r = getOneEvalById($db, $_GET['id']);
                                     ?>
                                 </select>
                             </div>
-                            <label for="input_title3" class="col-lg-1 control-label">Titre actuel 3</label>
+                            <label for="input_title3" class="col-lg-1 control-label">Titre act 3</label>
                             <div class="col-lg-3">
                                 <?php $r_titles = getAllTitles($db); ?>
                                 <select class="form-control" name="input_title3" id="input_title3">
@@ -155,7 +155,7 @@ $r = getOneEvalById($db, $_GET['id']);
                         </div>
                     </fieldset>
                 </div>
-                <div class="col-lg-3" style="position:absolute;right:0;"><img src="http://placehold.it/200x225" /></div>
+                <div class="col-lg-3" style="position:absolute;right:0;"><img src="http://placehold.it/100x150" /></div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
@@ -467,7 +467,7 @@ $r = getOneEvalById($db, $_GET['id']);
                         <div class="form-group">
                             <label for="input_remarque" class="col-lg-1 control-label">Remarque</label>
                             <div class="col-lg-11">
-                                <textarea class="form-control" rows="6" name="input_remarque" id="input_remarque"><?= isset($r->REMARQUE) ? $r->REMARQUE : '' ?></textarea>
+                                <textarea class="form-control" rows="16" name="input_remarque" id="input_remarque"><?= isset($r->REMARQUE) ? $r->REMARQUE : '' ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">

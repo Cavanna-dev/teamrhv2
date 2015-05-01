@@ -115,7 +115,6 @@ include '../functions/bootstrap.php';
                                     </td>
                                 </tr>
                                 <?php
-                                $count_r++;
                             }
                             ?>
                         </tbody>
