@@ -6,7 +6,7 @@ include '../functions/bootstrap.php';
 ?>
 
 <div class="container">
-    <form class="form-horizontal" method="POST" action="prospect.php" id="form_customer">
+    <form class="form-horizontal" method="GET" action="prospect.php" id="form_customer">
         <h1>Recherche prospect</h1>
         <div class="jumbotron">
             <div class="row">
@@ -15,7 +15,7 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_name" class="col-lg-2 control-label">Nom</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_POST['input_name']) ? $_POST['input_name'] : ""; ?>">
+                                <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_GET['input_name']) ? $_GET['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -27,10 +27,23 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($user_r = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_POST['input_contact_law']) && $_POST['input_contact_law'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
+                                        <option value="<?php echo $user_r->id; ?>" <?php if (isset($_GET['input_contact_law']) && $_GET['input_contact_law'] == $user_r->id) echo "selected"; ?>><?php echo $user_r->nom . " " . $user_r->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" name="input_nation" id="input_nation">
+                                    <option value="" <?php if ($_GET['input_nation'] == "") echo "selected"; ?>></option>
+                                    <option value="Autre" <?php if ($_GET['input_nation'] == "Autre") echo "selected"; ?>>Autre</option>
+                                    <option value="Anglais" <?php if ($_GET['input_nation'] == "Anglais") echo "selected"; ?>>Anglais</option>
+                                    <option value="Américain" <?php if ($_GET['input_nation'] == "Américain") echo "selected"; ?>>Américain</option>
+                                    <option value="Britannique" <?php if ($_GET['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
+                                    <option value="Francais" <?php if ($_GET['input_nation'] == "Francais") echo "selected"; ?>>Francais</option>
                                 </select>
                             </div>
                         </div>
@@ -52,7 +65,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($r_zone = $r_zones->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $r_zone->id; ?>" <?php if (isset($_POST['input_zone']) && $_POST['input_zone'] == $r_zone->id) echo "selected"; ?>><?php echo $r_zone->libelle; ?></option>
+                                        <option value="<?php echo $r_zone->id; ?>" <?php if (isset($_GET['input_zone']) && $_GET['input_zone'] == $r_zone->id) echo "selected"; ?>><?php echo $r_zone->libelle; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -68,7 +81,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $r_user->id; ?>" <?php if (isset($_POST['input_contact_supp']) && $_POST['input_contact_supp'] == $r_user->id) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
+                                        <option value="<?php echo $r_user->id; ?>" <?php if (isset($_GET['input_contact_supp']) && $_GET['input_contact_supp'] == $r_user->id) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -80,13 +93,14 @@ include '../functions/bootstrap.php';
             </div>
         </div>
 
-        <h1>Résultats</h1>
         <?php
-        if ($_POST) {
+        if (!empty($_GET)) {
             $r_prospects = searchProspect($db);
-            if ($r_prospects) {
+            $result_search = $r_prospects->fetchAll(PDO::FETCH_OBJ);
+            if ($result_search) {
                 ?>
 
+                <h1>Résultats - <?= count($result_search) ?></h1>
                 <div class="jumbotron">
                     <table class="table table-striped table-hover ">
                         <thead>
@@ -100,28 +114,28 @@ include '../functions/bootstrap.php';
                         </thead>
                         <tbody>
                             <?php
-                            while ($r_prospect = $r_prospects->fetch(PDO::FETCH_OBJ)) {
+                            foreach ($result_search as $r_prospect) {
                                 ?>
                                 <tr>
                                     <td><a href="upd_prospect.php?id=<?= $r_prospect->id; ?>"><?= $r_prospect->nom; ?></a></td>
                                     <td>
                                         <?php
                                         $r_zone = getOneZoneById($db, $r_prospect->secteur);
-                                        if(!empty($r_zone))
+                                        if (!empty($r_zone))
                                             echo $r_zone->libelle;
                                         ?>
                                     </td>
                                     <td>
                                         <?php
                                         $r_user_law = getUserById($db, $r_prospect->mngt_law);
-                                        if(!empty($r_user_law))
+                                        if (!empty($r_user_law))
                                             echo $r_user_law->initiale;
                                         ?>
                                     </td>
                                     <td>
                                         <?php
                                         $r_user_sup = getUserById($db, $r_prospect->mngt_supp);
-                                        if(!empty($r_user_sup))  
+                                        if (!empty($r_user_sup))
                                             echo $r_user_sup->initiale;
                                         ?>
                                     </td>

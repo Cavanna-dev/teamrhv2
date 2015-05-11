@@ -15,7 +15,8 @@ function getOneZoneById($db, $id)
 function getAllZones($db)
 {
     $sql = "SELECT id, libelle "
-            . "FROM secteur";
+            . "FROM secteur "
+            . "ORDER BY libelle";
     $r = $db->prepare($sql);
     $r->execute();
 

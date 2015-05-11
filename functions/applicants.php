@@ -12,7 +12,7 @@ function searchApplicant($db)
     if (!empty($name) || !empty($first))
         $sql .= "WHERE ";
     if (!empty($name))
-        $sql .= "c.NOM LIKE '" . $name . "%'";
+        $sql .= "c.NOM LIKE '%" . $name . "%'";
     if (!empty($name) && !empty($first))
         $sql .= " AND ";
     if (!empty($first))

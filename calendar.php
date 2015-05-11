@@ -6,7 +6,7 @@ if ($param == "") {
     $param = date("Y") . "-" . date("m") . "-" . date("d");
 }
 $param = "2015-03-24";
-$heightCase = 50;
+$heightCase = 26;
 $START_JAVASCRIPT = '<script type="text/javascript">';
 $END_JAVASCRIPT = '</script>';
 
@@ -132,7 +132,7 @@ $resultat->execute();
 $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<TABLE cellpadding="0" cellspacing="0" border="1" bordercolor="white" width="1200">
+<TABLE cellpadding="0" cellspacing="0" border="1" bordercolor="white" width="1200" style="margin-left: 315px;">
     <TR>
         <TD colspan="6" class="titre" align="middle">
             <BR>&nbsp;&nbsp;&nbsp;&nbsp;Liste des RDV pour la p&eacute;riode allant du Lundi <?php echo $lundi; ?> au Samedi <?php echo $samedi; ?>
@@ -267,46 +267,46 @@ $tmp2 = urlencode($tmp2);
 // Initialisation du compteur de boucle
 $i = 8;
 echo "<TR>";
-echo "<TABLE cellpadding=\"0\" cellspacing=\"0\" border=\"1\" bordercolor=\"black\" width=\"1200\">";
+echo "<TABLE cellpadding=\"0\" cellspacing=\"0\" border=\"1\" bordercolor=\"black\" width=\"1200\" style=\"margin-left: 315px;margin-bottom: 50px;\">";
 
 while ($i <= 20) {
     echo "<TR id=$i>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL;  width=\"35\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL;  width=\"35\" HEIGHT=\"26\">";
     echo "<SUP>" . $i . "H00</SUP>";
     echo "</TD>";
-    echo "<TD  valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD  valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
     echo "</TR>";
     echo "<TR>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"right\" style=WORD-BREAK:BREAK-ALL; width=\"35\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"demi\" align=\"right\" style=WORD-BREAK:BREAK-ALL; width=\"35\" HEIGHT=\"26\">";
     echo "<SUP>30</SUP>";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"".$heightCase."\">";
+    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
     echo "&nbsp;";
     echo "</TD>";
     echo "</TR>";
@@ -342,7 +342,7 @@ echo "</TR>";
                     } else {
                         ?>
 
-                    <div style="position:absolute;right:620px;top:315px;">
+                    <div style="position:absolute;right:305px;top:305px;">
 
                     <?php
                     $test = 0;
@@ -441,6 +441,7 @@ foreach($rdvs as $enregistrement3){
     $hordeb[$enregistrement3[NUM]] = $enregistrement3[CHEV_DEB];
     $horfin[$enregistrement3[NUM]] = $enregistrement3[CHEV_FIN];
 }
+/*
 if(isset($tableau)){
     foreach ($tableau as $key1 => $value1) {
         $l = 0;
@@ -448,7 +449,7 @@ if(isset($tableau)){
             $tableau = recursion($tableau[$value2], $tableau, $key1, 0);
         }
     }
-}
+}*/
 
 // Les valeurs left des div prennent en compte le numéro de salle et le jour de la semaine
 // La valeur top prend en compte l'heure du RDV
@@ -464,19 +465,19 @@ foreach($r as $enregistrement){
     $nomjour = date("l", $tms);
     switch ($nomjour) {
         case "Monday":
-            $col = 62;
+            $col = 62 + 315;
             break;
         case "Tuesday":
-            $col = 292;
+            $col = 292 + 315;
             break;
         case "Wednesday":
-            $col = 522;
+            $col = 522 + 315;
             break;
         case "Thursday":
-            $col = 752;
+            $col = 752 + 315;
             break;
         case "Friday":
-            $col = 982;
+            $col = 982 + 315;
             break;
     }
     // on gère le décalage de la salle
@@ -485,14 +486,15 @@ foreach($r as $enregistrement){
     if ($enregistrement[NUMSALLE] == 3)
         $col = $col + 153.2;
 
+    $ratio_min = 0.833;
+    
     // on gère la hauteur des cases
-    $diff1 = ($enregistrement[HEURE_FIN] * ($heightCase*2) + $enregistrement[MINUTE_FIN]*1.666) - ($enregistrement[HEURE_DEB] * ($heightCase*2) + $enregistrement[MINUTE_DEB]*1.666);
-    $height = round($diff1);
-    $height2 = $height - 50;
+    $diff1 = ($enregistrement[HEURE_FIN] * ($heightCase*2) + $enregistrement[MINUTE_FIN]*$ratio_min) - ($enregistrement[HEURE_DEB] * ($heightCase*2) + $enregistrement[MINUTE_DEB]*$ratio_min);
+    $height = $diff1;
 
     // on gère le décalage des heures			
-    $diff2 = ($enregistrement[HEURE_DEB] * ($heightCase*2) + $enregistrement[MINUTE_DEB]*1.666) - 495; //305 si 8h00 //355 si 8h30
-    $row = round($diff2); //480 si 8h00 //510 si 8h30
+    $diff2 = ($enregistrement[HEURE_DEB] * ($heightCase*2) + $enregistrement[MINUTE_DEB]*$ratio_min) - 110;
+    $row = $diff2;
 
     // on gère la couleur des cases
     if (strtoupper($enregistrement[TYPE]) == "CANDIDAT") {
@@ -517,7 +519,7 @@ foreach($r as $enregistrement){
         $titre = ucfirst($enregistrement[TYPE]);
     }
 
-
+    /*
     if (isset($tableau[$enregistrement[ID]])) {
         // Calcul de la largeur
         $j = count($tableau[$enregistrement[ID]]);
@@ -548,8 +550,8 @@ foreach($r as $enregistrement){
     }
     else {
         $width = 76.6;
-    }
-
+    }*/
+    $width = 76.6;
 
     $id = urlencode($enregistrement[ID]);
 

@@ -155,7 +155,7 @@ $r = getOneEvalById($db, $_GET['id']);
                         </div>
                     </fieldset>
                 </div>
-                <div class="col-lg-3" style="position:absolute;right:0;"><img src="http://placehold.it/100x150" /></div>
+                <div class="col-lg-3" style="position:absolute;right:0;"><img src="http://placehold.it/100x150" style="position: absolute;right: 40px;"/></div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
@@ -207,7 +207,7 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <input class="form-control" type="text" 
                                        name="input_test_fr1" id="input_test_fr1"
                                        placeholder="Test FR 1"
-                                       value="<?= isset($r->LVL_TEST1_FR) ? $r->LVL_TEST1_FR : '' ?>"/>
+                                       value="<?= isset($r->LVL_TEST1_FR) && $r->LVL_TEST1_FR != 0 ? $r->LVL_TEST1_FR : '' ?>"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -227,7 +227,7 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <input class="form-control" type="text" 
                                        name="input_test_en1" id="input_test_en1"
                                        placeholder="Test AN 1"
-                                       value="<?= isset($r->LVL_TEST1_EN) ? $r->LVL_TEST1_EN : '' ?>"/>
+                                       value="<?= isset($r->LVL_TEST1_EN) && $r->LVL_TEST1_EN != 0 ? $r->LVL_TEST1_EN : '' ?>"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -347,14 +347,14 @@ $r = getOneEvalById($db, $_GET['id']);
                             <label for="input_l2" class="col-lg-2 control-label">Langue 2</label>
                             <div class="col-lg-4">
                                 <select class="form-control" name="input_l2" id="input_l2">
-                                    <option value="" <?= $r->LANGUE == '' ? 'selected' : '' ?>></option>
-                                    <option value="LMA" <?= $r->LANGUE == 'LMA' ? 'selected' : '' ?>>LMA</option>
-                                    <option value="LMF" <?= $r->LANGUE == 'LMF' ? 'selected' : '' ?>>LMF</option>
-                                    <option value="LMF-LMA" <?= $r->LANGUE == 'LMF-LMA' ? 'selected' : '' ?>>LMF-LMA</option>
-                                    <option value="LM Allemande" <?= $r->LANGUE == 'LM Allemande' ? 'selected' : '' ?>>LM Allemande</option>
-                                    <option value="LM Espagnole" <?= $r->LANGUE == 'LM Espagnole' ? 'selected' : '' ?>>LM Espagnole</option>
-                                    <option value="LM Italienne" <?= $r->LANGUE == 'LM Italienne' ? 'selected' : '' ?>>LM Italienne</option>
-                                    <option value="Autre" <?= $r->LANGUE == 'Autre' ? 'selected' : '' ?>>Autre</option>
+                                    <option value="" <?= $r->LANGUE2 == '' ? 'selected' : '' ?>></option>
+                                    <option value="LMA" <?= $r->LANGUE2 == 'LMA' ? 'selected' : '' ?>>LMA</option>
+                                    <option value="LMF" <?= $r->LANGUE2 == 'LMF' ? 'selected' : '' ?>>LMF</option>
+                                    <option value="LMF-LMA" <?= $r->LANGUE2 == 'LMF-LMA' ? 'selected' : '' ?>>LMF-LMA</option>
+                                    <option value="LM Allemande" <?= $r->LANGUE2 == 'LM Allemande' ? 'selected' : '' ?>>LM Allemande</option>
+                                    <option value="LM Espagnole" <?= $r->LANGUE2 == 'LM Espagnole' ? 'selected' : '' ?>>LM Espagnole</option>
+                                    <option value="LM Italienne" <?= $r->LANGUE2 == 'LM Italienne' ? 'selected' : '' ?>>LM Italienne</option>
+                                    <option value="Autre" <?= $r->LANGUE2 == 'Autre' ? 'selected' : '' ?>>Autre</option>
                                 </select>
                             </div>
                         </div>
@@ -364,14 +364,14 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <input class="form-control" type="text" 
                                        name="input_test_fr2" id="input_test_fr2"
                                        placeholder="Test FR 2"
-                                       value="<?= isset($r->LVL_TEST2_FR) ? $r->LVL_TEST2_FR : '' ?>"/>
+                                       value="<?= isset($r->LVL_TEST2_FR) && $r->LVL_TEST2_FR != 0 ? $r->LVL_TEST2_FR : '' ?>"/>
                             </div>
                             <label for="input_speed" class="col-lg-2 control-label">Vitesse</label>
                             <div class="col-lg-4">
                                 <input class="form-control" type="text" 
                                        name="input_speed" id="input_speed"
                                        placeholder="Vitesse"
-                                       value="<?= isset($r->VITESSE) ? $r->VITESSE : '' ?>"/>
+                                       value="<?= isset($r->VITESSE) && $r->VITESSE != 0 ? $r->VITESSE : '' ?>"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -380,7 +380,7 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <input class="form-control" type="text" 
                                        name="input_test_en2" id="input_test_en2"
                                        placeholder="Test AN 2"
-                                       value="<?= isset($r->LVL_TEST2_EN) ? $r->LVL_TEST2_EN : '' ?>"/>
+                                       value="<?= isset($r->LVL_TEST2_EN) && $r->LVL_TEST2_EN != 0 ? $r->LVL_TEST2_EN : '' ?>"/>
                             </div>
                             <label for="input_appli1" class="col-lg-2 control-label">Autre appli.</label>
                             <div class="col-lg-4">

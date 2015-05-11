@@ -16,23 +16,28 @@ function getOneProspectById($db, $id)
 
 function searchProspect($db)
 {
-    $name = htmlspecialchars($_POST['input_name']);
-    $zone = htmlspecialchars($_POST['input_zone']);
-    $contact_s = htmlspecialchars($_POST['input_contact_supp']);
-    $contact_l = htmlspecialchars($_POST['input_contact_law']);
+    $name = htmlspecialchars($_GET['input_name']);
+    $zone = htmlspecialchars($_GET['input_zone']);
+    $contact_s = htmlspecialchars($_GET['input_contact_supp']);
+    $contact_l = htmlspecialchars($_GET['input_contact_law']);
+    $nation = htmlspecialchars($_GET['input_nation']);
 
     $sql = "SELECT id, nom, secteur, mngt_law, mngt_supp "
             . "FROM prospect ";
 
-    if (!empty($name) || !empty($zone) ||  !empty($contact_s) || !empty($contact_l))
+    if (!empty($name) || !empty($zone) || !empty($nation) || !empty($contact_s) || !empty($contact_l))
         $sql .= "WHERE ";
     if (!empty($name))
         $sql .= "nom like '%" . $name . "%' ";
-    if (!empty($name) && (!empty($zone) || !empty($contact_s) || !empty($contact_l)))
+    if (!empty($name) && (!empty($zone) || !empty($nation) || !empty($contact_s) || !empty($contact_l)))
+        $sql .= " AND ";
+    if (!empty($nation))
+        $sql .= "nationalite = '" . $nation . "' ";
+    if (!empty($nation) && (!empty($zone) || !empty($contact_s) || !empty($contact_l)))
         $sql .= " AND ";
     if (!empty($zone))
         $sql .= "secteur = '" . $zone . "' ";
-    if (!empty($zone) && !empty($contact_s))
+    if (!empty($zone) && (!empty($contact_s) || !empty($contact_l)))
         $sql .= " AND ";
     if (!empty($contact_s))
         $sql .= "mngt_supp = '" . $contact_s . "' ";
