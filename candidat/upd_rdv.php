@@ -10,12 +10,13 @@ $rdv = getOneRdvById($db, $_GET['id']);
 <div class="container">
     <h1>Gestion RDVs</h1>
     <form class="form-horizontal" method="POST" action="../functions/upd_rdv.php" id="form_rdv">
+        <input type="hidden" class="form-control" name="input_id" id="input_id" value="<?= $rdv->ID ?>">
         <div class="jumbotron">
             <div class="row">
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_consult1" class="col-lg-2 control-label">Consultant</label>
+                            <label for="input_consult1" class="col-lg-2 control-label">Consult. 1</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_consult1" id="input_consult1">
@@ -88,7 +89,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 $r_mail->execute();
                                 $r = $r_mail->fetch(PDO::FETCH_OBJ);
                                 ?>
-                                <p><a href="mailto:<?= $r->email ?>?subject=test&body=test"><?= $r->email ?></a></p>
+                                <p><a href="mailto:<?= isset($r->email) ? $r->email : '' ?>?subject=test&body=test"><?= $r->email ?></a></p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -101,7 +102,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_consult2" class="col-lg-2 control-label">Accomp.</label>
+                            <label for="input_consult2" class="col-lg-2 control-label">Consult. 2</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_consult2" id="input_consult2">
@@ -177,7 +178,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
-                                        <option value="<?= $i ?>" <?php if ($rdv->HEURE_DEB == $i) echo 'selected'; ?>><?= $i ?></option>
+                                        <option value="<?= $i ?>" <?php if ($rdv->HEURE_FIN == $i) echo 'selected'; ?>><?= $i ?></option>
                                         <?php
                                     endfor;
                                     ?>
@@ -185,11 +186,11 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             </div>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_mfin" id="input_title">
-                                    <option value=""   <?php if ($rdv->MINUTE_DEB == '') echo 'selected'; ?>></option>
-                                    <option value="00" <?php if ($rdv->MINUTE_DEB == '00') echo 'selected'; ?>>00</option>
-                                    <option value="15" <?php if ($rdv->MINUTE_DEB == '15') echo 'selected'; ?>>15</option>
-                                    <option value="30" <?php if ($rdv->MINUTE_DEB == '30') echo 'selected'; ?>>30</option>
-                                    <option value="45" <?php if ($rdv->MINUTE_DEB == '45') echo 'selected'; ?>>45</option>
+                                    <option value=""   <?php if ($rdv->MINUTE_FIN == '') echo 'selected'; ?>></option>
+                                    <option value="00" <?php if ($rdv->MINUTE_FIN == '00') echo 'selected'; ?>>00</option>
+                                    <option value="15" <?php if ($rdv->MINUTE_FIN == '15') echo 'selected'; ?>>15</option>
+                                    <option value="30" <?php if ($rdv->MINUTE_FIN == '30') echo 'selected'; ?>>30</option>
+                                    <option value="45" <?php if ($rdv->MINUTE_FIN == '45') echo 'selected'; ?>>45</option>
                                 </select>
                             </div>
                         </div>

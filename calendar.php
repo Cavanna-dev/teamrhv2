@@ -691,4 +691,9 @@ while ($i <= count($resultat)) {
                                 alert('Le RDV a été créée.');
                             });
 <?php } ?>
+<?php if (isset($_GET['updRDV'])) { ?>
+                            $(window).load(function () {
+                                alert('Le RDV a été modifié.');
+                            });
+<?php } ?>
                     </script>
