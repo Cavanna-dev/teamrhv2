@@ -95,7 +95,7 @@ include '../functions/bootstrap.php';
                                     <?php
                                     while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?php echo $r_user->id; ?>" <?php if ($r_user->id == $r->mngt_law) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
+                                        <option value="<?php echo $r_user->id; ?>"><?php echo $r_user->nom . " " . $r_user->prenom; ?></option> 
                                         <?php
                                     }
                                     ?>
