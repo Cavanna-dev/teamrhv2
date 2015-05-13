@@ -9,9 +9,9 @@ $rdv = getOneRdvById($db, $_GET['id']);
 
 <div class="container">
     <h1>Gestion RDVs</h1>
-    <form class="form-horizontal" method="POST" action="../functions/upd_rdv.php" id="form_rdv">
-        <input type="hidden" class="form-control" name="input_id" id="input_id" value="<?= $rdv->ID ?>">
-        <div class="jumbotron">
+    <div class="jumbotron">
+        <form class="form-horizontal" method="POST" action="../functions/upd_rdv.php" id="form_rdv">
+            <input type="hidden" class="form-control" name="input_id" id="input_id" value="<?= $rdv->ID ?>">
             <div class="row">
                 <div class="col-lg-6">
                     <fieldset>
@@ -71,7 +71,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 <input type="text" class="form-control" name="input_name" id="input_name" value="<?= $rdv->NOM ?>" placeholder="Nom">
                             </div>
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" name="input_last" id="input_last" value="<?= $rdv->NOM ?>" placeholder="Prénom">
+                                <input type="text" class="form-control" name="input_last" id="input_last" value="<?= $rdv->PRENOM ?>" placeholder="Prénom">
                             </div>
                         </div>
                         <div class="form-group">
@@ -90,11 +90,6 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 $r = $r_mail->fetch(PDO::FETCH_OBJ);
                                 ?>
                                 <p><a href="mailto:<?= isset($r->email) ? $r->email : '' ?>?subject=test&body=test"><?= $r->email ?></a></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" class="btn btn-primary">Modifier RDV</button>
                             </div>
                         </div>
                     </fieldset>
@@ -197,7 +192,20 @@ $rdv = getOneRdvById($db, $_GET['id']);
                     </fieldset>
                 </div>
             </div>
-        </div>
-    </form>
+            <div class="form-group pull-left">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Modifier RDV</button>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" method="POST" action="../functions/del_rdv.php" id="form_rdv">
+            <input type="hidden" class="form-control" name="input_id" id="input_id" value="<?= $rdv->ID ?>">
+            <div class="form-group pull-left" style="margin-left: 15px;">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Suppr. RDV</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 </body>

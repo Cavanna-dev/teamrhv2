@@ -13,7 +13,7 @@ include '../functions/bootstrap.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_consult1" class="col-lg-2 control-label">Consultant</label>
+                            <label for="input_consult1" class="col-lg-2 control-label">Consult. 1</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_consult1" id="input_consult1">
@@ -87,7 +87,7 @@ include '../functions/bootstrap.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_consult2" class="col-lg-2 control-label">Accomp.</label>
+                            <label for="input_consult2" class="col-lg-2 control-label">Consult. 2</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_consult2" id="input_consult2">

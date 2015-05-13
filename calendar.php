@@ -696,4 +696,9 @@ while ($i <= count($resultat)) {
                                 alert('Le RDV a été modifié.');
                             });
 <?php } ?>
+<?php if (isset($_GET['delRDV'])) { ?>
+                            $(window).load(function () {
+                                alert('Le RDV a été supprimé.');
+                            });
+<?php } ?>
                     </script>
