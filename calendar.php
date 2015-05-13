@@ -1,6 +1,6 @@
 <?php
 include './functions/connection_db.php';
-
+error_reporting(0);
 $param = isset($_GET['param']) ? $_GET['param'] : '';
 
 // Par défaut on prend le planning de la semaine courante.
