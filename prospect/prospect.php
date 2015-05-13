@@ -13,14 +13,14 @@ include '../functions/bootstrap.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_name" class="col-lg-2 control-label">Nom</label>
-                            <div class="col-lg-10">
+                            <label for="input_name" class="col-lg-3 control-label">Nom</label>
+                            <div class="col-lg-9">
                                 <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_GET['input_name']) ? $_GET['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_contact_law" class="col-lg-2 control-label">Resp. compte Avocat</label>
-                            <div class="col-lg-10">
+                            <label for="input_contact_law" class="col-lg-3 control-label">Resp. Avocat</label>
+                            <div class="col-lg-9">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_contact_law" id="input_contact_law">
                                     <option value=""></option>
@@ -35,15 +35,14 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
-                            <div class="col-lg-10">
+                            <label for="input_nation" class="col-lg-3 control-label">Nationalité</label>
+                            <div class="col-lg-9">
                                 <select class="form-control" name="input_nation" id="input_nation">
-                                    <option value="" <?php if ($_GET['input_nation'] == "") echo "selected"; ?>></option>
-                                    <option value="Autre" <?php if ($_GET['input_nation'] == "Autre") echo "selected"; ?>>Autre</option>
-                                    <option value="Anglais" <?php if ($_GET['input_nation'] == "Anglais") echo "selected"; ?>>Anglais</option>
-                                    <option value="Américain" <?php if ($_GET['input_nation'] == "Américain") echo "selected"; ?>>Américain</option>
-                                    <option value="Britannique" <?php if ($_GET['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
-                                    <option value="Francais" <?php if ($_GET['input_nation'] == "Francais") echo "selected"; ?>>Francais</option>
+                                    <option value="" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "") echo "selected"; ?>></option>
+                                    <option value="Autre" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Autre") echo "selected"; ?>>Autre</option>
+                                    <option value="Américain" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Américain") echo "selected"; ?>>Américaine</option>
+                                    <option value="Britannique" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
+                                    <option value="Francais" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Francais") echo "selected"; ?>>Française</option>
                                 </select>
                             </div>
                         </div>
@@ -57,8 +56,8 @@ include '../functions/bootstrap.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_zone" class="col-lg-2 control-label">Secteur</label>
-                            <div class="col-lg-10">
+                            <label for="input_zone" class="col-lg-3 control-label">Secteur</label>
+                            <div class="col-lg-9">
                                 <?php $r_zones = getAllZones($db); ?>
                                 <select class="form-control" name="input_zone" id="input_zone">
                                     <option value=""></option>
@@ -73,8 +72,8 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_contact_supp" class="col-lg-2 control-label">Resp. compte Support</label>
-                            <div class="col-lg-10">
+                            <label for="input_contact_supp" class="col-lg-3 control-label">Resp. Support</label>
+                            <div class="col-lg-9">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_contact_supp" id="input_contact_supp">
                                     <option value=""></option>
