@@ -1,11 +1,12 @@
 <?php
 include './functions/connection_db.php';
-error_reporting(0);
+
+$param = isset($_GET['param']) ?  $_GET['param'] : '';
+
 // Par défaut on prend le planning de la semaine courante.
 if ($param == "") {
     $param = date("Y") . "-" . date("m") . "-" . date("d");
 }
-$param = "2015-03-24";
 $heightCase = 26;
 $START_JAVASCRIPT = '<script type="text/javascript">';
 $END_JAVASCRIPT = '</script>';
@@ -215,10 +216,9 @@ if ($erreur == "oui") {
                     <TR>
                         <TD align="left"  class="normal" colspan=2>
                     <?php
-                    $tmp1 = date("Y-m-d", mktime(0, 0, 0, substr($param, 5, 2), substr($param, 8, 2) - 7, substr($param, 0, 4)));
-                    $tmp1 = urlencode($tmp1);
+                    $tmp1 = date("Y-m-d", strtotime('-1 week', strtotime($param)));
                     ?>
-                            <A class="lien"  href="#" onclick="go_to('agenda.php?&param=<?php echo $tmp1 ?>');">Semaine pr&eacute;c&eacute;dente</A>
+                            <A class="lien"  href='index.php?&param=<?php echo $tmp1 ?>'>Semaine précédente</A>
                         </TD>
                         <TD align="center" colspan=3>
                             <img border= 0 src="../image/plus.jpg"/>
@@ -226,10 +226,9 @@ if ($erreur == "oui") {
                         </TD>
                         <TD align="right"  class="normal">
 <?php
-$tmp2 = date("Y-m-d", mktime(0, 0, 0, substr($param, 5, 2), substr($param, 8, 2) + 7, substr($param, 0, 4)));
-$tmp2 = urlencode($tmp2);
+$tmp2 = date("Y-m-d", strtotime('+1 week', strtotime($param)));
 ?>
-                            <A class="lien" href="#" onclick="go_to('agenda.php?&param=<?php echo $tmp2 ?>');">Semaine suivante</A>
+                            <A class="lien" href='index.php?&param=<?= $tmp2 ?>'>Semaine suivante</A>
                         </TD>
                     </TR>
 
