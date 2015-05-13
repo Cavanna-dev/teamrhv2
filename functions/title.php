@@ -17,8 +17,9 @@ function getAllTitles($db)
     $sql = "SELECT id, libelle "
             . "FROM titre " 
             . "ORDER BY libelle";
-    $r = $db->prepare($sql);
-    $r->execute();
+    $r_title = $db->prepare($sql);
+    $r_title->execute();
+    $r = $r_title->fetchAll(PDO::FETCH_OBJ);
 
     return $r;
 }

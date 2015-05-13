@@ -1,7 +1,7 @@
 <?php
 include './functions/connection_db.php';
 
-$param = isset($_GET['param']) ?  $_GET['param'] : '';
+$param = isset($_GET['param']) ? $_GET['param'] : '';
 
 // Par défaut on prend le planning de la semaine courante.
 if ($param == "") {
@@ -145,40 +145,40 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
             Voir les RDV de:
         </TD>
         <TD colspan="2" align="middle">
-<?php
-$tmp6 = urlencode($param);
-?>
-            <select class="normal" name="consultant" size="1" onchange="go_to('agenda.php?&param=<?php echo $tmp6; ?>')">
             <?php
-            $requete1 = " SELECT ID, concat(nom, ' ', prenom) 'nom' ";
-            $requete1 .= " FROM   utilisateur ";
-            $requete1 .= " WHERE (type = 'CONSULT' or type = 'ADMIN' or type = 'ASSOC') and actif ='Y' ";
-            $requete1 .= " ORDER BY concat(nom, ' ', prenom) ";
-
-            $resultat1 = $db->prepare($requete1);
-            $resultat1->execute();
-            $r1 = $resultat1->fetchAll(PDO::FETCH_ASSOC);
-            
-            if (!$r1) {
-                echo " <option  selected value=\"\"> Tous les consultants </option> ";
-            } else {
-                echo " <option  selected value=\"\"> Tous les consultants </option> ";
-
-                foreach($r1 as $t) {
-                    echo " <option ";
-
-                    if ($consultant == $t[ID])
-                        echo " selected ";
-
-                    echo " value=$t[ID] > $t[nom] </option> ";
-                }
-            }
+            $tmp6 = urlencode($param);
             ?>
+            <select class="normal" name="consultant" size="1" onchange="go_to('agenda.php?&param=<?php echo $tmp6; ?>')">
+                <?php
+                $requete1 = " SELECT ID, concat(nom, ' ', prenom) 'nom' ";
+                $requete1 .= " FROM   utilisateur ";
+                $requete1 .= " WHERE (type = 'CONSULT' or type = 'ADMIN' or type = 'ASSOC') and actif ='Y' ";
+                $requete1 .= " ORDER BY concat(nom, ' ', prenom) ";
+
+                $resultat1 = $db->prepare($requete1);
+                $resultat1->execute();
+                $r1 = $resultat1->fetchAll(PDO::FETCH_ASSOC);
+
+                if (!$r1) {
+                    echo " <option  selected value=\"\"> Tous les consultants </option> ";
+                } else {
+                    echo " <option  selected value=\"\"> Tous les consultants </option> ";
+
+                    foreach ($r1 as $t) {
+                        echo " <option ";
+
+                        if ($consultant == $t[ID])
+                            echo " selected ";
+
+                        echo " value=$t[ID] > $t[nom] </option> ";
+                    }
+                }
+                ?>
             </select>
         </TD>
         <TD colspan="2" align="left">
-                <?php
-                ?>
+            <?php
+            ?>
             <select class="normal" name="numsalle" size="1" onchange="go_to('agenda.php?&param=<?php echo $tmp6; ?>')">
                 <option  selected value="" > Toutes les salles</option>
                 <option <?php if ($numsalle == 1) echo "selected"; ?> value="1"> Salle A</option>
@@ -188,21 +188,21 @@ $tmp6 = urlencode($param);
         </TD>
     </TR>
     <TR>
-<?php
-if ($erreur == "oui") {
-    ?>
+        <?php
+        if ($erreur == "oui") {
+            ?>
             <TD class="titre"  align="middle" colspan="6">
                 <B>Connexion impossible &agrave; notre base de donn&eacute;es. Renouveller votre recherche ult&eacute;rieurement.<B>
                         </TD>
                         </TR>
-            <?php
-        } else {
-            ?>
+                        <?php
+                    } else {
+                        ?>
                         <TD class="titre"  align="middle" colspan="6">
-            <?php
-            if (count($r) == 0)
-                echo "Aucun RDV n'est organis&eacute; pour cette semaine. ";
-            ?>
+                            <?php
+                            if (count($r) == 0)
+                                echo "Aucun RDV n'est organis&eacute; pour cette semaine. ";
+                            ?>
                         </TD>
                         </TR>
                         <?php
@@ -215,19 +215,18 @@ if ($erreur == "oui") {
                     </TR>
                     <TR>
                         <TD align="left"  class="normal" colspan=2>
-                    <?php
-                    $tmp1 = date("Y-m-d", strtotime('-1 week', strtotime($param)));
-                    ?>
+                            <?php
+                            $tmp1 = date("Y-m-d", strtotime('-1 week', strtotime($param)));
+                            ?>
                             <A class="lien"  href='index.php?&param=<?php echo $tmp1 ?>'>Semaine précédente</A>
                         </TD>
                         <TD align="center" colspan=3>
-                            <img border= 0 src="../image/plus.jpg"/>
-                            <a href="#"><U>Nouveau RDV</U></A>
+                            <a href="./candidat/newRdv.php"><U><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Nouveau RDV</U></A>
                         </TD>
                         <TD align="right"  class="normal">
-<?php
-$tmp2 = date("Y-m-d", strtotime('+1 week', strtotime($param)));
-?>
+                            <?php
+                            $tmp2 = date("Y-m-d", strtotime('+1 week', strtotime($param)));
+                            ?>
                             <A class="lien" href='index.php?&param=<?= $tmp2 ?>'>Semaine suivante</A>
                         </TD>
                     </TR>
@@ -262,59 +261,59 @@ $tmp2 = date("Y-m-d", strtotime('+1 week', strtotime($param)));
                             <font color=gray><I> Salle A &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Salle B &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Salle C </I></font>
                         </TD>
                     </TR>
-<?php
+                    <?php
 // Initialisation du compteur de boucle
-$i = 8;
-echo "<TR>";
-echo "<TABLE cellpadding=\"0\" cellspacing=\"0\" border=\"1\" bordercolor=\"black\" width=\"1200\" style=\"margin-left: 315px;margin-bottom: 50px;\">";
+                    $i = 8;
+                    echo "<TR>";
+                    echo "<TABLE cellpadding=\"0\" cellspacing=\"0\" border=\"1\" bordercolor=\"black\" width=\"1200\" style=\"margin-left: 315px;margin-bottom: 50px;\">";
 
-while ($i <= 20) {
-    echo "<TR id=$i>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL;  width=\"35\" HEIGHT=\"26\">";
-    echo "<SUP>" . $i . "H00</SUP>";
-    echo "</TD>";
-    echo "<TD  valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "</TR>";
-    echo "<TR>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"right\" style=WORD-BREAK:BREAK-ALL; width=\"35\" HEIGHT=\"26\">";
-    echo "<SUP>30</SUP>";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
-    echo "&nbsp;";
-    echo "</TD>";
-    echo "</TR>";
+                    while ($i <= 20) {
+                        echo "<TR id=$i>";
+                        echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL;  width=\"35\" HEIGHT=\"26\">";
+                        echo "<SUP>" . $i . "H00</SUP>";
+                        echo "</TD>";
+                        echo "<TD  valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"heure\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "</TR>";
+                        echo "<TR>";
+                        echo "<TD valign=\"top\" class=\"demi\" align=\"right\" style=WORD-BREAK:BREAK-ALL; width=\"35\" HEIGHT=\"26\">";
+                        echo "<SUP>30</SUP>";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "<TD valign=\"top\" class=\"demi\" align=\"center\" style=WORD-BREAK:BREAK-ALL; width=\"168\" HEIGHT=\"26\">";
+                        echo "&nbsp;";
+                        echo "</TD>";
+                        echo "</TR>";
 
-    $i = $i + 1;
-}
-echo "</TABLE>";
-echo "</TR>";
-?>
+                        $i = $i + 1;
+                    }
+                    echo "</TABLE>";
+                    echo "</TR>";
+                    ?>
 
                     </TABLE>
 
@@ -341,279 +340,279 @@ echo "</TR>";
                     } else {
                         ?>
 
-                    <div style="position:absolute;right:305px;top:305px;">
+                        <div style="position:absolute;right:305px;top:305px;">
 
-                    <?php
-                    $test = 0;
-                    $widthBlock = 200;
-                    foreach($rescolor as $enrcolor) {
-                     ?>
-                        <div id="<?php echo $enrcolor[login]; ?>" 
-                            style="position:absolute; left:0px; top:<?= $test ?>px;padding:10px;font-size:18px;
-                            width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#<?php echo $enrcolor[color]; ?>">
-                            <p><strong><?php echo substr($enrcolor[prenom], 0, 1) . "." . $enrcolor[nom]; ?></strong></p>
-                        </div>
-                    <?php
-                    $test+=50;
-                    }
-                    }
-                    ?>
+                            <?php
+                            $test = 0;
+                            $widthBlock = 200;
+                            foreach ($rescolor as $enrcolor) {
+                                ?>
+                                <div id="<?php echo $enrcolor[login]; ?>" 
+                                     style="position:absolute; left:0px; top:<?= $test ?>px;padding:10px;font-size:18px;
+                                     width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#<?php echo $enrcolor[color]; ?>">
+                                    <p><strong><?php echo substr($enrcolor[prenom], 0, 1) . "." . $enrcolor[nom]; ?></strong></p>
+                                </div>
+                                <?php
+                                $test+=50;
+                            }
+                        }
+                        ?>
                         <div id="pro" 
-                            style="position:absolute; left:0px; top:<?= $test ?>px;padding:10px;font-size:18px;
-                            width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#FFFF7D;">
+                             style="position:absolute; left:0px; top:<?= $test ?>px;padding:10px;font-size:18px;
+                             width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#FFFF7D;">
                             <p>
                                 <strong>Prospection</strong>
                             </p>
                         </div>
 
                         <div id="clt" 
-                            style="position:absolute; left:0px; top:<?= $test+50 ?>px;padding:10px;font-size:18px;
-                            width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#FF3737;">
+                             style="position:absolute; left:0px; top:<?= $test + 50 ?>px;padding:10px;font-size:18px;
+                             width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#FF3737;">
                             <p>
                                 <strong>Client</strong>
                             </p>
                         </div>
 
                         <div id="int" 
-                            style="position:absolute; left:0px; top:<?= $test+100 ?>px;padding:10px;font-size:18px;
-                            width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#00FF80;">
+                             style="position:absolute; left:0px; top:<?= $test + 100 ?>px;padding:10px;font-size:18px;
+                             width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#00FF80;">
                             <p>
                                 <strong>Interne</strong>
                             </p>
                         </div>
 
                         <div id="per" 
-                            style="position:absolute; left:0px; top:<?= $test +150?>px;padding:10px;font-size:18px;
-                            width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#E8BDE4;">
+                             style="position:absolute; left:0px; top:<?= $test + 150 ?>px;padding:10px;font-size:18px;
+                             width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#E8BDE4;">
                             <p>
                                 <strong>Personnel</strong>
                             </p>
                         </div>
                     </div>
-<?php
-if ($consultant != "")
-    $clause1 = "   $clause and chevauche.CONSULTANT = $consultant ";
-else
-    $clause1 = $clause;
+                    <?php
+                    if ($consultant != "")
+                        $clause1 = "   $clause and chevauche.CONSULTANT = $consultant ";
+                    else
+                        $clause1 = $clause;
 
 // On remplit un tableau avec pour un identifiant de case la liste des identifiants des cases qui chevauchent 
-$requete3 = " SELECT resa_salle.ID, concat(resa_salle.heure_deb, resa_salle.minute_deb) 'RESA_DEB', chevauche.ID 'NUM' ,           ";
-$requete3 .= "        concat(chevauche.heure_deb, chevauche.minute_deb) 'CHEV_DEB' ,     ";
-$requete3 .= "        concat(chevauche.heure_fin, chevauche.minute_fin) 'CHEV_FIN'      ";
-$requete3 .= " FROM   resa_salle, resa_salle chevauche   ";
-$requete3 .= " WHERE  $clause1 ";
-$requete3 .= "     and ((concat(resa_salle.heure_deb, resa_salle.minute_deb) >= concat(chevauche.heure_deb, chevauche.minute_deb) ";
-$requete3 .= "                               and concat(resa_salle.heure_deb, resa_salle.minute_deb)<  concat(chevauche.heure_fin, chevauche.minute_fin)) ";
-$requete3 .= "     or   (concat(resa_salle.heure_fin, resa_salle.minute_fin) >  concat(chevauche.heure_deb, chevauche.minute_deb) ";
-$requete3 .= "            and concat(resa_salle.heure_fin, resa_salle.minute_fin)<= concat(chevauche.heure_fin, chevauche.minute_fin))";
-$requete3 .= "     or   (concat(resa_salle.heure_deb, resa_salle.minute_deb) <  concat(chevauche.heure_deb, chevauche.minute_deb) ";
-$requete3 .= "            and concat(resa_salle.heure_fin, resa_salle.minute_fin)> concat(chevauche.heure_fin, chevauche.minute_fin)))";
-$requete3 .= "     and resa_salle.ID       !=  chevauche.ID      ";
-$requete3 .= "     and resa_salle.jour     =  chevauche.jour   ";
-$requete3 .= "     and resa_salle.numsalle =  chevauche.numsalle       ";
-$requete3 .= " ORDER BY 1, 2 ";
+                    $requete3 = " SELECT resa_salle.ID, concat(resa_salle.heure_deb, resa_salle.minute_deb) 'RESA_DEB', chevauche.ID 'NUM' ,           ";
+                    $requete3 .= "        concat(chevauche.heure_deb, chevauche.minute_deb) 'CHEV_DEB' ,     ";
+                    $requete3 .= "        concat(chevauche.heure_fin, chevauche.minute_fin) 'CHEV_FIN'      ";
+                    $requete3 .= " FROM   resa_salle, resa_salle chevauche   ";
+                    $requete3 .= " WHERE  $clause1 ";
+                    $requete3 .= "     and ((concat(resa_salle.heure_deb, resa_salle.minute_deb) >= concat(chevauche.heure_deb, chevauche.minute_deb) ";
+                    $requete3 .= "                               and concat(resa_salle.heure_deb, resa_salle.minute_deb)<  concat(chevauche.heure_fin, chevauche.minute_fin)) ";
+                    $requete3 .= "     or   (concat(resa_salle.heure_fin, resa_salle.minute_fin) >  concat(chevauche.heure_deb, chevauche.minute_deb) ";
+                    $requete3 .= "            and concat(resa_salle.heure_fin, resa_salle.minute_fin)<= concat(chevauche.heure_fin, chevauche.minute_fin))";
+                    $requete3 .= "     or   (concat(resa_salle.heure_deb, resa_salle.minute_deb) <  concat(chevauche.heure_deb, chevauche.minute_deb) ";
+                    $requete3 .= "            and concat(resa_salle.heure_fin, resa_salle.minute_fin)> concat(chevauche.heure_fin, chevauche.minute_fin)))";
+                    $requete3 .= "     and resa_salle.ID       !=  chevauche.ID      ";
+                    $requete3 .= "     and resa_salle.jour     =  chevauche.jour   ";
+                    $requete3 .= "     and resa_salle.numsalle =  chevauche.numsalle       ";
+                    $requete3 .= " ORDER BY 1, 2 ";
 
-$r3 = $db->prepare($requete3);
-$r3->execute();
-$rdvs = $r3->fetchAll(PDO::FETCH_ASSOC);
+                    $r3 = $db->prepare($requete3);
+                    $r3->execute();
+                    $rdvs = $r3->fetchAll(PDO::FETCH_ASSOC);
 
-function recursion($tab, $tableau, $key1, $cpt)
-{
-    if ($cpt < 6)
-    // on va parcourir les noeuds liés sur une profondeur donnée par le test (ici 5 niveaux)
-        $i = count($tableau[$key1]);
+                    function recursion($tab, $tableau, $key1, $cpt)
+                    {
+                        if ($cpt < 6)
+                        // on va parcourir les noeuds liés sur une profondeur donnée par le test (ici 5 niveaux)
+                            $i = count($tableau[$key1]);
 
-    foreach ($tab as $key => $value) {
-        if (!in_array($value, $tableau[$key1])) {
-            $tableau[$key1][$i] = $value;
-            $i = $i + 1;
-            $cpt = $cpt + 1;
-            recursion($tab[$value], $tableau, $key1, $cpt);
-        }
-    }
+                        foreach ($tab as $key => $value) {
+                            if (!in_array($value, $tableau[$key1])) {
+                                $tableau[$key1][$i] = $value;
+                                $i = $i + 1;
+                                $cpt = $cpt + 1;
+                                recursion($tab[$value], $tableau, $key1, $cpt);
+                            }
+                        }
 
-    return $tableau;
-}
+                        return $tableau;
+                    }
 
-foreach($rdvs as $enregistrement3){
-    $tableau[$enregistrement3[ID]][] = $enregistrement3[NUM];
-    $hordeb[$enregistrement3[NUM]] = $enregistrement3[CHEV_DEB];
-    $horfin[$enregistrement3[NUM]] = $enregistrement3[CHEV_FIN];
-}
-/*
-if(isset($tableau)){
-    foreach ($tableau as $key1 => $value1) {
-        $l = 0;
-        foreach ($tableau[$key1] as $key2 => $value2) {
-            $tableau = recursion($tableau[$value2], $tableau, $key1, 0);
-        }
-    }
-}*/
+                    foreach ($rdvs as $enregistrement3) {
+                        $tableau[$enregistrement3[ID]][] = $enregistrement3[NUM];
+                        $hordeb[$enregistrement3[NUM]] = $enregistrement3[CHEV_DEB];
+                        $horfin[$enregistrement3[NUM]] = $enregistrement3[CHEV_FIN];
+                    }
+                    /*
+                      if(isset($tableau)){
+                      foreach ($tableau as $key1 => $value1) {
+                      $l = 0;
+                      foreach ($tableau[$key1] as $key2 => $value2) {
+                      $tableau = recursion($tableau[$value2], $tableau, $key1, 0);
+                      }
+                      }
+                      } */
 
 // Les valeurs left des div prennent en compte le numéro de salle et le jour de la semaine
 // La valeur top prend en compte l'heure du RDV
 // Pour décaler d'une journée 170 px
 // Pour décaler d'une heure 60 px
 // Initialisation du compteur de boucle
-$i = 1;
-foreach($r as $enregistrement){
-    $date = $enregistrement[DATE_RDV];
-    $tms = mktime(0, 0, 0, substr($date, 3, 2), substr($date, 0, 2), substr($date, 6, 4));
+                    $i = 1;
+                    foreach ($r as $enregistrement) {
+                        $date = $enregistrement[DATE_RDV];
+                        $tms = mktime(0, 0, 0, substr($date, 3, 2), substr($date, 0, 2), substr($date, 6, 4));
 
-    // on gère le décalage des jours
-    $nomjour = date("l", $tms);
-    switch ($nomjour) {
-        case "Monday":
-            $col = 62 + 315;
-            break;
-        case "Tuesday":
-            $col = 292 + 315;
-            break;
-        case "Wednesday":
-            $col = 522 + 315;
-            break;
-        case "Thursday":
-            $col = 752 + 315;
-            break;
-        case "Friday":
-            $col = 982 + 315;
-            break;
-    }
-    // on gère le décalage de la salle
-    if ($enregistrement[NUMSALLE] == 2)
-        $col = $col + 76.6;
-    if ($enregistrement[NUMSALLE] == 3)
-        $col = $col + 153.2;
+                        // on gère le décalage des jours
+                        $nomjour = date("l", $tms);
+                        switch ($nomjour) {
+                            case "Monday":
+                                $col = 62 + 315;
+                                break;
+                            case "Tuesday":
+                                $col = 292 + 315;
+                                break;
+                            case "Wednesday":
+                                $col = 522 + 315;
+                                break;
+                            case "Thursday":
+                                $col = 752 + 315;
+                                break;
+                            case "Friday":
+                                $col = 982 + 315;
+                                break;
+                        }
+                        // on gère le décalage de la salle
+                        if ($enregistrement[NUMSALLE] == 2)
+                            $col = $col + 76.6;
+                        if ($enregistrement[NUMSALLE] == 3)
+                            $col = $col + 153.2;
 
-    $ratio_min = 0.833;
-    
-    // on gère la hauteur des cases
-    $diff1 = ($enregistrement[HEURE_FIN] * ($heightCase*2) + $enregistrement[MINUTE_FIN]*$ratio_min) - ($enregistrement[HEURE_DEB] * ($heightCase*2) + $enregistrement[MINUTE_DEB]*$ratio_min);
-    $height = $diff1;
+                        $ratio_min = 0.833;
 
-    // on gère le décalage des heures			
-    $diff2 = ($enregistrement[HEURE_DEB] * ($heightCase*2) + $enregistrement[MINUTE_DEB]*$ratio_min) - 110;
-    $row = $diff2;
+                        // on gère la hauteur des cases
+                        $diff1 = ($enregistrement[HEURE_FIN] * ($heightCase * 2) + $enregistrement[MINUTE_FIN] * $ratio_min) - ($enregistrement[HEURE_DEB] * ($heightCase * 2) + $enregistrement[MINUTE_DEB] * $ratio_min);
+                        $height = $diff1;
 
-    // on gère la couleur des cases
-    if (strtoupper($enregistrement[TYPE]) == "CANDIDAT") {
-        $color = $enregistrement[COLOR];
-    } elseif (strtoupper($enregistrement[TYPE]) == "PROSPECTION")
-        $color = "FFFF7D";
-    elseif (strtoupper($enregistrement[TYPE]) == "CLIENT")
-        $color = "FF3737";
-    elseif (strtoupper($enregistrement[TYPE]) == "PERSONNEL")
-        $color = "E8BDE4";
-    elseif (strtoupper($enregistrement[TYPE]) == "INTERNE")
-        $color = "00FF80";
+                        // on gère le décalage des heures			
+                        $diff2 = ($enregistrement[HEURE_DEB] * ($heightCase * 2) + $enregistrement[MINUTE_DEB] * $ratio_min) - 110;
+                        $row = $diff2;
 
-    // on gère le libell&eacute;
-    if (strtoupper($enregistrement[TYPE]) == "CANDIDAT") {
-        if ($enregistrement[NOMCLIENT] != "") {
-            $titre = substr(ucfirst($enregistrement[NOMCLIENT]), 0, 10);
-        } else {
-            $titre = ucfirst($enregistrement[CANDIDAT]);
-        }
-    } else {
-        $titre = ucfirst($enregistrement[TYPE]);
-    }
+                        // on gère la couleur des cases
+                        if (strtoupper($enregistrement[TYPE]) == "CANDIDAT") {
+                            $color = $enregistrement[COLOR];
+                        } elseif (strtoupper($enregistrement[TYPE]) == "PROSPECTION")
+                            $color = "FFFF7D";
+                        elseif (strtoupper($enregistrement[TYPE]) == "CLIENT")
+                            $color = "FF3737";
+                        elseif (strtoupper($enregistrement[TYPE]) == "PERSONNEL")
+                            $color = "E8BDE4";
+                        elseif (strtoupper($enregistrement[TYPE]) == "INTERNE")
+                            $color = "00FF80";
 
-    /*
-    if (isset($tableau[$enregistrement[ID]])) {
-        // Calcul de la largeur
-        $j = count($tableau[$enregistrement[ID]]);
-        $width = round(76.6 / $j) - 1;
+                        // on gère le libell&eacute;
+                        if (strtoupper($enregistrement[TYPE]) == "CANDIDAT") {
+                            if ($enregistrement[NOMCLIENT] != "") {
+                                $titre = substr(ucfirst($enregistrement[NOMCLIENT]), 0, 10);
+                            } else {
+                                $titre = ucfirst($enregistrement[CANDIDAT]);
+                            }
+                        } else {
+                            $titre = ucfirst($enregistrement[TYPE]);
+                        }
 
-        //Init des variables
-        $NbCasesAvant = 0;
-        $NbCasesIdentique = 0;
+                        /*
+                          if (isset($tableau[$enregistrement[ID]])) {
+                          // Calcul de la largeur
+                          $j = count($tableau[$enregistrement[ID]]);
+                          $width = round(76.6 / $j) - 1;
 
-        // Calcul du decalage
-        foreach ($tableau[$enregistrement[ID]] as $key => $value) {
-            $deb = $enregistrement[HEURE_DEB] . $enregistrement[MINUTE_DEB];
-            $fin = $enregistrement[HEURE_FIN] . $enregistrement[MINUTE_FIN];
+                          //Init des variables
+                          $NbCasesAvant = 0;
+                          $NbCasesIdentique = 0;
 
-            // Nb de cases avant
-            if ($deb > $hordeb[$value])
-                $NbCasesAvant = $NbCasesAvant + 1;
+                          // Calcul du decalage
+                          foreach ($tableau[$enregistrement[ID]] as $key => $value) {
+                          $deb = $enregistrement[HEURE_DEB] . $enregistrement[MINUTE_DEB];
+                          $fin = $enregistrement[HEURE_FIN] . $enregistrement[MINUTE_FIN];
 
-            // Nb de cases avant
-            if ($deb == $hordeb[$value] && $fin > $horfin[$value])
-                $NbCasesAvant = $NbCasesAvant + 1;
+                          // Nb de cases avant
+                          if ($deb > $hordeb[$value])
+                          $NbCasesAvant = $NbCasesAvant + 1;
 
-            // Nb cases identiques	
-            if ($deb == $hordeb[$value] && $fin == $horfin[$value] && $value > $enregistrement[ID])
-                $NbCasesIdentique = $NbCasesIdentique + 1;
-        }
-        $col = $col + $width * ($NbCasesAvant + $NbCasesIdentique);
-    }
-    else {
-        $width = 76.6;
-    }*/
-    $width = 76.6;
+                          // Nb de cases avant
+                          if ($deb == $hordeb[$value] && $fin > $horfin[$value])
+                          $NbCasesAvant = $NbCasesAvant + 1;
 
-    $id = urlencode($enregistrement[ID]);
+                          // Nb cases identiques
+                          if ($deb == $hordeb[$value] && $fin == $horfin[$value] && $value > $enregistrement[ID])
+                          $NbCasesIdentique = $NbCasesIdentique + 1;
+                          }
+                          $col = $col + $width * ($NbCasesAvant + $NbCasesIdentique);
+                          }
+                          else {
+                          $width = 76.6;
+                          } */
+                        $width = 76.6;
 
-    // On gère les caractères spéciaux sur les noms
-    $value1 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[NOMCANDIDAT])));
-    $value2 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[PRENOMCANDIDAT])));
-    $value3 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[NOMCLIENT])));
-    $value4 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[LIBELLE])));
+                        $id = urlencode($enregistrement[ID]);
 
-    if ($enregistrement[ACCOMPAGNE] != "") {
-        $width_accomp = $width / 2;
-        $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
-        $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
-        $str .= " background-color:#" . $color . ";\" >";
-        $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
-        $str .= "    <TR>  ";
-        $str .= "  		<TD valign=top colspan=2 align=left>";
-        $str .= "				<SUP>" . $enregistrement[HEURE_DEB] . ":" . $enregistrement[MINUTE_DEB] . " </SUP>";
-        $str .= "		</TD>";
-        $str .= "  		<TD valign=top colspan=2 align=left style=\"position:absolute;left:75%;background-color:#" . $enregistrement[COLOR2] . ";width:" . $width_accomp . "\">";
-        $str .= "				<SUP>" . $enregistrement[ACCOMPAGNE2] . " </SUP>";
-        $str .= "		</TD>";
-        $str .= "	</TR>";
-        $str .= "	<TR>";
-        $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size=10px ;  fontweight=bold\" colspan=2>";
-        $str .= "				<A  href=\"#\" class=\"lien\" style=\"font-size:11px;\"><U><font style=\"font-size=6px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
-        $str .= "		</TD>";
-        $str .= "	</TR>";
-        $str .= "   <TR>  ";
-        $str .= "   	<TD valign=bottom colspan=2 align=left height=" . $height2 . ">";
-        $str .= "				<SUB> " . $enregistrement[HEURE_FIN] . ":" . $enregistrement[MINUTE_FIN] . " </SUB>";
-        $str .= "		</TD>";
-        $str .= "	</TR>";
-        $str .= "</TABLE>";
-        $str .= " </DIV>";
-    } else {
-        $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
-        $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
-        $str .= " background-color:#" . $color . ";\">";
-        $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
-        $str .= "    <TR>  ";
-        $str .= "  		<TD valign=top colspan=2 align=left>";
-        $str .= "				<SUP>" . $enregistrement[HEURE_DEB] . ":" . $enregistrement[MINUTE_DEB] . " </SUP>";
-        $str .= "		</TD>";
-        $str .= "	</TR>";
-        $str .= "	<TR>";
-        $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size=10px ;  fontweight=bold\" colspan=2>";
-        $str .= "				<A  href=\"#\" class=\"lien\" style=\"font-size:11px;\"><U><font style=\"font-size=6px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
-        $str .= "		</TD>";
-        $str .= "	</TR>";
-        $str .= "   <TR>  ";
-        $str .= "   	<TD valign=bottom colspan=2 align=left height=" . $height2 . ">";
-        $str .= "				<SUB> " . $enregistrement[HEURE_FIN] . ":" . $enregistrement[MINUTE_FIN] . " </SUB>";
-        $str .= "		</TD>";
-        $str .= "	</TR>";
-        $str .= "</TABLE>";
-        $str .= " </DIV>";
-    }
-    echo $str;
+                        // On gère les caractères spéciaux sur les noms
+                        $value1 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[NOMCANDIDAT])));
+                        $value2 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[PRENOMCANDIDAT])));
+                        $value3 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[NOMCLIENT])));
+                        $value4 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[LIBELLE])));
 
-    $i = $i + 1;
-}
-?>
+                        if ($enregistrement[ACCOMPAGNE] != "") {
+                            $width_accomp = $width / 2;
+                            $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
+                            $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
+                            $str .= " background-color:#" . $color . ";\" >";
+                            $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
+                            $str .= "    <TR>  ";
+                            $str .= "  		<TD valign=top colspan=2 align=left>";
+                            $str .= "				<SUP>" . $enregistrement[HEURE_DEB] . ":" . $enregistrement[MINUTE_DEB] . " </SUP>";
+                            $str .= "		</TD>";
+                            $str .= "  		<TD valign=top colspan=2 align=left style=\"position:absolute;left:75%;background-color:#" . $enregistrement[COLOR2] . ";width:" . $width_accomp . "\">";
+                            $str .= "				<SUP>" . $enregistrement[ACCOMPAGNE2] . " </SUP>";
+                            $str .= "		</TD>";
+                            $str .= "	</TR>";
+                            $str .= "	<TR>";
+                            $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size=10px ;  fontweight=bold\" colspan=2>";
+                            $str .= "				<A  href=\"./candidat/upd_rdv.php?id=" . $id . "\" class=\"lien\" style=\"font-size:11px;\"><U><font style=\"font-size=6px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
+                            $str .= "		</TD>";
+                            $str .= "	</TR>";
+                            $str .= "   <TR>  ";
+                            $str .= "   	<TD valign=bottom colspan=2 align=left height=" . $height2 . ">";
+                            $str .= "				<SUB> " . $enregistrement[HEURE_FIN] . ":" . $enregistrement[MINUTE_FIN] . " </SUB>";
+                            $str .= "		</TD>";
+                            $str .= "	</TR>";
+                            $str .= "</TABLE>";
+                            $str .= " </DIV>";
+                        } else {
+                            $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
+                            $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
+                            $str .= " background-color:#" . $color . ";\">";
+                            $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
+                            $str .= "    <TR>  ";
+                            $str .= "  		<TD valign=top colspan=2 align=left>";
+                            $str .= "				<SUP>" . $enregistrement[HEURE_DEB] . ":" . $enregistrement[MINUTE_DEB] . " </SUP>";
+                            $str .= "		</TD>";
+                            $str .= "	</TR>";
+                            $str .= "	<TR>";
+                            $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size=10px ;  fontweight=bold\" colspan=2>";
+                            $str .= "				<A  href=\"./candidat/upd_rdv.php?id=" . $id . "\" class=\"lien\" style=\"font-size:11px;\"><U><font style=\"font-size=6px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
+                            $str .= "		</TD>";
+                            $str .= "	</TR>";
+                            $str .= "   <TR>  ";
+                            $str .= "   	<TD valign=bottom colspan=2 align=left height=" . $height2 . ">";
+                            $str .= "				<SUB> " . $enregistrement[HEURE_FIN] . ":" . $enregistrement[MINUTE_FIN] . " </SUB>";
+                            $str .= "		</TD>";
+                            $str .= "	</TR>";
+                            $str .= "</TABLE>";
+                            $str .= " </DIV>";
+                        }
+                        echo $str;
+
+                        $i = $i + 1;
+                    }
+                    ?>
 
                     <script type="text/javascript">
                         // on calcule la position absolue de la premi&egrave;re colonne de la table
@@ -628,64 +627,68 @@ foreach($r as $enregistrement){
 
                             // on met en place les div de l&eacute;gende		  	
 
-                    <?php
-                    $reqcolor = " SELECT ID, concat(nom, ' ', prenom) 'nom', login, type, SORTING";
-                    $reqcolor .= " FROM   utilisateur   ";
-                    $reqcolor .= " where  (login <> 'admin') and actif ='Y'";
-                    $reqcolor .= " ORDER BY SORTING ";
+<?php
+$reqcolor = " SELECT ID, concat(nom, ' ', prenom) 'nom', login, type, SORTING";
+$reqcolor .= " FROM   utilisateur   ";
+$reqcolor .= " where  (login <> 'admin') and actif ='Y'";
+$reqcolor .= " ORDER BY SORTING ";
 
-                    $r_color = $db->prepare($reqcolor);
-                    $r_color->execute();
-                    $rescolor = $r_color->fetchAll(PDO::FETCH_ASSOC);
+$r_color = $db->prepare($reqcolor);
+$r_color->execute();
+$rescolor = $r_color->fetchAll(PDO::FETCH_ASSOC);
 
-                    if (!$rescolor) {
-                        $erreur = "oui";
-                    }
+if (!$rescolor) {
+    $erreur = "oui";
+}
 
-                    if (count($rescolor) == 0) {
-                        echo " ERROR ";
-                    } else {
+if (count($rescolor) == 0) {
+    echo " ERROR ";
+} else {
 
-                        $w = 0;
+    $w = 0;
 
-                        foreach($rescolor as $enrcolor){
+    foreach ($rescolor as $enrcolor) {
 
-                            echo "var " . $enrcolor[login] . " = document.getElementById('" . $enrcolor[login] . "');";
-                            echo $enrcolor[login] . ".style.left = left + getAbsLeft(" . $enrcolor[login] . ")+ 855 ;";
-                            echo $enrcolor[login] . ".style.top  = top + getAbsTop(" . $enrcolor[login] . ") + " . $w . " ;";
+        echo "var " . $enrcolor[login] . " = document.getElementById('" . $enrcolor[login] . "');";
+        echo $enrcolor[login] . ".style.left = left + getAbsLeft(" . $enrcolor[login] . ")+ 855 ;";
+        echo $enrcolor[login] . ".style.top  = top + getAbsTop(" . $enrcolor[login] . ") + " . $w . " ;";
 
-                            $w = $w + 60;
+        $w = $w + 60;
+    }
+}
+?>
+
+                            var pro = document.getElementById('pro');
+                            pro.style.left = left + getAbsLeft(pro) + 855;
+                            pro.style.top = top + getAbsTop(pro) + <?php echo $w; ?> + 0;
+
+                            var clt = document.getElementById('clt');
+                            clt.style.left = left + getAbsLeft(clt) + 855;
+                            clt.style.top = top + getAbsTop(clt) + <?php echo $w; ?> + 60;
+
+                            var int = document.getElementById('int');
+                            int.style.left = left + getAbsLeft(int) + 855;
+                            int.style.top = top + getAbsTop(int) + <?php echo $w; ?> + 120;
+
+                            var per = document.getElementById('per');
+                            per.style.left = left + getAbsLeft(per) + 855;
+                            per.style.top = top + getAbsTop(per) + <?php echo $w; ?> + 180;
+
+                            // on boucle sur l'ensemble des div 
+<?php
+$i = 1;
+while ($i <= count($resultat)) {
+    echo "var div" . $i . " = document.getElementById('DIV" . $i . "');";
+    echo "div" . $i . ".style.left = left + getAbsLeft(div" . $i . ");";
+    echo "div" . $i . ".style.top  = top + getAbsTop(div" . $i . ");";
+
+    $i = $i + 1;
+}
+?>
                         }
-                    }
-                    ?>
-
-                    var pro = document.getElementById('pro');
-                    pro.style.left = left + getAbsLeft(pro) + 855;
-                    pro.style.top = top + getAbsTop(pro) + <?php echo $w; ?> + 0;
-
-                    var clt = document.getElementById('clt');
-                    clt.style.left = left + getAbsLeft(clt) + 855;
-                    clt.style.top = top + getAbsTop(clt) + <?php echo $w; ?> + 60;
-
-                    var int = document.getElementById('int');
-                    int.style.left = left + getAbsLeft(int) + 855;
-                    int.style.top = top + getAbsTop(int) + <?php echo $w; ?> + 120;
-
-                    var per = document.getElementById('per');
-                    per.style.left = left + getAbsLeft(per) + 855;
-                    per.style.top = top + getAbsTop(per) + <?php echo $w; ?> + 180;
-
-                    // on boucle sur l'ensemble des div 
-                    <?php
-                    $i = 1;
-                    while ($i <= count($resultat)) {
-                        echo "var div" . $i . " = document.getElementById('DIV" . $i . "');";
-                        echo "div" . $i . ".style.left = left + getAbsLeft(div" . $i . ");";
-                        echo "div" . $i . ".style.top  = top + getAbsTop(div" . $i . ");";
-
-                        $i = $i + 1;
-                    }
-                    ?>
-                }
-
+<?php if (isset($_GET['newRDV'])) { ?>
+                            $(window).load(function () {
+                                alert('Le RDV a été créée.');
+                            });
+<?php } ?>
                     </script>

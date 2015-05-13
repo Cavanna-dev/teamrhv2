@@ -51,7 +51,7 @@ include '../functions/bootstrap.php';
                     if ($result_search) {
                         ?>
 
-                <h1>Résultats - <?= count($result_search) ?></h1>
+                        <h1>Résultats - <?= count($result_search) ?></h1>
                         <div class="jumbotron">
                             <table class="table table-striped table-hover ">
                                 <thead>
@@ -62,10 +62,11 @@ include '../functions/bootstrap.php';
                                 </thead>
                                 <tbody>
                                     <?php
-                                    foreach($result_search as $r_appli) {
+                                    foreach ($result_search as $r_appli) {
                                         ?>
-                                    <tr>
-                                            <td><a href="upd_applicant.php?id=<?= $r_appli->id; ?>"><?= $r_appli->nom . " " . $r_appli->prenom; ?></a></td>
+                                        <tr>
+                                            <td>
+                                                <a tabindex="0" role="button" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="<?= $r_appli->remarque_eval ?>"><?= $r_appli->nom . " " . $r_appli->prenom; ?></a>
                                             <td>
                                                 <a href="del_applicant.php?id=<?= $r_appli->id; ?>" 
                                                    onclick="return confirm('Pas disponible pour le moment.')">
@@ -281,12 +282,16 @@ include '../functions/bootstrap.php';
         </div>
     </div>
 </div>
-<?php if (isset($_GET['success'])) { ?>
-    <script type="text/javascript">
-        $(window).load(function () {
-            alert('Candidat ajouté.');
+
+<script type="text/javascript">
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
         });
-    </script>
-<?php }
-?>
+    });
+
+<?php if (isset($_GET['success'])) { ?>
+        alert('Candidat ajouté.');
+<?php } ?>
+</script>
 </body>

@@ -60,13 +60,13 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <select class="form-control" name="input_title1" id="input_title1">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_title = $r_titles->fetch(PDO::FETCH_OBJ)) {
+                                    foreach ($r_titles as $r_title) :
                                         ?>
                                         <option value="<?= $r_title->id ?>" <?= $r->TITRE1_ACTUEL == $r_title->id ? 'selected' : '' ?>>
                                             <?= $r_title->libelle ?>
                                         </option>
                                         <?php
-                                    }
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>
@@ -76,13 +76,13 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <select class="form-control" name="input_title2" id="input_title2">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_title = $r_titles->fetch(PDO::FETCH_OBJ)) {
+                                    foreach ($r_titles as $r_title) :
                                         ?>
                                         <option value="<?= $r_title->id ?>" <?= $r->TITRE2_ACTUEL == $r_title->id ? 'selected' : '' ?>>
                                             <?= $r_title->libelle ?>
                                         </option>
                                         <?php
-                                    }
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>
@@ -92,13 +92,13 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <select class="form-control" name="input_title3" id="input_title3">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_title = $r_titles->fetch(PDO::FETCH_OBJ)) {
+                                    foreach ($r_titles as $r_title) :
                                         ?>
                                         <option value="<?= $r_title->id ?>" <?= $r->TITRE3_ACTUEL == $r_title->id ? 'selected' : '' ?>>
                                             <?= $r_title->libelle ?>
                                         </option>
                                         <?php
-                                    }
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>
@@ -110,13 +110,13 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <select class="form-control" name="input_title_futur1" id="input_title_futur1">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_title = $r_titles->fetch(PDO::FETCH_OBJ)) {
+                                    foreach ($r_titles as $r_title) :
                                         ?>
                                         <option value="<?= $r_title->id ?>" <?= $r->TITRE1_RECH == $r_title->id ? 'selected' : '' ?>>
                                             <?= $r_title->libelle ?>
                                         </option>
                                         <?php
-                                    }
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>
@@ -126,13 +126,13 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <select class="form-control" name="input_title_futur2" id="input_title_futur2">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_title = $r_titles->fetch(PDO::FETCH_OBJ)) {
+                                    foreach ($r_titles as $r_title) :
                                         ?>
                                         <option value="<?= $r_title->id ?>" <?= $r->TITRE2_RECH == $r_title->id ? 'selected' : '' ?>>
                                             <?= $r_title->libelle ?>
                                         </option>
                                         <?php
-                                    }
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>
@@ -142,13 +142,13 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <select class="form-control" name="input_title_futur3" id="input_title_futur3">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_title = $r_titles->fetch(PDO::FETCH_OBJ)) {
+                                    foreach ($r_titles as $r_title) :
                                         ?>
                                         <option value="<?= $r_title->id ?>" <?= $r->TITRE3_RECH == $r_title->id ? 'selected' : '' ?>>
                                             <?= $r_title->libelle ?>
                                         </option>
                                         <?php
-                                    }
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>

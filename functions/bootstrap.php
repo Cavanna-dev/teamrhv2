@@ -10,6 +10,7 @@ include '../functions/evaluation.php';
 include '../functions/jobs.php';
 include '../functions/media.php';
 include '../functions/prospect.php';
+include '../functions/rdv.php';
 include '../functions/sendCv.php';
 include '../functions/speciality.php';
 include '../functions/status.php';
