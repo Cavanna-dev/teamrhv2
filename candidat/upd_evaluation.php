@@ -15,7 +15,7 @@ $r = getOneEvalById($db, $_GET['id']);
     </script>
 <?php } ?>
 <div class="container-fluid">
-    <form class="form-horizontal" method="POST" action="../functions/upd_eval.php" id="form_customer">
+    <form class="form-horizontal" method="POST" action="../functions/upd_eval.php" id="form_customer" enctype="multipart/form-data">
         <div class="jumbotron">
             <div class="row">
                 <div class="col-lg-9" style="min-height: 150px;margin-left:30px;">
@@ -27,6 +27,9 @@ $r = getOneEvalById($db, $_GET['id']);
                                 <input type="hidden" 
                                        name="input_eval" id="input_eval" 
                                        value="<?= $r->ID ?>">
+                                <input type="hidden" 
+                                       name="input_apply" id="input_eval" 
+                                       value="<?= $r->CANDIDAT ?>">
                                 <input type="text" 
                                        class="form-control"
                                        value="<?= $r_applicant_eval->nom . " " . $r_applicant_eval->prenom; ?>" disabled />
@@ -155,7 +158,17 @@ $r = getOneEvalById($db, $_GET['id']);
                         </div>
                     </fieldset>
                 </div>
-                <div class="col-lg-3" style="position:absolute;right:0;"><img src="http://placehold.it/100x150" style="position: absolute;right: 40px;"/></div>
+                <div class="col-lg-3" style="position:absolute;right:-225px;top: 80px;">
+                    <img src="http://placehold.it/200x150" /><br />
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <span class="btn btn-default btn-file">
+                            <span class="fileinput-new">Select file</span>
+                            <span class="fileinput-exists">Change</span>
+                            <input type="file" name="photo" id="photo"></span>
+                        <span class="fileinput-filename"></span>
+                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">

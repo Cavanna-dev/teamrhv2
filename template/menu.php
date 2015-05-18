@@ -5,34 +5,19 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
-                "recherche.php" => "Recherche",
-                "rendezvous.php" => "Rendez-vous",
-                "refus.php" => "Refus",
             ),
             "Client" => Array(
                 "client.php" => "Société",
-                "contact.php" => "Contact",
                 "job.php" => "Poste",
-                "entretien.php" => "Entretien",
-                "placement.php" => "Placement",
-                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
-                "contact.php" => "Contact",
-                "planning.php" => "Planning",
             ),
             "Fournisseur" => Array(
-                "fournisseur.php" => "Fournisseur",
-                "contact.php" => "Contact",
-                "media.php" => "Media",
             ),
             "Facturation" => Array(
-                "encaisse.php" => "Encaisse",
-                "decaisse.php" => "Decaisse",
             ),
             "Comptabilité" => Array(
-                "notedefrais.php" => "Notes de frais",
             ),
         );
         break;
@@ -41,34 +26,19 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
-                "recherche.php" => "Recherche",
-                "rendezvous.php" => "Rendez-vous",
-                "refus.php" => "Refus",
             ),
             "Client" => Array(
                 "client.php" => "Société",
-                "contact.php" => "Contact",
                 "job.php" => "Poste",
-                "entretien.php" => "Entretien",
-                "placement.php" => "Placement",
-                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
-                "contact.php" => "Contact",
-                "planning.php" => "Planning",
             ),
             "Fournisseur" => Array(
-                "fournisseur.php" => "Fournisseur",
-                "contact.php" => "Contact",
-                "media.php" => "Media",
             ),
             "Facturation" => Array(
-                "encaisse.php" => "Encaisse",
-                "decaisse.php" => "Decaisse",
             ),
             "Comptabilité" => Array(
-                "notedefrais.php" => "Notes de frais",
             ),
         );
         break;
@@ -77,27 +47,15 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
-                "recherche.php" => "Recherche",
-                "rendezvous.php" => "Rendez-vous",
-                "refus.php" => "Refus",
             ),
             "Client" => Array(
                 "client.php" => "Société",
-                "contact.php" => "Contact",
                 "job.php" => "Poste",
-                "entretien.php" => "Entretien",
-                "placement.php" => "Placement",
-                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
-                "contact.php" => "Contact",
-                "planning.php" => "Planning",
             ),
             "Fournisseur" => Array(
-                "fournisseur.php" => "Fournisseur",
-                "contact.php" => "Contact",
-                "media.php" => "Media",
             )
         );
         break;
@@ -106,27 +64,15 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
-                "recherche.php" => "Recherche",
-                "rendezvous.php" => "Rendez-vous",
-                "refus.php" => "Refus",
             ),
             "Client" => Array(
                 "client.php" => "Société",
-                "contact.php" => "Contact",
                 "job.php" => "Poste",
-                "entretien.php" => "Entretien",
-                "placement.php" => "Placement",
-                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
-                "contact.php" => "Contact",
-                "planning.php" => "Planning",
             ),
             "Fournisseur" => Array(
-                "fournisseur.php" => "Fournisseur",
-                "contact.php" => "Contact",
-                "media.php" => "Media",
             )
         );
         break;
@@ -135,27 +81,15 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
-                "recherche.php" => "Recherche",
-                "rendezvous.php" => "Rendez-vous",
-                "refus.php" => "Refus",
             ),
             "Client" => Array(
                 "client.php" => "Société",
-                "contact.php" => "Contact",
                 "job.php" => "Poste",
-                "entretien.php" => "Entretien",
-                "placement.php" => "Placement",
-                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
-                "contact.php" => "Contact",
-                "planning.php" => "Planning",
             ),
             "Fournisseur" => Array(
-                "fournisseur.php" => "Fournisseur",
-                "contact.php" => "Contact",
-                "media.php" => "Media",
             )
         );
         break;

@@ -3,15 +3,18 @@
 include './connection_db.php';
 
 //var_dump($_POST);die;
+//var_dump($_FILES["photo"]);die;
 
-foreach ($_POST['spec'] as $value):
-    $array_spec[] = $value;
-endforeach;
+if (isset($_POST['spec'])) {
+    foreach ($_POST['spec'] as $value):
+        $array_spec[] = $value;
+    endforeach;
+}
 //var_dump($array_spec);die;
 
 foreach ($_POST as $key => $value):
-    if($key != 'spec')
-        $array_value[':'.$key] = $value;
+    if ($key != 'spec' && $key != 'input_apply')
+        $array_value[':' . $key] = $value;
 endforeach;
 //var_dump($array_value);die;
 
@@ -33,17 +36,27 @@ try {
     $stmt = $db->prepare($sql);
     $stmt->execute($array_value);
 
-    $sql = "DELETE FROM `eval_spec` WHERE `ID_EVAL`='".$array_value[':input_eval']."'";
+    $sql = "DELETE FROM `eval_spec` WHERE `ID_EVAL`='" . $array_value[':input_eval'] . "'";
     $stmt = $db->prepare($sql);
     $stmt->execute();
-    
+
     foreach ($array_spec as $spec):
-        $sql = "INSERT INTO `eval_spec`(`ID_EVAL`, `ID_SPEC`) VALUES (".$array_value[':input_eval'].",".$spec.") ";
+        $sql = "INSERT INTO `eval_spec`(`ID_EVAL`, `ID_SPEC`) VALUES (" . $array_value[':input_eval'] . "," . $spec . ") ";
         $stmt = $db->prepare($sql);
         $stmt->execute();
     endforeach;
-    
-    header('Location:../candidat/upd_evaluation.php?id='.$array_value[':input_eval'].'&success');
+
+    /**
+     * Traitement d'ajout/modif d'image
+     */
+    if ($_FILES["photo"]['name'] != '') {
+            $tmp_name = $_FILES["photo"]["tmp_name"];
+            $name = $_POST['input_apply'] . "_" . date('Ymd');
+            move_uploaded_file($tmp_name, "../img/pictures/" . $name . ".jpg");
+    }
+
+
+    header('Location:../candidat/upd_evaluation.php?id=' . $array_value[':input_eval'] . '&success');
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
 }

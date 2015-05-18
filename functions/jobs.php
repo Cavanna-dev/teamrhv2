@@ -64,15 +64,16 @@ function searchJobs($db)
     $name = htmlspecialchars($_GET['input_name']);
     $customer = htmlspecialchars($_GET['input_customer']);
     $contact = htmlspecialchars($_GET['input_contact']);
+    $statut = htmlspecialchars($_GET['input_pourvu']);
 
     $sql = "SELECT id, client, titre, libelle, consultant "
             . "FROM poste ";
 
-    if (!empty($name) || !empty($customer) || !empty($contact))
+    if (!empty($name) || !empty($customer) || !empty($contact) || !empty($statut))
         $sql .= "WHERE ";
     if (!empty($name))
         $sql .= "libelle like '%" . $name . "%' ";
-    if (!empty($name) && (!empty($customer) || !empty($contact)))
+    if (!empty($name) && (!empty($customer) || !empty($contact) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($customer))
         $sql .= "client = '" . $zone . "' ";
@@ -80,9 +81,13 @@ function searchJobs($db)
         $sql .= " AND ";
     if (!empty($contact))
         $sql .= "consultant = '" . $contact . "' ";
+    if (!empty($contact) && !empty($statut))
+        $sql .= " AND ";
+    if (!empty($statut))
+        $sql .= "pourvu = '" . $statut . "' ";
     
     $sql .= "ORDER BY libelle";
-
+    
     $r = $db->prepare($sql);
     $r->execute();
 

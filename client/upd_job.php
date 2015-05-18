@@ -76,11 +76,11 @@ $r = getOneJobById($db, $_GET['id']);
                                 <select class="form-control" name="input_title" id="input_title">
                                     <option value=""></option>
                                     <?php
-                                    while ($r_title = $r_titles->fetch(PDO::FETCH_OBJ)) {
+                                    foreach ($r_titles as $r_title):
                                         ?>
                                         <option value="<?= $r_title->id ?>" <?php if ($r_title->id == $r->titre) echo "selected"; ?>><?= $r_title->libelle ?></option>
                                         <?php
-                                    }
+                                    endforeach;
                                     ?>
                                 </select>
                             </div>
@@ -141,10 +141,6 @@ $r = getOneJobById($db, $_GET['id']);
                             <label for="input_speed" class="col-lg-2 control-label">Vitesse</label>
                             <div class="col-lg-2">
                                 <input class="form-control" id="input_speed" name="input_speed" type="text" value="<?= $r->vitesse; ?>">
-                            </div>
-                            <label for="input_pourvu" class="col-lg-2 control-label">Pourvu</label>
-                            <div class="col-lg-2">
-                                <input class="form-control" id="input_pourvu" name="input_pourvu" type="text" value="<?= $r->pourvu; ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -260,9 +256,26 @@ $r = getOneJobById($db, $_GET['id']);
                                 <input class="form-control" id="input_garantie" name="input_garantie" placeholder="Garantie" type="text" value="<?= $r->garantie; ?>">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="input_pourvu" class="col-lg-2 control-label">Statut</label>
+                            <div class="col-lg-10">
+                                <select name="input_pourvu" id="input_pourvu" class="form-control">
+                                    <option value="" <?php if(isset($r->pourvu) && $r->pourvu == '') echo 'selected'; ?>></option>
+                                    <option value="Y" <?php if(isset($r->pourvu) && $r->pourvu == 'Y') echo 'selected'; ?>>Poste Fermé</option>
+                                    <option value="N" <?php if(isset($r->pourvu) && $r->pourvu == 'N') echo 'selected'; ?>>Poste Ouvert</option>
+                                </select>
+                            </div>
+                        </div>
                     </fieldset>
                 </div>
             </div>
         </div>
     </form>
 </div>
+<?php if (isset($_GET['new'])) { ?>
+    <script>
+        $(window).ready(function () {
+            alert('Le poste a été créée.');
+        });
+    </script>
+<?php } ?>

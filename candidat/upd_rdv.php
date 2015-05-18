@@ -116,7 +116,6 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             <label for="input_type_rdv" class="col-lg-2 control-label">Type RDV</label>
                             <div class="col-lg-10">			
                                 <select class="form-control" name="input_type_rdv">
-                                    <option value="0"></option>
                                     <option value="CANDIDAT"    <?php if ($rdv->TYPE == 'CANDIDAT') echo 'selected'; ?>>Candidat   </option> 
                                     <option value="CLIENT"      <?php if ($rdv->TYPE == 'CLIENT') echo 'selected'; ?>>Client     </option> 
                                     <option value="INTERNE"     <?php if ($rdv->TYPE == 'INTERNE') echo 'selected'; ?>>Interne    </option> 
@@ -145,7 +144,6 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             <label for="input_title" class="col-lg-2 control-label">Horaires deb.</label>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_hdeb" id="input_title">
-                                    <option value=""></option>
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
@@ -157,7 +155,6 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             </div>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_mdeb" id="input_title">
-                                    <option value=""   <?php if ($rdv->MINUTE_DEB == '') echo 'selected'; ?>></option>
                                     <option value="00" <?php if ($rdv->MINUTE_DEB == '00') echo 'selected'; ?>>00</option>
                                     <option value="15" <?php if ($rdv->MINUTE_DEB == '15') echo 'selected'; ?>>15</option>
                                     <option value="30" <?php if ($rdv->MINUTE_DEB == '30') echo 'selected'; ?>>30</option>
@@ -169,7 +166,6 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             <label for="input_title" class="col-lg-2 control-label">Horaires fin</label>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_hfin" id="input_title">
-                                    <option value=""></option>
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
@@ -181,7 +177,6 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             </div>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_mfin" id="input_title">
-                                    <option value=""   <?php if ($rdv->MINUTE_FIN == '') echo 'selected'; ?>></option>
                                     <option value="00" <?php if ($rdv->MINUTE_FIN == '00') echo 'selected'; ?>>00</option>
                                     <option value="15" <?php if ($rdv->MINUTE_FIN == '15') echo 'selected'; ?>>15</option>
                                     <option value="30" <?php if ($rdv->MINUTE_FIN == '30') echo 'selected'; ?>>30</option>

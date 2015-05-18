@@ -561,7 +561,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
 
                         if ($enregistrement[ACCOMPAGNE] != "") {
                             $width_accomp = $width / 2;
-                            $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
+                            $str = "<a href=\"./candidat/upd_rdv.php?id=" . $id . "\" style=\"color:black;\"><DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                             $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
                             $str .= " background-color:#" . $color . ";\" >";
                             $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
@@ -575,7 +575,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $str .= "	</TR>";
                             $str .= "	<TR>";
                             $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size=10px ;  fontweight=bold\" colspan=2>";
-                            $str .= "				<A  href=\"./candidat/upd_rdv.php?id=" . $id . "\" class=\"lien\" style=\"font-size:11px;\"><U><font style=\"font-size=6px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
+                            $str .= $titre;
                             $str .= "		</TD>";
                             $str .= "	</TR>";
                             $str .= "   <TR>  ";
@@ -584,9 +584,9 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $str .= "		</TD>";
                             $str .= "	</TR>";
                             $str .= "</TABLE>";
-                            $str .= " </DIV>";
+                            $str .= " </DIV></a>";
                         } else {
-                            $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
+                            $str = "<a href=\"./candidat/upd_rdv.php?id=" . $id . "\" style=\"color:black;\"><DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                             $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
                             $str .= " background-color:#" . $color . ";\">";
                             $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
@@ -597,7 +597,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $str .= "	</TR>";
                             $str .= "	<TR>";
                             $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size=10px ;  fontweight=bold\" colspan=2>";
-                            $str .= "				<A  href=\"./candidat/upd_rdv.php?id=" . $id . "\" class=\"lien\" style=\"font-size:11px;\"><U><font style=\"font-size=6px; fontweight=bold\" color=black>" . $titre . "</font></U></A>";
+                            $str .= $titre;
                             $str .= "		</TD>";
                             $str .= "	</TR>";
                             $str .= "   <TR>  ";
@@ -606,7 +606,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $str .= "		</TD>";
                             $str .= "	</TR>";
                             $str .= "</TABLE>";
-                            $str .= " </DIV>";
+                            $str .= " </DIV></a>";
                         }
                         echo $str;
 
