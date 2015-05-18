@@ -67,8 +67,11 @@ include '../functions/bootstrap.php';
                                         <tr>
                                             <td>
                                                 <a href="upd_applicant.php?id=<?= $r_appli->id ?>" 
-                                                   tabindex="0" role="button" data-toggle="popover" data-trigger="hover" 
+                                                   tabindex="0" role="button" 
+                                                   data-toggle="popover" 
+                                                   data-trigger="hover" 
                                                    data-placement="right" 
+                                                   data-html="true"
                                                    data-content="<?= $r_appli->remarque_eval ?>">
                                                        <?= $r_appli->nom . " " . $r_appli->prenom; ?>
                                                 </a>

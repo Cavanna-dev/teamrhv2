@@ -135,7 +135,6 @@ include '../functions/bootstrap.php';
                             <label for="input_title" class="col-lg-2 control-label">Horaires deb.</label>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_hdeb" id="input_title">
-                                    <option value=""></option>
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
@@ -147,7 +146,6 @@ include '../functions/bootstrap.php';
                             </div>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_mdeb" id="input_title">
-                                    <option value=""></option>
                                     <option value="00">00</option>
                                     <option value="15">15</option>
                                     <option value="30">30</option>
@@ -159,7 +157,6 @@ include '../functions/bootstrap.php';
                             <label for="input_title" class="col-lg-2 control-label">Horaires fin</label>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_hfin" id="input_title">
-                                    <option value=""></option>
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
@@ -171,7 +168,6 @@ include '../functions/bootstrap.php';
                             </div>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_mfin" id="input_title">
-                                    <option value=""></option>
                                     <option value="00">00</option>
                                     <option value="15">15</option>
                                     <option value="30">30</option>

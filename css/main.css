@@ -32,4 +32,5 @@ table, .table {
     max-width: 100%; /* Max Width of the popover (depending on the container!) */
     background-color: grey;
     color:white;
+    white-space:pre-wrap;
 }
