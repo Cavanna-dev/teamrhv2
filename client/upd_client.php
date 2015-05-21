@@ -14,16 +14,16 @@ if (!$r) {
     </div>
 <?php } else { ?>
 
-    <div class="container-fluid">    
-        <div class = "row">
-            <div class = "col-md-6">
-                <input type = "hidden" name = "input_id" value = "<?= $_GET['id'] ?>"/>
-                <div class = "row">
-                    <div class = "col-lg-9">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="hidden" name="input_id" value="<?= $_GET['id'] ?>"/>
+                <div class="row">
+                    <div class="col-lg-9">
                         <h1>Suivi du client</h1>
                     </div>
-                    <div class = "col-lg-3">
-                        <h1 class = "pull-right"><a href="com_client_new.php?id=<?= $r->id; ?>"><button type = "button" class = "btn btn-primary">Enregistrer commentaire</button></a></h1>
+                    <div class="col-lg-3">
+                        <h1 class="pull-right"><a href="com_client_new.php?id=<?= $r->id; ?>"><button type = "button" class = "btn btn-primary">Enregistrer commentaire</button></a></h1>
                     </div>
                 </div>
                 <?php
@@ -223,10 +223,15 @@ if (!$r) {
                             <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
-                                        <th class="col-lg-5">Identité</th>
-                                        <th class="col-lg-3">Titre</th>
+                                        <th class="col-lg-4">Identité</th>
+                                        <th class="col-lg-4">Titre</th>
                                         <th class="col-lg-3">Téléphone</th>
                                         <th class="col-lg-1">Action</th>
+                                        <th>
+                                            <a href="contact.php?id_client=<?= $_GET['id'] ?>&type=SUP">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </a>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -235,7 +240,11 @@ if (!$r) {
                                     while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
                                         ?>
                                         <tr>
-                                            <td><?= $r_contact->civilite . " " . $r_contact->nom . " " . $r_contact->prenom; ?></td>
+                                            <td>
+                                                <a href="upd_contact.php?id=<?= $r_contact->ID ?>">
+                                                    <?= $r_contact->civilite . " " . $r_contact->nom . " " . $r_contact->prenom; ?>
+                                                </a>
+                                            </td>
                                             <td><?= $r_contact->fonction; ?></td>
                                             <td><?= $r_contact->tel; ?></td>
                                             <td>
@@ -252,10 +261,15 @@ if (!$r) {
                             <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
-                                        <th class="col-lg-5">Identité</th>
-                                        <th class="col-lg-3">Titre</th>
+                                        <th class="col-lg-4">Identité</th>
+                                        <th class="col-lg-4">Titre</th>
                                         <th class="col-lg-3">Téléphone</th>
                                         <th class="col-lg-1">Action</th>
+                                        <th>
+                                            <a href="contact.php?id_client=<?= $_GET['id'] ?>&type=LAW">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </a>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -264,7 +278,11 @@ if (!$r) {
                                     while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
                                         ?>
                                         <tr>
-                                            <td><?= $r_contact->civilite . " " . $r_contact->nom . " " . $r_contact->prenom; ?></td>
+                                            <td>
+                                                <a href="upd_contact.php?id=<?= $r_contact->ID ?>">
+                                                    <?= $r_contact->civilite . " " . $r_contact->nom . " " . $r_contact->prenom; ?>
+                                                </a>
+                                            </td>
                                             <td><?= $r_contact->fonction; ?></td>
                                             <td><?= $r_contact->tel; ?></td>
                                             <td>
@@ -370,14 +388,20 @@ if (!$r) {
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
     <?php if (isset($_GET['success'])) { ?>
-        <script type="text/javascript">
             $(window).load(function () {
                 alert('Commentaire modifié');
             });
-        </script>
-    <?php }
-    ?>
+    <?php } ?>
+    <?php if (isset($_GET['newsuccess'])) { ?>
+            $(window).load(function () {
+                alert('Nouveau client créée.');
+            });
+    <?php } ?>
+    </script>
+
     </body>
 
 <?php } ?>
