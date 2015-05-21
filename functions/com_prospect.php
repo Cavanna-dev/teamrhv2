@@ -5,7 +5,7 @@ function getComByProspect($db, $id)
     $sql = "SELECT id, prospect, mid(remarque, 1, 100) 'remarque', creation "
             . "FROM commentaire_prospect "
             . "WHERE prospect = " . $id . " "
-            . "ORDER BY creation desc";
+            . "ORDER BY creation DESC";
 
     $r = $db->prepare($sql);
     $r->execute();

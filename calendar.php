@@ -152,7 +152,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                 <?php
                 $requete1 = " SELECT ID, concat(nom, ' ', prenom) 'nom' ";
                 $requete1 .= " FROM   utilisateur ";
-                $requete1 .= " WHERE (type = 'CONSULT' or type = 'ADMIN' or type = 'ASSOC') and actif ='Y' ";
+                $requete1 .= " WHERE type IN ( 'CONSULT', 'ADMIN', 'ASSOC') and actif ='Y' ";
                 $requete1 .= " ORDER BY concat(nom, ' ', prenom) ";
 
                 $resultat1 = $db->prepare($requete1);
@@ -322,10 +322,10 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                     <?php
                     /* Requ&ecirc;te r&eacute;cup&eacute;ration de la couleur pour chaque utilisateur */
 
-                    $reqcolor = " SELECT ID, nom, prenom, color, login, sorting ";
-                    $reqcolor .= " FROM   utilisateur   ";
-                    $reqcolor .= " WHERE  (login <> 'admin') and actif ='Y' ";
-                    $reqcolor .= " ORDER BY sorting ";
+                    $reqcolor = "SELECT ID, nom, prenom, color, login, sorting, type ";
+                    $reqcolor .= "FROM utilisateur ";
+                    $reqcolor .= "WHERE type IN ( 'ADMIN', 'ASSOC', 'CONSULT') and actif ='Y' ";
+                    $reqcolor .= "ORDER BY sorting ";
 
                     $r_color = $db->prepare($reqcolor);
                     $r_color->execute();
@@ -396,10 +396,10 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                         $clause1 = $clause;
 
 // On remplit un tableau avec pour un identifiant de case la liste des identifiants des cases qui chevauchent 
-                    $requete3 = " SELECT resa_salle.ID, concat(resa_salle.heure_deb, resa_salle.minute_deb) 'RESA_DEB', chevauche.ID 'NUM' ,           ";
-                    $requete3 .= "        concat(chevauche.heure_deb, chevauche.minute_deb) 'CHEV_DEB' ,     ";
-                    $requete3 .= "        concat(chevauche.heure_fin, chevauche.minute_fin) 'CHEV_FIN'      ";
-                    $requete3 .= " FROM   resa_salle, resa_salle chevauche   ";
+                    $requete3 = " SELECT resa_salle.ID, concat(resa_salle.heure_deb, resa_salle.minute_deb) 'RESA_DEB', chevauche.ID 'NUM', ";
+                    $requete3 .= "concat(chevauche.heure_deb, chevauche.minute_deb) 'CHEV_DEB' , ";
+                    $requete3 .= "concat(chevauche.heure_fin, chevauche.minute_fin) 'CHEV_FIN' ";
+                    $requete3 .= "FROM   resa_salle, resa_salle chevauche   ";
                     $requete3 .= " WHERE  $clause1 ";
                     $requete3 .= "     and ((concat(resa_salle.heure_deb, resa_salle.minute_deb) >= concat(chevauche.heure_deb, chevauche.minute_deb) ";
                     $requete3 .= "                               and concat(resa_salle.heure_deb, resa_salle.minute_deb)<  concat(chevauche.heure_fin, chevauche.minute_fin)) ";
@@ -559,11 +559,25 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                         $value3 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[NOMCLIENT])));
                         $value4 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[LIBELLE])));
 
+                        $infobulle  = "Consultant : ".$enregistrement[CONSULTANT]."<br />";
+                        $infobulle .= "Accompagnant : ".$enregistrement[ACCOMPAGNE]."<br />";
+                        $infobulle .= "Client : ".$enregistrement[NOMCLIENT]."<br />";
+                        $infobulle .= "Poste : ".$enregistrement[LIBELLE]."<br />";
+                        $infobulle .= "Candidat : ".$enregistrement[CIVILITE]." ".$enregistrement[NOMCANDIDAT]." ".$enregistrement[PRENOMCANDIDAT]."<br />";
+                        
+                        
                         if ($enregistrement[ACCOMPAGNE] != "") {
                             $width_accomp = $width / 2;
-                            $str = "<a href=\"./candidat/upd_rdv.php?id=" . $id . "\" style=\"color:black;\"><DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
+                            $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                             $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
                             $str .= " background-color:#" . $color . ";\" >";
+                            $str .= "<a href=\"./candidat/upd_rdv.php?id=" . $id . "\" style=\"color:black;\" ";
+                            $str .= "tabindex='0' role='button' 
+                                                   data-toggle='popover' 
+                                                   data-trigger='hover' 
+                                                   data-placement='right' 
+                                                   data-html='true'
+                                                   data-content='".$infobulle."'>";
                             $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
                             $str .= "    <TR>  ";
                             $str .= "  		<TD valign=top colspan=2 align=left>";
@@ -583,8 +597,8 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $str .= "				<SUB> " . $enregistrement[HEURE_FIN] . ":" . $enregistrement[MINUTE_FIN] . " </SUB>";
                             $str .= "		</TD>";
                             $str .= "	</TR>";
-                            $str .= "</TABLE>";
-                            $str .= " </DIV></a>";
+                            $str .= "</TABLE></a>";
+                            $str .= " </DIV>";
                         } else {
                             $str = "<a href=\"./candidat/upd_rdv.php?id=" . $id . "\" style=\"color:black;\"><DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                             $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
@@ -701,4 +715,11 @@ while ($i <= count($resultat)) {
                                 alert('Le RDV a été supprimé.');
                             });
 <?php } ?>
+    
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        });
+    });
+    
                     </script>

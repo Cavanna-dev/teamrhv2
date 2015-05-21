@@ -114,9 +114,9 @@ $r = getOneProspectById($db, $_GET['id']);
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input_url" class="col-lg-2 control-label">URL</label>
+                                <label for="input_url" class="col-lg-2 control-label"><a href="<?= $r->url; ?>">URL</a></label>
                                 <div class="col-lg-10">
-                                    <input class="form-control" id="input_url" name="input_url" placeholder="URL" type="text" value="<?= $r->url; ?>">
+                                    <input class="form-control" id="input_url" name="input_url" placeholder="URL" type="url" value="<?= $r->url; ?>">
                                 </div>
                             </div>
                         </fieldset>
@@ -166,10 +166,9 @@ $r = getOneProspectById($db, $_GET['id']);
                                 <div class="col-lg-9">
                                     <select class="form-control" name="input_nation" id="input_nation">
                                         <option value="Autre" <?php if ($r->nationalite == "Autre" || $r->nationalite == "" || $r->nationalite == NULL) echo "selected"; ?>>Autre</option>
-                                        <option value="Anglais" <?php if ($r->nationalite == "Anglais") echo "selected"; ?>>Anglais</option>
-                                        <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américain</option>
+                                        <option value="Américain" <?php if ($r->nationalite == "Américain") echo "selected"; ?>>Américaine</option>
                                         <option value="Britannique" <?php if ($r->nationalite == "Britannique") echo "selected"; ?>>Britannique</option>
-                                        <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Francais</option>
+                                        <option value="Francais" <?php if ($r->nationalite == "Francais") echo "selected"; ?>>Française</option>
                                     </select>
                                 </div>
                             </div>
@@ -209,12 +208,18 @@ $r = getOneProspectById($db, $_GET['id']);
     </div>
 </div>
 
+<script type="text/javascript">
+    
 <?php if (isset($_GET['success']) && $_GET['success'] == 'newcom') { ?>
-    <script type="text/javascript">
         $(window).load(function () {
             alert('Nouveau commentaire ajouté avec succès !');
         });
-    </script>
-<?php }
-?>
+<?php } ?>
+    
+<?php if (isset($_GET['success']) && $_GET['success'] == 'newpros') { ?>
+        $(window).load(function () {
+            alert('Nouveau prospect ajouté avec succès !');
+        });
+<?php } ?>
+</script>
 </body>

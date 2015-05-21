@@ -485,6 +485,7 @@ $r = getOneEvalById($db, $_GET['id']);
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
+                                <a href="upd_applicant.php?id=<?= $r->CANDIDAT ?>"><button type="button" class="btn btn-primary">Fiche Candidat</button></a>
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                             </div>
                         </div>

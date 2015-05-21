@@ -16,7 +16,7 @@ include '../functions/bootstrap.php';
                             <label for="input_consult1" class="col-lg-2 control-label">Consult. 1</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
-                                <select class="form-control" name="input_consult1" id="input_consult1">
+                                <select class="form-control" name="input_consult1" id="input_consult1" required>
                                     <option value=""></option>
                                     <?php
                                     while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
@@ -31,7 +31,7 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_salle" class="col-lg-2 control-label">Salle</label>
                             <div class="col-lg-10">			
-                                <select class="form-control" name="input_salle">
+                                <select class="form-control" name="input_salle" required="">
                                     <option value="1">Salle A</option> 
                                     <option value="2">Salle B</option> 
                                     <option value="3">Salle C</option> 
@@ -42,7 +42,7 @@ include '../functions/bootstrap.php';
                             <label for="input_customer" class="col-lg-2 control-label">Client</label>
                             <?php $r_customers = getAllCustomers($db); ?>
                             <div class="col-lg-10">
-                                <select class="form-control" name="input_customer" id="input_customer">
+                                <select class="form-control" name="input_customer" id="input_customer" required>
                                     <option value=""></option>
                                     <?php
                                     while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
@@ -57,7 +57,7 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_civil" class="col-lg-2 control-label">Candidat</label>
                             <div class="col-lg-3">			
-                                <select class="form-control" name="input_civil">
+                                <select class="form-control" name="input_civil" >
                                     <OPTION value=""     >     </OPTION>
                                     <OPTION value="Melle">Melle</OPTION>
                                     <OPTION value="Mme"  >Mme  </OPTION>
@@ -65,16 +65,19 @@ include '../functions/bootstrap.php';
                                 </select>
                             </div>
                             <div class="col-lg-4">
-                                <input type="text" class="form-control" name="input_name" id="input_name" value="" placeholder="Nom">
+                                <input type="text" class="form-control" name="input_name" 
+                                       id="input_name" value="" placeholder="Nom" >
                             </div>
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" name="input_last" id="input_last" value="" placeholder="Prénom">
+                                <input type="text" class="form-control" name="input_last" 
+                                       id="input_last" value="" placeholder="Prénom" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="input_date" class="col-lg-2 control-label">Date</label>
                             <div class="col-lg-8">
-                                <input type="date" class="form-control" name="input_date" id="input_date">
+                                <input type="date" class="form-control" name="input_date" 
+                                       id="input_date" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -106,7 +109,6 @@ include '../functions/bootstrap.php';
                             <label for="input_type_rdv" class="col-lg-2 control-label">Type RDV</label>
                             <div class="col-lg-10">			
                                 <select class="form-control" name="input_type_rdv">
-                                    <option value="0"></option>
                                     <option value="CANDIDAT"   >Candidat   </option> 
                                     <option value="CLIENT"     >Client     </option> 
                                     <option value="INTERNE"    >Interne    </option> 
@@ -134,7 +136,7 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_title" class="col-lg-2 control-label">Horaires deb.</label>
                             <div class="col-lg-5">
-                                <select class="form-control" name="input_hdeb" id="input_title">
+                                <select class="form-control" name="input_hdeb" id="input_title" required>
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
@@ -145,7 +147,7 @@ include '../functions/bootstrap.php';
                                 </select>
                             </div>
                             <div class="col-lg-5">
-                                <select class="form-control" name="input_mdeb" id="input_title">
+                                <select class="form-control" name="input_mdeb" id="input_title" required>
                                     <option value="00">00</option>
                                     <option value="15">15</option>
                                     <option value="30">30</option>
@@ -156,7 +158,7 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_title" class="col-lg-2 control-label">Horaires fin</label>
                             <div class="col-lg-5">
-                                <select class="form-control" name="input_hfin" id="input_title">
+                                <select class="form-control" name="input_hfin" id="input_title" required>
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
@@ -167,7 +169,7 @@ include '../functions/bootstrap.php';
                                 </select>
                             </div>
                             <div class="col-lg-5">
-                                <select class="form-control" name="input_mfin" id="input_title">
+                                <select class="form-control" name="input_mfin" id="input_title" required>
                                     <option value="00">00</option>
                                     <option value="15">15</option>
                                     <option value="30">30</option>

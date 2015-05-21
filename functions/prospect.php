@@ -4,7 +4,7 @@ function getOneProspectById($db, $id)
 {
     $sql = "SELECT id, nom, secteur, adresse1, ville, postal, "
             . "country_fk, nationalite, tel_std, url, metro, remarque, "
-            . "mngt_law, mngt_supp, niveau, status_fk "
+            . "mngt_law, mngt_supp, status_fk "
             . "FROM prospect "
             . "WHERE id=" . $id;
     $r_prospect = $db->prepare($sql);

@@ -88,8 +88,28 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 $r_mail = $db->prepare($sql);
                                 $r_mail->execute();
                                 $r = $r_mail->fetch(PDO::FETCH_OBJ);
+
+                                $subject = "TEAM RH : Votre candidature";
+
+                                switch ($civilite) {
+                                    case "" : $body = "Cher(e) Madame/Monsieur,";
+                                        break;
+                                    case "Mr" : $body = "Cher Monsieur,";
+                                        break;
+                                    case "Mme" : $body = "Chère Madame,";
+                                        break;
+                                    case "Melle" : $body = "Chère Mademoiselle,";
+                                        break;
+                                }
+
+                                $body .= "%0A%0AJe vous écris pour vous confirmer le RDV dans nos locaux, au 5 rue du Hanovre 75002 PARIS, le " . $jour . " à " . $heure_deb . "h" . $minute_deb . ".";
+                                $body .= " Il y aura des tests en anglais et ensuite un entretien avec moi-même.";
+                                $body .= " Il faut compter en tout 1h - 1h15.";
+                                $body .= "%0A%0ALes stations de métro les plus proches sont : Quatre septembre (ligne 3) ou Opéra (lignes 7/8 ou RER A d%27Auber).";
+                                $body .= " En cas de problème de retard ou d%27empêchement, n%27hésitez pas à nous contacter au numéro ci-dessous.";
+                                $body .= "%0A%0AMerci de me confirmer la lecture de ce mail, par retour de mail. %0A%0ASincèrement,";
                                 ?>
-                                <p><a href="mailto:<?= isset($r->email) ? $r->email : '' ?>?subject=test&body=test"><?= $r->email ?></a></p>
+                                <p><a href="mailto:<?= isset($r->email) ? $r->email : '' ?>?subject=<?= $subject ?>&body=<?= $body ?>"><?= $r->email ?></a></p>
                             </div>
                         </div>
                     </fieldset>
@@ -99,16 +119,16 @@ $rdv = getOneRdvById($db, $_GET['id']);
                         <div class="form-group">
                             <label for="input_consult2" class="col-lg-2 control-label">Consult. 2</label>
                             <div class="col-lg-10">
-                                <?php $r_users = getAllUsers($db); ?>
+                                    <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_consult2" id="input_consult2">
                                     <option value=""></option>
                                     <?php
                                     while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
                                         <option value="<?php echo $r_user->id; ?>" <?php if ($r_user->id == $rdv->CONSULTANT2) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
-                                        <?php
-                                    }
-                                    ?>
+    <?php
+}
+?>
                                 </select>
                             </div>
                         </div>
@@ -126,7 +146,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                         </div>
                         <div class="form-group">
                             <label for="input_title" class="col-lg-2 control-label">Poste</label>
-                            <?php $r_titles = getAllTitles($db); ?>
+                                    <?php $r_titles = getAllTitles($db); ?>
                             <div class="col-lg-10">
                                 <select class="form-control" name="input_title" id="input_title">
                                     <option value=""></option>
@@ -134,9 +154,9 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                     foreach ($r_titles as $title):
                                         ?>
                                         <option value="<?= $title->id ?>" <?php if ($rdv->POSTE == $title->id) echo 'selected'; ?>><?= $title->libelle ?></option>
-                                        <?php
-                                    endforeach;
-                                    ?>
+    <?php
+endforeach;
+?>
                                 </select>
                             </div>
                         </div>
@@ -148,9 +168,9 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
                                         <option value="<?= $i ?>" <?php if ($rdv->HEURE_DEB == $i) echo 'selected'; ?>><?= $i ?></option>
-                                        <?php
-                                    endfor;
-                                    ?>
+    <?php
+endfor;
+?>
                                 </select>
                             </div>
                             <div class="col-lg-5">
@@ -170,9 +190,9 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
                                         <option value="<?= $i ?>" <?php if ($rdv->HEURE_FIN == $i) echo 'selected'; ?>><?= $i ?></option>
-                                        <?php
-                                    endfor;
-                                    ?>
+    <?php
+endfor;
+?>
                                 </select>
                             </div>
                             <div class="col-lg-5">

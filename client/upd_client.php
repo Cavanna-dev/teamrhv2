@@ -223,9 +223,10 @@ if (!$r) {
                             <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
-                                        <th>Identité</th>
-                                        <th>Téléphone</th>
-                                        <th>Action</th>
+                                        <th class="col-lg-5">Identité</th>
+                                        <th class="col-lg-3">Titre</th>
+                                        <th class="col-lg-3">Téléphone</th>
+                                        <th class="col-lg-1">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -235,6 +236,7 @@ if (!$r) {
                                         ?>
                                         <tr>
                                             <td><?= $r_contact->civilite . " " . $r_contact->nom . " " . $r_contact->prenom; ?></td>
+                                            <td><?= $r_contact->fonction; ?></td>
                                             <td><?= $r_contact->tel; ?></td>
                                             <td>
                                                 <?php if (!empty($r_contact->email)): ?>
@@ -250,9 +252,10 @@ if (!$r) {
                             <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
-                                        <th>Identité</th>
-                                        <th>Téléphone</th>
-                                        <th>Action</th>
+                                        <th class="col-lg-5">Identité</th>
+                                        <th class="col-lg-3">Titre</th>
+                                        <th class="col-lg-3">Téléphone</th>
+                                        <th class="col-lg-1">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -262,6 +265,7 @@ if (!$r) {
                                         ?>
                                         <tr>
                                             <td><?= $r_contact->civilite . " " . $r_contact->nom . " " . $r_contact->prenom; ?></td>
+                                            <td><?= $r_contact->fonction; ?></td>
                                             <td><?= $r_contact->tel; ?></td>
                                             <td>
                                                 <?php if (!empty($r_contact->email)): ?>
