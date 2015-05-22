@@ -9,6 +9,7 @@ switch ($_SESSION['user']['type']):
             "Client" => Array(
                 "client.php" => "Société",
                 "job.php" => "Poste",
+                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
@@ -30,6 +31,7 @@ switch ($_SESSION['user']['type']):
             "Client" => Array(
                 "client.php" => "Société",
                 "job.php" => "Poste",
+                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
@@ -51,6 +53,7 @@ switch ($_SESSION['user']['type']):
             "Client" => Array(
                 "client.php" => "Société",
                 "job.php" => "Poste",
+                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
@@ -68,6 +71,7 @@ switch ($_SESSION['user']['type']):
             "Client" => Array(
                 "client.php" => "Société",
                 "job.php" => "Poste",
+                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
@@ -85,6 +89,7 @@ switch ($_SESSION['user']['type']):
             "Client" => Array(
                 "client.php" => "Société",
                 "job.php" => "Poste",
+                "agenda.php" => "Agenda",
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
