@@ -603,6 +603,13 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $str = "<a href=\"./candidat/upd_rdv.php?id=" . $id . "\" style=\"color:black;\"><DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                             $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
                             $str .= " background-color:#" . $color . ";\">";
+                            $str .= "<a href=\"./candidat/upd_rdv.php?id=" . $id . "\" style=\"color:black;\" ";
+                            $str .= "tabindex='0' role='button' 
+                                                   data-toggle='popover' 
+                                                   data-trigger='hover' 
+                                                   data-placement='right' 
+                                                   data-html='true'
+                                                   data-content='".$infobulle."'>";
                             $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
                             $str .= "    <TR>  ";
                             $str .= "  		<TD valign=top colspan=2 align=left>";
@@ -619,8 +626,8 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $str .= "				<SUB> " . $enregistrement[HEURE_FIN] . ":" . $enregistrement[MINUTE_FIN] . " </SUB>";
                             $str .= "		</TD>";
                             $str .= "	</TR>";
-                            $str .= "</TABLE>";
-                            $str .= " </DIV></a>";
+                            $str .= "</TABLE></a>";
+                            $str .= " </DIV>";
                         }
                         echo $str;
 

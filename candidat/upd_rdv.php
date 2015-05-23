@@ -91,16 +91,24 @@ $rdv = getOneRdvById($db, $_GET['id']);
 
                                 $subject = "TEAM RH : Votre candidature";
 
-                                switch ($civilite) {
-                                    case "" : $body = "Cher(e) Madame/Monsieur,";
-                                        break;
-                                    case "Mr" : $body = "Cher Monsieur,";
-                                        break;
-                                    case "Mme" : $body = "Chère Madame,";
-                                        break;
-                                    case "Melle" : $body = "Chère Mademoiselle,";
-                                        break;
-                                }
+                                $body = '';
+
+                                if(isset($civilite)){
+                                    switch ($civilite) {
+                                        case "" : $body .= "Cher(e) Madame/Monsieur,";
+                                            break;
+                                        case "Mr" : $body .= "Cher Monsieur,";
+                                            break;
+                                        case "Mme" : $body .= "Chère Madame,";
+                                            break;
+                                        case "Melle" : $body .= "Chère Mademoiselle,";
+                                            break;
+                                    }
+                                }else
+
+                                $jour = isset($jour) ? $jour : '';
+                                $heure_deb = isset($heure_deb) ? $heure_deb : '';
+                                $minute_deb = isset($minute_deb) ? $minute_deb : '';
 
                                 $body .= "%0A%0AJe vous écris pour vous confirmer le RDV dans nos locaux, au 5 rue du Hanovre 75002 PARIS, le " . $jour . " à " . $heure_deb . "h" . $minute_deb . ".";
                                 $body .= " Il y aura des tests en anglais et ensuite un entretien avec moi-même.";
