@@ -93,8 +93,8 @@ include '../functions/bootstrap.php';
                         <table class="table table-striped table-hover ">
                             <thead>
                                 <tr>
-                                    <th>Libelle</th>
                                     <th>Client</th>
+                                    <th>Libelle</th>
                                     <th>Titre</th>
                                     <th>Consultant</th>
                                     <th>Action</th>
@@ -106,19 +106,17 @@ include '../functions/bootstrap.php';
                                     ?>
                                     <tr>
                                         <td>
+                                            <a href="upd_client.php?id=<?= $r_job->client ?>">
+                                                <?= isset($r_job->nom) ? $r_job->nom : '' ?>
+                                            </a>
+                                        </td>
+                                        <td>
                                             <a href="upd_job.php?id=<?= $r_job->id; ?>">
                                                 <?= $r_job->libelle; ?>
                                             </a>
                                         </td>
                                         <td>
-                                            <?php $r_customer = getOneCustomerById($db, $r_job->client); ?>
-                                            <a href="upd_client.php?id=<?= $r_customer->id ?>">
-                                                <?php if ($r_customer) echo $r_customer->nom; ?>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <?php $r_title = getOneTitleById($db, $r_job->titre); ?>
-                                            <?php if ($r_title) echo $r_title->libelle; ?>
+                                                <?= $r_job->titre; ?>
                                         </td>
                                         <td>
                                             <?php $r_user = getUserById($db, $r_job->consultant); ?>

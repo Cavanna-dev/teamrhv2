@@ -66,8 +66,10 @@ function searchJobs($db)
     $contact = htmlspecialchars($_GET['input_contact']);
     $statut = htmlspecialchars($_GET['input_pourvu']);
 
-    $sql = "SELECT id, client, titre, libelle, consultant "
-            . "FROM poste ";
+    $sql = "SELECT p.id, c.nom as nom, t.libelle as titre, p.libelle as libelle, p.consultant "
+            . "FROM poste p "
+            . "LEFT JOIN client c ON p.client = c.id "
+            . "LEFT JOIN titre t ON p.titre = t.id ";
 
     if (!empty($name) || !empty($customer) || !empty($contact) || !empty($statut))
         $sql .= "WHERE ";
@@ -76,18 +78,18 @@ function searchJobs($db)
     if (!empty($name) && (!empty($customer) || !empty($contact) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($customer))
-        $sql .= "client = '" . $zone . "' ";
+        $sql .= "p.client = '" . $customer . "' ";
     if (!empty($customer) && !empty($contact))
         $sql .= " AND ";
     if (!empty($contact))
-        $sql .= "consultant = '" . $contact . "' ";
+        $sql .= "p.consultant = '" . $contact . "' ";
     if (!empty($contact) && !empty($statut))
         $sql .= " AND ";
     if (!empty($statut))
-        $sql .= "pourvu = '" . $statut . "' ";
+        $sql .= "p.pourvu = '" . $statut . "' ";
     
-    $sql .= "ORDER BY libelle";
-    
+    $sql .= "ORDER BY nom, libelle, titre";
+    //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();
 
