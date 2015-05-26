@@ -112,11 +112,11 @@ include '../functions/bootstrap.php';
                                         </td>
                                         <td>
                                             <a href="upd_job.php?id=<?= $r_job->id; ?>">
-                                                <?= $r_job->libelle; ?>
+                                                <?= isset($r_job->libelle) ? $r_job->libelle : ''; ?>
                                             </a>
                                         </td>
                                         <td>
-                                                <?= $r_job->titre; ?>
+                                                <?= isset($r_job->titre) ? $r_job->titre : ''; ?>
                                         </td>
                                         <td>
                                             <?php $r_user = getUserById($db, $r_job->consultant); ?>
