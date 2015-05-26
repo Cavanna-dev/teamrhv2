@@ -106,12 +106,12 @@ include '../functions/bootstrap.php';
                                     ?>
                                     <tr>
                                         <td>
-                                            <a href="upd_client.php?id=<?= $r_job->client ?>">
+                                            <a href="upd_client.php?id=<?= isset($r_job->client) ? $r_job->client : ''; ?>">
                                                 <?= isset($r_job->nom) ? $r_job->nom : '' ?>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="upd_job.php?id=<?= $r_job->id; ?>">
+                                            <a href="upd_job.php?id=<?= isset($r_job->id) ? $r_job->id : ''; ?>">
                                                 <?= isset($r_job->libelle) ? $r_job->libelle : ''; ?>
                                             </a>
                                         </td>
@@ -126,7 +126,7 @@ include '../functions/bootstrap.php';
                                             ?>
                                         </td>
                                         <td>
-                                            <a href="del_client.php?id=<?= $r_customer->id; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                            <a href="del_client.php?id=<?= isset($r_job->client) ? $r_job->client : ''; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
                                     <?php
