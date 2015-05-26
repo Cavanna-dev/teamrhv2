@@ -72,7 +72,7 @@ include '../functions/bootstrap.php';
                                                    data-trigger="hover" 
                                                    data-placement="right" 
                                                    data-html="true"
-                                                   data-content="<?= $r_appli->remarque_eval ?>">
+                                                   data-content="<?= str_replace('"', '\'',$r_appli->remarque_eval); ?>">
                                                        <?= $r_appli->nom . " " . $r_appli->prenom; ?>
                                                 </a>
                                             <td>
