@@ -66,7 +66,7 @@ function searchJobs($db)
     $contact = htmlspecialchars($_GET['input_contact']);
     $statut = htmlspecialchars($_GET['input_pourvu']);
 
-    $sql = "SELECT p.id, c.nom as nom, t.libelle as titre, p.libelle as libelle, p.consultant "
+    $sql = "SELECT p.id, p.client as client, c.nom as nom, t.libelle as titre, p.libelle as libelle, p.consultant "
             . "FROM poste p "
             . "LEFT JOIN client c ON p.client = c.id "
             . "LEFT JOIN titre t ON p.titre = t.id ";
