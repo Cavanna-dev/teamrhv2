@@ -277,7 +277,7 @@ include '../functions/bootstrap.php';
                                     </div>
                                     <label for="input_signature" class="col-lg-2 control-label">Signature</label>
                                     <div class="col-lg-4">
-                                        <input class="form-control" id="input_signature" name="input_signature" type="date" value="<?= $r->signature; ?>">
+                                        <input class="form-control" id="input_signature" name="input_signature" type="date">
                                     </div>
                                 </div>
                                 <div class="form-group">
