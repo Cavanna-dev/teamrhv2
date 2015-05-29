@@ -21,30 +21,41 @@ function searchProspect($db)
     $contact_s = htmlspecialchars($_GET['input_contact_supp']);
     $contact_l = htmlspecialchars($_GET['input_contact_law']);
     $nation = htmlspecialchars($_GET['input_nation']);
+    $statut = htmlspecialchars($_GET['input_status']);
 
     $sql = "SELECT id, nom, secteur, mngt_law, mngt_supp "
             . "FROM prospect ";
 
-    if (!empty($name) || !empty($zone) || !empty($nation) || !empty($contact_s) || !empty($contact_l))
+    if (!empty($name) || !empty($zone) || !empty($nation)
+            || !empty($contact_s) || !empty($contact_l)
+            || !empty($statut))
         $sql .= "WHERE ";
     if (!empty($name))
         $sql .= "nom like '%" . $name . "%' ";
-    if (!empty($name) && (!empty($zone) || !empty($nation) || !empty($contact_s) || !empty($contact_l)))
+    if (!empty($name) && (!empty($zone) || !empty($nation)
+            || !empty($contact_s) || !empty($contact_l)
+            || !empty($statut)))
         $sql .= " AND ";
     if (!empty($nation))
         $sql .= "nationalite = '" . $nation . "' ";
-    if (!empty($nation) && (!empty($zone) || !empty($contact_s) || !empty($contact_l)))
+    if (!empty($nation) && (!empty($zone) || !empty($contact_s)
+            || !empty($contact_l) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($zone))
         $sql .= "secteur = '" . $zone . "' ";
-    if (!empty($zone) && (!empty($contact_s) || !empty($contact_l)))
+    if (!empty($zone) && (!empty($contact_s) || !empty($contact_l)
+            || !empty($statut)))
         $sql .= " AND ";
     if (!empty($contact_s))
         $sql .= "mngt_supp = '" . $contact_s . "' ";
-    if (!empty($contact_s) && !empty($contact_l))
+    if (!empty($contact_s) && (!empty($contact_l) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($contact_l))
         $sql .= "mngt_law = '" . $contact_l . "' ";
+    if (!empty($contact_l) && !empty($statut))
+        $sql .= " AND ";
+    if (!empty($statut))
+        $sql .= "status_fk = '" . $statut . "' ";
 
     $sql .= "ORDER BY nom";
     

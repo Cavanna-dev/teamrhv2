@@ -114,9 +114,11 @@ $r = getOneProspectById($db, $_GET['id']);
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input_url" class="col-lg-2 control-label"><a href="<?= $r->url; ?>">URL</a></label>
+                                <label for="input_url" class="col-lg-2 control-label"><a href="<?= $r->url; ?>" target="_blank">URL</a></label>
                                 <div class="col-lg-10">
-                                    <input class="form-control" id="input_url" name="input_url" placeholder="URL" type="url" value="<?= $r->url; ?>">
+                                    <input class="form-control" id="input_url" 
+                                           name="input_url" placeholder="URL" 
+                                           type="url" value="<?= $r->url; ?>">
                                 </div>
                             </div>
                         </fieldset>
@@ -206,20 +208,19 @@ $r = getOneProspectById($db, $_GET['id']);
             </div>
         </form>
     </div>
-</div>
 
-<script type="text/javascript">
-    
+    <script type="text/javascript">
+
 <?php if (isset($_GET['success']) && $_GET['success'] == 'newcom') { ?>
-        $(window).load(function () {
-            alert('Nouveau commentaire ajouté avec succès !');
-        });
+            $(window).load(function () {
+                alert('Nouveau commentaire ajouté avec succès !');
+            });
 <?php } ?>
-    
+
 <?php if (isset($_GET['success']) && $_GET['success'] == 'newpros') { ?>
-        $(window).load(function () {
-            alert('Nouveau prospect ajouté avec succès !');
-        });
+            $(window).load(function () {
+                alert('Nouveau prospect ajouté avec succès !');
+            });
 <?php } ?>
-</script>
+    </script>
 </body>

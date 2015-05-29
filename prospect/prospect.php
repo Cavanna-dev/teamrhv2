@@ -93,6 +93,22 @@ include '../functions/bootstrap.php';
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="input_status" class="col-lg-2 control-label">Statut</label>
+                                    <div class="col-lg-10">
+                                        <?php $r_status = getAllStatus($db); ?>
+                                        <select class="form-control" name="input_status" id="input_status">
+                                            <option value="">Les deux</option>
+                                            <?php
+                                            while ($r_statu = $r_status->fetch(PDO::FETCH_OBJ)) {
+                                                ?>
+                                                <option value="<?php echo $r_statu->id; ?>" <?php if (isset($_GET['input_status']) && $_GET['input_status'] == $r_statu->id) echo 'selected'; ?>><?= $r_statu->status ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
                             </fieldset>
                         </div>
                     </div>
@@ -296,12 +312,12 @@ include '../functions/bootstrap.php';
                                         </select>
                                     </div>
                                 </div>
-                            <div class="form-group" style="visibility: hidden;">
-                                <label for="input_nation" class="col-lg-2 control-label"></label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="" name="" placeholder="" type="text" value="">
+                                <div class="form-group" style="visibility: hidden;">
+                                    <label for="input_nation" class="col-lg-2 control-label"></label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="" name="" placeholder="" type="text" value="">
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="form-group">
                                     <label for="input_contact_supp" class="col-lg-2 control-label">Resp. Support</label>
                                     <div class="col-lg-10">

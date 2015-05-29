@@ -167,7 +167,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_email" class="col-lg-2 control-label"><a href="<?= isset($r->email) ? $r->email : '' ?>">Email</a></label>
+                            <label for="input_email" class="col-lg-2 control-label"><a href="mailto:<?= isset($r->email) ? $r->email : '' ?>">Email</a></label>
                             <div class="col-lg-10">
                                 <input type="email" class="form-control" name="input_email" id="input_email" value="<?= isset($r->email) ? $r->email : '' ?>" placeholder="Email">
                             </div>

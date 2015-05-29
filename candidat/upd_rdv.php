@@ -117,7 +117,11 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 $body .= " En cas de problème de retard ou d%27empêchement, n%27hésitez pas à nous contacter au numéro ci-dessous.";
                                 $body .= "%0A%0AMerci de me confirmer la lecture de ce mail, par retour de mail. %0A%0ASincèrement,";
                                 ?>
-                                <p><a href="mailto:<?= isset($r->email) ? $r->email : '' ?>?subject=<?= $subject ?>&body=<?= $body ?>"><?= isset($r->email) ? $r->email : '' ?></a></p>
+                                <p>
+                                    <a href="mailto:<?= isset($r->email) ? $r->email : '' ?>?subject=<?= $subject ?>&body=<?= $body ?>">
+                                        <?= isset($r->email) ? $r->email : '' ?>
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </fieldset>

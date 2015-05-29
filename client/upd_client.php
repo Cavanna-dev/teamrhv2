@@ -106,9 +106,9 @@ if (!$r) {
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="input_url" class="col-lg-3 control-label">URL</label>
+                                        <label for="input_url" class="col-lg-3 control-label"><a href="<?= $r->url; ?>" target="_blank">URL</a></label>
                                         <div class="col-lg-9">
-                                            <a href="<?= $r->url; ?>" target="_blank"><input class="form-control" id="input_url" name="input_url" placeholder="URL" type="text" value="<?= $r->url; ?>"></a>
+                                            <input class="form-control" id="input_url" name="input_url" placeholder="URL" type="text" value="<?= $r->url; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
