@@ -4,7 +4,9 @@ function getAllUsers($db)
 {
     $sql = "SELECT id, nom, prenom, login, pwd, type, actif, color, arrival, sorting, initiale "
             . "FROM utilisateur "
-            . "WHERE actif='Y' AND (type = 'CONSULT' or type = 'ADMIN' or type = 'ASSOC')";
+            . "WHERE actif='Y' AND (type = 'CONSULT' or type = 'ADMIN' or type = 'ASSOC'"
+            . "or type = 'ASSIST')"
+            . "ORDER BY sorting";
     $r = $db->prepare($sql);
     $r->execute();
 

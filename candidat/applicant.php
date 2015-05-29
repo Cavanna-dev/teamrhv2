@@ -56,8 +56,12 @@ include '../functions/bootstrap.php';
                             <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
-                                        <th>Nom - Prénom</th>
-                                        <th>Action</th>
+                                        <th class="col-lg-4 text-left">Nom - Prénom</th>
+                                        <th class="col-lg-1 text-left">Age</th>
+                                        <th class="col-lg-1 text-right">Salaire souhaité</th>
+                                        <th class="col-lg-2 text-right">Langue maternelle</th>
+                                        <th class="col-lg-1 text-right">Action</th>
+                                        <th class="col-lg-1 text-right">CVs</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +79,28 @@ include '../functions/bootstrap.php';
                                                    data-content="<?= str_replace('"', '\'', $r_appli->remarque_eval) ?>">
                                                        <?= $r_appli->nom . " " . $r_appli->prenom; ?>
                                                 </a>
+                                            </td>
                                             <td>
+                                                <?php
+                                                if ($r_appli->naissance) {
+                                                    $am = explode('/', date('d/m/Y', strtotime($r_appli->naissance)));
+                                                    $an = explode('/', date('d/m/Y'));
+
+                                                    if (($am[1] < $an[1]) || (($am[1] == $an[1]) && ($am[0] <= $an[0])))
+                                                        echo $an[2] - $am[2];
+                                                    else
+                                                        echo $an[2] - $am[2] - 1;
+                                                    ?>
+                                                    ans
+                                                <?php } ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?= isset($r_appli->salaire) ? $r_appli->salaire : '' ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?= isset($r_appli->langue) ? $r_appli->langue : '' ?>
+                                            </td>
+                                            <td class="text-right">
                                                 <a href="del_applicant.php?id=<?= $r_appli->id; ?>" 
                                                    onclick="return confirm('Pas disponible pour le moment.')">
                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true">
@@ -94,6 +119,12 @@ include '../functions/bootstrap.php';
                                                         </span>
                                                     </a>
                                                 <?php endif; ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <span class="glyphicon glyphicon-list-alt" aria-hidden="true">
+                                                </span>
+                                                <span class="glyphicon glyphicon-list-alt" aria-hidden="true">
+                                                </span>
                                             </td>
                                         </tr>
                                         <?php

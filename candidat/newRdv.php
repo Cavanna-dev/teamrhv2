@@ -5,7 +5,7 @@ include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
 ?>
 
-<div class="container">
+<div class="container" style="font-size: 8px!important;">
     <h1>Gestion RDVs</h1>
     <form class="form-horizontal" method="POST" action="../functions/new_rdv.php" id="form_rdv">
         <div class="jumbotron">
@@ -42,7 +42,7 @@ include '../functions/bootstrap.php';
                             <label for="input_customer" class="col-lg-2 control-label">Client</label>
                             <?php $r_customers = getAllCustomers($db); ?>
                             <div class="col-lg-10">
-                                <select class="form-control" name="input_customer" id="input_customer" required>
+                                <select class="form-control" name="input_customer" id="input_customer">
                                     <option value=""></option>
                                     <?php
                                     while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
@@ -121,7 +121,7 @@ include '../functions/bootstrap.php';
                             <label for="input_title" class="col-lg-2 control-label">Poste</label>
                             <?php $r_titles = getAllTitles($db); ?>
                             <div class="col-lg-10">
-                                <select class="form-control" name="input_title" id="input_title">
+                                <select class="form-control" name="input_title" id="input_title" required>
                                     <option value=""></option>
                                     <?php
                                     foreach ($r_titles as $title):

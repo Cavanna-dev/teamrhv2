@@ -5,7 +5,9 @@ function searchApplicant($db)
     $name = $_GET['input_name'] ? htmlspecialchars($_GET['input_name']) : '';
     $first = $_GET['input_first'] ? htmlspecialchars($_GET['input_first']) : '';
 
-    $sql = "SELECT c.id as id, c.nom as nom, c.prenom as prenom, c.email as email, e.id as eval_id, e.remarque 'remarque_eval' "
+    $sql = "SELECT c.id as id, c.nom as nom, c.prenom as prenom, c.naissance as naissance, "
+            . "c.email as email, e.id as eval_id, e.remarque 'remarque_eval',"
+            . "e.sal_min_rech salaire, e.langue langue "
             . "FROM candidat c "
             . "LEFT JOIN evaluation e ON e.candidat = c.id ";
 
