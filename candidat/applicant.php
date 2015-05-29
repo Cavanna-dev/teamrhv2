@@ -149,15 +149,15 @@ include '../functions/bootstrap.php';
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_name" class="col-lg-2 control-label">Nom</label>
+                                    <label for="input_name" class="col-lg-2 control-label">Nom*</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="input_name" id="input_name" value="" placeholder="Nom">
+                                        <input type="text" class="form-control" name="input_name" id="input_name" value="" placeholder="Nom" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_birthday" class="col-lg-2 control-label">Date de naissance</label>
+                                    <label for="input_birthday" class="col-lg-2 control-label">Date de naissance*</label>
                                     <div class="col-lg-5">
-                                        <input type="date" class="form-control" name="input_birthday" id="input_birthday" value="">
+                                        <input type="date" class="form-control" name="input_birthday" id="input_birthday" value="" required>
                                     </div>
                                     <label class="col-lg-2 control-label"></label>
                                 </div>
@@ -230,9 +230,12 @@ include '../functions/bootstrap.php';
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_last" class="col-lg-2 control-label">Prénom</label>
+                                    <label for="input_last" class="col-lg-2 control-label">Prénom*</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="input_last" id="input_last" value="" placeholder="Prénom">
+                                        <input type="text" class="form-control" 
+                                               name="input_last" id="input_last" 
+                                               value="" placeholder="Prénom"
+                                               required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -248,11 +251,11 @@ include '../functions/bootstrap.php';
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">Sexe</label>
+                                    <label class="col-lg-2 control-label">Sexe*</label>
                                     <div class="col-lg-10">
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="input_sexe" id="optionsRadios1" value="H">
+                                                <input type="radio" name="input_sexe" id="optionsRadios1" value="H" checked>
                                                 Masculin
                                             </label>
                                         </div>

@@ -23,7 +23,7 @@ if (!$r) {
                         <h1>Suivi du client</h1>
                     </div>
                     <div class="col-lg-3">
-                        <h1 class="pull-right"><a href="com_client_new.php?id=<?= $r->id; ?>"><button type = "button" class = "btn btn-primary">Enregistrer commentaire</button></a></h1>
+                        <h1 class="pull-right"><a href="com_client_new.php?id=<?= $r->id; ?>"><button type = "button" class = "btn btn-primary">Ajouter commentaire</button></a></h1>
                     </div>
                 </div>
                 <?php

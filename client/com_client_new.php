@@ -8,8 +8,8 @@ $r_client = getOneCustomerById($db, $_GET['id']);
 ?>
 
 <div class="container">
-    <form action="../functions/new_prospect_com.php" method="POST">
-        <input type="hidden" name="input_id_prospect" id="input_id" value="<?= $r_client->id ?>" />
+    <form action="../functions/new_client_com.php" method="POST">
+        <input type="hidden" name="input_id_client" id="input_id" value="<?= $r_client->id ?>" />
         <div class="row">
             <div class="col-lg-9">
                 <h1>Commentaire : <a href="upd_client.php?id=<?= $r_client->id ?> "><?= $r_client->nom ?></a></h1>

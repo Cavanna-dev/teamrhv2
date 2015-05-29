@@ -140,8 +140,8 @@ $r = getOneProspectById($db, $_GET['id']);
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input_postal" class="col-lg-2 control-label">Code Postal</label>
-                                <div class="col-lg-10">
+                                <label for="input_postal" class="col-lg-3 control-label">Code Postal</label>
+                                <div class="col-lg-9">
                                     <input class="form-control" id="input_postal" name="input_postal" placeholder="Code Postal" type="text" value="<?= $r->postal; ?>">
                                 </div>
                             </div>

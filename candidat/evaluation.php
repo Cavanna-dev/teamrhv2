@@ -220,7 +220,7 @@ include '../functions/bootstrap.php';
                                                class="form-control"
                                                value="<?= isset($r_applicant_eval) ? $r_applicant_eval->nom . " " . $r_applicant_eval->prenom : ''; ?>" disabled />
                                     </div>
-                                    <label for="input_disponible" class="col-lg-2 control-label">Disponible</label>
+                                    <label for="input_disponible" class="col-lg-2 control-label">Disponible*</label>
                                     <div class="col-lg-2">
                                         <div class="radio">
                                             <label>
@@ -291,10 +291,10 @@ include '../functions/bootstrap.php';
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-12">
-                                    <label for="input_title_futur1" class="col-lg-1 control-label">Titre rech. 1</label>
+                                    <label for="input_title_futur1" class="col-lg-1 control-label">Titre rech. 1*</label>
                                     <div class="col-lg-3">
                                         <?php $r_titles = getAllTitles($db); ?>
-                                        <select class="form-control" name="input_title_futur1" id="input_title_futur1">
+                                        <select class="form-control" name="input_title_futur1" id="input_title_futur1" required>
                                             <option value=""></option>
                                             <?php
                                             foreach ($r_titles as $r_title):

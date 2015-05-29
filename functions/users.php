@@ -25,4 +25,18 @@ function getUserById($db, $id)
     return $r;
 }
 
+
+function getAllImportantUsers($db)
+{
+    $sql = "SELECT id, nom, prenom, login, pwd, type, actif, color, arrival, sorting, initiale "
+            . "FROM utilisateur "
+            . "WHERE actif='Y' AND (type = 'CONSULT' or type = 'ADMIN' or type = 'ASSOC')"
+            . "ORDER BY sorting";
+    $r = $db->prepare($sql);
+    $r->execute();
+
+    return $r;
+}
+
+
 ?>

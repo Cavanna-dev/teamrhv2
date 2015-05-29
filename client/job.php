@@ -27,7 +27,7 @@ include '../functions/bootstrap.php';
                                 <div class="form-group">
                                     <label for="input_contact" class="col-lg-2 control-label">Consultant</label>
                                     <div class="col-lg-10">
-                                        <?php $r_users = getAllUsers($db); ?>
+                                        <?php $r_users = getAllImportantUsers($db); ?>
                                         <select class="form-control" name="input_contact" id="input_contact">
                                             <option value=""></option>
                                             <?php
@@ -93,6 +93,7 @@ include '../functions/bootstrap.php';
                         <table class="table table-striped table-hover ">
                             <thead>
                                 <tr>
+                                    <th>N°</th>
                                     <th>Client</th>
                                     <th>Libelle</th>
                                     <th>Titre</th>
@@ -106,17 +107,20 @@ include '../functions/bootstrap.php';
                                     ?>
                                     <tr>
                                         <td>
+                                            <a href="upd_job.php?id=<?= isset($r_job->id) ? $r_job->id : ''; ?>">
+                                            <?= $r_job->id ?>
+                                            </a>
+                                        </td>
+                                        <td>
                                             <a href="upd_client.php?id=<?= isset($r_job->client) ? $r_job->client : ''; ?>">
                                                 <?= isset($r_job->nom) ? $r_job->nom : '' ?>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="upd_job.php?id=<?= isset($r_job->id) ? $r_job->id : ''; ?>">
-                                                <?= isset($r_job->libelle) ? $r_job->libelle : ''; ?>
-                                            </a>
+                                            <?= isset($r_job->libelle) ? $r_job->libelle : ''; ?>
                                         </td>
                                         <td>
-                                                <?= isset($r_job->titre) ? $r_job->titre : ''; ?>
+                                            <?= isset($r_job->titre) ? $r_job->titre : ''; ?>
                                         </td>
                                         <td>
                                             <?php $r_user = getUserById($db, $r_job->consultant); ?>
@@ -289,7 +293,7 @@ include '../functions/bootstrap.php';
                                 <div class="form-group">
                                     <label for="input_contact" class="col-lg-2 control-label">Consultant</label>
                                     <div class="col-lg-10">
-                                        <?php $r_users = getAllUsers($db); ?>
+                                        <?php $r_users = getAllImportantUsers($db); ?>
                                         <select class="form-control" name="input_contact" id="input_contact">
                                             <option value=""></option>
                                             <?php
