@@ -93,12 +93,13 @@ include '../functions/bootstrap.php';
                         <table class="table table-striped table-hover ">
                             <thead>
                                 <tr>
-                                    <th>N°</th>
-                                    <th>Client</th>
-                                    <th>Libelle</th>
-                                    <th>Titre</th>
-                                    <th>Consultant</th>
-                                    <th>Action</th>
+                                    <th class="col-lg-1">N°</th>
+                                    <th class="col-lg-2">Client</th>
+                                    <th class="col-lg-3">Libelle</th>
+                                    <th class="col-lg-3">Titre</th>
+                                    <th class="col-lg-1 text-right">Cons.</th>
+                                    <th class="col-lg-1 text-right">Comm</th>
+                                    <th class="col-lg-1 text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,14 +123,17 @@ include '../functions/bootstrap.php';
                                         <td>
                                             <?= isset($r_job->titre) ? $r_job->titre : ''; ?>
                                         </td>
-                                        <td>
+                                        <td class="text-right">
                                             <?php $r_user = getUserById($db, $r_job->consultant); ?>
                                             <?php
                                             if ($r_user)
                                                 echo $r_user->initiale;
                                             ?>
                                         </td>
-                                        <td>
+                                        <td class="text-right">
+                                            <?= isset($r_job->comm) ? $r_job->comm : ''; ?>
+                                        </td>
+                                        <td class="text-right">
                                             <a href="del_client.php?id=<?= isset($r_job->client) ? $r_job->client : ''; ?>" onclick="return confirm('Pas disponible pour le moment.')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>

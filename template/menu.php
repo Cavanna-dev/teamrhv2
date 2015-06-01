@@ -5,6 +5,7 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
+                "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
                 "client.php" => "Société",
@@ -27,6 +28,7 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
+                "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
                 "client.php" => "Société",
@@ -49,6 +51,7 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
+                "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
                 "client.php" => "Société",
@@ -67,6 +70,7 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
+                "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
                 "client.php" => "Société",
@@ -85,6 +89,7 @@ switch ($_SESSION['user']['type']):
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
                 "evaluation.php" => "Evaluation",
+                "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
                 "client.php" => "Société",

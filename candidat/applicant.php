@@ -241,13 +241,9 @@ include '../functions/bootstrap.php';
                                 <div class="form-group">
                                     <label for="input_nation" class="col-lg-2 control-label">Nationalité</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control" name="input_nation" id="input_nation">
-                                            <option value=""></option>
-                                            <option value="Autre">Autre</option>
-                                            <option value="Américain">Américaine</option>
-                                            <option value="Britannique">Britannique</option>
-                                            <option value="Francais">Française</option>
-                                        </select>
+                                        <input type="text" class="form-control" 
+                                               name="input_nation" id="input_nation" 
+                                               value="" placeholder="Nationalité">
                                     </div>
                                 </div>
                                 <div class="form-group">

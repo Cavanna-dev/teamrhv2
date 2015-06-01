@@ -84,7 +84,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             <label for="input_date" class="col-lg-2 control-label">Email</label>
                             <div class="col-lg-8">
                                 <?php
-                                $sql = "SELECT email FROM candidat WHERE nom = '" . $rdv->NOM . "' AND prenom = '" . $rdv->PRENOM . "'";
+                                $sql = "SELECT sexe, email FROM candidat WHERE nom = '" . $rdv->NOM . "' AND prenom = '" . $rdv->PRENOM . "'";
                                 $r_mail = $db->prepare($sql);
                                 $r_mail->execute();
                                 $r = $r_mail->fetch(PDO::FETCH_OBJ);
@@ -93,28 +93,28 @@ $rdv = getOneRdvById($db, $_GET['id']);
 
                                 $body = '';
 
-                                if(isset($civilite)){
-                                    switch ($civilite) {
-                                        case "" : $body .= "Cher(e) Madame/Monsieur,";
+                                if(isset($r->sexe)){
+                                    switch ($r->sexe) {
+                                        case "" : $body .= "Madame/Monsieur,";
                                             break;
-                                        case "Mr" : $body .= "Cher Monsieur,";
+                                        case "Mr" : $body .= "Monsieur,";
                                             break;
-                                        case "Mme" : $body .= "Chère Madame,";
+                                        case "Mme" : $body .= "Madame,";
                                             break;
-                                        case "Melle" : $body .= "Chère Mademoiselle,";
+                                        case "Melle" : $body .= "Mademoiselle,";
                                             break;
                                     }
                                 }else
 
-                                $jour = isset($jour) ? $jour : '';
-                                $heure_deb = isset($heure_deb) ? $heure_deb : '';
-                                $minute_deb = isset($minute_deb) ? $minute_deb : '';
+                                $jour = isset($rdv->JOUR) ? $rdv->JOUR : '';
+                                $heure_deb = isset($rdv->HEURE_DEB) ? $rdv->HEURE_DEB : '';
+                                $minute_deb = isset($rdv->MINUTE_DEB) ? $rdv->MINUTE_DEB : '';
 
-                                $body .= "%0A%0AJe vous écris pour vous confirmer le RDV dans nos locaux, au 5 rue du Hanovre 75002 PARIS, le " . $jour . " à " . $heure_deb . "h" . $minute_deb . ".";
-                                $body .= " Il y aura des tests en anglais et ensuite un entretien avec moi-même.";
-                                $body .= " Il faut compter en tout 1h - 1h15.";
-                                $body .= "%0A%0ALes stations de métro les plus proches sont : Quatre septembre (ligne 3) ou Opéra (lignes 7/8 ou RER A d%27Auber).";
-                                $body .= " En cas de problème de retard ou d%27empêchement, n%27hésitez pas à nous contacter au numéro ci-dessous.";
+                                $body .= "%0A%0AJe vous écris pour vous confirmer le rendez-vous dans nos locaux, au 5 rue du Hanovre 75002 PARIS, le ";
+                                $body .= isset($rdv->JOUR) ? $rdv->JOUR : '' . " à " . isset($rdv->HEURE_DEB) ? $rdv->HEURE_DEB : '' . "h" . isset($rdv->MINUTE_DEB) ? $rdv->MINUTE_DEB : '' . ".";
+                                $body .= "%0A%0AIl y aura des tests en anglais et ensuite un entretien avec moi-même. Il faut compter en tout 1h - 1h15.";
+                                $body .= "%0A%0ALes stations de métro les plus proches sont : Quatre-septembre (ligne 3) ou Opéra (lignes 7/8) ; ou RER A";
+                                $body .= "%0A%0AEn cas de problème de retard ou d%27empêchement, merci de nous contacter au numéro indiqué ci-dessous.";
                                 $body .= "%0A%0AMerci de me confirmer la lecture de ce mail, par retour de mail. %0A%0ASincèrement,";
                                 ?>
                                 <p>

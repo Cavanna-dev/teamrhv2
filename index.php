@@ -20,10 +20,12 @@
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
                             "evaluation.php" => "Evaluation",
+                            "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
                             "client.php" => "Société",
                             "job.php" => "Poste",
+                            "agenda.php" => "Agenda",
                         ),
                         "Prospect" => Array(
                             "prospect.php" => "Prospect",
@@ -41,10 +43,12 @@
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
                             "evaluation.php" => "Evaluation",
+                            "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
                             "client.php" => "Société",
                             "job.php" => "Poste",
+                            "agenda.php" => "Agenda",
                         ),
                         "Prospect" => Array(
                             "prospect.php" => "Prospect",
@@ -62,10 +66,12 @@
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
                             "evaluation.php" => "Evaluation",
+                            "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
                             "client.php" => "Société",
                             "job.php" => "Poste",
+                            "agenda.php" => "Agenda",
                         ),
                         "Prospect" => Array(
                             "prospect.php" => "Prospect",
@@ -79,10 +85,12 @@
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
                             "evaluation.php" => "Evaluation",
+                            "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
                             "client.php" => "Société",
                             "job.php" => "Poste",
+                            "agenda.php" => "Agenda",
                         ),
                         "Prospect" => Array(
                             "prospect.php" => "Prospect",
@@ -96,6 +104,7 @@
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
                             "evaluation.php" => "Evaluation",
+                            "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
                             "client.php" => "Société",

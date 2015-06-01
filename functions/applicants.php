@@ -40,6 +40,19 @@ function getAllApplicants($db)
     return $r_applicant;
 }
 
+function getAllBirthdaysApplicants($db)
+{
+    $sql = "SELECT id, nom, prenom, anniversaire, email "
+            . "FROM `candidat` "
+            . "WHERE dayofyear(naissance) - dayofyear(NOW()) = 1 "
+            . "OR dayofyear(naissance) + 365 - dayofyear(NOW()) = 1";
+
+    $r_applicant = $db->prepare($sql);
+    $r_applicant->execute();
+    
+    return $r_applicant;
+}
+
 function getOneApplicantById($db, $id)
 {
     $sql = "SELECT c.id, c.nom, c.prenom, c.naissance, c.sexe, c.statut, c.nationalite, c.adresse1, c.ville, c.postal, "

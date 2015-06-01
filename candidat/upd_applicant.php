@@ -16,15 +16,21 @@ $r = getOneApplicantById($db, $_GET['id']);
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_name" class="col-lg-2 control-label">Nom</label>
+                            <label for="input_name" class="col-lg-2 control-label">Nom*</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="input_name" id="input_name" value="<?= $r->nom ?>" placeholder="Nom">
+                                <input type="text" class="form-control" 
+                                       name="input_name" id="input_name" 
+                                       value="<?= $r->nom ?>" 
+                                       placeholder="Nom" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_birthday" class="col-lg-2 control-label">Date de naissance</label>
+                            <label for="input_birthday" class="col-lg-2 control-label">Date de naissance*</label>
                             <div class="col-lg-5">
-                                <input type="date" class="form-control" name="input_birthday" id="input_birthday" value="<?= $r->naissance ?>">
+                                <input type="date" class="form-control" 
+                                       name="input_birthday" 
+                                       id="input_birthday" 
+                                       value="<?= $r->naissance ?>" required>
                             </div>
                             <label class="col-lg-2 control-label">
                                 <?php
@@ -110,9 +116,12 @@ $r = getOneApplicantById($db, $_GET['id']);
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_last" class="col-lg-2 control-label">Prénom</label>
+                            <label for="input_last" class="col-lg-2 control-label">Prénom*</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="input_last" id="input_last" value="<?= $r->prenom ?>" placeholder="Prénom">
+                                <input type="text" class="form-control" 
+                                       name="input_last" id="input_last" 
+                                       value="<?= $r->prenom ?>" 
+                                       placeholder="Prénom" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -122,7 +131,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Sexe</label>
+                            <label class="col-lg-2 control-label">Sexe*</label>
                             <div class="col-lg-10">
                                 <div class="radio">
                                     <label>
@@ -185,7 +194,11 @@ $r = getOneApplicantById($db, $_GET['id']);
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                <a href="upd_evaluation.php?id=<?= $r->eval_id ?>"><button type="button" class="btn btn-primary">Evaluation</button></a>
+                                <?php if($r->eval_id){ ?>
+                                    <a href="upd_evaluation.php?id=<?= $r->eval_id ?>"><button type="button" class="btn btn-primary">Evaluation</button></a>
+                                <?php }else{ ?>
+                                    <a href="evaluation.php?tab=new&id=<?= $r->id ?>"><button type="button" class="btn btn-primary">Créer Evaluation</button></a>
+                                <?php } ?>
                             </div>
                         </div>
                     </fieldset>
