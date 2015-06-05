@@ -44,8 +44,8 @@ function getAllBirthdaysApplicants($db)
 {
     $sql = "SELECT id, nom, prenom, anniversaire, email "
             . "FROM `candidat` "
-            . "WHERE dayofyear(naissance) - dayofyear(NOW()) = 1 "
-            . "OR dayofyear(naissance) + 365 - dayofyear(NOW()) = 1";
+            . "WHERE dayofyear(naissance) - dayofyear(NOW()) = 0 "
+            . "OR dayofyear(naissance) + 365 - dayofyear(NOW()) = 0";
 
     $r_applicant = $db->prepare($sql);
     $r_applicant->execute();

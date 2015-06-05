@@ -22,7 +22,8 @@ if ($consultant != "")
 if ($numsalle != "")
     $clause .= "   and RESA_SALLE.NUMSALLE = $numsalle ";
 
-switch ($nomjour) {
+switch ($nomjour)
+{
     case "Monday":
         $nomjour = "lundi";
         $clause .= " and  RESA_SALLE.jour  between  date_sub('$param', interval 0 day) and date_add('$param', interval 6 day) ";
@@ -177,8 +178,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
             </select>
         </TD>
         <TD colspan="2" align="left">
-            <?php
-            ?>
+            <?php ?>
             <select class="normal" name="numsalle" size="1" onchange="go_to('agenda.php?&param=<?php echo $tmp6; ?>')">
                 <option  selected value="" > Toutes les salles</option>
                 <option <?php if ($numsalle == 1) echo "selected"; ?> value="1"> Salle A</option>
@@ -461,7 +461,8 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
 
                         // on gère le décalage des jours
                         $nomjour = date("l", $tms);
-                        switch ($nomjour) {
+                        switch ($nomjour)
+                        {
                             case "Monday":
                                 $col = 62 + 315;
                                 break;
@@ -559,13 +560,13 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                         $value3 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[NOMCLIENT])));
                         $value4 = str_replace('"', '\\\'', str_replace($linefeed, '<BR>', str_replace('\'', '\\\'', $enregistrement[LIBELLE])));
 
-                        $infobulle  = "Consultant : ".$enregistrement[CONSULTANT]."<br />";
-                        $infobulle .= "Accompagnant : ".$enregistrement[ACCOMPAGNE]."<br />";
-                        $infobulle .= "Client : ".$enregistrement[NOMCLIENT]."<br />";
-                        $infobulle .= "Poste : ".$enregistrement[LIBELLE]."<br />";
-                        $infobulle .= "Candidat : ".$enregistrement[CIVILITE]." ".$enregistrement[NOMCANDIDAT]." ".$enregistrement[PRENOMCANDIDAT]."<br />";
-                        
-                        
+                        $infobulle = "Consultant : " . $enregistrement[CONSULTANT] . "<br />";
+                        $infobulle .= "Accompagnant : " . $enregistrement[ACCOMPAGNE] . "<br />";
+                        $infobulle .= "Client : " . $enregistrement[NOMCLIENT] . "<br />";
+                        $infobulle .= "Poste : " . $enregistrement[LIBELLE] . "<br />";
+                        $infobulle .= "Candidat : " . $enregistrement[CIVILITE] . " " . $enregistrement[NOMCANDIDAT] . " " . $enregistrement[PRENOMCANDIDAT] . "<br />";
+
+
                         if ($enregistrement[ACCOMPAGNE] != "") {
                             $width_accomp = $width / 2;
                             $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
@@ -577,23 +578,23 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                                                    data-trigger='hover' 
                                                    data-placement='right' 
                                                    data-html='true'
-                                                   data-content='".$infobulle."'>";
+                                                   data-content='" . $infobulle . "'>";
                             $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
                             $str .= "    <TR>  ";
-                            $str .= "  		<TD valign=top colspan=2 align=left style=\"font-size:12px;\">";
+                            $str .= "  		<TD valign=top colspan=2 align=left style=\"font-size:11px!important;\">";
                             $str .= "				<SUP>" . $enregistrement[HEURE_DEB] . ":" . $enregistrement[MINUTE_DEB] . " </SUP>";
                             $str .= "		</TD>";
-                            $str .= "  		<TD valign=top colspan=2 align=left style=\"position:absolute;left:75%;background-color:#" . $enregistrement[COLOR2] . ";width:" . $width_accomp . "\">";
-                            $str .= "				<SUP>" . $enregistrement[ACCOMPAGNE2] . " </SUP>";
+                            $str .= "  		<TD valign=top colspan=2 align=left style=\"position:absolute;left:85%;background-color:#" . $enregistrement[COLOR2] . ";width:" . $width_accomp . ";font-size:9px;\">";
+                            $str .= $enregistrement[ACCOMPAGNE2];
                             $str .= "		</TD>";
                             $str .= "	</TR>";
                             $str .= "	<TR>";
-                            $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size:11px ;  fontweight=bold\" colspan=2>";
+                            $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size:11px!important;  fontweight=bold\" colspan=2>";
                             $str .= $titre;
                             $str .= "		</TD>";
                             $str .= "	</TR>";
                             $str .= "   <TR>  ";
-                            $str .= "   	<TD valign=bottom colspan=2 align=left height=" . $height2 . " style=\"font-size:12px;\">";
+                            $str .= "   	<TD valign=bottom colspan=2 align=left height=" . $height2 . " style=\"font-size:11px!important;\">";
                             $str .= "				<SUB> " . $enregistrement[HEURE_FIN] . ":" . $enregistrement[MINUTE_FIN] . " </SUB>";
                             $str .= "		</TD>";
                             $str .= "	</TR>";
@@ -609,20 +610,20 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                                                    data-trigger='hover' 
                                                    data-placement='right' 
                                                    data-html='true'
-                                                   data-content='".$infobulle."'>";
+                                                   data-content='" . $infobulle . "'>";
                             $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
                             $str .= "    <TR>  ";
-                            $str .= "  		<TD valign=top colspan=2 align=left style=\"font-size:12px;\">";
+                            $str .= "  		<TD valign=top colspan=2 align=left style=\"font-size:11px!important;\">";
                             $str .= "				<SUP>" . $enregistrement[HEURE_DEB] . ":" . $enregistrement[MINUTE_DEB] . " </SUP>";
                             $str .= "		</TD>";
                             $str .= "	</TR>";
                             $str .= "	<TR>";
-                            $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size:11px ;  fontweight=bold\" colspan=2>";
+                            $str .= "		<TD align=left valign=top class=rdvbas style=\"font-size:11px!important;  fontweight=bold\" colspan=2>";
                             $str .= $titre;
                             $str .= "		</TD>";
                             $str .= "	</TR>";
                             $str .= "   <TR>  ";
-                            $str .= "   	<TD valign=bottom colspan=2 align=left height=" . $height2 . " style=\"font-size:12px;\">";
+                            $str .= "   	<TD valign=bottom colspan=2 align=left height=" . $height2 . " style=\"font-size:11px!important;\">";
                             $str .= "				<SUB> " . $enregistrement[HEURE_FIN] . ":" . $enregistrement[MINUTE_FIN] . " </SUB>";
                             $str .= "		</TD>";
                             $str .= "	</TR>";
@@ -707,6 +708,7 @@ while ($i <= count($resultat)) {
 }
 ?>
                         }
+
 <?php if (isset($_GET['newRDV'])) { ?>
                             $(window).load(function () {
                                 alert('Le RDV a été créée.');
@@ -722,11 +724,11 @@ while ($i <= count($resultat)) {
                                 alert('Le RDV a été supprimé.');
                             });
 <?php } ?>
-    
-    $(function () {
-        $('[data-toggle="popover"]').popover({
-            container: 'body'
-        });
-    });
-    
+
+                        $(function () {
+                            $('[data-toggle="popover"]').popover({
+                                container: 'body'
+                            });
+                        });
+
                     </script>

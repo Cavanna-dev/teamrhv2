@@ -13,7 +13,7 @@ include '../functions/bootstrap.php';
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_consult1" class="col-lg-2 control-label">Consult. 1</label>
+                            <label for="input_consult1" class="col-lg-2 control-label">Consult.1*</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_consult1" id="input_consult1" required>
@@ -29,7 +29,7 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_salle" class="col-lg-2 control-label">Salle</label>
+                            <label for="input_salle" class="col-lg-2 control-label">Salle*</label>
                             <div class="col-lg-10">			
                                 <select class="form-control" name="input_salle" required="">
                                     <option value="1">Salle A</option> 
@@ -74,7 +74,7 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_date" class="col-lg-2 control-label">Date</label>
+                            <label for="input_date" class="col-lg-2 control-label">Date*</label>
                             <div class="col-lg-8">
                                 <input type="date" class="form-control" name="input_date" 
                                        id="input_date" required>
@@ -106,7 +106,7 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_type_rdv" class="col-lg-2 control-label">Type RDV</label>
+                            <label for="input_type_rdv" class="col-lg-2 control-label">Type RDV*</label>
                             <div class="col-lg-10">			
                                 <select class="form-control" name="input_type_rdv">
                                     <option value="CANDIDAT"   >Candidat   </option> 
@@ -134,7 +134,7 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_title" class="col-lg-2 control-label">Horaires deb.</label>
+                            <label for="input_title" class="col-lg-2 control-label">Horaires deb.*</label>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_hdeb" id="input_title" required>
                                     <?php
@@ -156,7 +156,7 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_title" class="col-lg-2 control-label">Horaires fin</label>
+                            <label for="input_title" class="col-lg-2 control-label">Horaires fin*</label>
                             <div class="col-lg-5">
                                 <select class="form-control" name="input_hfin" id="input_title" required>
                                     <?php

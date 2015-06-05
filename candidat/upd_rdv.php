@@ -16,10 +16,11 @@ $rdv = getOneRdvById($db, $_GET['id']);
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_consult1" class="col-lg-2 control-label">Consult. 1</label>
+                            <label for="input_consult1" class="col-lg-2 control-label">Consult.1*</label>
                             <div class="col-lg-10">
                                 <?php $r_users = getAllUsers($db); ?>
-                                <select class="form-control" name="input_consult1" id="input_consult1">
+                                <select class="form-control" name="input_consult1" 
+                                        id="input_consult1" required>
                                     <option value=""></option>
                                     <?php
                                     while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
@@ -32,9 +33,10 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_salle" class="col-lg-2 control-label">Salle</label>
+                            <label for="input_salle" class="col-lg-2 control-label">Salle*</label>
                             <div class="col-lg-10">			
-                                <select class="form-control" name="input_salle">
+                                <select class="form-control" name="input_salle"
+                                        required>
                                     <option value="1" <?php if ($rdv->NUMSALLE == 1) echo "selected"; ?>>Salle A</option> 
                                     <option value="2" <?php if ($rdv->NUMSALLE == 2) echo "selected"; ?>>Salle B</option> 
                                     <option value="3" <?php if ($rdv->NUMSALLE == 3) echo "selected"; ?>>Salle C</option> 
@@ -75,9 +77,11 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_date" class="col-lg-2 control-label">Date</label>
+                            <label for="input_date" class="col-lg-2 control-label">Date*</label>
                             <div class="col-lg-8">
-                                <input type="date" class="form-control" name="input_date" id="input_date" value="<?= $rdv->JOUR ?>">
+                                <input type="date" class="form-control" 
+                                       name="input_date" id="input_date" 
+                                       value="<?= $rdv->JOUR ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -93,8 +97,9 @@ $rdv = getOneRdvById($db, $_GET['id']);
 
                                 $body = '';
 
-                                if(isset($r->sexe)){
-                                    switch ($r->sexe) {
+                                if (isset($r->sexe)) {
+                                    switch ($r->sexe)
+                                    {
                                         case "" : $body .= "Madame/Monsieur,";
                                             break;
                                         case "Mr" : $body .= "Monsieur,";
@@ -104,9 +109,8 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                         case "Melle" : $body .= "Mademoiselle,";
                                             break;
                                     }
-                                }else
-
-                                $jour = isset($rdv->JOUR) ? $rdv->JOUR : '';
+                                } else
+                                    $jour = isset($rdv->JOUR) ? $rdv->JOUR : '';
                                 $heure_deb = isset($rdv->HEURE_DEB) ? $rdv->HEURE_DEB : '';
                                 $minute_deb = isset($rdv->MINUTE_DEB) ? $rdv->MINUTE_DEB : '';
 
@@ -131,23 +135,24 @@ $rdv = getOneRdvById($db, $_GET['id']);
                         <div class="form-group">
                             <label for="input_consult2" class="col-lg-2 control-label">Consult. 2</label>
                             <div class="col-lg-10">
-                                    <?php $r_users = getAllUsers($db); ?>
+                                <?php $r_users = getAllUsers($db); ?>
                                 <select class="form-control" name="input_consult2" id="input_consult2">
                                     <option value=""></option>
                                     <?php
                                     while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
                                         <option value="<?php echo $r_user->id; ?>" <?php if ($r_user->id == $rdv->CONSULTANT2) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
-    <?php
-}
-?>
+                                        <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_type_rdv" class="col-lg-2 control-label">Type RDV</label>
+                            <label for="input_type_rdv" class="col-lg-2 control-label">Type RDV*</label>
                             <div class="col-lg-10">			
-                                <select class="form-control" name="input_type_rdv">
+                                <select class="form-control" 
+                                        name="input_type_rdv" required>
                                     <option value="CANDIDAT"    <?php if ($rdv->TYPE == 'CANDIDAT') echo 'selected'; ?>>Candidat   </option> 
                                     <option value="CLIENT"      <?php if ($rdv->TYPE == 'CLIENT') echo 'selected'; ?>>Client     </option> 
                                     <option value="INTERNE"     <?php if ($rdv->TYPE == 'INTERNE') echo 'selected'; ?>>Interne    </option> 
@@ -158,7 +163,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                         </div>
                         <div class="form-group">
                             <label for="input_title" class="col-lg-2 control-label">Poste</label>
-                                    <?php $r_titles = getAllTitles($db); ?>
+                            <?php $r_titles = getAllTitles($db); ?>
                             <div class="col-lg-10">
                                 <select class="form-control" name="input_title" id="input_title">
                                     <option value=""></option>
@@ -166,23 +171,29 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                     foreach ($r_titles as $title):
                                         ?>
                                         <option value="<?= $title->id ?>" <?php if ($rdv->POSTE == $title->id) echo 'selected'; ?>><?= $title->libelle ?></option>
-    <?php
-endforeach;
-?>
+                                        <?php
+                                    endforeach;
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_title" class="col-lg-2 control-label">Horaires deb.</label>
+                            <label for="input_title" class="col-lg-2 control-label">Horaires deb.*</label>
                             <div class="col-lg-5">
-                                <select class="form-control" name="input_hdeb" id="input_title">
+                                <select class="form-control" 
+                                        name="input_hdeb" 
+                                        id="input_title" required>
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
-                                        <option value="<?= $i ?>" <?php if ($rdv->HEURE_DEB == $i) echo 'selected'; ?>><?= $i ?></option>
-    <?php
-endfor;
-?>
+                                        <option value="<?= $i ?>" 
+                                        <?php if ($rdv->HEURE_DEB == $i)
+                                            echo 'selected';
+                                        ?>><?= $i ?>
+                                        </option>
+                                        <?php
+                                    endfor;
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-lg-5">
@@ -195,16 +206,18 @@ endfor;
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_title" class="col-lg-2 control-label">Horaires fin</label>
+                            <label for="input_title" class="col-lg-2 control-label">Horaires fin*</label>
                             <div class="col-lg-5">
-                                <select class="form-control" name="input_hfin" id="input_title">
+                                <select class="form-control" 
+                                        name="input_hfin" 
+                                        id="input_title" required>
                                     <?php
                                     for ($i = 8; $i <= 20; $i++):
                                         ?>
                                         <option value="<?= $i ?>" <?php if ($rdv->HEURE_FIN == $i) echo 'selected'; ?>><?= $i ?></option>
-    <?php
-endfor;
-?>
+                                        <?php
+                                    endfor;
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-lg-5">

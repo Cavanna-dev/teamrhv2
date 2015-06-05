@@ -374,8 +374,8 @@ if (!$r) {
                                         $job = getJobById($db, $r_send_cv->poste);
                                         $r_job = $job->fetch(PDO::FETCH_OBJ);
                                         ?>
-                                        <a href="upd_job.php?id=<?= isset($r_job) ? $r_job->id : '' ?>">
-                                            <?= isset($r_job) ? $r_job->libelle : ''; ?>
+                                        <a href="upd_job.php?id=<?= isset($r_job->id) ? $r_job->id : '' ?>">
+                                            <?= isset($r_job->libelle) ? $r_job->libelle : ''; ?>
                                         </a>
                                     </td>
                                 </tr>
