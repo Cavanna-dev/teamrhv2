@@ -97,25 +97,22 @@ $rdv = getOneRdvById($db, $_GET['id']);
 
                                 $body = '';
 
-                                if (isset($r->sexe)) {
-                                    switch ($r->sexe)
+                                if (isset($rdv->CIVILITE)) {
+                                    switch ($rdv->CIVILITE)
                                     {
-                                        case "" : $body .= "Madame/Monsieur,";
-                                            break;
                                         case "Mr" : $body .= "Monsieur,";
                                             break;
                                         case "Mme" : $body .= "Madame,";
                                             break;
                                         case "Melle" : $body .= "Mademoiselle,";
                                             break;
+                                        default: $body .= "Madame/Monsieur,";
+                                            break;
                                     }
-                                } else
-                                    $jour = isset($rdv->JOUR) ? $rdv->JOUR : '';
-                                $heure_deb = isset($rdv->HEURE_DEB) ? $rdv->HEURE_DEB : '';
-                                $minute_deb = isset($rdv->MINUTE_DEB) ? $rdv->MINUTE_DEB : '';
+                                }
 
                                 $body .= "%0A%0AJe vous écris pour vous confirmer le rendez-vous dans nos locaux, au 5 rue du Hanovre 75002 PARIS, le ";
-                                $body .= isset($rdv->JOUR) ? $rdv->JOUR : '' . " à " . isset($rdv->HEURE_DEB) ? $rdv->HEURE_DEB : '' . "h" . isset($rdv->MINUTE_DEB) ? $rdv->MINUTE_DEB : '' . ".";
+                                $body .= date("d/m/Y", strtotime($rdv->JOUR)) . " à " . $rdv->HEURE_DEB . "h" . $rdv->MINUTE_DEB . ".";
                                 $body .= "%0A%0AIl y aura des tests en anglais et ensuite un entretien avec moi-même. Il faut compter en tout 1h - 1h15.";
                                 $body .= "%0A%0ALes stations de métro les plus proches sont : Quatre-septembre (ligne 3) ou Opéra (lignes 7/8) ; ou RER A";
                                 $body .= "%0A%0AEn cas de problème de retard ou d%27empêchement, merci de nous contacter au numéro indiqué ci-dessous.";
