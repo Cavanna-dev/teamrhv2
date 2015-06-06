@@ -93,7 +93,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 $r_mail->execute();
                                 $r = $r_mail->fetch(PDO::FETCH_OBJ);
 
-                                $subject = "TEAM RH : Votre candidature";
+                                $subject = "TeamRH: Confirmation de votre rendez-vous";
 
                                 $body = '';
 
@@ -114,7 +114,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 $body .= "%0A%0AJe vous écris pour vous confirmer le rendez-vous dans nos locaux, au 5 rue du Hanovre 75002 PARIS, le ";
                                 $body .= date("d/m/Y", strtotime($rdv->JOUR)) . " à " . $rdv->HEURE_DEB . "h" . $rdv->MINUTE_DEB . ".";
                                 $body .= "%0A%0AIl y aura des tests en anglais et ensuite un entretien avec moi-même. Il faut compter en tout 1h - 1h15.";
-                                $body .= "%0A%0ALes stations de métro les plus proches sont : Quatre-septembre (ligne 3) ou Opéra (lignes 7/8) ; ou RER A";
+                                $body .= "%0A%0ALes stations de métro les plus proches sont : Quatre-septembre (ligne 3) ou Opéra (lignes 7/8) ; ou RER A d%27Auber";
                                 $body .= "%0A%0AEn cas de problème de retard ou d%27empêchement, merci de nous contacter au numéro indiqué ci-dessous.";
                                 $body .= "%0A%0AMerci de me confirmer la lecture de ce mail, par retour de mail. %0A%0ASincèrement,";
                                 ?>
