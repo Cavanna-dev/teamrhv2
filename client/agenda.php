@@ -619,5 +619,10 @@ while ($i <= mysql_num_rows($resultat)) {
                                 alert('Le RDV a été modifié.');
                             });
 <?php } ?>
+<?php if (isset($_GET['delRDV'])) { ?>
+                            $(window).load(function () {
+                                alert('Le RDV a été supprimé.');
+                            });
+<?php } ?>
 
                     </SCRIPT>

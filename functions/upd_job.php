@@ -6,6 +6,7 @@ $array_post = array();
 foreach($_POST as $key => $value):
     $array_post[":".$key] = $value;
 endforeach;
+//var_dump($array_post);die;
 
 try{
 $sql = "UPDATE poste SET "
@@ -23,11 +24,7 @@ $sql = "UPDATE poste SET "
         . "horaires = :input_schedule, " 
         . "date_deb = :input_starting_date, "
         . "vitesse = :input_speed, " 
-        . "communication = :input_communication, " 
-        . "word = :input_word, " 
-        . "excel = :input_excel, " 
-        . "powerpoint = :input_pp, " 
-        . "internet = :input_internet, " 
+        . "communication = :input_communication, "
         . "autre_appli1 = :input_appli_1, " 
         . "autre_appli2 = :input_appli_2, " 
         . "niveau_fr = :input_fr, " 

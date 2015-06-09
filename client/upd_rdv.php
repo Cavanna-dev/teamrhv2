@@ -82,6 +82,7 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                <a href="../functions/del_rdv_customer.php?id=<?= $rdv->ID ?>"><button type="button" class="btn btn-primary">Supprimer</button></a>
                             </div>
                         </div>
                     </fieldset>
