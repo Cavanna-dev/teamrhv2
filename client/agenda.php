@@ -519,7 +519,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                         $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                         $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
                         $str .= " background-color:#" . $color . ";\">";
-                        $str .= "<a href=\"./candidat/upd_rdv.php?id=" . $id . "\" style=\"color:black;\" ";
+                        $str .= "<a href=\"./upd_rdv.php?id=" . $id . "\" style=\"color:black;\" ";
                         $str .= "tabindex='0' role='button' 
                                                    data-toggle='popover' 
                                                    data-trigger='hover' 
@@ -609,5 +609,15 @@ while ($i <= mysql_num_rows($resultat)) {
                             });
                         });
 
+<?php if (isset($_GET['newRDV'])) { ?>
+                            $(window).load(function () {
+                                alert('Le RDV a été créée.');
+                            });
+<?php } ?>
+<?php if (isset($_GET['updRDV'])) { ?>
+                            $(window).load(function () {
+                                alert('Le RDV a été modifié.');
+                            });
+<?php } ?>
 
                     </SCRIPT>

@@ -12,3 +12,16 @@ function getOneRdvById($db, $id)
 
     return $r;
 }
+function getOneRdvCustomerById($db, $id)
+{
+    $sql = "SELECT * "
+            . "FROM entretien "
+            . "WHERE id='".$id."'";
+    $r_rdv = $db->prepare($sql);
+    $r_rdv->execute();
+    $r = $r_rdv->fetch(PDO::FETCH_OBJ);
+
+    return $r;
+}
+
+?>

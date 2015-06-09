@@ -199,6 +199,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                                 <?php }else{ ?>
                                     <a href="evaluation.php?tab=new&id=<?= $r->id ?>"><button type="button" class="btn btn-primary">Créer Evaluation</button></a>
                                 <?php } ?>
+                                    <a href="../client/new_rdv.php?candidat=<?= $r->id ?>"><button type="button" class="btn btn-primary">Créer RDV Client</button></a>
                             </div>
                         </div>
                     </fieldset>

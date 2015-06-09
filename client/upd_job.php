@@ -54,7 +54,11 @@ $r = getOneJobById($db, $_GET['id']);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_customer" class="col-lg-2 control-label">Client</label>
+                            <label for="input_customer" class="col-lg-2 control-label">
+                                <a href="./upd_client.php?id=<?= $r->client ?>">
+                                    Client
+                                </a>
+                            </label>
                             <div class="col-lg-10">
                                 <?php $r_customers = getAllCustomers($db); ?>
                                 <select class="form-control" name="input_customer" id="input_customer">
@@ -260,9 +264,9 @@ $r = getOneJobById($db, $_GET['id']);
                             <label for="input_pourvu" class="col-lg-2 control-label">Statut</label>
                             <div class="col-lg-10">
                                 <select name="input_pourvu" id="input_pourvu" class="form-control">
-                                    <option value="" <?php if(isset($r->pourvu) && $r->pourvu == '') echo 'selected'; ?>></option>
-                                    <option value="Y" <?php if(isset($r->pourvu) && $r->pourvu == 'Y') echo 'selected'; ?>>Poste Fermé</option>
-                                    <option value="N" <?php if(isset($r->pourvu) && $r->pourvu == 'N') echo 'selected'; ?>>Poste Ouvert</option>
+                                    <option value="" <?php if (isset($r->pourvu) && $r->pourvu == '') echo 'selected'; ?>></option>
+                                    <option value="Y" <?php if (isset($r->pourvu) && $r->pourvu == 'Y') echo 'selected'; ?>>Poste Fermé</option>
+                                    <option value="N" <?php if (isset($r->pourvu) && $r->pourvu == 'N') echo 'selected'; ?>>Poste Ouvert</option>
                                 </select>
                             </div>
                         </div>

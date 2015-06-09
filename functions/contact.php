@@ -1,5 +1,16 @@
 <?php
 
+function getAllContact($db)
+{
+    $sql = "SELECT id, civilite, nom, prenom, tel, fonction, type, email "
+            . "FROM contact "
+            . "ORDER BY nom ";
+
+    $r = $db->prepare($sql);
+    $r->execute();
+    return $r;
+}
+
 function getContactByClientId($db, $type, $id)
 {
     $sql = "SELECT ID, civilite, nom, prenom, tel, fonction, type, email "
