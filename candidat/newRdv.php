@@ -121,7 +121,9 @@ include '../functions/bootstrap.php';
                             <label for="input_title" class="col-lg-2 control-label">Poste</label>
                             <?php $r_titles = getAllTitles($db); ?>
                             <div class="col-lg-10">
-                                <select class="form-control" name="input_title" id="input_title" required>
+                                <select class="form-control" 
+                                        name="input_title" 
+                                        id="input_title">
                                     <option value=""></option>
                                     <?php
                                     foreach ($r_titles as $title):

@@ -15,9 +15,8 @@ function getAllCustomers($db)
 function getOneCustomerById($db, $id)
 {
     $sql = "SELECT id, nom, secteur, adresse1, ville, postal, "
-            . "country_fk, nationalite, tel_std, fax, url, metro, remarque, "
-            . "mngt_law, mngt_supp, status_fk, raison_factu, civilite_factu, nom_factu, prenom_factu, "
-            . "titre_factu, adr1_factu, ville_factu, postal_factu, country_factu_fk, tel_factu, fax_factu, email_factu "
+            . "country_fk, nationalite, tel_std, url, metro, remarque, "
+            . "mngt_law, mngt_supp, status_fk "
             . "FROM client "
             . "WHERE id=" . $id;
     $r_customer = $db->prepare($sql);

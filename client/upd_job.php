@@ -27,14 +27,18 @@ $r = getOneJobById($db, $_GET['id']);
         <input type="hidden" name="input_id" value="<?= $r->id ?>"/>
         <div class="row">
             <div class="col-md-6">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <h1>Commentaires</h1>
+                <div class="jumbotron">
+                    <div class="form-group">
+                        <label for="input_description" class="col-lg-1 control-label">Description</label>
+                        <div class="col-lg-11">
+                            <textarea class="form-control" id="input_description" name="input_description" placeholder="Description" type="text" rows="15"><?= $r->description; ?></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="jumbotron" style="height:500px;">
+                <div class="jumbotron">
                     <div class="form-group">
-                        <div class="col-lg-12">
+                        <label for="input_description" class="col-lg-1 control-label">Comment.</label>
+                        <div class="col-lg-11">
                             <textarea class="form-control" id="input_commentaire"
                                       name="input_commentaire" placeholder="Commentaire" 
                                       type="text" rows="20"><?= $r->commentaire; ?></textarea>
@@ -99,7 +103,7 @@ $r = getOneJobById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_signature" class="col-lg-2 control-label">Date de mission</label>
+                                    <label for="input_signature" class="col-lg-2 control-label">Date de m.</label>
                                     <div class="col-lg-10">
                                         <input class="form-control" id="input_signature" name="input_signature" type="date" value="<?= $r->signature; ?>">
                                     </div>
@@ -159,7 +163,7 @@ $r = getOneJobById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_starting_date" class="col-lg-2 control-label">Date Début</label>
+                                    <label for="input_starting_date" class="col-lg-2 control-label">Date de d.</label>
                                     <div class="col-lg-10">
                                         <input class="form-control" id="input_starting_date" 
                                                name="input_starting_date" type="date" 
@@ -200,7 +204,7 @@ $r = getOneJobById($db, $_GET['id']);
                                     <div class="col-lg-10">
                                         <select class="form-control" name="input_garantie" 
                                                 id="input_garantie">
-                                            <option value=""<?php if ($r->garantie == "") echo "selected"; ?>></option>
+                                            <option value="" <?php if ($r->garantie == "") echo "selected"; ?>></option>
                                             <option value="2 semaines" <?php if ($r->garantie == "2 semaines") echo "selected"; ?>>2 semaines</option>
                                             <option value="3 semaines" <?php if ($r->garantie == "3 semaines") echo "selected"; ?>>3 semaines</option>
                                             <option value="1 mois" <?php if ($r->garantie == "1 mois") echo "selected"; ?>>1 mois</option>
@@ -334,14 +338,6 @@ $r = getOneJobById($db, $_GET['id']);
                                     </div>
                                 </div>
                             </fieldset>
-                        </div>
-                    </div>
-                </div>
-                <div class="jumbotron">
-                    <div class="form-group">
-                        <label for="input_description" class="col-lg-1 control-label">Description</label>
-                        <div class="col-lg-11">
-                            <textarea class="form-control" id="input_description" name="input_description" placeholder="Description" type="text" rows="15"><?= $r->description; ?></textarea>
                         </div>
                     </div>
                 </div>

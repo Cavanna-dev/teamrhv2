@@ -8,6 +8,7 @@ function getAllContact($db)
 
     $r = $db->prepare($sql);
     $r->execute();
+    
     return $r;
 }
 
@@ -20,6 +21,22 @@ function getContactByClientId($db, $type, $id)
 
     $r = $db->prepare($sql);
     $r->execute();
+    
+    return $r;
+}
+
+function getContactByClient($db, $id)
+{
+    $sql = "SELECT id, inactif, civilite, nom, prenom, tel, fonction, type, "
+            . "email, remarque, creation "
+            . "FROM contact "
+            . "WHERE client = '".$id."' "
+            . "ORDER BY nom ";
+
+    $r_contact = $db->prepare($sql);
+    $r_contact->execute();
+    $r = $r_contact->fetchAll(PDO::FETCH_OBJ);
+    
     return $r;
 }
 
@@ -32,6 +49,7 @@ function getOneContactByClientIdType($db, $type, $id)
 
     $r = $db->prepare($sql);
     $r->execute();
+    
     return $r;
 }
 
@@ -45,6 +63,21 @@ function getOneContactById($db, $id)
     $r_contact= $db->prepare($sql);
     $r_contact->execute();
     $r = $r_contact->fetch(PDO::FETCH_OBJ);
+    
+    return $r;
+}
+
+function getContactProspectById($db, $id)
+{
+    $sql = "SELECT id, prospect, civilite, inactif, nom, prenom, tel, fonction, type, "
+        . "email, remarque, creation "
+        . "FROM contact_prospect "
+        . "WHERE prospect='".$id."'";
+
+    $r_contact= $db->prepare($sql);
+    $r_contact->execute();
+    $r = $r_contact->fetchAll(PDO::FETCH_OBJ);
+    
     return $r;
 }
 

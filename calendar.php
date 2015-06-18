@@ -584,7 +584,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $str .= "  		<TD valign=top colspan=2 align=left style=\"font-size:11px!important;\">";
                             $str .= "				<SUP>" . $enregistrement[HEURE_DEB] . ":" . $enregistrement[MINUTE_DEB] . " </SUP>";
                             $str .= "		</TD>";
-                            $str .= "  		<TD valign=top colspan=2 align=left style=\"position:absolute;left:85%;background-color:#" . $enregistrement[COLOR2] . ";width:" . $width_accomp . ";font-size:9px;\">";
+                            $str .= "  		<TD valign=top colspan=2 align=left style=\"position:absolute;left:80%;background-color:#" . $enregistrement[COLOR2] . ";width:" . $width_accomp . ";font-size:10px;\">";
                             $str .= $enregistrement[ACCOMPAGNE2];
                             $str .= "		</TD>";
                             $str .= "	</TR>";

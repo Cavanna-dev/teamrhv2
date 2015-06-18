@@ -7,7 +7,6 @@ include '../functions/bootstrap.php';
 $r = getOneCustomerById($db, $_GET['id']);
 if (!$r) {
     ?>
-
     <div class="alert alert-dismissible alert-warning">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <h4>Client introuvable</h4>
@@ -23,7 +22,11 @@ if (!$r) {
                         <h1>Suivi du client</h1>
                     </div>
                     <div class="col-lg-3">
-                        <h1 class="pull-right"><a href="com_client_new.php?id=<?= $r->id; ?>"><button type = "button" class = "btn btn-primary">Ajouter commentaire</button></a></h1>
+                        <h1 class="pull-right">
+                            <a href="com_client_new.php?id=<?= $r->id; ?>">
+                                <button type="button" class = "btn btn-primary">Ajouter commentaire</button>
+                            </a>
+                        </h1>
                     </div>
                 </div>
                 <?php
@@ -34,7 +37,7 @@ if (!$r) {
                     $remarque = str_replace('"', '\\\'', str_replace($linefeed, '<BR />', str_replace('\'', '\\\'', $com->remarque)));
                     $remarque = str_replace('\\', '', str_replace('\'\'', '\'', str_replace('"', '\'', $remarque)));
                     ?>
-                    <div class="jumbotron" style="margin: 2px 0;padding: 15px;">
+                    <div class="jumbotron" style="margin: 2px 0;padding: 10px;">
                         <p style="font-size: 14px;"><?= $remarque . "..."; ?>
                             <a href="com_client.php?id=<?= $com->id; ?>">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -47,12 +50,15 @@ if (!$r) {
             <div class="col-md-6">
                 <form class="form-horizontal" method="POST" action="../functions/upd_customer.php" id="form_upd_customer">
                     <div class="row">
-                        <div class="col-lg-10">
+                        <div class="col-lg-9">
                             <input type="hidden" name="input_id" value="<?= $_GET['id'] ?>"/>
                             <h1>Fiche client</h1>
                         </div>
-                        <div class="col-lg-2">
-                            <h1 class="pull-right"><button type = "submit" class = "btn btn-primary">Enregistrer</button></h1>
+                        <div class="col-lg-3">
+                            <h1 class="pull-right">
+                                <a href="../functions/custtoprosp.php?id=<?= $_GET['id'] ?>"><button type="button" class="btn btn-primary">Prospect</button></a> 
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </h1>
                         </div>
                     </div>
                     <div class="jumbotron">
@@ -398,6 +404,11 @@ if (!$r) {
     <?php if (isset($_GET['newsuccess'])) { ?>
             $(window).load(function () {
                 alert('Nouveau client créée.');
+            });
+    <?php } ?>
+    <?php if (isset($_GET['transform'])) { ?>
+            $(window).load(function () {
+                alert('Prospect en Client terminé.');
             });
     <?php } ?>
     </script>

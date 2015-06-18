@@ -519,7 +519,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                         $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                         $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
                         $str .= " background-color:#" . $color . ";\">";
-                        $str .= "<a href=\"./upd_rdv.php?id=" . $id . "\" style=\"color:black;\" ";
+                        $str .= "<a href=\"./upd_rdv.php?id=" . $id;
                         $str .= "tabindex='0' role='button' 
                                                    data-toggle='popover' 
                                                    data-trigger='hover' 
@@ -529,13 +529,13 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                         $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
                         $str .= "    <TR>  ";
                         $str .= "		<TD align=left colspan=2 valign=top>";
-                        $str .= "		   <A href=\"upd_client.php?id=$tmp2\" style=\"font-size:12px;\">" . substr($enregistrement[SOCIETE], 0, 10) . "</A>";
+                        $str .= "		   <A href=\"upd_client.php?id=$tmp2\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[SOCIETE], 0, 10) . "</A>";
                         $str .= "		</TD>";
                         $str .= "	</TR>";
                         $str .= "	<TR>";
                         $str .= "		<TD align=left valign=top >";
-                        $str .= "		<A href=\"../candidat/upd_applicant.php?id=$tmp3\" style=\"font-size:12px;\">" . substr($enregistrement[NOMCANDIDAT], 0, 10) . "</A>";
-                        $str .= "		<BR><A href=\"upd_job.php?id=$tmp4\" style=\"font-size:12px;\">" . substr($enregistrement[LIBELLE], 0, 10) . "</A>";
+                        $str .= "		<br /><A href=\"../candidat/upd_applicant.php?id=$tmp3\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[NOMCANDIDAT], 0, 10) . "</A>";
+                        $str .= "		<br /><A href=\"upd_job.php?id=$tmp4\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[LIBELLE], 0, 10) . "</A>";
                         $str .= "		</TD>";
                         $str .= "	</TR>";
                         $str .= "</TABLE>";

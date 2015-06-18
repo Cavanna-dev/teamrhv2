@@ -18,22 +18,22 @@ $r = getOneProspectById($db, $_GET['id']);
                 <h1 class="pull-right"><a href="com_prospect_new.php?id=<?= $r->id; ?>"><button type = "submit" class = "btn btn-primary">Nouveau commentaire</button></a></h1>
             </div>
         </div>
-        <div class="jumbotron">
-            <?php
-            $coms = getComByProspect($db, $_GET['id']);
-            while ($com = $coms->fetch(PDO::FETCH_OBJ)) {
-                $linefeed = "\r\n";
-                $remarque = str_replace('"', '\\\'', str_replace($linefeed, '<BR />', str_replace('\'', '\\\'', $com->remarque)));
-                $remarque = str_replace('\\', '', str_replace('\'\'', '\'', str_replace('"', '\'', $remarque)));
-                ?>
+        <?php
+        $coms = getComByProspect($db, $_GET['id']);
+        while ($com = $coms->fetch(PDO::FETCH_OBJ)) {
+            $linefeed = "\r\n";
+            $remarque = str_replace('"', '\\\'', str_replace($linefeed, '<BR />', str_replace('\'', '\\\'', $com->remarque)));
+            $remarque = str_replace('\\', '', str_replace('\'\'', '\'', str_replace('"', '\'', $remarque)));
+            ?>
+            <div class="jumbotron" style="margin: 2px 0;padding: 10px;">
                 <p style="font-size: 14px;"><?= $remarque . "..."; ?>
                     <a href="com_prospect.php?id=<?= $com->id; ?>">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
                 </p>
+            </div>
 
-            <?php } ?>
-        </div>
+        <?php } ?>
     </div>
     <div class="col-lg-6">
         <form class="form-horizontal" method="POST" action="../functions/upd_prospect.php" id="form_upd_customer">
@@ -43,15 +43,17 @@ $r = getOneProspectById($db, $_GET['id']);
                     <h1>Fiche Prospect</h1>
                 </div>
                 <div class="col-lg-3">
-                    <h1 class="pull-right"><button type="submit" class="btn btn-primary">Enregistrer</button></h1>
+                    <h1 class="pull-right">
+                        <a href="../functions/prosptocust.php?id=<?= $_GET['id'] ?>"><button type="button" class="btn btn-primary">Client</button></a> 
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </h1>
                 </div>
             </div>
             <div class="jumbotron">
                 <div class="form-group">
                     <label for="input_remarque" class="col-lg-2 control-label">Informations Générales</label>
                     <div class="col-lg-10">
-                        <textarea class="form-control" id="input_remarque" name="input_remarque" placeholder="Remarque" type="text" rows="15"><?= $r->remarque; ?>
-                        </textarea>
+                        <textarea class="form-control" id="input_remarque" name="input_remarque" placeholder="Remarque" type="text" rows="15"><?= $r->remarque; ?></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -210,16 +212,19 @@ $r = getOneProspectById($db, $_GET['id']);
     </div>
 
     <script type="text/javascript">
-
 <?php if (isset($_GET['success']) && $_GET['success'] == 'newcom') { ?>
             $(window).load(function () {
                 alert('Nouveau commentaire ajouté avec succès !');
             });
 <?php } ?>
-
 <?php if (isset($_GET['success']) && $_GET['success'] == 'newpros') { ?>
             $(window).load(function () {
                 alert('Nouveau prospect ajouté avec succès !');
+            });
+<?php } ?>
+<?php if (isset($_GET['transform'])) { ?>
+            $(window).load(function () {
+                alert('Prospect en Client terminé.');
             });
 <?php } ?>
     </script>

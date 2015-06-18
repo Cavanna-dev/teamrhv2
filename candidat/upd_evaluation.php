@@ -285,6 +285,7 @@ $r = getOneEvalById($db, $_GET['id']);
                                     <option value="" <?= $r->CONTRAT1_RECH == '' ? 'selected' : '' ?>></option>
                                     <option value="CDI" <?= $r->CONTRAT1_RECH == 'CDI' ? 'selected' : '' ?>>CDI</option>
                                     <option value="CDD" <?= $r->CONTRAT1_RECH == 'CDD' ? 'selected' : '' ?>>CDD</option>
+                                    <option value="Libéral" <?= $r->CONTRAT1_RECH == 'Libéral' ? 'selected' : '' ?>>Libéral</option>
                                 </select>
                             </div>
                             <label for="input_contrat_2" class="col-lg-2 control-label">Contrat rech. 2</label>
@@ -294,6 +295,7 @@ $r = getOneEvalById($db, $_GET['id']);
                                     <option value="" <?= $r->CONTRAT2_RECH == '' ? 'selected' : '' ?>></option>
                                     <option value="CDI" <?= $r->CONTRAT2_RECH == 'CDI' ? 'selected' : '' ?>>CDI</option>
                                     <option value="CDD" <?= $r->CONTRAT2_RECH == 'CDD' ? 'selected' : '' ?>>CDD</option>
+                                    <option value="Libéral" <?= $r->CONTRAT2_RECH == 'Libéral' ? 'selected' : '' ?>>Libéral</option>
                                 </select>
                             </div>
                         </div>
