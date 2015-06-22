@@ -209,6 +209,90 @@ $r = getOneProspectById($db, $_GET['id']);
                 </div>
             </div>
         </form>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#contact_support" data-toggle="tab">Contacts Support</a></li>
+            <li><a href="#contact_avocat" data-toggle="tab">Contacts Avocat</a></li>
+        </ul>
+        <div class="jumbotron">
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="contact_support">
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-4">Identité</th>
+                                <th class="col-lg-4">Titre</th>
+                                <th class="col-lg-3">Téléphone</th>
+                                <th class="col-lg-1">Action</th>
+                                <th>
+                                    <a href="contact.php?id_prospect=<?= $_GET['id'] ?>&type=SUP">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $r_contacts = getContactByProspectId($db, "SUP", $_GET['id']);
+                            while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
+                                ?>
+                                <tr>
+                                    <td>
+                                        <a href="upd_contact.php?id=<?= $r_contact->ID ?>">
+                                            <?= $r_contact->civilite . " " . $r_contact->nom . " " . $r_contact->prenom; ?>
+                                        </a>
+                                    </td>
+                                    <td><?= $r_contact->fonction; ?></td>
+                                    <td><?= $r_contact->tel; ?></td>
+                                    <td>
+                                        <?php if (!empty($r_contact->email)): ?>
+                                            <a href="mailto:<?= $r_contact->email; ?>?subject=Contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="contact_avocat">
+                    <table class="table table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-4">Identité</th>
+                                <th class="col-lg-4">Titre</th>
+                                <th class="col-lg-3">Téléphone</th>
+                                <th class="col-lg-1">Action</th>
+                                <th>
+                                    <a href="contact.php?id_prospect=<?= $_GET['id'] ?>&type=LAW">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $r_contacts = getContactByProspectId($db, "LAW", $_GET['id']);
+                            while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
+                                ?>
+                                <tr>
+                                    <td>
+                                        <a href="upd_contact.php?id=<?= $r_contact->ID ?>">
+                                            <?= $r_contact->civilite . " " . $r_contact->nom . " " . $r_contact->prenom; ?>
+                                        </a>
+                                    </td>
+                                    <td><?= $r_contact->fonction; ?></td>
+                                    <td><?= $r_contact->tel; ?></td>
+                                    <td>
+                                        <?php if (!empty($r_contact->email)): ?>
+                                            <a href="mailto:<?= $r_contact->email; ?>?subject=Contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                            <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="text/javascript">
