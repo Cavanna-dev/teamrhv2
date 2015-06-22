@@ -516,31 +516,33 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                         $tmp5 = substr($enregistrement[HORAIRE], 0, 2) + 2;
                         $tmp5 = $tmp5 . ":" . substr($enregistrement[HORAIRE], 3, 2);
 
-                        $str = "<DIV id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
+                        $str = "<div id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                         $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
                         $str .= " background-color:#" . $color . ";\">";
-                        $str .= "<a href=\"./upd_rdv.php?id=" . $id;
+                        $str .= "<a href=\"./upd_rdv.php?id=" . $id . "\" ";
                         $str .= "tabindex='0' role='button' 
                                                    data-toggle='popover' 
                                                    data-trigger='hover' 
                                                    data-placement='right' 
                                                    data-html='true'
                                                    data-content='" . $commentaire . "'>";
-                        $str .= "<TABLE width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
-                        $str .= "    <TR>  ";
-                        $str .= "		<TD align=left colspan=2 valign=top>";
-                        $str .= "		   <A href=\"upd_client.php?id=$tmp2\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[SOCIETE], 0, 10) . "</A>";
-                        $str .= "		</TD>";
-                        $str .= "	</TR>";
-                        $str .= "	<TR>";
-                        $str .= "		<TD align=left valign=top >";
-                        $str .= "		<br /><A href=\"../candidat/upd_applicant.php?id=$tmp3\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[NOMCANDIDAT], 0, 10) . "</A>";
-                        $str .= "		<br /><A href=\"upd_job.php?id=$tmp4\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[LIBELLE], 0, 10) . "</A>";
-                        $str .= "		</TD>";
-                        $str .= "	</TR>";
-                        $str .= "</TABLE>";
+                        $str .= "<table width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
+                        $str .= "<tr>";
+                        $str .= "<td align=left colspan=2 valign=top>";
+                        $str .= "<a href=\"upd_client.php?id=$tmp2\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[SOCIETE], 0, 10) . "</a>";
+                        $str .= "</td>";
+                        $str .= "</tr>";
+                        $str .= "<tr>";
+                        $str .= "<td>";
+                        $str .= "<a href=\"../candidat/upd_applicant.php?id=$tmp3\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[NOMCANDIDAT], 0, 10) . "</a>";
+                        if(isset($enregistrement[LIBELLE]))
+                         $str .= " - <a href=\"upd_job.php?id=$tmp4\" style=\"font-size:12px;color:black;\">" . substr($enregistrement[LIBELLE], 0, 10) . "</a>";
+                        $str .= "</TD>";
+                        $str .= "</TR>";
+                        $str .= "</table>";
                         $str .= "</a>";
-                        $str .= " </DIV>";
+                        $str .= "</div>";
+                        
                         echo $str;
 
                         $i = $i + 1;
