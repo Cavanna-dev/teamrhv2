@@ -5,12 +5,13 @@ include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
 
 $rdv = getOneRdvCustomerById($db, $_GET['id']);
+//var_dump($rdv);die;
 ?>
 
 <div class="container" style="font-size: 8px!important;">
     <h1>Gestion RDVs</h1>
     <form class="form-horizontal" method="POST" action="../functions/upd_rdv_customer.php" id="form_rdv">
-            <input type="hidden" class="form-control" name="input_id" id="input_id" value="<?= $rdv->ID ?>">
+        <input type="hidden" class="form-control" name="input_id" id="input_id" value="<?= $rdv->ID ?>">
         <div class="jumbotron">
             <div class="row">
                 <div class="col-lg-6">
@@ -31,10 +32,10 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                                 <?php $r_customers = getAllCustomers($db); ?>		
                                 <select class="form-control" 
                                         name="input_customer">
-                                    <?php
-                                    while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                        ?>
-                                        <option value="<?php echo $r_customer->id; ?>" <?php if($r_customer->id == $rdv->CLIENT) echo "selected"; ?>><?php echo $r_customer->nom; ?></option>
+                                            <?php
+                                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
+                                                ?>
+                                        <option value="<?php echo $r_customer->id; ?>" <?php if ($r_customer->id == $rdv->CLIENT) echo "selected"; ?>><?php echo $r_customer->nom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -51,7 +52,7 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                                     <?php
                                     foreach ($r_jobs as $r_job) {
                                         ?>
-                                        <option value="<?= $r_job->id; ?>" <?php if($r_job->id == $rdv->POSTE) echo "selected"; ?>><?= $r_job->libelle; ?></option>
+                                        <option value="<?= $r_job->id; ?>" <?php if ($r_job->id == $rdv->POSTE) echo "selected"; ?>><?= $r_job->libelle; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -81,8 +82,14 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                                <a href="../functions/del_rdv_customer.php?id=<?= $rdv->ID ?>"><button type="button" class="btn btn-primary">Supprimer</button></a>
+                                <?php
+                                if (strtotime('+2 week', strtotime($rdv->DATE_RDV)) > strtotime("now")) {
+                                    ?>
+                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                    <a href="../functions/del_rdv_customer.php?id=<?= $rdv->ID ?>"><button type="button" class="btn btn-primary">Supprimer</button></a>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </fieldset>
@@ -99,7 +106,7 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                                             <?php
                                             while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                                 ?>
-                                        <option value="<?php echo $r_user->id; ?>" <?php if($r_user->id == $rdv->CONSULTANT) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
+                                        <option value="<?php echo $r_user->id; ?>" <?php if ($r_user->id == $rdv->CONSULTANT) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -116,7 +123,7 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                                     <?php
                                     while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
                                         ?>
-                                        <option value="<?= $r_contact->id; ?>" <?php if($r_contact->id == $rdv->CONTACT) echo "selected"; ?>><?= $r_contact->nom . ' ' . $r_contact->prenom; ?></option>
+                                        <option value="<?= $r_contact->id; ?>" <?php if ($r_contact->id == $rdv->CONTACT) echo "selected"; ?>><?= $r_contact->nom . ' ' . $r_contact->prenom; ?></option>
                                         <?php
                                     }
                                     ?>
