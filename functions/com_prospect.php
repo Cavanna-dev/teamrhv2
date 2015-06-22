@@ -12,6 +12,18 @@ function getComByProspect($db, $id)
     return $r;
 }
 
+function getAllComByProspect($db, $id)
+{
+    $sql = "SELECT id, prospect, remarque, creation "
+            . "FROM commentaire_prospect "
+            . "WHERE prospect = " . $id . " "
+            . "ORDER BY creation DESC";
+
+    $r = $db->prepare($sql);
+    $r->execute();
+    return $r;
+}
+
 function getOneProspectComById($db, $id)
 {
     $sql = "SELECT id, prospect, remarque, creation "

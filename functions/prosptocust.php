@@ -10,7 +10,7 @@ foreach ($prosp as $key => $value):
         $prospect[":" . $key] = $value;
 endforeach;
 //var_dump($prospect);die;
-$r_coms = getComByProspect($db, $_GET['id']);
+$r_coms = getAllComByProspect($db, $_GET['id']);
 $coms = $r_coms->fetchAll(PDO::FETCH_OBJ);
 //var_dump($coms);die;
 $contacts = getContactProspectById($db, $_GET['id']);

@@ -2,7 +2,7 @@
 
 function getComByCustomer($db, $id)
 {
-    $sql = "SELECT id, client, mid(remarque, 1, 200) 'remarque', creation "
+    $sql = "SELECT id, client, mid(remarque, 1, 100) 'remarque', creation "
             . "FROM commentaire_client "
             . "WHERE client = " . $id . " "
             . "ORDER BY creation desc";
