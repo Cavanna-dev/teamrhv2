@@ -80,7 +80,7 @@ function searchJobs($db)
         $sql .= " AND ";
     if (!empty($customer))
         $sql .= "p.client = '" . $customer . "' ";
-    if (!empty($customer) && !empty($contact))
+    if (!empty($customer) && (!empty($contact) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($contact))
         $sql .= "p.consultant = '" . $contact . "' ";
