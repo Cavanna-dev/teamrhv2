@@ -56,7 +56,6 @@ if (!$r) {
                         </div>
                         <div class="col-lg-3">
                             <h1 class="pull-right">
-                                <a href="../functions/custtoprosp.php?id=<?= $_GET['id'] ?>"><button type="button" class="btn btn-primary">Prospect</button></a> 
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                             </h1>
                         </div>
