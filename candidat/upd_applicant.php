@@ -106,7 +106,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                                     ?>
                                 </td>
                                 <td>
-                                    <?= isset($r_cv['date_envoi']) ? date("d/m/Y", strtotime($r_cv['date_envoi'])) : 'N/A'; ?>
+                                    <?= isset($r_cv['date_envoi']) ? $r_cv['date_envoi'] : 'N/A'; ?>
                                 </td>
                             </tr>
                             <?php
