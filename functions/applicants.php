@@ -137,7 +137,7 @@ function getCvsSendByApplicant($db, $id)
     $sql .= "  and cv_envoye.poste is null ";
     $sql .= "  and cv_envoye.client is null ";
     $sql .= "ORDER BY 3 DESC, 1";
-
+    
     $r_applicant = $db->prepare($sql);
     $r_applicant->execute();
     $r = $r_applicant->fetchAll(PDO::FETCH_ASSOC);

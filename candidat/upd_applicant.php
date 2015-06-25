@@ -60,7 +60,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                             <th class="col-lg-6">Libellé</th>
                             <th class="col-lg-2">Date envoi</th>
                             <th>
-                                <a href="../candidat/new_envoi_cv.php?candidat=<?= $_GET['id'] ?>" >
+                                <a href="../candidat/send_cv.php?candidat=<?= $_GET['id'] ?>" >
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                 </a>
                             </th>
@@ -76,7 +76,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                             <tr>
                                 <td>
                                     <?php
-                                    switch($r_cv[1]):
+                                    switch ($r_cv[1]):
                                         case 1:
                                             echo "[Client]";
                                             break;
@@ -91,22 +91,24 @@ $r = getOneApplicantById($db, $_GET['id']);
                                 </td>
                                 <td>
                                     <?php
-                                    switch($r_cv[1]):
+                                    switch ($r_cv[1]):
                                         case 1:
-                                            echo '<a href="../client/upd_client.php?id='.$r_cv['id_client'].'">'.$r_cv['nom_client'].'</a>';
+                                            echo '<a href="../client/upd_client.php?id=' . $r_cv['id_client'] . '">' . $r_cv['nom_client'] . '</a>';
                                             break;
                                         case 2:
-                                            echo '<a href="../client/upd_client.php?id='.$r_cv['id_client'].'">'.$r_cv['nom_client'].'</a> - ';
-                                            echo '<a href="../client/upd_job.php?id='.$r_cv['id_poste'].'">'.$r_cv['libelle_poste'].'</a>';
+                                            echo '<a href="../client/upd_client.php?id=' . $r_cv['id_client'] . '">' . $r_cv['nom_client'] . '</a> - ';
+                                            echo '<a href="../client/upd_job.php?id=' . $r_cv['id_poste'] . '">' . $r_cv['libelle_poste'] . '</a>';
                                             break;
                                         case 3:
-                                            echo '<a href="../prospect/upd_prospect.php?id='.$r_cv['id_prospect'].'">'.$r_cv['nom_prospect'].'</a>';
+                                            echo '<a href="../prospect/upd_prospect.php?id=' . $r_cv['id_prospect'] . '">' . $r_cv['nom_prospect'] . '</a>';
                                             break;
                                     endswitch;
                                     ?>
                                 </td>
                                 <td>
-                                    <?= isset($r_cv['date_envoi']) ? $r_cv['date_envoi'] : 'N/A'; ?>
+                                    <a href="../candidat/upd_send_cv.php?candidat=<?= $_GET['id'] ?>&date_envoi=<?= isset($r_cv['date_ordre']) ? date('Y-m-d', strtotime($r_cv['date_ordre'])) : ''; ?>" >
+                                        <?= isset($r_cv['date_envoi']) ? $r_cv['date_envoi'] : 'N/A'; ?>
+                                    </a>
                                 </td>
                             </tr>
                             <?php

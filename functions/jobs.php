@@ -11,7 +11,6 @@ function getAllJobs($db)
     $r_job->execute();
     $r = $r_job->fetchAll(PDO::FETCH_OBJ);
     return $r;
-    
 }
 
 function getJobById($db, $id)
@@ -51,7 +50,7 @@ function getJobByCustomer($db, $id)
             . "FROM poste "
             . "LEFT JOIN entretien on poste.id = entretien.poste "
             . "LEFT join candidat on entretien.candidat = candidat.id "
-            . "WHERE pourvu != 'Y' and poste.client = " .$id. " "
+            . "WHERE pourvu != 'Y' and poste.client = " . $id . " "
             . "ORDER BY poste.ID, candidat.nom, date_rdv ";
 
     $r = $db->prepare($sql);
@@ -88,11 +87,41 @@ function searchJobs($db)
         $sql .= " AND ";
     if (!empty($statut))
         $sql .= "p.pourvu = '" . $statut . "' ";
-    
+
     $sql .= "ORDER BY nom, libelle, titre";
     //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();
+
+    return $r;
+}
+
+function getAllJobsSendCv($db)
+{
+    $sql = " SELECT poste.id, concat(mid(client.nom, 1, 15) , concat(' - ', poste.libelle)) 'nom' ";
+    $sql .= " FROM poste, client ";
+    $sql .= " WHERE pourvu != 'Y' and client.id = poste.client ";
+    $sql .= " ORDER BY 2";
+
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetchAll(PDO::FETCH_OBJ);
+
+    return $r;
+}
+
+function getJobSendCv($db, $candidat, $date)
+{
+    $sql = "SELECT poste.id, concat(mid(client.nom, 1, 15) , concat(' - ', poste.libelle)) 'nom' ";
+    $sql .= " FROM poste, client, cv_envoye ";
+    $sql .= " WHERE poste.id = cv_envoye.poste and poste.client = client.id ";
+    $sql .= "   and cv_envoye.candidat   = $candidat ";
+    $sql .= "   and cv_envoye.date_envoi = '$date' ";
+    $sql .= " ORDER BY 2";
+    
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetchAll(PDO::FETCH_OBJ);
 
     return $r;
 }

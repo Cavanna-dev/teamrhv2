@@ -8,7 +8,7 @@ function getAllCustomers($db)
 
     $r_customer = $db->prepare($sql);
     $r_customer->execute();
-    
+
     return $r_customer;
 }
 
@@ -62,6 +62,21 @@ function searchCustomers($db)
 
     $r = $db->prepare($sql);
     $r->execute();
-    
+
     return $r;
+}
+
+function getCustomersBySendCvs($db, $applicant, $date)
+{
+    $sql = " SELECT client.id, client.nom";
+    $sql .= " FROM client, cv_envoye ";
+    $sql .= " WHERE client.id = cv_envoye.client ";
+    $sql .= " and cv_envoye.candidat   = " . $applicant;
+    $sql .= " and cv_envoye.date_envoi = '" .$date . "'";
+    $sql .= " ORDER BY client.nom";
+
+    $r_customer = $db->prepare($sql);
+    $r_customer->execute();
+
+    return $r_customer;
 }

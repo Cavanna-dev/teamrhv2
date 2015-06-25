@@ -1,5 +1,17 @@
 <?php
 
+function getAllProspect($db)
+{
+    $sql = "SELECT id, nom "
+            . "FROM prospect";
+
+    $r_prospect = $db->prepare($sql);
+    $r_prospect->execute();
+    $r = $r_prospect->fetchAll(PDO::FETCH_OBJ);
+
+    return $r;
+}
+
 function getOneProspectById($db, $id)
 {
     $sql = "SELECT id, nom, secteur, adresse1, ville, postal, "
@@ -26,25 +38,19 @@ function searchProspect($db)
     $sql = "SELECT id, nom, secteur, mngt_law, mngt_supp "
             . "FROM prospect ";
 
-    if (!empty($name) || !empty($zone) || !empty($nation)
-            || !empty($contact_s) || !empty($contact_l)
-            || !empty($statut))
+    if (!empty($name) || !empty($zone) || !empty($nation) || !empty($contact_s) || !empty($contact_l) || !empty($statut))
         $sql .= "WHERE ";
     if (!empty($name))
         $sql .= "nom like '%" . $name . "%' ";
-    if (!empty($name) && (!empty($zone) || !empty($nation)
-            || !empty($contact_s) || !empty($contact_l)
-            || !empty($statut)))
+    if (!empty($name) && (!empty($zone) || !empty($nation) || !empty($contact_s) || !empty($contact_l) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($nation))
         $sql .= "nationalite = '" . $nation . "' ";
-    if (!empty($nation) && (!empty($zone) || !empty($contact_s)
-            || !empty($contact_l) || !empty($statut)))
+    if (!empty($nation) && (!empty($zone) || !empty($contact_s) || !empty($contact_l) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($zone))
         $sql .= "secteur = '" . $zone . "' ";
-    if (!empty($zone) && (!empty($contact_s) || !empty($contact_l)
-            || !empty($statut)))
+    if (!empty($zone) && (!empty($contact_s) || !empty($contact_l) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($contact_s))
         $sql .= "mngt_supp = '" . $contact_s . "' ";
@@ -58,9 +64,25 @@ function searchProspect($db)
         $sql .= "status_fk = '" . $statut . "' ";
 
     $sql .= "ORDER BY nom";
-    
+
     $r = $db->prepare($sql);
     $r->execute();
-    
+
+    return $r;
+}
+
+function getProspectSendCv($db, $candidat, $date)
+{
+    $sql = "SELECT prospect.id, prospect.nom ";
+    $sql .= " FROM prospect, cv_envoye  ";
+    $sql .= " WHERE prospect.id = cv_envoye.prospect ";
+    $sql .= "   and cv_envoye.date_envoi = '$date' ";
+    $sql .= "   and cv_envoye.candidat   = $candidat ";
+    $sql .= " ORDER BY 2";
+
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetchAll(PDO::FETCH_OBJ);
+
     return $r;
 }

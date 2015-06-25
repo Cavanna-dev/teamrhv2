@@ -6,11 +6,12 @@ $inputLogin     = htmlspecialchars($_POST['inputLogin'], ENT_QUOTES);
 $inputPassword  = htmlspecialchars($_POST['inputPassword'], ENT_QUOTES);
 
 try {
-    $resultats = $db->query("SELECT nom, prenom, login, pwd, type, color, arrival, sorting, initiale " .
+    $resultats = $db->query("SELECT id, nom, prenom, login, pwd, type, color, arrival, sorting, initiale " .
                             "FROM utilisateur " .
                             "WHERE actif = 'Y' AND login = '" . $inputLogin . "'"
                             , PDO::FETCH_OBJ);
     while ($resultat = $resultats->fetch()) {
+        $bdId       = $resultat->id;
         $bdLast     = $resultat->nom;
         $bdFirst    = $resultat->prenom;
         $bdLogin    = $resultat->login;
@@ -24,6 +25,7 @@ try {
     
     if ($bdPassword == $inputPassword) {
         session_start();
+        $_SESSION['user']['id']       = $bdId;
         $_SESSION['user']['last']     = $bdLast;
         $_SESSION['user']['first']    = $bdFirst;
         $_SESSION['user']['login']    = $bdLogin;
