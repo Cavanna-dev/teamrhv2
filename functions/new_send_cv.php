@@ -3,6 +3,7 @@
 session_start();
 
 include './connection_db.php';
+error_reporting(0);
 
 $array_value = array(
     'consult' => $_SESSION['user']['id'],

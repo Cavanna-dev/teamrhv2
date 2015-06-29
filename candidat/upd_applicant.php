@@ -235,7 +235,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                                     </div>
                                     <div class="col-lg-1">
                                         <?php 
-                                        if(isset($r->cv_perso)){
+                                        if($r->cv_perso != ''){
                                         ?>
                                         <a href="file:///C:/T/Candidat/<?= $r->cv_perso ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
                                         <?php } ?>
@@ -252,7 +252,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                                     </div>
                                     <div class="col-lg-1">
                                         <?php 
-                                        if(isset($r->cv_teamrh)){
+                                        if($r->cv_teamrh != ''){
                                         ?>
                                         <a href="file:///C:/T/Candidat/<?= $r->cv_teamrh ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
                                         <?php } ?>

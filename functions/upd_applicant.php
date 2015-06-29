@@ -3,6 +3,7 @@
 include './connection_db.php';
 mb_internal_encoding("UTF-8");
 $real_path = 'C:/T/Candidat/';
+error_reporting(0);
 
 $id_applicant = htmlspecialchars($_POST['input_id']);
 $name = htmlspecialchars($_POST['input_name']);
