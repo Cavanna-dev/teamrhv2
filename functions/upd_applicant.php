@@ -1,18 +1,38 @@
 <?php
 
 include './connection_db.php';
+mb_internal_encoding("UTF-8");
+$real_path = 'C:/T/Candidat/';
 
 $id_applicant = htmlspecialchars($_POST['input_id']);
+$name = htmlspecialchars($_POST['input_name']);
+$last = htmlspecialchars($_POST['input_last']);
 
 //var_dump($_FILES);die;
 /**
  * Traitement de sauvegarde des CVs Perso
  */
 if ($_FILES['input_cv_perso']['error'] == 0) {
-    $uploaddir = 'Perso/';
-    $uploadfile_perso = $uploaddir . 'Perso' . $id_applicant . '.doc';
-    $real_path = 'C:/T/Candidat/';
+    $uploaddir = 'CV Perso/';
+
+    switch ($_FILES['input_cv_perso']['type']):
+        case 'application/msword':
+            $type = 'doc';
+            break;
+        case 'application/pdf':
+            $type = 'pdf';
+            break;
+        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+            $type = 'docx';
+            break;
+        default:
+            $type = 'doc';
+            break;
+    endswitch;
+
     
+    $uploadfile_perso = $uploaddir . 'CV ' . strtoupperFr($name) . ' ' . suppr_accents($last) . ' - perso.' . $type;
+
     if (move_uploaded_file($_FILES['input_cv_perso']['tmp_name'], $real_path . $uploadfile_perso)) {
         echo "Le fichier CV_Perso est valide, et a été téléchargé avec succès.\n";
     } else {
@@ -23,10 +43,25 @@ if ($_FILES['input_cv_perso']['error'] == 0) {
  * Traitement de sauvegarde des CVs TeamRH
  */
 if ($_FILES['input_cv_teamrh']['error'] == 0) {
-    $uploaddir = 'Teamrh/';
-    $uploadfile_teamrh = $uploaddir . 'Teamrh' . $id_applicant . '.doc';
-    $real_path = 'C:/T/Candidat/';
-        
+    $uploaddir = 'CV TeamRH/';
+
+    switch ($_FILES['input_cv_perso']['type']):
+        case 'application/msword':
+            $type = 'doc';
+            break;
+        case 'application/pdf':
+            $type = 'pdf';
+            break;
+        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+            $type = 'docx';
+            break;
+        default:
+            $type = 'doc';
+            break;
+    endswitch;
+
+    $uploadfile_teamrh = $uploaddir . 'CV ' . strtoupperFr($name) . ' ' . $last . ' - TeamRH.' . $type;
+
     if (move_uploaded_file($_FILES['input_cv_teamrh']['tmp_name'], $real_path . $uploadfile_teamrh)) {
         echo "Le fichier CV_TEAMRH est valide, et a été téléchargé
            avec succès.\n";
@@ -35,8 +70,6 @@ if ($_FILES['input_cv_teamrh']['error'] == 0) {
     }
 }
 
-$name = htmlspecialchars($_POST['input_name']);
-$last = htmlspecialchars($_POST['input_last']);
 $birthday = htmlspecialchars($_POST['input_birthday']);
 $sexe = htmlspecialchars($_POST['input_sexe']);
 $statut = htmlspecialchars($_POST['input_civil']);
@@ -74,10 +107,12 @@ try {
             . "email = :email, "
             . "media = :media, "
             . "refus = :refus, "
-            . "motif = :motif, "
-            . "path_cv_perso = '" . $uploadfile_perso . "', "
-            . "path_cv_teamrh = '" . $uploadfile_teamrh . "', "
-            . "anniversaire = :anniversaire "
+            . "motif = :motif, ";
+    if($uploadfile_perso != '')
+        $sql .= "path_cv_perso = '" . $uploadfile_perso . "', ";
+    if($uploadfile_teamrh != '')
+        $sql .= "path_cv_teamrh = '" . $uploadfile_teamrh . "', ";
+    $sql .= "anniversaire = :anniversaire "
             . "WHERE id = :id_applicant";
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
@@ -105,5 +140,32 @@ try {
     header('Location:../candidat/upd_applicant.php?id=' . $_POST['input_id'] . '');
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
+}
+
+function strtoupperFr($string)
+{
+    $string = strtoupper($string);
+    $string = str_replace(
+            array('é', 'è', 'ê', 'ë', 'à', 'â', 'î', 'ï', 'ô', 'ù', 'û'), array('E', 'E', 'E', 'E', 'E', 'E', 'I', 'I', 'O', 'U', 'U'), $string
+    );
+    return $string;
+}
+
+function suppr_accents($str, $encoding='utf-8')
+{
+    // transformer les caractères accentués en entités HTML
+    $str = htmlentities($str, ENT_NOQUOTES, $encoding);
+ 
+    // remplacer les entités HTML pour avoir juste le premier caractères non accentués
+    // Exemple : "&ecute;" => "e", "&Ecute;" => "E", "Ã " => "a" ...
+    $str = preg_replace('#&([A-za-z])(?:acute|grave|cedil|circ|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+ 
+    // Remplacer les ligatures tel que : Œ, Æ ...
+    // Exemple "Å“" => "oe"
+    $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str);
+    // Supprimer tout le reste
+    $str = preg_replace('#&[^;]+;#', '', $str);
+ 
+    return $str;
 }
 ?>
