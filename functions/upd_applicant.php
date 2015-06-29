@@ -61,7 +61,7 @@ if ($_FILES['input_cv_teamrh']['error'] == 0) {
             break;
     endswitch;
 
-    $uploadfile_teamrh = $uploaddir . 'CV ' . strtoupperFr($name) . ' ' . $last . ' - TeamRH.' . $type;
+    $uploadfile_teamrh = $uploaddir . 'CV ' . strtoupperFr($name) . ' ' . suppr_accents($last) . ' - TeamRH.' . $type;
 
     if (move_uploaded_file($_FILES['input_cv_teamrh']['tmp_name'], $real_path . $uploadfile_teamrh)) {
         echo "Le fichier CV_TEAMRH est valide, et a été téléchargé
