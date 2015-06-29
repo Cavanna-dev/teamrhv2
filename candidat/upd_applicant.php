@@ -237,7 +237,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                                         <?php 
                                         if($r->cv_perso != ''){
                                         ?>
-                                        <a href="file:///C:/T/Candidat/<?= $r->cv_perso ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+                                        <a href="file:///SRV-TEAMRH/T/Candidat/<?= $r->cv_perso ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -254,7 +254,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                                         <?php 
                                         if($r->cv_teamrh != ''){
                                         ?>
-                                        <a href="file:///C:/T/Candidat/<?= $r->cv_teamrh ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+                                        <a href="file:///SRV-TEAMRH/T/Candidat/<?= $r->cv_teamrh ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
                                         <?php } ?>
                                     </div>
                                 </div>
