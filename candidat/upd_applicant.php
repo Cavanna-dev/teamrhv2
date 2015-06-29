@@ -119,7 +119,9 @@ $r = getOneApplicantById($db, $_GET['id']);
             </div>
         </div>
         <div class="col-lg-7">
-            <form class="form-horizontal" method="POST" action="../functions/upd_applicant.php" id="form_customer">
+            <form class="form-horizontal" method="POST" 
+                  action="../functions/upd_applicant.php" 
+                  id="form_customer" enctype="multipart/form-data" >
                 <input type="hidden" name="input_id" value="<?= $_GET['id'] ?>" />
                 <h1>Fiche Candidat</h1>
                 <div class="jumbotron">
@@ -220,6 +222,40 @@ $r = getOneApplicantById($db, $_GET['id']);
                                     <label for="input_why_refusal" class="col-lg-2 control-label">Motif Refus</label>
                                     <div class="col-lg-7">
                                         <input type="text" class="form-control" name="input_why_refusal" id="input_why_refusal"  value="<?= $r->motif ?>" placeholder="Motif Refus">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_cv_perso" class="col-lg-2 control-label">CV Perso</label>
+                                    <div class="col-lg-9">
+                                        <div class="fileinput">
+                                            <label>
+                                                <input name="input_cv_perso" type="file"/>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <?php 
+                                        if(isset($r->cv_perso)){
+                                        ?>
+                                        <a href="file:///C:/T/Candidat/<?= $r->cv_perso ?>" target="_blank"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_cv_teamrh" class="col-lg-2 control-label">CV TeamRH</label>
+                                    <div class="col-lg-9">
+                                        <div class="fileinput">
+                                            <label>
+                                                <input name="input_cv_teamrh" type="file"/>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <?php 
+                                        if(isset($r->cv_teamrh)){
+                                        ?>
+                                        <a href="file:///C:/T/Candidat/<?= $r->cv_teamrh ?>" target="_blank"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </fieldset>

@@ -55,8 +55,11 @@ function getAllBirthdaysApplicants($db)
 
 function getOneApplicantById($db, $id)
 {
-    $sql = "SELECT c.id, c.nom, c.prenom, c.naissance, c.sexe, c.statut, c.nationalite, c.adresse1, c.ville, c.postal, "
-            . "c.country_fk, c.metro, c.tel_bureau, c.tel_perso, c.tel_port, c.email, c.media, c.refus, c.motif, c.anniversaire, e.id as eval_id "
+    $sql = "SELECT c.id, c.nom, c.prenom, c.naissance, c.sexe, c.statut, "
+            . "c.nationalite, c.adresse1, c.ville, c.postal, "
+            . "c.country_fk, c.metro, c.tel_bureau, c.tel_perso, c.tel_port, "
+            . "c.email, c.media, c.refus, c.motif, c.anniversaire, "
+            . "e.id as eval_id, c.path_cv_perso as cv_perso, c.path_cv_teamrh as cv_teamrh "
             . "FROM candidat c "
             . "LEFT JOIN evaluation e ON e.candidat = c.id "
             . "WHERE c.id='" . $id . "'";
