@@ -29,6 +29,21 @@ function getContactByClientId($db, $type, $id)
     return $r;
 }
 
+function getContactActifByClient($db, $id)
+{
+    $sql = "SELECT id, inactif, civilite, nom, prenom, tel, fonction, type, "
+            . "email, remarque, creation "
+            . "FROM contact "
+            . "WHERE client = '".$id."' and ifnull(inactif, 'N') <> 'Y' "
+            . "ORDER BY nom ";
+
+    $r_contact = $db->prepare($sql);
+    $r_contact->execute();
+    $r = $r_contact->fetchAll(PDO::FETCH_OBJ);
+    
+    return $r;
+}
+
 function getContactByClient($db, $id)
 {
     $sql = "SELECT id, inactif, civilite, nom, prenom, tel, fonction, type, "
