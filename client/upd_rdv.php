@@ -159,4 +159,9 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
         </div>
     </form>
 </div>
+<script type='text/javascript'>
+    $('#input_customer').change(function () {
+        window.location = 'upd_rdv.php?id=<?= $_GET['id'] ?>&client=' + $(this).val();
+    });
+</script>
 </body>

@@ -245,7 +245,7 @@ $r = getOneJobById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_salary" class="col-lg-2 control-label">Rémunération</label>
+                                    <label for="input_salary" class="col-lg-2 control-label">Rém.</label>
                                     <div class="col-lg-10">
                                         <input class="form-control" id="input_salary" 
                                                name="input_salary" placeholder="Salaire" 

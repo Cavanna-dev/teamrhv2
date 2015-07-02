@@ -180,7 +180,7 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
 </div>
 <script type='text/javascript'>
     $('#input_customer').change(function () {
-        window.location = 'new_rdv.php?candidat=4673&client=' + $(this).val();
+        window.location = 'new_rdv.php?candidat=<?= $applicantId ?>&client=' + $(this).val();
     });
 </script>
 </body>

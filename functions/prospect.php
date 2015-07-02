@@ -3,7 +3,8 @@
 function getAllProspect($db)
 {
     $sql = "SELECT id, nom "
-            . "FROM prospect";
+            . "FROM prospect "
+            . "ORDER BY nom";
 
     $r_prospect = $db->prepare($sql);
     $r_prospect->execute();
