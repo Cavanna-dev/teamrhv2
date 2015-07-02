@@ -30,12 +30,12 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                             <label for="input_customer" class="col-lg-2 control-label">Client*</label>
                             <div class="col-lg-10">
                                 <?php $r_customers = getAllCustomers($db); ?>		
-                                <select class="form-control" 
+                                <select class="form-control" id="input_customer"
                                         name="input_customer">
                                             <?php
                                             while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
                                                 ?>
-                                        <option value="<?php echo $r_customer->id; ?>" <?php if ($r_customer->id == $rdv->CLIENT) echo "selected"; ?>><?php echo $r_customer->nom; ?></option>
+                                        <option value="<?php echo $r_customer->id; ?>" <?php if ( (!isset($_GET['client']) && $r_customer->id == $rdv->CLIENT) || (isset($_GET['client']) && $r_customer->id == $_GET['client']) )echo "selected"; ?>><?php echo $r_customer->nom; ?></option>
                                         <?php
                                     }
                                     ?>
@@ -45,18 +45,33 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                         <div class="form-group">
                             <label for="input_job" class="col-lg-2 control-label">Poste</label>
                             <div class="col-lg-10">
-                                <?php $r_jobs = getAllJobs($db); ?>		
-                                <select class="form-control" 
-                                        name="input_job">
-                                    <option value=""></option>
-                                    <?php
-                                    foreach ($r_jobs as $r_job) {
-                                        ?>
-                                        <option value="<?= $r_job->id; ?>" <?php if ($r_job->id == $rdv->POSTE) echo "selected"; ?>><?= $r_job->libelle; ?></option>
+                                <?php if (isset($_GET['client'])) { ?>
+                                    <?php $r_jobs = getJobByCustomer($db, $_GET['client']); ?>
+                                    <select class="form-control" 
+                                            name="input_job">
+                                        <option value=""></option>
                                         <?php
-                                    }
-                                    ?>
-                                </select>
+                                        while ($r_job = $r_jobs->fetch(PDO::FETCH_OBJ)) {
+                                            ?>
+                                            <option value="<?php echo $r_job->ID; ?>"><?php echo $r_job->libelle; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                <?php } else { ?>
+                                    <?php $r_jobs = getAllJobs($db); ?>		
+                                    <select class="form-control" 
+                                            name="input_job">
+                                        <option value=""></option>
+                                        <?php
+                                        foreach ($r_jobs as $r_job) {
+                                            ?>
+                                            <option value="<?= $r_job->id; ?>" <?php if ($r_job->id == $rdv->POSTE) echo "selected"; ?>><?= $r_job->libelle; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -115,19 +130,34 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                         </div>
                         <div class="form-group">
                             <label for="input_contact" class="col-lg-2 control-label">Contact</label>
-                            <div class="col-lg-10">	
-                                <?php $r_contacts = getAllContact($db); ?>
-                                <select class="form-control" 
-                                        name="input_contact" required>
-                                    <option value=""></option>
-                                    <?php
-                                    while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
-                                        ?>
-                                        <option value="<?= $r_contact->id; ?>" <?php if ($r_contact->id == $rdv->CONTACT) echo "selected"; ?>><?= $r_contact->nom . ' ' . $r_contact->prenom; ?></option>
+                            <div class="col-lg-10">
+                                <?php if (isset($_GET['client'])) { ?>
+                                    <?php $r_contacts = getContactActifByClient($db, $_GET['client']); ?>
+                                    <select class="form-control" 
+                                            name="input_contact">
+                                        <option value=""></option>
                                         <?php
-                                    }
-                                    ?>
-                                </select>
+                                        foreach ($r_contacts as $r_contact) :
+                                            ?>
+                                            <option value="<?php echo $r_contact->id; ?>"><?php echo $r_contact->nom . ' ' . $r_contact->prenom; ?></option>
+                                            <?php
+                                        endforeach;
+                                        ?>
+                                    </select>
+                                <?php } else { ?>	
+                                    <?php $r_contacts = getAllContact($db); ?>
+                                    <select class="form-control" 
+                                            name="input_contact">
+                                        <option value=""></option>
+                                        <?php
+                                        while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
+                                            ?>
+                                            <option value="<?= $r_contact->id; ?>" <?php if ($r_contact->id == $rdv->CONTACT) echo "selected"; ?>><?= $r_contact->nom . ' ' . $r_contact->prenom; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-group">

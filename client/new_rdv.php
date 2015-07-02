@@ -47,7 +47,7 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                                 <?php if (isset($_GET['client'])) { ?>
                                     <?php $r_jobs = getJobByCustomer($db, $_GET['client']); ?>
                                     <select class="form-control" 
-                                            name="input_contact" required>
+                                            name="input_job" required>
                                         <option value=""></option>
                                         <?php
                                         while ($r_job = $r_jobs->fetch(PDO::FETCH_OBJ)) {
