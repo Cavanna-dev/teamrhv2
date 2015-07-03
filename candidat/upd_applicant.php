@@ -56,7 +56,6 @@ $r = getOneApplicantById($db, $_GET['id']);
                 <table class="table table-striped table-hover ">
                     <thead>
                         <tr>
-                            <th class="col-lg-4">Type</th>
                             <th class="col-lg-6">Libellé</th>
                             <th class="col-lg-2">Date envoi</th>
                             <th>
@@ -74,21 +73,6 @@ $r = getOneApplicantById($db, $_GET['id']);
                         foreach ($r_cvs as $r_cv) :
                             ?>
                             <tr>
-                                <td>
-                                    <?php
-                                    switch ($r_cv[1]):
-                                        case 1:
-                                            echo "[Client]";
-                                            break;
-                                        case 2:
-                                            echo "[Poste]";
-                                            break;
-                                        case 3:
-                                            echo "[Prospect]";
-                                            break;
-                                    endswitch;
-                                    ?>
-                                </td>
                                 <td>
                                     <?php
                                     switch ($r_cv[1]):
