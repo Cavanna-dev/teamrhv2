@@ -109,7 +109,7 @@ include '../functions/bootstrap.php';
                                     <tr>
                                         <td>
                                             <a href="upd_job.php?id=<?= isset($r_job->id) ? $r_job->id : ''; ?>">
-                                            <?= $r_job->id ?>
+                                                <?= $r_job->id ?>
                                             </a>
                                         </td>
                                         <td>
@@ -155,39 +155,13 @@ include '../functions/bootstrap.php';
         <div class="tab-pane fade <?= isset($_GET['tab']) ? "active in" : "" ?>" id="add">
             <form class="form-horizontal" method="POST" action="../functions/new_job.php" id="form_job">
                 <div class="jumbotron">
-                    <div class="form-group">
-                        <label for="input_description" class="col-lg-1 control-label">Description</label>
-                        <div class="col-lg-5">
-                            <textarea class="form-control" id="input_description" name="input_description" placeholder="Description" type="text" rows="15"></textarea>
-                        </div>
-                        <label for="input_commentaire" class="col-lg-1 control-label">Commentaire</label>
-                        <div class="col-lg-5">
-                            <textarea class="form-control" id="input_commentaire" name="input_commentaire" placeholder="Commentaire" type="text" rows="15"></textarea>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
                                     <label for="input_name" class="col-lg-2 control-label"><b>Libelle</b></label>
                                     <div class="col-lg-10">
-                                        <b><input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text"></b>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_customer" class="col-lg-2 control-label">Client</label>
-                                    <div class="col-lg-10">
-                                        <?php $r_customers = getAllCustomers($db); ?>
-                                        <select class="form-control" name="input_customer" id="input_customer">
-                                            <option value=""></option>
-                                            <?php
-                                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                                ?>
-                                                <option value="<?= $r_customer->id ?>" <?php if (isset($_GET['id_client']) && $_GET['id_client'] == $r_customer->id) echo 'selected'; ?>><?= $r_customer->nom ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
+                                        <b><input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value=""></b>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -207,6 +181,30 @@ include '../functions/bootstrap.php';
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="input_customer" class="col-lg-2 control-label">
+                                        Client
+                                    </label>
+                                    <div class="col-lg-10">
+                                        <?php $r_customers = getAllCustomers($db); ?>
+                                        <select class="form-control" name="input_customer" id="input_customer">
+                                            <option value=""></option>
+                                            <?php
+                                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
+                                                ?>
+                                                <option value="<?= $r_customer->id ?>"><?= $r_customer->nom ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_signature" class="col-lg-2 control-label">Date de mission</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="input_signature" name="input_signature" type="date" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="input_exp" class="col-lg-2 control-label">Expérience</label>
                                     <div class="col-lg-4">
                                         <select class="form-control" name="input_exp" id="input_exp">
@@ -219,85 +217,35 @@ include '../functions/bootstrap.php';
                                             <option value="> 10 ans">> 10 ans</option>
                                         </select>
                                     </div>
-                                    <label for="input_contrat" class="col-lg-2 control-label">Contrat</label>
-                                    <div class="col-lg-4">
-                                        <select class="form-control" name="input_contrat" id="input_contrat">
-                                            <option value=""></option>
-                                            <option value="CDD">CDD</option>
-                                            <option value="CDI">CDI</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_period" class="col-lg-2 control-label">Durée</label>
-                                    <div class="col-lg-5">
-                                        <input class="form-control" id="input_period" name="input_period" placeholder="Durée" type="text">
-                                    </div>
-                                    <label for="input_communication" class="col-lg-2 control-label">Comm.</label>
-                                    <div class="col-lg-3">
-                                        <select class="form-control" name="input_communication" id="input_communication">
-                                            <option value="" ></option>
-                                            <option value="N">N</option>
-                                            <option value="Y">Y</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_word" class="col-lg-2 control-label">Word</label>
-                                    <div class="col-lg-2">
-                                        <input class="form-control" id="input_word" name="input_word" placeholder="Word" type="text">
-                                    </div>
-                                    <label for="input_excel" class="col-lg-2 control-label">Excel</label>
-                                    <div class="col-lg-2">
-                                        <input class="form-control" id="input_excel" name="input_excel" placeholder="Excel" type="text">
-                                    </div>
-                                    <label for="input_pp" class="col-lg-2 control-label">PP</label>
-                                    <div class="col-lg-2">
-                                        <input class="form-control" id="input_pp" name="input_pp" placeholder="PP" type="text">
-                                    </div>
-                                    <label for="input_internet" class="col-lg-2 control-label">Internet</label>
-                                    <div class="col-lg-2">
-                                        <input class="form-control" id="input_internet" name="input_internet" placeholder="Internet" type="text">
-                                    </div>
-                                    <label for="input_speed" class="col-lg-2 control-label">Vitesse</label>
-                                    <div class="col-lg-2">
-                                        <input class="form-control" id="input_speed" name="input_speed" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_appli_1" class="col-lg-3 control-label">Autre Appli. 1</label>
-                                    <div class="col-lg-3">
-                                        <input class="form-control" id="input_appli_1" name="input_appli_1" placeholder="Application" type="text">
-                                    </div>
-                                    <label for="input_appli_2" class="col-lg-3 control-label">Autre Appli. 2</label>
-                                    <div class="col-lg-3">
-                                        <input class="form-control" id="input_appli_2" name="input_appli_2" placeholder="Application" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_forfait" class="col-lg-2 control-label">Forfait</label>
-                                    <div class="col-lg-4">
-                                        <input class="form-control" id="input_forfait" name="input_forfait" placeholder="Forfait" type="text">
-                                    </div>
-                                    <label for="input_signature" class="col-lg-2 control-label">Signature</label>
-                                    <div class="col-lg-4">
-                                        <input class="form-control" id="input_signature" name="input_signature" type="date">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_formule" class="col-lg-2 control-label">Formule</label>
-                                    <div class="col-lg-10">
-                                        <textarea class="form-control" id="input_formule" name="input_formule" placeholder="Formule" type="text"></textarea>
-                                    </div>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
+                                    <label for="input_communication" class="col-lg-2 control-label">Com.</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" name="input_communication" id="input_communication">
+                                            <option value=""></option>
+                                            <option value="N">N</option>
+                                            <option value="Y">Y</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_pourvu" class="col-lg-2 control-label">Statut</label>
+                                    <div class="col-lg-10">
+                                        <select name="input_pourvu" id="input_pourvu" class="form-control">
+                                            <option value=""></option>
+                                            <option value="Y">Poste Fermé</option>
+                                            <option value="N">Poste Ouvert</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="input_contact" class="col-lg-2 control-label">Consultant</label>
                                     <div class="col-lg-10">
-                                        <?php $r_users = getAllImportantUsers($db); ?>
+                                        <?php $r_users = getAllUsers($db); ?>
                                         <select class="form-control" name="input_contact" id="input_contact">
                                             <option value=""></option>
                                             <?php
@@ -308,6 +256,96 @@ include '../functions/bootstrap.php';
                                             }
                                             ?>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_starting_date" class="col-lg-2 control-label">Date de début</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="input_starting_date" 
+                                               name="input_starting_date" type="date" 
+                                               value="">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="input_percent" class="col-lg-2 control-label">Pourcent.</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="input_percent" 
+                                               name="input_percent" placeholder="Pourcentage" 
+                                               type="text" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_forfait" class="col-lg-2 control-label">Forfait</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="input_forfait" 
+                                               name="input_forfait" placeholder="Forfait" 
+                                               type="text" value="">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="input_garantie" class="col-lg-2 control-label">Garantie</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" name="input_garantie" 
+                                                id="input_garantie">
+                                            <option value=""></option>
+                                            <option value="2 semaines">2 semaines</option>
+                                            <option value="3 semaines">3 semaines</option>
+                                            <option value="1 mois">1 mois</option>
+                                            <option value="2 mois">2 mois</option>
+                                            <option value="3 mois">3 mois</option>
+                                            <option value="4 mois">4 mois</option>
+                                            <option value="6 mois">6 mois</option>
+                                            <option value="12 mois">12 mois</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_formule" class="col-lg-2 control-label">Formule</label>
+                                    <div class="col-lg-10">
+                                        <textarea class="form-control" id="input_formule" 
+                                                  name="input_formule" placeholder="Formule" 
+                                                  type="text"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="input_contrat" class="col-lg-2 control-label">Contrat</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" name="input_contrat" id="input_contrat">
+                                            <option value=""></option>
+                                            <option value="Libéral">Libéral</option>
+                                            <option value="CDD">CDD</option>
+                                            <option value="CDI">CDI</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_salary" class="col-lg-2 control-label">Rém.</label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="input_salary" 
+                                               name="input_salary" placeholder="Salaire" 
+                                               type="text" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -327,9 +365,56 @@ include '../functions/bootstrap.php';
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_salary" class="col-lg-2 control-label">Salaire</label>
+                                    <label for="input_speed" class="col-lg-2 control-label">Vitesse</label>
+                                    <div class="col-lg-4">
+                                        <input class="form-control" id="input_speed" 
+                                               name="input_speed" type="text"
+                                               value=""/>
+                                    </div>
+                                    <label for="input_appli_1" class="col-lg-2 control-label">Autre Appli. 1</label>
+                                    <div class="col-lg-4">
+                                        <input class="form-control" id="input_appli_1"
+                                               name="input_appli_1" placeholder="Application" 
+                                               type="text" value=""/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_fr" class="col-lg-2 control-label">Niveau FR</label>
+                                    <div class="col-lg-4">
+                                        <input class="form-control" id="input_fr" 
+                                               name="input_fr" placeholder="Niveau francais" 
+                                               type="text" value="">
+                                    </div>
+                                    <label for="input_an" class="col-lg-2 control-label">Niveau AN</label>
+                                    <div class="col-lg-4">
+                                        <input class="form-control" id="input_an" 
+                                               name="input_an" placeholder="Niveau anglais" 
+                                               type="text" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_place" class="col-lg-2 control-label">Lieux</label>
                                     <div class="col-lg-10">
-                                        <input class="form-control" id="input_salary" name="input_salary" placeholder="Salaire" type="text">
+                                        <input class="form-control" id="input_place" 
+                                               name="input_place" placeholder="Lieux" 
+                                               type="text" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-10 col-lg-offset-2">
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="input_period" class="col-lg-2 control-label">Durée</label>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" id="input_period" 
+                                               name="input_period" placeholder="URL" 
+                                               type="text" value="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -346,50 +431,11 @@ include '../functions/bootstrap.php';
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_starting_date" class="col-lg-2 control-label">Date Début</label>
+                                    <label for="input_appli_2" class="col-lg-2 control-label">Autre Appli. 2</label>
                                     <div class="col-lg-10">
-                                        <input class="form-control" id="input_starting_date" name="input_starting_date" type="date">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_place" class="col-lg-2 control-label">Lieux</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control" id="input_place" name="input_place" placeholder="Lieux" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_fr" class="col-lg-2 control-label">Niveau FR</label>
-                                    <div class="col-lg-4">
-                                        <input class="form-control" id="input_fr" name="input_fr" placeholder="Niveau francais" type="text">
-                                    </div>
-                                    <label for="input_an" class="col-lg-3 control-label">Niveau AN</label>
-                                    <div class="col-lg-3">
-                                        <input class="form-control" id="input_an" name="input_an" placeholder="Niveau anglais" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_percent" class="col-lg-2 control-label">Pourcent.</label>
-                                    <div class="col-lg-4">
-                                        <input class="form-control" id="input_percent" name="input_percent" placeholder="Pourcentage" type="text">
-                                    </div>
-                                    <label for="input_garantie" class="col-lg-2 control-label">Garantie</label>
-                                    <div class="col-lg-4">
-                                        <input class="form-control" id="input_garantie" name="input_garantie" placeholder="Garantie" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_pourvu" class="col-lg-2 control-label">Statut</label>
-                                    <div class="col-lg-10">
-                                        <select name="input_pourvu" id="input_pourvu" class="form-control">
-                                            <option value=""></option>
-                                            <option value="Y">Poste Fermé</option>
-                                            <option value="N">Poste Ouvert</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-10 col-lg-offset-2">
-                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        <input class="form-control" id="input_appli_2" 
+                                               name="input_appli_2" placeholder="Application" 
+                                               type="text" value="">
                                     </div>
                                 </div>
                             </fieldset>
