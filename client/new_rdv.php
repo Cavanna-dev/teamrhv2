@@ -47,7 +47,7 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                                 <?php if (isset($_GET['client'])) { ?>
                                     <?php $r_jobs = getJobByCustomer($db, $_GET['client']); ?>
                                     <select class="form-control" 
-                                            name="input_job" required>
+                                            name="input_job">
                                         <option value=""></option>
                                         <?php
                                         while ($r_job = $r_jobs->fetch(PDO::FETCH_OBJ)) {
@@ -81,7 +81,7 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_hours" class="col-lg-2 control-label">Horaires (hh:mm)</label>
+                            <label for="input_hours" class="col-lg-2 control-label">Horaires (hh:mm)*</label>
                             <div class="col-lg-4">		
                                 <input class="form-control" type="text" 
                                        name="input_hours" required />
@@ -89,7 +89,7 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                             <label for="input_n_rdv" class="col-lg-2 control-label">Numéro RDV</label>
                             <div class="col-lg-4">		
                                 <input class="form-control" type="text" 
-                                       name="input_n_rdv" required />
+                                       name="input_n_rdv" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -124,7 +124,7 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                                 <?php if (isset($_GET['client'])) { ?>
                                     <?php $r_contacts = getContactActifByClient($db, $_GET['client']); ?>
                                     <select class="form-control" 
-                                            name="input_contact" required>
+                                            name="input_contact">
                                         <option value=""></option>
                                         <?php
                                         foreach ($r_contacts as $r_contact) :
@@ -137,7 +137,7 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                                 <?php } else { ?>
                                     <?php $r_contacts = getAllContact($db); ?>
                                     <select class="form-control" 
-                                            name="input_contact" required>
+                                            name="input_contact">
                                         <option value=""></option>
                                         <?php
                                         while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
