@@ -56,7 +56,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                 <table class="table table-striped table-hover ">
                     <thead>
                         <tr>
-                            <th class="col-lg-6">Libellé</th>
+                            <th class="col-lg-10">Libellé</th>
                             <th class="col-lg-2">Date envoi</th>
                             <th>
                                 <a href="../candidat/send_cv.php?candidat=<?= $_GET['id'] ?>" >
