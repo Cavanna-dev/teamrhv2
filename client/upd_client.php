@@ -4,6 +4,8 @@ include '../template/menu.php';
 include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
 
+error_reporting(0);
+
 $r = getOneCustomerById($db, $_GET['id']);
 if (!$r) {
     ?>
