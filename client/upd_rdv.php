@@ -6,6 +6,9 @@ include '../functions/bootstrap.php';
 
 $rdv = getOneRdvCustomerById($db, $_GET['id']);
 //var_dump($rdv);die;
+$mail_customer = getOneCustomerById($db, $rdv->CLIENT);
+$mail_contact = getOneContactById($db, $rdv->CONTACT);
+$mail_job = getOneJobById($db, $rdv->POSTE);
 ?>
 
 <div class="container" style="font-size: 8px!important;">
@@ -44,7 +47,7 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                         </div>
                         <div class="form-group">
                             <label for="input_job" class="col-lg-2 control-label">
-                                <?php if(!empty($rdv->POSTE)){ ?><a href="./upd_job.php?id=<?= $rdv->POSTE ?>">Poste</a><?php }else{ ?>Poste<?php } ?>
+                                <?php if (!empty($rdv->POSTE)) { ?><a href="./upd_job.php?id=<?= $rdv->POSTE ?>">Poste</a><?php } else { ?>Poste<?php } ?>
                             </label>
                             <div class="col-lg-10">
                                 <?php if (isset($_GET['client'])) { ?>
@@ -107,41 +110,37 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                                     <?php
                                 }
                                 ?>
-                                    <?php 
-                                    $subject_cust = "TeamRH : Confirmation d’entretien"; 
-                                    $body_cust = "Monsieur,%0A%0ANous vous confirmons le rendez-vous avec ";
-                                    $body_cust .= $r_applicant->nom . ' ' . $r_applicant->prenom;
-                                    $body_cust .= "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE. ".";
-                                    $body_cust .= "%0ANous restons à votre disposition.";
-                                    $body_cust .= "%0A%0ATrès sincèrement. ";
-                                    ?>
-                                    <a href="mailto:?<?= $subject_cust . "&" . $body_cust?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
-                                    <?php 
-                                    $mail_customer = getOneCustomerById($db, $rdv->CLIENT);
-                                    $mail_contact = getOneContactById($db, $rdv->CONTACT);
-                                    $mail_job = getOneJobById($db, $rdv->POSTE);
-                                    
-                                    $subject_appli = "TeamRH : Confirmation d’entretien"; 
-                                    $body_appli = "************************************************";
-                                    $body_appli .= "*     Merci de nous confirmer la lecture de ce mail              *";
-                                    $body_appli .= "************************************************";
-                                    $body_appli .= "%0A%0A%0A%0AChère ".$r_applicant->prenom.",";
-                                    $body_appli .= "%0A%0AVotre rendez-vous a été confirmé pour "
-                                            . "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE. " "
-                                            . "avec " . $mail_contact->civilite . " " . $mail_contact->nom . " " .$mail_contact->prenom;
-                                    $body_appli .= "%0A".$mail_customer->adresse1;
-                                    $body_appli .= "%0A".$mail_customer->postal." ".$mail_customer->ville;
-                                    $body_appli .= "%0A%0AMétro : " . $mail_customer->metro;
-                                    $body_appli .= "%0ATél Standard : " . $mail_customer->tel_std;
-                                    $body_appli .= "%0ASite web : " . $mail_customer->url;
-                                    if(!empty($mail_job))
-                                        $body_appli .= "%0A%0APoste : " . $mail_job->libelle;
-                                    
-                                    $body_appli .= "%0A%0AMerci de nous rappeler à l'issue de l'entretien pour nous donner votre feedback.";
-                                    $body_appli .= "%0ANous vous souhaitons bonne chance.";
-                                    $body_appli .= "%0A%0ATrès sincèrement.";
-                                    ?>
-                                    <a href="mailto:<?= $r_applicant->email ?>?<?= $subject_appli ?>&<?= $body_appli ?>"><button type="button" class="btn btn-primary">Confirmation Candidat</button></a>
+                                <?php
+                                $subject_cust = "TeamRH : Confirmation d’entretien";
+                                $body_cust = "Monsieur,%0A%0ANous vous confirmons le rendez-vous avec ";
+                                $body_cust .= $r_applicant->nom . ' ' . $r_applicant->prenom;
+                                $body_cust .= "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . ".";
+                                $body_cust .= "%0ANous restons à votre disposition.";
+                                $body_cust .= "%0A%0ATrès sincèrement. ";
+                                ?>
+                                <a href="mailto:<?= $mail_contact->email ?>?<?= $subject_cust . "&" . $body_cust ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
+                                <?php
+                                $subject_appli = "TeamRH : Confirmation d’entretien";
+                                $body_appli = "************************************************";
+                                $body_appli .= "*     Merci de nous confirmer la lecture de ce mail              *";
+                                $body_appli .= "************************************************";
+                                $body_appli .= "%0A%0A%0A%0AChère " . $r_applicant->prenom . ",";
+                                $body_appli .= "%0A%0AVotre rendez-vous a été confirmé pour "
+                                        . "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . " "
+                                        . "avec " . $mail_contact->civilite . " " . $mail_contact->nom . " " . $mail_contact->prenom;
+                                $body_appli .= "%0A" . $mail_customer->adresse1;
+                                $body_appli .= "%0A" . $mail_customer->postal . " " . $mail_customer->ville;
+                                $body_appli .= "%0A%0AMétro : " . $mail_customer->metro;
+                                $body_appli .= "%0ATél Standard : " . $mail_customer->tel_std;
+                                $body_appli .= "%0ASite web : " . $mail_customer->url;
+                                if (!empty($mail_job))
+                                    $body_appli .= "%0A%0APoste : " . $mail_job->libelle;
+
+                                $body_appli .= "%0A%0AMerci de nous rappeler à l'issue de l'entretien pour nous donner votre feedback.";
+                                $body_appli .= "%0ANous vous souhaitons bonne chance.";
+                                $body_appli .= "%0A%0ATrès sincèrement.";
+                                ?>
+                                <a href="mailto:<?= $r_applicant->email ?>?<?= $subject_appli ?>&<?= $body_appli ?>"><button type="button" class="btn btn-primary">Confirmation Candidat</button></a>
                             </div>
                         </div>
                     </fieldset>
@@ -168,7 +167,7 @@ $rdv = getOneRdvCustomerById($db, $_GET['id']);
                         </div>
                         <div class="form-group">
                             <label for="input_contact" class="col-lg-2 control-label">
-                                <?php if(!empty($rdv->CONTACT)) { ?><a href="./upd_contact.php?id=<?= $rdv->CONTACT ?>">Contact</a><?php }else{ ?>Contact<?php } ?>
+                                <?php if (!empty($rdv->CONTACT)) { ?><a href="./upd_contact.php?id=<?= $rdv->CONTACT ?>">Contact</a><?php } else { ?>Contact<?php } ?>
                             </label>
                             <div class="col-lg-10">
                                 <?php if (isset($_GET['client'])) { ?>
