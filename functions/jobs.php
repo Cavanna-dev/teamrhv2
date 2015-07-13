@@ -53,8 +53,24 @@ function getJobByCustomer($db, $id)
             . "WHERE pourvu != 'Y' and poste.client = " . $id . " "
             . "ORDER BY poste.ID, candidat.nom, date_rdv ";
 
-    $r = $db->prepare($sql);
-    $r->execute();
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetchAll(PDO::FETCH_ASSOC);
+    return $r;
+}
+
+function getJobByCustomerReal($db, $id)
+{
+    $sql = "SELECT poste.ID, poste.libelle, candidat.id 'candidat', candidat.prenom, candidat.nom, date_format(date_rdv, '%d/%m/%Y') 'date_rdv'  "
+            . "FROM poste "
+            . "LEFT JOIN entretien on poste.id = entretien.poste "
+            . "LEFT join candidat on entretien.candidat = candidat.id "
+            . "WHERE pourvu != 'Y' and poste.client = " . $id . " "
+            . "ORDER BY poste.ID, candidat.nom, date_rdv ";
+
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetchAll(PDO::FETCH_OBJ);
     return $r;
 }
 

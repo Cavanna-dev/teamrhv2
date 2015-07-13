@@ -3,6 +3,8 @@
 session_start();
 
 include './connection_db.php';
+include './bootstrap.php';
+
 error_reporting(0);
 
 $array_value = array(
@@ -25,12 +27,13 @@ foreach ($_POST['customers'] as $customer) :
     }
 endforeach;
 
-foreach ($_POST['jobs'] as $customer) :
+foreach ($_POST['jobs'] as $job) :
+    $job_obj = getOneJobById($db, $job);
     try {
         $sql = "INSERT INTO CV_ENVOYE";
-        $sql .= " (consultant, candidat, poste, date_envoi) ";
+        $sql .= " (consultant, candidat, client, poste, date_envoi) ";
         $sql .= " values ";
-        $sql .= "('" . $array_value['consult'] . "', '" . $array_value['candidat'] . "', '" . $customer . "', '" . $array_value['date_envoi'] . "') ";
+        $sql .= "('" . $array_value['consult'] . "', '" . $array_value['candidat'] . "', '" . $job_obj->client . "', '" . $job . "', '" . $array_value['date_envoi'] . "') ";
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -39,12 +42,12 @@ foreach ($_POST['jobs'] as $customer) :
     }
 endforeach;
 
-foreach ($_POST['prospects'] as $customer) :
+foreach ($_POST['prospects'] as $prospect) :
     try {
         $sql = "INSERT INTO CV_ENVOYE";
         $sql .= " (consultant, candidat, prospect, date_envoi) ";
         $sql .= " values ";
-        $sql .= "('" . $array_value['consult'] . "', '" . $array_value['candidat'] . "', '" . $customer . "', '" . $array_value['date_envoi'] . "') ";
+        $sql .= "('" . $array_value['consult'] . "', '" . $array_value['candidat'] . "', '" . $prospect . "', '" . $array_value['date_envoi'] . "') ";
 
         $stmt = $db->prepare($sql);
         $stmt->execute();

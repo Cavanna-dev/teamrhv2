@@ -515,17 +515,17 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                         $tmp4 = urlencode($enregistrement[POSTE]);
                         $tmp5 = substr($enregistrement[HORAIRE], 0, 2) + 2;
                         $tmp5 = $tmp5 . ":" . substr($enregistrement[HORAIRE], 3, 2);
-
+                        
                         $str = "<div id=\"DIV" . $i . "\" style=\"position:absolute; left:" . $col . "px; top:" . $row . "px; width:" . $width . "px; overflow:hidden; height:" . $height . "px; ";
                         $str .= " BORDER-LEFT: #606060 1px solid; BORDER-RIGHT: #606060 1px solid; BORDER-TOP: #606060 1px solid; BORDER-BOTTOM: #606060 1px solid; ";
                         $str .= " background-color:#" . $color . ";\">";
-                        $str .= "<a href=\"./upd_rdv.php?id=" . $id . "\" ";
+                        $str .= "<a href=\"./upd_rdv.php?id=" . $id . "&client=".$tmp2."\" ";
                         $str .= "tabindex='0' role='button' 
                                                    data-toggle='popover' 
                                                    data-trigger='hover' 
                                                    data-placement='right' 
                                                    data-html='true'
-                                                   data-content='" . $commentaire . "'>";
+                                                   data-content='" . htmlspecialchars($commentaire, ENT_QUOTES) . "'>";
                         $str .= "<table width=" . $width . " height=" . $height . " cellpadding=2 cellspacing=0 border=0>";
                         $str .= "<tr>";
                         $str .= "<td align=left colspan=2 valign=top>";

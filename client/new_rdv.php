@@ -108,9 +108,10 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                                 <select class="form-control" 
                                         name="input_consult" 
                                         id="input_contact_law" required>
-                                            <?php
-                                            while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
-                                                ?>
+                                    <option value=""></option>
+                                    <?php
+                                    while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
+                                        ?>
                                         <option value="<?php echo $r_user->id; ?>"><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
                                         <?php
                                     }

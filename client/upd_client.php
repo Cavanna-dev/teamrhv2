@@ -320,22 +320,62 @@ if (!$r) {
                         <tbody>
                             <?php
                             $r_jobs = getJobByCustomer($db, $_GET['id']);
-                            while ($r_job = $r_jobs->fetch(PDO::FETCH_OBJ)) {
-                                ?>
-                                <tr>
-                                    <td>
-                                        <a href="upd_job.php?id=<?= $r_job->ID ?>"><?= $r_job->libelle; ?></a>
-                                    </td>
-                                    <td>
-                                        <a href="../candidat/upd_applicant.php?id=<?= $r_job->candidat ?>">
-                                            <?= $r_job->nom . " " . $r_job->prenom ?>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <?= $r_job->date_rdv; ?>
-                                    </td>
-                                </tr>
-                                <?php
+                            //var_dump($r_jobs);die;
+
+                            $nb_rows = count($r_jobs);
+                            if ($nb_rows >= 2) {
+                                $temp = array();
+                                $nb = 1;
+
+                                foreach ($r_jobs as $r_job):
+
+                                    $temp[$nb]['libelle'] = '<a href=upd_job.php?id=' . $r_job['ID'] . '>' . $r_job['libelle'] . '</a>';
+
+                                    if (in_array($r_job['candidat'], array_column($temp, 'candidat'))) {
+                                        $key = array_search($r_job['candidat'], array_column($temp, 'candidat'));
+                                        $temp[$key + 1]['date'] .= " - " . $r_job['date_rdv'];
+                                    } else {
+                                        $temp[$nb]['candidat'] = $r_job['candidat'];
+                                        $temp[$nb]['candidat_identite'] = '<a href=upd_jobupd_applicantphp?id=' . $r_job['candidat'] . '>' . $r_job['nom'] . " " . $r_job['prenom'] . '</a>';
+                                        $temp[$nb]['date'] = $r_job['date_rdv'];
+                                        $nb++;
+                                    }
+                                endforeach;
+
+                                //var_dump($temp);die;
+
+                                foreach ($temp as $r_job) :
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <?= $r_job['libelle']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $r_job['candidat_identite']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $r_job['date']; ?>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                endforeach;
+                            }else {
+
+                                foreach ($r_jobs as $r_job) :
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <?= $r_job['libelle']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $r_job['nom'] . " " .$r_job['prenom']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $r_job['date_rdv']; ?>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                endforeach;
                             }
                             ?>
                         </tbody>
@@ -356,7 +396,7 @@ if (!$r) {
                         <tbody>
                             <?php
                             $r_send_cvs = getSendCvByCustomer($db, $_GET['id']);
-                            while ($r_send_cv = $r_send_cvs->fetch(PDO::FETCH_OBJ)) {
+                            foreach ($r_send_cvs as $r_send_cv) :
                                 ?>
                                 <tr>
                                     <td>
@@ -385,7 +425,7 @@ if (!$r) {
                                     </td>
                                 </tr>
                                 <?php
-                            }
+                            endforeach;
                             ?>
                         </tbody>
                     </table>
