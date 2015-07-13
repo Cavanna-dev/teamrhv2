@@ -308,8 +308,8 @@ if (!$r) {
                         <thead>
                             <tr>
                                 <th class="col-lg-4">Libelle</th>
-                                <th class="col-lg-4">Identité candidat</th>
-                                <th class="col-lg-4">Date RDV</th>
+                                <th class="col-lg-3">Identité candidat</th>
+                                <th class="col-lg-5">Date RDV</th>
                                 <th>
                                     <a href="job.php?tab=new&id_client=<?= $_GET['id'] ?>">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -331,12 +331,12 @@ if (!$r) {
 
                                     $temp[$nb]['libelle'] = '<a href=upd_job.php?id=' . $r_job['ID'] . '>' . $r_job['libelle'] . '</a>';
 
-                                    if (in_array($r_job['candidat'], array_column($temp, 'candidat'))) {
+                                    if (in_array($r_job['candidat'], array_column($temp, 'candidat')) && $r_job['candidat'] != NULL) {
                                         $key = array_search($r_job['candidat'], array_column($temp, 'candidat'));
                                         $temp[$key + 1]['date'] .= " - " . $r_job['date_rdv'];
                                     } else {
                                         $temp[$nb]['candidat'] = $r_job['candidat'];
-                                        $temp[$nb]['candidat_identite'] = '<a href=upd_jobupd_applicantphp?id=' . $r_job['candidat'] . '>' . $r_job['nom'] . " " . $r_job['prenom'] . '</a>';
+                                        $temp[$nb]['candidat_identite'] = '<a href=../candidat/upd_applicant.php?id=' . $r_job['candidat'] . '>' . $r_job['nom'] . " " . $r_job['prenom'] . '</a>';
                                         $temp[$nb]['date'] = $r_job['date_rdv'];
                                         $nb++;
                                     }
@@ -360,15 +360,15 @@ if (!$r) {
                                     <?php
                                 endforeach;
                             }else {
-
+                                
                                 foreach ($r_jobs as $r_job) :
                                     ?>
                                     <tr>
                                         <td>
-                                            <?= $r_job['libelle']; ?>
+                                            <a href=upd_job.php?id=<?= $r_job['ID'] ?>><?= $r_job['libelle']; ?></a>
                                         </td>
                                         <td>
-                                            <?= $r_job['nom'] . " " .$r_job['prenom']; ?>
+                                            <a href=../candidat/upd_applicant.php?id=<?= $r_job['candidat'] ?>><?= $r_job['nom'] . " " .$r_job['prenom']; ?></a>
                                         </td>
                                         <td>
                                             <?= $r_job['date_rdv']; ?>
