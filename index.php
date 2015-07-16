@@ -33,6 +33,7 @@
                         "Fournisseur" => Array(
                         ),
                         "Facturation" => Array(
+                            "decaisse.php" => "Décaissé",
                         ),
                         "Comptabilité" => Array(
                         ),
@@ -56,6 +57,7 @@
                         "Fournisseur" => Array(
                         ),
                         "Facturation" => Array(
+                            "decaisse.php" => "Décaissé",
                         ),
                         "Comptabilité" => Array(
                         ),

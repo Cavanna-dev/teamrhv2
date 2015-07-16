@@ -18,6 +18,7 @@ switch ($_SESSION['user']['type']):
             "Fournisseur" => Array(
             ),
             "Facturation" => Array(
+                "decaisse.php" => "Décaissé",
             ),
             "Comptabilité" => Array(
             ),
@@ -41,6 +42,7 @@ switch ($_SESSION['user']['type']):
             "Fournisseur" => Array(
             ),
             "Facturation" => Array(
+                "decaisse.php" => "Décaissé",
             ),
             "Comptabilité" => Array(
             ),
