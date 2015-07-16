@@ -118,7 +118,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $body_cust .= "%0ANous restons à votre disposition.";
                                 $body_cust .= "%0A%0ATrès sincèrement. ";
                                 ?>
-                                <a href="mailto:<?= $mail_contact->email ?>?<?= $subject_cust . "&" . $body_cust ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
+                                <a href="mailto:<?= $mail_contact->email ?>?subject=<?= $subject_cust . "&body=" . $body_cust ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
                                 <?php
                                 $subject_appli = "TeamRH : Confirmation d’entretien";
                                 $body_appli = "************************************************";
@@ -140,7 +140,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $body_appli .= "%0ANous vous souhaitons bonne chance.";
                                 $body_appli .= "%0A%0ATrès sincèrement.";
                                 ?>
-                                <a href="mailto:<?= $r_applicant->email ?>?<?= $subject_appli ?>&<?= $body_appli ?>"><button type="button" class="btn btn-primary">Confirmation Candidat</button></a>
+                                <a href="mailto:<?= $r_applicant->email ?>?subject=<?= $subject_appli ?>&body=<?= $body_appli ?>"><button type="button" class="btn btn-primary">Confirmation Candidat</button></a>
                             </div>
                         </div>
                     </fieldset>
