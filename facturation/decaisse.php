@@ -106,6 +106,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                 <?php
                 if (!empty($_GET)) {
                     $r_decaisses = searchDecaisse($db);
+                    
                     if ($r_decaisses) {
                         ?>
 
@@ -120,6 +121,10 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         <th>Ref Paiement</th>
                                         <th>Date Factu.</th>
                                         <th>Date Paie.</th>
+                                        <th>HT</th>
+                                        <th>TVA</th>
+                                        <th>TTC</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -142,10 +147,22 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                                 <?= $r_decaisse->ref_paiement ?>
                                             </td>
                                             <td>
-                                                <?= $r_decaisse->date_compta ?>
+                                                <?= date("d/m/Y", strtotime($r_decaisse->date_compta)) ?>
                                             </td>
                                             <td>
-                                                <?= $r_decaisse->date_paiement ?>
+                                                <?= date("d/m/Y", strtotime($r_decaisse->date_paiement)) ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?= $r_decaisse->ht_amount ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?= $r_decaisse->tva_amount ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?= $r_decaisse->ttc_amount ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?= $r_decaisse->ht_amount + $r_decaisse->tva_amount + $r_decaisse->ttc_amount ?>
                                             </td>
                                         </tr>
                                         <?php

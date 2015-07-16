@@ -13,8 +13,11 @@ function searchDecaisse($db)
     $paie_min = $_GET['input_date_paie_mini'] ? htmlspecialchars($_GET['input_date_paie_mini']) : '';
     $paie_max = $_GET['input_date_paie_maxi'] ? htmlspecialchars($_GET['input_date_paie_maxi']) : '';
     
-    $sql = "SELECT d.id, f.nom, d.ref_facture, d.ref_paiement, d.date_compta, d.date_paiement "
-            . "FROM decaisse d LEFT JOIN fournisseur f ON d.fournisseur = f.id ";
+    $sql = "SELECT d.id, f.nom, d.ref_facture, d.ref_paiement, d.date_compta, d.date_paiement, "
+            . "dd.ht_amount, dd.tva_amount, dd.ttc_amount "
+            . "FROM decaisse d "
+            . "LEFT JOIN fournisseur f ON d.fournisseur = f.id "
+            . "INNER JOIN decaisse_detail dd ON d.id = dd.fk_decaisse_id ";
 
     if (!empty($fourn) || !empty($ref_fac) || !empty($ref_paie) || !empty($compta_min) || !empty($compta_max)
              || !empty($paie_min) || !empty($paie_max))
