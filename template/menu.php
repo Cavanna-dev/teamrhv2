@@ -149,7 +149,7 @@ endswitch;
             <?php if (isset($_SESSION['user'])) { ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Bienvenue <?php echo $_SESSION['user']['first'] . " " . $_SESSION['user']['last'] ?>!</a></li>
-                    <li><a href="/logout.php">Se deconnecter!</a></li>
+                    <li><a href="../logout.php">Se deconnecter!</a></li>
                 </ul>
             <?php } ?>
         </div>
