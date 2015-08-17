@@ -103,8 +103,8 @@ $r = getOneJobById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_signature" class="col-lg-2 control-label">Date de m.</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_signature" class="col-lg-4 control-label">Date de miss.</label>
+                                    <div class="col-lg-8">
                                         <input class="form-control" id="input_signature" name="input_signature" type="date" value="<?= $r->signature; ?>">
                                     </div>
                                 </div>
@@ -163,8 +163,8 @@ $r = getOneJobById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_starting_date" class="col-lg-2 control-label">Date de d.</label>
-                                    <div class="col-lg-10">
+                                    <label for="input_starting_date" class="col-lg-3 control-label">Date de deb.</label>
+                                    <div class="col-lg-9">
                                         <input class="form-control" id="input_starting_date" 
                                                name="input_starting_date" type="date" 
                                                value="<?= $r->date_deb; ?>">

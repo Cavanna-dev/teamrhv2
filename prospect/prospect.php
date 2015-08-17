@@ -98,7 +98,7 @@ include '../functions/bootstrap.php';
                                     <div class="col-lg-10">
                                         <?php $r_status = getAllStatus($db); ?>
                                         <select class="form-control" name="input_status" id="input_status">
-                                            <option value="">Les deux</option>
+                                            <option value=""></option>
                                             <?php
                                             while ($r_statu = $r_status->fetch(PDO::FETCH_OBJ)) {
                                                 ?>

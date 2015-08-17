@@ -459,6 +459,7 @@ include '../functions/bootstrap.php';
                                             <option value=""></option>
                                             <option value="CDI">CDI</option>
                                             <option value="CDD">CDD</option>
+                                            <option value="Libéral">Libéral</option>
                                         </select>
                                     </div>
                                     <label for="input_contrat_2" class="col-lg-2 control-label">Contrat rech. 2</label>
@@ -468,6 +469,7 @@ include '../functions/bootstrap.php';
                                             <option value=""></option>
                                             <option value="CDI">CDI</option>
                                             <option value="CDD">CDD</option>
+                                            <option value="Libéral">Libéral</option>
                                         </select>
                                     </div>
                                 </div>

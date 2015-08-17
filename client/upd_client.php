@@ -346,11 +346,14 @@ if (!$r) {
 
                                 //var_dump($temp);die;
 
-                                foreach ($temp as $r_job) :
+                                foreach ($temp as $key => $r_job) :
                                     ?>
                                     <tr>
                                         <td>
-                                            <?= $r_job['libelle']; ?>
+                                            <?php 
+                                            if($r_job['libelle'] != $temp[$key-1]['libelle'])
+                                                echo $r_job['libelle'];
+                                            ?>
                                         </td>
                                         <td>
                                             <?= $r_job['candidat_identite']; ?>
@@ -363,7 +366,7 @@ if (!$r) {
                                 endforeach;
                             }else {
                                 
-                                foreach ($r_jobs as $r_job) :
+                                foreach ($r_jobs as $key => $r_job) :
                                     ?>
                                     <tr>
                                         <td>

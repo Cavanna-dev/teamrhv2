@@ -80,13 +80,6 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_rmq_customer" class="col-lg-2 control-label">Remarque Client</label>
-                            <div class="col-lg-10">		
-                                <textarea class="form-control" 
-                                          name="input_rmq_customer"><?= $rdv->RMQ_CLIENT ?></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="input_hours" class="col-lg-2 control-label">Horaires (hh:mm)</label>
                             <div class="col-lg-4">		
                                 <input class="form-control" type="text" 
@@ -98,6 +91,13 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 <input class="form-control" type="text" 
                                        name="input_n_rdv" required 
                                        value="<?= $rdv->NUMERO_RDV ?>" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_rmq_customer" class="col-lg-2 control-label">Remarque Client</label>
+                            <div class="col-lg-10">		
+                                <textarea class="form-control" 
+                                          name="input_rmq_customer"><?= $rdv->RMQ_CLIENT ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -223,17 +223,17 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_rmq_applicant" class="col-lg-2 control-label">Remarque Candidat</label>
-                            <div class="col-lg-10">		
-                                <textarea class="form-control" 
-                                          name="input_rmq_applicant"><?= $rdv->RMQ_CANDI ?></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="input_rmq_teamrh" class="col-lg-2 control-label">Remarque TeamRH</label>
                             <div class="col-lg-10">		
                                 <textarea class="form-control"
                                           name="input_rmq_teamrh"><?= $rdv->RMQ_TEAMRH ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_rmq_applicant" class="col-lg-2 control-label">Remarque Candidat</label>
+                            <div class="col-lg-10">		
+                                <textarea class="form-control" 
+                                          name="input_rmq_applicant"><?= $rdv->RMQ_CANDI ?></textarea>
                             </div>
                         </div>
                     </fieldset>

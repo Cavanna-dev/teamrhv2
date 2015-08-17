@@ -15,7 +15,8 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_name" class="col-lg-3 control-label">Dénomination</label>
                             <div class="col-lg-9">
-                                <input class="form-control" id="input_name" name="input_name" placeholder="Nom" type="text" value="<?= isset($_GET['input_name']) ? $_GET['input_name'] : ""; ?>">
+                                <input class="form-control" id="input_name" name="input_name" 
+                                       placeholder="Nom" type="text" value="<?= isset($_GET['input_name']) ? $_GET['input_name'] : ""; ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -44,6 +45,11 @@ include '../functions/bootstrap.php';
                                     <option value="Britannique" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Britannique") echo "selected"; ?>>Britannique</option>
                                     <option value="Francais" <?php if (isset($_GET['input_nation']) && $_GET['input_nation'] == "Francais") echo "selected"; ?>>Française</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-9">
+                                <button type="submit" class="btn btn-primary">Rechercher</button>
                             </div>
                         </div>
                     </fieldset>
@@ -83,8 +89,13 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-9">
-                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                            <label for="input_statut" class="col-lg-2 control-label">Statut</label>
+                            <div class="col-lg-10">
+                                <select name="input_statut" id="input_pourvu" class="form-control">
+                                    <option value="" <?php if (isset($_GET['input_statut']) && $_GET['input_statut'] == '') echo 'selected'; ?>></option>
+                                    <option value="3" <?php if (isset($_GET['input_statut']) && $_GET['input_statut'] == '3') echo 'selected'; ?>>Liquidé</option>
+                                    <option value="2" <?php if (isset($_GET['input_statut']) && $_GET['input_statut'] == '2') echo 'selected'; ?>>Actif</option>
+                                </select>
                             </div>
                         </div>
                     </fieldset>

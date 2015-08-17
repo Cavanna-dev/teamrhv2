@@ -50,9 +50,16 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                                             name="input_job">
                                         <option value=""></option>
                                         <?php
-                                        while ($r_job = $r_jobs->fetch(PDO::FETCH_OBJ)) {
+                                        //var_dump($r_jobs);die;
+                                        if (count($r_jobs) != 0) {
+                                            foreach ($r_jobs as $r_job) :
+                                                ?>
+                                                <option value="<?= $r_job['ID']; ?>"><?= $r_job['libelle']; ?></option>
+                                                <?php
+                                            endforeach;
+                                        }else {
                                             ?>
-                                            <option value="<?php echo $r_job->ID; ?>"><?php echo $r_job->libelle; ?></option>
+                                            <option value="">Aucun Poste</option>
                                             <?php
                                         }
                                         ?>
@@ -74,13 +81,6 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_rmq_customer" class="col-lg-2 control-label">Remarque Client</label>
-                            <div class="col-lg-10">		
-                                <textarea class="form-control" 
-                                          name="input_rmq_customer"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="input_hours" class="col-lg-2 control-label">Horaires (hh:mm)*</label>
                             <div class="col-lg-4">		
                                 <input class="form-control" type="text" 
@@ -90,6 +90,13 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                             <div class="col-lg-4">		
                                 <input class="form-control" type="text" 
                                        name="input_n_rdv" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_rmq_customer" class="col-lg-2 control-label">Remarque Client</label>
+                            <div class="col-lg-10">		
+                                <textarea class="form-control" 
+                                          name="input_rmq_customer"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -160,17 +167,17 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_rmq_applicant" class="col-lg-2 control-label">Remarque Candidat</label>
-                            <div class="col-lg-10">		
-                                <textarea class="form-control" 
-                                          name="input_rmq_applicant"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="input_rmq_teamrh" class="col-lg-2 control-label">Remarque TeamRH</label>
                             <div class="col-lg-10">		
                                 <textarea class="form-control"
                                           name="input_rmq_teamrh"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_rmq_applicant" class="col-lg-2 control-label">Remarque Candidat</label>
+                            <div class="col-lg-10">		
+                                <textarea class="form-control" 
+                                          name="input_rmq_applicant"></textarea>
                             </div>
                         </div>
                     </fieldset>
