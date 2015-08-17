@@ -350,8 +350,8 @@ if (!$r) {
                                     ?>
                                     <tr>
                                         <td>
-                                            <?php 
-                                            if($r_job['libelle'] != $temp[$key-1]['libelle'])
+                                            <?php
+                                            if ($r_job['libelle'] != $temp[$key - 1]['libelle'])
                                                 echo $r_job['libelle'];
                                             ?>
                                         </td>
@@ -365,15 +365,19 @@ if (!$r) {
                                     <?php
                                 endforeach;
                             }else {
-                                
+
                                 foreach ($r_jobs as $key => $r_job) :
                                     ?>
                                     <tr>
                                         <td>
-                                            <a href=upd_job.php?id=<?= $r_job['ID'] ?>><?= $r_job['libelle']; ?></a>
+                                            <?php
+                                            if ($r_job['libelle'] != $temp[$key - 1]['libelle']) {
+                                                ?>
+                                                <a href=upd_job.php?id=<?= $r_job['ID'] ?>><?= $r_job['libelle']; ?></a>
+                                            <?php } ?>
                                         </td>
                                         <td>
-                                            <a href=../candidat/upd_applicant.php?id=<?= $r_job['candidat'] ?>><?= $r_job['nom'] . " " .$r_job['prenom']; ?></a>
+                                            <a href=../candidat/upd_applicant.php?id=<?= $r_job['candidat'] ?>><?= $r_job['nom'] . " " . $r_job['prenom']; ?></a>
                                         </td>
                                         <td>
                                             <?= $r_job['date_rdv']; ?>

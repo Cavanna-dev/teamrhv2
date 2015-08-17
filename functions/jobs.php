@@ -47,12 +47,12 @@ function getOneJobById($db, $id)
 function getJobByCustomer($db, $id)
 {
     $sql = "SELECT poste.ID 'ID', poste.libelle, candidat.id 'candidat', candidat.prenom, "
-            . "candidat.nom, date_format(date_rdv, '%d/%m/%Y') 'date_rdv', poste.libelle 'libelle' "
+            . "candidat.nom, date_format(date_rdv, '%d/%m/%Y') as date_rdv, poste.libelle 'libelle' "
             . "FROM poste "
             . "LEFT JOIN entretien on poste.id = entretien.poste "
             . "LEFT join candidat on entretien.candidat = candidat.id "
             . "WHERE pourvu != 'Y' and poste.client = " . $id . " "
-            . "ORDER BY poste.ID, candidat.nom, date_rdv ";
+            . "ORDER BY poste.ID, entretien.date_rdv DESC, candidat.nom ";
 
     $r_job = $db->prepare($sql);
     $r_job->execute();
