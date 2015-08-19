@@ -6,6 +6,7 @@ function searchDecaisse($db)
     //var_dump($_GET);die;
     
     $fourn = $_GET['input_fournisseur'] ? htmlspecialchars($_GET['input_fournisseur']) : '';
+    $amount = $_GET['input_amount'] ? htmlspecialchars($_GET['input_amount']) : '';
     $ref_fac   = $_GET['input_ref_fac'] ? htmlspecialchars($_GET['input_ref_fac']) : '';
     $ref_paie   = $_GET['input_ref_paie'] ? htmlspecialchars($_GET['input_ref_paie']) : '';
     $compta_min = $_GET['input_date_compta_mini'] ? htmlspecialchars($_GET['input_date_compta_mini']) : '';
@@ -20,29 +21,29 @@ function searchDecaisse($db)
             . "INNER JOIN decaisse_detail dd ON d.id = dd.fk_decaisse_id ";
 
     if (!empty($fourn) || !empty($ref_fac) || !empty($ref_paie) || !empty($compta_min) || !empty($compta_max)
-             || !empty($paie_min) || !empty($paie_max))
+             || !empty($paie_min) || !empty($paie_max) || !empty($amount))
         $sql .= "WHERE ";
     if (!empty($fourn))
         $sql .= "fournisseur = '".$fourn."'";
     if (!empty($fourn) && (!empty($ref_fac) || !empty($ref_paie) || !empty($compta_min) || !empty($compta_max) 
-            || !empty($paie_min) || !empty($paie_max)))
+            || !empty($paie_min) || !empty($paie_max) || !empty($amount)))
         $sql .= " AND ";
     if (!empty($ref_fac))
         $sql .= "ref_facture like '%".$ref_fac."%'";
     if (!empty($ref_fac) && (!empty($ref_paie) || !empty($compta_min) || !empty($compta_max) 
-            || !empty($paie_min) || !empty($paie_max)))
+            || !empty($paie_min) || !empty($paie_max) || !empty($amount)))
         $sql .= " AND ";
     if (!empty($ref_paie))
         $sql .= "ref_paiement like '%".$ref_paie."%'";
     if (!empty($ref_paie) && (!empty($compta_min) || !empty($compta_max) 
-            || !empty($paie_min) || !empty($paie_max)))
+            || !empty($paie_min) || !empty($paie_max) || !empty($amount)))
         $sql .= " AND ";
     if (!empty($compta_min) || !empty($compta_max))
         $sql .= "date_compta BETWEEN '".$compta_min."' AND '".$compta_max."'";
-    if ((!empty($compta_min) || !empty($compta_max)) && (!empty($paie_min) || !empty($paie_max)))
+    if (!empty($amount) && (!empty($compta_min) || !empty($compta_max)))
         $sql .= " AND ";
-    if (!empty($paie_min) || !empty($paie_max))
-        $sql .= "date_paiement BETWEEN '".$paie_min."' AND '".$paie_max."'";
+    if (!empty($amount))
+        $sql .= "dec_ttc_tot_amount = '".$amount."'";
 
     $sql .= " ORDER BY date_compta desc";
 

@@ -26,6 +26,24 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
+                                    <label for="input_fournisseur" class="col-lg-3 control-label">Fournisseur</label>
+                                    <div class="col-lg-9">
+                                        <?php $r_fourns = getAllFourns($db); ?>
+                                        <select class="form-control" name="input_fournisseur" 
+                                                id="input_fournisseur">
+                                            <option value=""></option>
+                                            <?php
+                                            foreach ($r_fourns as $r_fourn) :
+                                                ?>
+                                                <option value="<?= $r_fourn->id; ?>"
+                                                        <?php if (isset($_GET['input_fournisseur']) && $_GET['input_fournisseur'] == $r_fourn->id) echo 'selected'; ?>><?= $r_fourn->nom; ?></option>
+                                                        <?php
+                                                    endforeach;
+                                                    ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="input_ref_fac" class="col-lg-3 control-label">Référence Facture</label>
                                     <div class="col-lg-9">
                                         <input class="form-control" id="input_ref_fac" name="input_ref_fac" 
@@ -49,24 +67,6 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_fournisseur" class="col-lg-3 control-label">Fournisseur</label>
-                                    <div class="col-lg-9">
-                                        <?php $r_fourns = getAllFourns($db); ?>
-                                        <select class="form-control" name="input_fournisseur" 
-                                                id="input_fournisseur">
-                                            <option value=""></option>
-                                            <?php
-                                            foreach ($r_fourns as $r_fourn) :
-                                                ?>
-                                                <option value="<?= $r_fourn->id; ?>"
-                                                        <?php if (isset($_GET['input_fournisseur']) && $_GET['input_fournisseur'] == $r_fourn->id) echo 'selected'; ?>><?= $r_fourn->nom; ?></option>
-                                                        <?php
-                                                    endforeach;
-                                                    ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <div class="col-lg-9">
                                         <button type="submit" class="btn btn-primary">Rechercher</button>
                                     </div>
@@ -75,6 +75,14 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         </div>
                         <div class="col-lg-6">
                             <fieldset>
+                                <div class="form-group">
+                                    <label for="input_amount" class="col-lg-3 control-label">Montant TTC</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" id="input_amount" name="input_amount" 
+                                               placeholder="Montant TTC" type="text" 
+                                               value="<?= isset($_GET['input_amount']) ? $_GET['input_amount'] : '' ?>"/>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="input_ref_paie" class="col-lg-3 control-label">Référence Paiement</label>
                                     <div class="col-lg-9">
@@ -121,10 +129,9 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         <th>Ref Paiement</th>
                                         <th>Date Factu.</th>
                                         <th>Date Paie.</th>
-                                        <th>HT</th>
-                                        <th>TVA</th>
-                                        <th>TTC</th>
-                                        <th>Total</th>
+                                        <th class="text-right">HT</th>
+                                        <th class="text-right">TVA</th>
+                                        <th class="text-right">TTC</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -161,9 +168,6 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                             <td class="text-right">
                                                 <?= $r_decaisse->ttc_amount ?>
                                             </td>
-                                            <td class="text-right">
-                                                <?= $r_decaisse->ht_amount + $r_decaisse->tva_amount + $r_decaisse->ttc_amount ?>
-                                            </td>
                                         </tr>
                                         <?php
                                     }
@@ -197,8 +201,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                             <?php
                                             foreach ($r_fourns as $r_fourn) :
                                                 ?>
-                                                <option value="<?= $r_fourn->id; ?>"
-                                                        <?php if (isset($_GET['fou']) && $_GET['fou'] == $r_fourn->id) echo 'selected'; ?>><?= $r_fourn->nom; ?></option>
+                                                <option value="<?= $r_fourn->id; ?>"><?= $r_fourn->nom; ?></option>
                                                         <?php
                                                     endforeach;
                                                     ?>
