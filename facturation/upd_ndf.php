@@ -9,7 +9,7 @@ $ndf = getOneNdfById($db, $_GET['id']);
 
 <div class="container" style="font-size: 8px!important;">
     <h1>Gestion RDVs</h1>
-    <form class="form-horizontal" method="POST" action="../functions/upd_decaisse.php" id="form_decaisse">
+    <form class="form-horizontal" method="POST" action="../functions/upd_ndf.php" id="form_decaisse">
         <input type="hidden" name="input_id" value="<?= $ndf->ID ?>"/>
         <div class="jumbotron">
             <div class="row">
