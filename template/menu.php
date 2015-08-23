@@ -19,6 +19,7 @@ switch ($_SESSION['user']['type']):
             ),
             "Facturation" => Array(
                 "decaisse.php" => "Décaissé",
+                "ndf.php" => "Note de Frais",
             ),
             "Comptabilité" => Array(
             ),
@@ -43,6 +44,7 @@ switch ($_SESSION['user']['type']):
             ),
             "Facturation" => Array(
                 "decaisse.php" => "Décaissé",
+                "ndf.php" => "Note de Frais",
             ),
             "Comptabilité" => Array(
             ),

@@ -34,6 +34,7 @@
                         ),
                         "Facturation" => Array(
                             "decaisse.php" => "Décaissé",
+                            "ndf.php" => "Note de Frais",
                         ),
                         "Comptabilité" => Array(
                         ),
@@ -58,6 +59,7 @@
                         ),
                         "Facturation" => Array(
                             "decaisse.php" => "Décaissé",
+                            "ndf.php" => "Note de Frais",
                         ),
                         "Comptabilité" => Array(
                         ),

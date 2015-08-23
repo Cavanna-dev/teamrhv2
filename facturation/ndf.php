@@ -13,57 +13,37 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
 }
 ?>
 <div class="container">
-    <h1>Gestion Décaissés</h1>
+    <h1>Gestion Notes de Frais</h1>
     <ul class="nav nav-tabs">
         <li class="active"><a href="#search" data-toggle="tab">Rechercher</a></li>
         <li><a href="#add" data-toggle="tab">Ajouter</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in" id="search">
-            <form class="form-horizontal" method="GET" action="decaisse.php" id="form_customer">
+            <form class="form-horizontal" method="GET" action="ndf.php" id="form_customer">
                 <div class="jumbotron">
                     <div class="row">
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_fournisseur" class="col-lg-3 control-label">Fournisseur</label>
+                                    <label for="input_month" class="col-lg-3 control-label">Mois</label>
                                     <div class="col-lg-9">
-                                        <?php $r_fourns = getAllFourns($db); ?>
-                                        <select class="form-control" name="input_fournisseur" 
-                                                id="input_fournisseur">
+                                        <select class="form-control" name="input_month" 
+                                                id="input_month">
                                             <option value=""></option>
-                                            <?php
-                                            foreach ($r_fourns as $r_fourn) :
-                                                ?>
-                                                <option value="<?= $r_fourn->id; ?>"
-                                                        <?php if (isset($_GET['input_fournisseur']) && $_GET['input_fournisseur'] == $r_fourn->id) echo 'selected'; ?>><?= $r_fourn->nom; ?></option>
-                                                        <?php
-                                                    endforeach;
-                                                    ?>
+                                            <option value="janvier" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'janvier') echo "selected";?>>Janvier</option>
+                                            <option value="février" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'février') echo "selected";?>>Février</option>
+                                            <option value="mars" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'mars') echo "selected";?>>Mars</option>
+                                            <option value="avril" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'avril') echo "selected";?>>Avril</option>
+                                            <option value="mai" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'mai') echo "selected";?>>Mai</option>
+                                            <option value="juin" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'juin') echo "selected";?>>Juin</option>
+                                            <option value="juillet" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'juillet') echo "selected";?>>Juillet</option>
+                                            <option value="août" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'août') echo "selected";?>>Août</option>
+                                            <option value="septembre" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'septembre') echo "selected";?>>Septembre</option>
+                                            <option value="octobre" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'octobre') echo "selected";?>>Octobre</option>
+                                            <option value="novembre" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'novembre') echo "selected";?>>Novembre</option>
+                                            <option value="décembre" <?php if(isset($_GET['input_month']) && $_GET['input_month'] == 'décembre') echo "selected";?>>Décembre</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_ref_fac" class="col-lg-3 control-label">Référence Facture</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" id="input_ref_fac" name="input_ref_fac" 
-                                               placeholder="Référence" type="text" 
-                                               value="<?= isset($_GET['input_ref_fac']) ? $_GET['input_ref_fac'] : '' ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_date_compta_mini" class="col-lg-4 control-label">Date comptabilité</label>
-                                    <div class="col-lg-4">
-                                        <input type="date" class="form-control" 
-                                               name="input_date_compta_mini" 
-                                               id="input_date_compta_mini"
-                                               value="<?= isset($_GET['input_date_compta_mini']) ? $_GET['input_date_compta_mini'] : '' ?>"/>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <input type="date" class="form-control" 
-                                               name="input_date_compta_maxi" 
-                                               id="input_date_compta_maxi"
-                                               value="<?= isset($_GET['input_date_compta_maxi']) ? $_GET['input_date_compta_maxi'] : '' ?>"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -76,34 +56,23 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_amount" class="col-lg-3 control-label">Montant TTC</label>
+                                    <label for="input_year" class="col-lg-3 control-label">Année</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" id="input_amount" name="input_amount" 
-                                               placeholder="Montant TTC" type="text" 
-                                               value="<?= isset($_GET['input_amount']) ? $_GET['input_amount'] : '' ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_ref_paie" class="col-lg-3 control-label">Référence Paiement</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" id="input_ref_paie" name="input_ref_paie" 
-                                               placeholder="Référence" type="text" 
-                                               value="<?= isset($_GET['input_ref_paie']) ? $_GET['input_ref_paie'] : '' ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_date_paie_mini" class="col-lg-4 control-label">Date Paiement</label>
-                                    <div class="col-lg-4">
-                                        <input type="date" class="form-control" 
-                                               name="input_date_paie_mini" 
-                                               id="input_date_paie_mini"
-                                               value="<?= isset($_GET['input_date_paie_mini']) ? $_GET['input_date_paie_mini'] : '' ?>"/>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <input type="date" class="form-control" 
-                                               name="input_date_paie_maxi" 
-                                               id="input_date_paie_maxi"
-                                               value="<?= isset($_GET['input_date_paie_maxi']) ? $_GET['input_date_paie_maxi'] : '' ?>"/>
+                                        <select class="form-control" name="input_year" 
+                                                id="input_year">
+                                            <option value=""></option>
+                                            <?php 
+                                            for($i=2002 ; $i<=date('Y') ; $i++):
+                                            ?>
+                                                <option value="<?= $i ?>" 
+                                                    <?php 
+                                                    if(isset($_GET['input_year']) && $_GET['input_year'] == $i){echo "selected";}
+                                                    elseif(!isset($_GET['input_year']) && date('Y') == $i){echo "selected";}
+                                                    ?>><?= $i ?></option>
+                                            <?php
+                                            endfor;
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </fieldset>
@@ -113,69 +82,54 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
 
                 <?php
                 if (!empty($_GET)) {
-                    $r_decaisses = searchDecaisse($db);
+                    $r_ndfs = searchNdf($db);
 
-                    if ($r_decaisses) {
+                    if ($r_ndfs) {
+                        //var_dump($r_ndfs);die;
                         ?>
-
-                        <h1>Résultats - <?= count($r_decaisses) ?> factures</h1>
+                        
+                        <h1>Résultats - <?= count($r_ndfs) ?> notes de frais</h1>
                         <div class="jumbotron">
                             <table class="table table-striped table-hover ">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Ref Facture</th>
-                                        <th>Fournisseur</th>
-                                        <th>Ref Paiement</th>
-                                        <th>Date Factu.</th>
-                                        <th>Date Paie.</th>
-                                        <th class="text-right">HT</th>
-                                        <th class="text-right">TVA</th>
-                                        <th class="text-right">TTC</th>
+                                        <th>ID</th>
+                                        <th>Description</th>
+                                        <th>HT</th>
+                                        <th>TVA</th>
+                                        <th>TTC</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $amount_ht_tot = 0;
-                                    $amount_tva_tot = 0;
-                                    $amount_ttc_tot = 0;
-                                    foreach ($r_decaisses as $r_decaisse) {
+                                    $total_ht_ndf = 0;
+                                    $total_tva_ndf = 0;
+                                    $total_ttc_ndf = 0;
+                                    foreach ($r_ndfs as $r_ndfs) {
                                         ?>
                                         <tr>
                                             <td>
-                                                <a href="./upd_decaisse.php?id=<?= $r_decaisse->id ?>">
-                                                    <?= $r_decaisse->id ?>
+                                                <a href="./upd_ndf.php?id=<?= $r_ndfs->id ?>">
+                                                    <?= $r_ndfs->id ?>
                                                 </a>
                                             </td>
                                             <td>
-                                                <?= $r_decaisse->ref_facture ?>
+                                                <?= $r_ndfs->description ?>
                                             </td>
                                             <td>
-                                                <?= $r_decaisse->nom ?>
+                                                <?= $r_ndfs->ht_tot_amount ?>
                                             </td>
                                             <td>
-                                                <?= $r_decaisse->ref_paiement ?>
+                                                <?= $r_ndfs->tva_tot_amount ?>
                                             </td>
                                             <td>
-                                                <?= date("d/m/Y", strtotime($r_decaisse->date_compta)) ?>
-                                            </td>
-                                            <td>
-                                                <?= date("d/m/Y", strtotime($r_decaisse->date_paiement)) ?>
-                                            </td>
-                                            <td class="text-right">
-                                                <?= $r_decaisse->ht_amount ?>
-                                            </td>
-                                            <td class="text-right">
-                                                <?= $r_decaisse->tva_amount ?>
-                                            </td>
-                                            <td class="text-right">
-                                                <?= $r_decaisse->ttc_amount ?>
+                                                <?= $r_ndfs->ttc_tot_amount ?>
                                             </td>
                                         </tr>
                                         <?php
-                                        $amount_ht_tot += $r_decaisse->ht_amount;
-                                        $amount_tva_tot += $r_decaisse->tva_amount;
-                                        $amount_ttc_tot += $r_decaisse->ttc_amount;
+                                        $total_ht_ndf += $r_ndfs->ht_tot_amount;
+                                        $total_tva_ndf += $r_ndfs->tva_tot_amount;
+                                        $total_ttc_ndf += $r_ndfs->ttc_tot_amount;
                                     }
                                     ?>
                                 </tbody>
@@ -197,7 +151,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total HT
                                     </td>
                                     <td>
-                                        <?= $amount_ht_tot ?>
+                                        <?= isset($total_ht_ndf) ? $total_ht_ndf : '' ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -205,7 +159,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total TVA
                                     </td>
                                     <td>
-                                        <?= $amount_tva_tot ?>
+                                        <?= isset($total_tva_ndf) ? $total_tva_ndf : '' ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -213,7 +167,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total TTC
                                     </td>
                                     <td>
-                                        <?= $amount_ttc_tot ?>
+                                        <?= isset($total_ttc_ndf) ? $total_ttc_ndf : '' ?>
                                     </td>
                                 </tr>
                             </tbody>
@@ -223,49 +177,29 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
             </form>
         </div>
         <div class="tab-pane fade" id="add">
-            <form class="form-horizontal" method="POST" action="../functions/new_decaisse.php" id="form_decaisse">
+            <form class="form-horizontal" method="POST" action="../functions/new_ndf.php" id="form_decaisse">
                 <div class="jumbotron">
                     <div class="row">
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_fournisseur" class="col-lg-3 control-label">Fournisseur</label>
+                                    <label for="input_month" class="col-lg-3 control-label">Mois</label>
                                     <div class="col-lg-9">
-                                        <?php $r_fourns = getAllFourns($db); ?>
-                                        <select class="form-control" name="input_fournisseur" 
-                                                id="input_fournisseur">
+                                        <select class="form-control" name="input_month" 
+                                                id="input_month">
                                             <option value=""></option>
-                                            <?php
-                                            foreach ($r_fourns as $r_fourn) :
-                                                ?>
-                                                <option value="<?= $r_fourn->id; ?>"><?= $r_fourn->nom; ?></option>
-                                                <?php
-                                            endforeach;
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_date_compta" class="col-lg-3 control-label">Date Compta</label>
-                                    <div class="col-lg-9">
-                                        <input type="date" class="form-control" 
-                                               name="input_date_compta" 
-                                               id="input_date_compta"
-                                               value="<?= isset($_GET['dc']) ? $_GET['dc'] : '' ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_mode_paiement" class="col-lg-3 control-label">Mode paiement</label>
-                                    <div class="col-lg-9">
-                                        <select class="form-control" name="input_mode_paiement" >
-                                            <option value=""        >        </option>
-                                            <option value="CB"      >CB      </option>
-                                            <option value="CHEQUE"  >CHEQUE  </option>
-                                            <option value="LIQUIDE" >LIQUIDE </option>
-                                            <option value="MANDAT"  >MANDAT  </option>
-                                            <option value="TIP"     >TIP     </option>
-                                            <option value="VIREMENT">VIREMENT</option>
-                                            <option value="AUTRE"   >AUTRE   </option>
+                                            <option value="janvier">Janvier</option>
+                                            <option value="février">Février</option>
+                                            <option value="mars">Mars</option>
+                                            <option value="avril">Avril</option>
+                                            <option value="mai">Mai</option>
+                                            <option value="juin">Juin</option>
+                                            <option value="juillet">Juillet</option>
+                                            <option value="août">Août</option>
+                                            <option value="septembre">Septembre</option>
+                                            <option value="octobre">Octobre</option>
+                                            <option value="novembre">Novembre</option>
+                                            <option value="décembre">Décembre</option>
                                         </select>
                                     </div>
                                 </div>
@@ -274,25 +208,19 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_ref_fac" class="col-lg-3 control-label">Ref. Fact.</label>
+                                    <label for="input_year" class="col-lg-3 control-label">Année</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" id="input_ref_fac" name="input_ref_fac" 
-                                               placeholder="Référence Facture" type="text"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_date_paiement" class="col-lg-3 control-label">Date Paiement</label>
-                                    <div class="col-lg-9">
-                                        <input type="date" class="form-control" 
-                                               name="input_date_paiement" 
-                                               id="input_date_paiement"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_ref_pai" class="col-lg-3 control-label">Ref Paiement</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" id="input_ref_pai" name="input_ref_pai" 
-                                               placeholder="Référence Paiement" type="text"/>
+                                        <select class="form-control" name="input_year" 
+                                                id="input_year">
+                                            <option value=""></option>
+                                            <?php 
+                                            for($i=2002 ; $i<=date('Y') ; $i++):
+                                            ?>
+                                                <option value="<?= $i ?>" ><?= $i ?></option>
+                                            <?php
+                                            endfor;
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </fieldset>
