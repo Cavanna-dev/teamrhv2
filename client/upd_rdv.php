@@ -146,7 +146,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                         isset($mail_contact->nom) ? $mail_contact->nom : '' . " " .
                                         isset($mail_contact->prenom) ? $mail_contact->prenom : '';
                                 }
-                                $body_appli .= "%0A" . $mail_customer->nom;
+                                $body_appli .= "%0A" . str_replace("&", "And", $mail_customer->nom);
                                 $body_appli .= "%0A" . $mail_customer->adresse1;
                                 $body_appli .= "%0A" . $mail_customer->postal . " " . $mail_customer->ville;
                                 $body_appli .= "%0A%0AMétro : " . $mail_customer->metro;
@@ -159,7 +159,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $body_appli .= "%0ANous vous souhaitons bonne chance.";
                                 $body_appli .= "%0A%0ATrès sincèrement.";
                                 ?>
-                                <a href="mailto:<?= $r_applicant->email ?>?subject=<?= $subject_appli ?>&body=<?= rawurlencode($body_appli) ?>"><button type="button" class="btn btn-primary">Confirmation Candidat</button></a>
+                                <a href="mailto:<?= $r_applicant->email ?>?subject=<?= $subject_appli ?>&body=<?= $body_appli ?>"><button type="button" class="btn btn-primary">Confirmation Candidat</button></a>
                             </div>
                         </div>
                     </fieldset>
