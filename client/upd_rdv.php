@@ -131,7 +131,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $body_cust .= "%0ANous restons à votre disposition.";
                                 $body_cust .= "%0A%0ATrès sincèrement. ";
                                 ?>
-                                <a href="mailto:<?= $mail_contact->email ?>?subject=<?= $subject_cust . "&body=" . rawurlencode($body_cust) ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
+                                <a href="mailto:<?= isset($mail_contact->email) ? $mail_contact->email : ''  ?>?subject=<?= $subject_cust . "&body=" . $body_cust ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
                                 <?php
                                 $subject_appli = "TeamRH : Confirmation d’entretien";
                                 $body_appli = "******************";
@@ -140,7 +140,12 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $body_appli .= "%0A%0A%0A%0AChère " . $r_applicant->prenom . ",";
                                 $body_appli .= "%0A%0AVotre rendez-vous a été confirmé pour "
                                         . "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . " "
-                                        . "avec " . $mail_contact->civilite . " " . $mail_contact->nom . " " . $mail_contact->prenom;
+                                        . "avec ";
+                                if($mail_contact){
+                                $body_appli .= isset($mail_contact->civilite) ? $mail_contact->civilite : '' . " " .
+                                        isset($mail_contact->nom) ? $mail_contact->nom : '' . " " .
+                                        isset($mail_contact->prenom) ? $mail_contact->prenom : '';
+                                }
                                 $body_appli .= "%0A" . $mail_customer->nom;
                                 $body_appli .= "%0A" . $mail_customer->adresse1;
                                 $body_appli .= "%0A" . $mail_customer->postal . " " . $mail_customer->ville;
