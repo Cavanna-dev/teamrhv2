@@ -32,7 +32,7 @@ try {
             . ":input_title3,:input_salaire_actuel,:input_zone_rech,"
             . ":input_title_futur1,:input_title_futur2,:input_title_futur3,"
             . ":input_salaire_rech,:input_contrat_1,:input_contrat_2,:input_horaires_1,"
-            . ":input_horaires_2,:input_preavis,:input_remarque,:input_note_gen,".date('Y-m-d').")";
+            . ":input_horaires_2,:input_preavis,:input_remarque,:input_note_gen,'".date('Y-m-d')."')";
     $stmt = $db->prepare($sql);
     $stmt->execute($array_value);
     $lastId = $db->lastInsertId();

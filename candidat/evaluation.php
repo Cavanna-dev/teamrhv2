@@ -162,7 +162,7 @@ include '../functions/bootstrap.php';
                                 <div class="form-group">
                                     <div class="col-lg-5">
                                         <div class="form-group">
-                                            <label for="input_diplome" class="col-lg-2 control-label">Diplôme</label>
+                                            <label for="cible_dipl_left" class="col-lg-2 control-label">Diplôme</label>
                                             <div class="col-lg-10">
                                                 <?php $r_diplomes = getAllDiplomes($db); ?>
                                                 <select class="form-control" id="cible_dipl_left">
@@ -190,6 +190,115 @@ include '../functions/bootstrap.php';
                                                     <?php
                                                     foreach ($_GET['input_diplomes'] as $value):
                                                         $r = getOneDiplomeById($db, $value);
+                                                        ?>
+                                                <option value="<?= $r->id; ?>" selected><?= $r->libelle; ?></option>
+                                                <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="cible_exp_left" class="col-lg-2 control-label">Expérience</label>
+                                            <div class="col-lg-10">
+                                                <select class="form-control" id="cible_exp_left">
+                                                    <option value="Aucune">Aucune</option>
+                                                    <option value="< 1 an">< 1 an</option>
+                                                    <option value="1 à 3 ans">1 à 3 ans</option>
+                                                    <option value="4 à 5 ans">4 à 5 ans</option>
+                                                    <option value="6 à 10 ans">6 à 10 ans</option>
+                                                    <option value="> 10 ans">> 10 ans</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="button" value="<<" id="rmv_item_exp">
+                                        <input type="button" value=">>" id="add_item_exp">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" name="input_exps[]" 
+                                                id="cible_exp_right" multiple 
+                                                style="height:100px;">
+                                                    <?php
+                                                    foreach ($_GET['input_exps'] as $value):
+                                                        ?>
+                                                <option value="<?= $value; ?>" selected><?= $value; ?></option>
+                                                <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="cible_loc_left" class="col-lg-2 control-label">Localisation</label>
+                                            <div class="col-lg-10">
+                                                <select class="form-control" id="cible_loc_left">
+                                                    <OPTION  value="75" >(75) Paris         </OPTION>
+                                                    <OPTION  value="77" >(77) Seine et Marne</OPTION>
+                                                    <OPTION  value="78" >(78) Yvelines      </OPTION>
+                                                    <OPTION  value="91" >(91) Essonne       </OPTION>
+                                                    <OPTION  value="92" >(92) Hauts de Seine</OPTION>
+                                                    <OPTION  value="93" >(93) Seine St Denis</OPTION>
+                                                    <OPTION  value="94" >(94) Val de Marne  </OPTION>
+                                                    <OPTION  value="95" >(95) Val d'Oise    </OPTION>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="button" value="<<" id="rmv_item_loc">
+                                        <input type="button" value=">>" id="add_item_loc">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" name="input_locs[]" 
+                                                id="cible_loc_right" multiple 
+                                                style="height:100px;">
+                                                    <?php
+                                                    foreach ($_GET['input_locs'] as $value):
+                                                        ?>
+                                                <option value="<?= $value; ?>" selected><?= $value; ?></option>
+                                                <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="cible_zone_left" class="col-lg-2 control-label">Secteur d'activité</label>
+                                            <div class="col-lg-10">
+                                                <?php $r_zones = getAllZones($db); ?>
+                                                <select class="form-control" id="cible_zone_left">
+                                                    <?php
+                                                    while ($r_zone = $r_zones->fetch(PDO::FETCH_OBJ)) {
+                                                        ?>
+                                                        <?php if (!in_array($r_zone->id, $_GET['input_zones'])) { ?>
+                                                            <option value="<?= $r_zone->id; ?>"><?= $r_zone->libelle; ?></option>
+                                                        <?php } ?>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="button" value="<<" id="rmv_item_zone">
+                                        <input type="button" value=">>" id="add_item_zone">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" name="input_zones[]" 
+                                                id="cible_dipl_right" multiple 
+                                                style="height:100px;">
+                                                    <?php
+                                                    foreach ($_GET['input_zones'] as $value):
+                                                        $r = getOneZoneById($db, $value);
                                                         ?>
                                                 <option value="<?= $r->id; ?>" selected><?= $r->libelle; ?></option>
                                                 <?php
@@ -760,6 +869,71 @@ include '../functions/bootstrap.php';
                 alert('Veuillez selectionner un diplôme à droite pour le supprimer.');
             $('#cible_dipl_left').each(function () {
                 $('#cible_dipl_right option[value="' + id + '"]').remove();
+            });
+            $('#cible_dipl_right').each(function () {
+                $('#cible_dipl_right option').attr("selected");
+            });
+        });
+
+        /**
+         * Ajout/Suppression des expériences
+         */
+        $('#add_item_exp').click(function () {
+            var id = $('#cible_exp_left').val();
+            var right = $('#cible_exp_left option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '" selected>' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_exp_right').append(option);
+            else
+                alert('Veuillez selectionner une expérience à gauche pour l\'ajouter.');
+            $('#cible_exp_right').each(function () {
+                $('#cible_exp_left option[value="' + id + '"]').remove();
+            });
+        });
+        $('#rmv_item_exp').click(function () {
+            var id = $('#cible_exp_right').val();
+            var right = $('#cible_exp_right option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '">' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_exp_left').append(option);
+            else
+                alert('Veuillez selectionner une expérience à droite pour le supprimer.');
+            $('#cible_exp_left').each(function () {
+                $('#cible_exp_right option[value="' + id + '"]').remove();
+            });
+            $('#cible_exp_right').each(function () {
+                $('#cible_exp_right option').attr("selected");
+            });
+        });
+
+        /**
+         * Ajout/Suppression des localisations
+         */
+        $('#add_item_loc').click(function () {
+            var id = $('#cible_loc_left').val();
+            var right = $('#cible_loc_left option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '" selected>' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_loc_right').append(option);
+            else
+                alert('Veuillez selectionner une localisation à gauche pour l\'ajouter.');
+            $('#cible_loc_right').each(function () {
+                $('#cible_loc_left option[value="' + id + '"]').remove();
+            });
+        });
+        $('#rmv_item_loc').click(function () {
+            var id = $('#cible_loc_right').val();
+            var right = $('#cible_loc_right option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '">' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_loc_left').append(option);
+            else
+                alert('Veuillez selectionner une localisation à droite pour le supprimer.');
+            $('#cible_loc_left').each(function () {
+                $('#cible_loc_right option[value="' + id + '"]').remove();
+            });
+            $('#cible_loc_right').each(function () {
+                $('#cible_loc_right option').attr("selected");
             });
         });
 
