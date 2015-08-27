@@ -35,6 +35,45 @@ include '../functions/bootstrap.php';
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
+                                    <label for="input_name" class="col-lg-2 control-label">Nom</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" name="input_name" class="form-control" 
+                                               value="<?= isset($_GET['input_name']) ? $_GET['input_name'] : '' ?>" />
+                                    </div>
+                                    <label for="input_phone" class="col-lg-2 control-label">N° Tel.</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" name="input_phone" class="form-control" 
+                                               value="<?= isset($_GET['input_phone']) ? $_GET['input_phone'] : '' ?>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_horaire" class="col-lg-2 control-label">Horaires</label>
+                                    <div class="col-lg-4">
+                                        <select class="form-control" 
+                                                name="input_horaire" id="input_horaire">
+                                            <option value="" <?= isset($_GET['input_horaire']) && $_GET['input_horaire'] == '' ? 'selected' : '' ?>></option>
+                                            <option value="matinée" <?= isset($_GET['input_horaire']) && $_GET['input_horaire'] == 'matinée' ? 'selected' : '' ?>>Matinée</option>
+                                            <option value="jour" <?= isset($_GET['input_horaire']) && $_GET['input_horaire'] == 'jour' ? 'selected' : '' ?>>Jour</option>
+                                            <option value="après-midi" <?= isset($_GET['input_horaire']) && $_GET['input_horaire'] == 'après-midi' ? 'selected' : '' ?>>Après-midi</option>
+                                            <option value="soirée" <?= isset($_GET['input_horaire']) && $_GET['input_horaire'] == 'soirée' ? 'selected' : '' ?>>Soirée</option>
+                                            <option value="nuit" <?= isset($_GET['input_horaire']) && $_GET['input_horaire'] == 'nuit' ? 'selected' : '' ?>>Nuit</option>
+                                        </select>
+                                    </div>
+                                    <label for="input_l1" class="col-lg-2 control-label">Langue Mat.</label>
+                                    <div class="col-lg-4">
+                                        <select class="form-control" name="input_l1" id="input_l1">
+                                            <option value="" <?= isset($_GET['input_l1']) && $_GET['input_l1'] == '' ? 'selected' : '' ?>></option>
+                                            <option value="LMA" <?= isset($_GET['input_l1']) && $_GET['input_l1'] == 'LMA' ? 'selected' : 'LMA' ?>>LMA</option>
+                                            <option value="LMF" <?= isset($_GET['input_l1']) && $_GET['input_l1'] == 'LMF' ? 'selected' : 'LMF' ?>>LMF</option>
+                                            <option value="LMF-LMA" <?= isset($_GET['input_l1']) && $_GET['input_l1'] == 'LMF-LMA' ? 'selected' : '' ?>>LMF-LMA</option>
+                                            <option value="LM Allemande" <?= isset($_GET['input_l1']) && $_GET['input_l1'] == 'LM Allemande' ? 'selected' : '' ?>>LM Allemande</option>
+                                            <option value="LM Espagnole" <?= isset($_GET['input_l1']) && $_GET['input_l1'] == 'LM Espagnole' ? 'selected' : '' ?>>LM Espagnole</option>
+                                            <option value="LM Italienne" <?= isset($_GET['input_l1']) && $_GET['input_l1'] == 'LM Italienne' ? 'selected' : '' ?>>LM Italienne</option>
+                                            <option value="Autre" <?= isset($_GET['input_l1']) && $_GET['input_l1'] == 'Autre' ? 'selected' : '' ?>>Autre</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="input_disponible" class="col-lg-2 control-label">Disponible</label>
                                     <div class="col-lg-2">
                                         <div class="checkbox">
@@ -46,41 +85,60 @@ include '../functions/bootstrap.php';
                                             </label>
                                         </div>
                                     </div>
-                                    <label for="input_zone" class="col-lg-2 control-label">Secteur</label>
-                                    <div class="col-lg-6">
-                                        <?php $r_zones = getAllZones($db); ?>
-                                        <select class="form-control" name="input_zone" id="input_zone">
-                                            <option value=""></option>
-                                            <?php
-                                            while ($r_zone = $r_zones->fetch(PDO::FETCH_OBJ)) {
-                                                ?>
-                                                <option value="<?php echo $r_zone->id; ?>" <?php if (isset($_GET['input_zone']) && $_GET['input_zone'] == $r_zone->id) echo "selected"; ?>><?php echo $r_zone->libelle; ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="input_title" class="col-lg-2 control-label">Titre actuel</label>
-                                    <div class="col-lg-10">
-                                        <?php $r_titles = getAllTitles($db); ?>
-                                        <select class="form-control" name="input_title" id="input_title">
-                                            <option value=""></option>
-                                            <?php
-                                            foreach ($r_titles as $r_title):
-                                                ?>
-                                                <option value="<?= $r_title->id ?>" <?php if (isset($_GET['input_title']) && $_GET['input_title'] == $r_title->id) echo "selected"; ?>><?= $r_title->libelle ?></option>
-                                                <?php
-                                            endforeach;
-                                            ?>
-                                        </select>
-                                    </div>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="col-lg-6">
                             <fieldset>
+                                <div class="form-group">
+                                    <label for="input_note" class="col-lg-2 control-label">Note</label>
+                                    <div class="col-lg-4">
+                                        <select class="form-control" 
+                                                name="input_note" id="input_note">
+                                            <option value="" <?= isset($_GET['input_note']) && $_GET['input_note'] == '' ? 'selected' : '' ?>></option>
+                                            <option value="A" <?= isset($_GET['input_note']) && $_GET['input_note'] == 'A' ? 'selected' : '' ?>>A</option>
+                                            <option value="B" <?= isset($_GET['input_note']) && $_GET['input_note'] == 'B' ? 'selected' : '' ?>>B</option>
+                                            <option value="C" <?= isset($_GET['input_note']) && $_GET['input_note'] == 'C' ? 'selected' : '' ?>>C</option>
+                                            <option value="D" <?= isset($_GET['input_note']) && $_GET['input_note'] == 'D' ? 'selected' : '' ?>>D</option>
+                                        </select>
+                                    </div>
+                                    <label for="input_date_eval" class="col-lg-2 control-label">Date eval.</label>
+                                    <div class="col-lg-4">
+                                        <select name="input_date_eval" class="form-control" >
+                                            <option value=""<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '' ? 'selected' : '' ?>>               </option>
+                                            <option value="1"<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '1' ? 'selected' : '' ?>>Moins de 1 mois</option>
+                                            <option value="2"<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '2' ? 'selected' : '' ?>>Moins de 2 mois</option>
+                                            <option value="3"<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '3' ? 'selected' : '' ?>>Moins de 3 mois</option>
+                                            <option value="6"<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '6' ? 'selected' : '' ?>>Moins de 6 mois</option>
+                                            <option value="12"<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '12' ? 'selected' : '' ?>>Moins de 12 mois</option>
+                                            <option value="24"<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '24' ? 'selected' : '' ?>>Moins de 24 mois</option>
+                                            <option value="36"<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '36' ? 'selected' : '' ?>>Moins de 36 mois</option>
+                                            <option value="48"<?= isset($_GET['input_date_eval']) && $_GET['input_date_eval'] == '48' ? 'selected' : '' ?>>Moins de 48 mois</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_age" class="col-lg-2 control-label">Age</label>
+                                    <div class="col-lg-4">
+                                        <select name="input_age" class="form-control">
+                                            <option value=""<?= isset($_GET['input_age']) && $_GET['input_age'] == '' ? 'selected' : '' ?>>          </option>
+                                            <option value="25"<?= isset($_GET['input_age']) && $_GET['input_age'] == '25' ? 'selected' : '' ?>> < 25 ans </option>
+                                            <option value="30"<?= isset($_GET['input_age']) && $_GET['input_age'] == '30' ? 'selected' : '' ?>> < 30 ans </option>
+                                            <option value="35"<?= isset($_GET['input_age']) && $_GET['input_age'] == '35' ? 'selected' : '' ?>> < 35 ans </option>
+                                            <option value="40"<?= isset($_GET['input_age']) && $_GET['input_age'] == '40' ? 'selected' : '' ?>> < 40 ans </option>
+                                            <option value="45"<?= isset($_GET['input_age']) && $_GET['input_age'] == '45' ? 'selected' : '' ?>> < 45 ans </option>
+                                            <option value="50"<?= isset($_GET['input_age']) && $_GET['input_age'] == '50' ? 'selected' : '' ?>> < 50 ans </option>
+                                        </select>
+                                    </div>
+                                    <label for="input_sexe" class="col-lg-2 control-label">Sexe</label>
+                                    <div class="col-lg-4">
+                                        <select name="input_sexe" class="form-control">
+                                            <option value=""<?= isset($_GET['input_sexe']) && $_GET['input_sexe'] == '' ? 'selected' : '' ?>>       </option>
+                                            <option value="F"<?= isset($_GET['input_sexe']) && $_GET['input_sexe'] == 'F' ? 'selected' : '' ?>> Femme </option>
+                                            <option value="H"<?= isset($_GET['input_sexe']) && $_GET['input_sexe'] == 'M' ? 'selected' : '' ?>> Homme </option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="input_salaire_mini" class="col-lg-3 control-label">Salaire mini.</label>
                                     <div class="col-lg-3">
@@ -97,26 +155,49 @@ include '../functions/bootstrap.php';
                                                value="<?= isset($_GET['input_salaire_maxi']) ? $_GET['input_salaire_maxi'] : "" ?>">
                                     </div>
                                 </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
                                 <div class="form-group">
-                                    <label for="input_title_futur" class="col-lg-2 control-label">Titre recherché</label>
-                                    <div class="col-lg-10">
-                                        <?php $r_titles = getAllTitles($db); ?>
-                                        <select class="form-control" name="input_title_futur" id="input_title_futur">
-                                            <option value=""></option>
-                                            <?php
-                                            foreach ($r_titles as $r_title):
-                                                ?>
-                                                <option value="<?= $r_title->id ?>" <?php if (isset($_GET['input_title_futur']) && $_GET['input_title_futur'] == $r_title->id) echo "selected"; ?>><?= $r_title->libelle ?></option>
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="input_diplome" class="col-lg-2 control-label">Diplôme</label>
+                                            <div class="col-lg-10">
+                                                <?php $r_diplomes = getAllDiplomes($db); ?>
+                                                <select class="form-control" id="cible_dipl_left">
+                                                    <?php
+                                                    while ($r_diplome = $r_diplomes->fetch(PDO::FETCH_OBJ)) {
+                                                        ?>
+                                                        <?php if (!in_array($r_diplome->id, $_GET['input_diplomes'])) { ?>
+                                                            <option value="<?= $r_diplome->id; ?>"><?= $r_diplome->libelle; ?></option>
+                                                        <?php } ?>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="button" value="<<" id="rmv_item_dipl">
+                                        <input type="button" value=">>" id="add_item_dipl">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" name="input_diplomes[]" 
+                                                id="cible_dipl_right" multiple 
+                                                style="height:100px;">
+                                                    <?php
+                                                    foreach ($_GET['input_diplomes'] as $value):
+                                                        $r = getOneDiplomeById($db, $value);
+                                                        ?>
+                                                <option value="<?= $r->id; ?>" selected><?= $r->libelle; ?></option>
                                                 <?php
                                             endforeach;
                                             ?>
                                         </select>
                                     </div>
                                 </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-lg-12">
-                            <fieldset>
                                 <div class="form-group">
                                     <label for="input_remarque" class="col-lg-1 control-label">Remarque</label>
                                     <div class="col-lg-11">
@@ -651,3 +732,37 @@ include '../functions/bootstrap.php';
     </div>
 </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        /**
+         * Ajout/Suppression des diplomes
+         */
+        $('#add_item_dipl').click(function () {
+            var id = $('#cible_dipl_left').val();
+            var right = $('#cible_dipl_left option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '" selected>' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_dipl_right').append(option);
+            else
+                alert('Veuillez selectionner un diplôme à gauche pour l\'ajouter.');
+            $('#cible_dipl_right').each(function () {
+                $('#cible_dipl_left option[value="' + id + '"]').remove();
+            });
+        });
+        $('#rmv_item_dipl').click(function () {
+            var id = $('#cible_dipl_right').val();
+            var right = $('#cible_dipl_right option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '">' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_dipl_left').append(option);
+            else
+                alert('Veuillez selectionner un diplôme à droite pour le supprimer.');
+            $('#cible_dipl_left').each(function () {
+                $('#cible_dipl_right option[value="' + id + '"]').remove();
+            });
+        });
+
+    });
+
+</script>

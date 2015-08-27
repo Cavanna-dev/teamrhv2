@@ -3,7 +3,7 @@
 function getOneDiplomeById($db, $id)
 {
     $sql = "SELECT id, libelle "
-            . "FROM secteur "
+            . "FROM diplome "
             . "WHERE id='" . $id . "'";
     $r_zone = $db->prepare($sql);
     $r_zone->execute();
