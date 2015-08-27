@@ -116,7 +116,7 @@ function searchEval($db)
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_date_eval']))
-        $sql .= "e.creation >= date_sub(now(), interval " . $array_value[':input_date_eval'] . " month) ";
+        $sql .= "e.modification >= date_sub(now(), interval " . $array_value[':input_date_eval'] . " month) ";
     if (!empty($array_value[':input_date_eval']) &&
             (!empty($array_value[':input_age']) || !empty($array_value[':input_sexe']) 
             || !empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_salaire_maxi']) 
