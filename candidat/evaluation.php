@@ -340,7 +340,7 @@ include '../functions/bootstrap.php';
                                     <th class="col-lg-2">Secteur</th>
                                     <th class="col-lg-3">Titre actuel</th>
                                     <th class="col-lg-3">Titre recherché</th>
-                                    <th class="col-lg-1">Salaire actuel</th>
+                                    <th class="col-lg-1">Salaire rech.</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -372,7 +372,7 @@ include '../functions/bootstrap.php';
                                             <?= $r_title2 ? $r_title2->libelle : ''; ?>
                                         </td>
                                         <td>
-                                            <?= $r_eval->salaire_actuel ? $r_eval->salaire_actuel : ''; ?>
+                                            <?= $r_eval->sal_min_rech ? $r_eval->sal_min_rech : ''; ?>
                                         </td>
                                     </tr>
                                     <?php

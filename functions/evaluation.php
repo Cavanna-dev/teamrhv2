@@ -16,7 +16,13 @@ function searchEval($db)
     //var_dump($array_value);die;
     //var_dump($array_value[':input_diplomes']);die;
 
-    $sql = "SELECT e.id, candidat, disponible, secteur_actuel, titre1_actuel, titre1_rech, salaire_actuel "
+    /**
+     * Fonction recherche dans la remarque
+     */
+    $remarque = explode(" ", $array_value[":input_remarque"]);
+    //var_dump($remarque);die;
+    
+    $sql = "SELECT e.id, candidat, disponible, secteur_actuel, titre1_actuel, titre1_rech, sal_min_rech "
             . "FROM evaluation e "
             . "LEFT JOIN  candidat c ON e.candidat = c.id ";
 
@@ -48,8 +54,16 @@ function searchEval($db)
             || !empty($array_value[':input_locs'])
             ))
         $sql .= "AND ";
-    if (!empty($array_value[':input_remarque']))
-        $sql .= "remarque like '%" . $array_value[':input_remarque'] . "%' ";
+    if (!empty($array_value[':input_remarque'])){
+        $nb_result_rmq = 0;
+        $sql .= '( ';
+        foreach ($remarque as $value):
+            $nb_result_rmq++;
+            $nb_result_rmq > 1 ? $sql .= 'OR ' : '';
+            $sql .= "remarque like '%" . $value . "%' ";
+        endforeach;
+        $sql .= ') ';
+    }
     if (!empty($array_value[':input_remarque']) &&
             (!empty($array_value[':input_horaire']) || !empty($array_value[':input_l1']) 
             || !empty($array_value[':input_disponible']) || !empty($array_value[':input_note']) 
@@ -148,7 +162,7 @@ function searchEval($db)
             $nb_result_dipl > 1 ? $sql .= 'OR ' : '';
             $sql .= "diplome = '" . $value . "' ";
         endforeach;
-        $sql .= ')';
+        $sql .= ') ';
     }
     if (!empty($array_value[':input_diplomes']) &&
             (!empty($array_value[':input_exps'] || !empty($array_value[':input_locs']))
@@ -162,7 +176,7 @@ function searchEval($db)
             $nb_result_exp > 1 ? $sql .= 'OR ' : '';
             $sql .= "experience = '" . $value . "' ";
         endforeach;
-        $sql .= ')';
+        $sql .= ') ';
     }
     if (!empty($array_value[':input_exps']) &&
             (!empty($array_value[':input_locs'])

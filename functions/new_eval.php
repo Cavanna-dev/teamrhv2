@@ -23,7 +23,7 @@ try {
             . "`TITRE3_ACTUEL`, `SALAIRE_ACTUEL`, `SECTEUR_RECH`, "
             . "`TITRE1_RECH`, `TITRE2_RECH`, `TITRE3_RECH`, `SAL_MIN_RECH`, `CONTRAT1_RECH`, "
             . "`CONTRAT2_RECH`, `HORAIRES1_RECH`, `HORAIRES2_RECH`, `PREAVIS`, `REMARQUE`, "
-            . "`NOTE`, `CREATION`) "
+            . "`NOTE`) "
             . "VALUES "
             . "(NULL,:input_candidat,:input_disponible,:input_diplome,:input_exp,"
             . ":input_l1,:input_l2,:input_test_fr1,:input_test_fr2,:input_oral_fr,"
@@ -32,7 +32,7 @@ try {
             . ":input_title3,:input_salaire_actuel,:input_zone_rech,"
             . ":input_title_futur1,:input_title_futur2,:input_title_futur3,"
             . ":input_salaire_rech,:input_contrat_1,:input_contrat_2,:input_horaires_1,"
-            . ":input_horaires_2,:input_preavis,:input_remarque,:input_note_gen,'".date('Y-m-d')."')";
+            . ":input_horaires_2,:input_preavis,:input_remarque,:input_note_gen)";
     $stmt = $db->prepare($sql);
     $stmt->execute($array_value);
     $lastId = $db->lastInsertId();
