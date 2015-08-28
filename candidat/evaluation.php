@@ -294,11 +294,50 @@ include '../functions/bootstrap.php';
                                     </div>
                                     <div class="col-lg-5">
                                         <select class="form-control" name="input_zones[]" 
-                                                id="cible_dipl_right" multiple 
+                                                id="cible_zone_right" multiple 
                                                 style="height:100px;">
                                                     <?php
                                                     foreach ($_GET['input_zones'] as $value):
                                                         $r = getOneZoneById($db, $value);
+                                                        ?>
+                                                <option value="<?= $r->id; ?>" selected><?= $r->libelle; ?></option>
+                                                <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="cible_spec_left" class="col-lg-2 control-label">Spécialité</label>
+                                            <div class="col-lg-10">
+                                                <?php $r_specs = getAllSpec($db); ?>
+                                                <select class="form-control" id="cible_spec_left">
+                                                    <?php
+                                                    while ($r_spec = $r_specs->fetch(PDO::FETCH_OBJ)) {
+                                                        ?>
+                                                        <?php if (!in_array($r_spec->id, $_GET['input_specs'])) { ?>
+                                                            <option value="<?= $r_spec->id; ?>"><?= $r_spec->libelle; ?></option>
+                                                        <?php } ?>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="button" value="<<" id="rmv_item_spec">
+                                        <input type="button" value=">>" id="add_item_spec">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" name="input_specs[]" 
+                                                id="cible_spec_right" multiple 
+                                                style="height:100px;">
+                                                    <?php
+                                                    foreach ($_GET['input_specs'] as $value):
+                                                        $r = getOneSpecById($db, $value);
                                                         ?>
                                                 <option value="<?= $r->id; ?>" selected><?= $r->libelle; ?></option>
                                                 <?php
@@ -934,6 +973,68 @@ include '../functions/bootstrap.php';
             });
             $('#cible_loc_right').each(function () {
                 $('#cible_loc_right option').attr("selected");
+            });
+        });
+
+        /**
+         * Ajout/Suppression des secteurs
+         */
+        $('#add_item_zone').click(function () {
+            var id = $('#cible_zone_left').val();
+            var right = $('#cible_zone_left option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '" selected>' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_zone_right').append(option);
+            else
+                alert('Veuillez selectionner un secteur à gauche pour l\'ajouter.');
+            $('#cible_zone_right').each(function () {
+                $('#cible_zone_left option[value="' + id + '"]').remove();
+            });
+        });
+        $('#rmv_item_zone').click(function () {
+            var id = $('#cible_zone_right').val();
+            var right = $('#cible_zone_right option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '">' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_zone_left').append(option);
+            else
+                alert('Veuillez selectionner un secteur à droite pour le supprimer.');
+            $('#cible_zone_left').each(function () {
+                $('#cible_zone_right option[value="' + id + '"]').remove();
+            });
+            $('#cible_zone_right').each(function () {
+                $('#cible_zone_right option').attr("selected");
+            });
+        });
+
+        /**
+         * Ajout/Suppression des spécialités
+         */
+        $('#add_item_spec').click(function () {
+            var id = $('#cible_spec_left').val();
+            var right = $('#cible_spec_left option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '" selected>' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_spec_right').append(option);
+            else
+                alert('Veuillez selectionner une spécialité à gauche pour l\'ajouter.');
+            $('#cible_spec_right').each(function () {
+                $('#cible_spec_left option[value="' + id + '"]').remove();
+            });
+        });
+        $('#rmv_item_spec').click(function () {
+            var id = $('#cible_spec_right').val();
+            var right = $('#cible_spec_right option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '">' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_spec_left').append(option);
+            else
+                alert('Veuillez selectionner une spécialité à droite pour le supprimer.');
+            $('#cible_spec_left').each(function () {
+                $('#cible_spec_right option[value="' + id + '"]').remove();
+            });
+            $('#cible_spec_right').each(function () {
+                $('#cible_spec_right option').attr("selected");
             });
         });
 

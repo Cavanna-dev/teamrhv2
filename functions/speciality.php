@@ -21,4 +21,17 @@ function getAllSpecByEval($db, $id)
     
     return $r;
 }
+
+function getOneSpecById($db, $id)
+{
+    $sql = "SELECT id, libelle "
+            . "FROM specialite "
+            . "WHERE id='" . $id . "'";
+    $r_spec = $db->prepare($sql);
+    $r_spec->execute();
+    $r = $r_spec->fetch(PDO::FETCH_OBJ);
+
+    return $r;
+}
+
 ?>

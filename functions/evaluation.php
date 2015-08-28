@@ -38,6 +38,7 @@ function searchEval($db)
             || !empty($array_value[':input_sexe']) || !empty($array_value[':input_salaire_mini']) 
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_phone']))
@@ -51,7 +52,8 @@ function searchEval($db)
             || !empty($array_value[':input_age']) || !empty($array_value[':input_sexe']) 
             || !empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_salaire_maxi']) 
             || !empty($array_value[':input_diplomes']) || !empty($array_value[':input_exps'])
-            || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
+            || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_remarque'])){
@@ -71,6 +73,7 @@ function searchEval($db)
             || !empty($array_value[':input_sexe']) || !empty($array_value[':input_salaire_mini'])
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_horaire']))
@@ -82,7 +85,8 @@ function searchEval($db)
             || !empty($array_value[':input_date_eval']) || !empty($array_value[':input_age']) 
             || !empty($array_value[':input_sexe']) || !empty($array_value[':input_salaire_mini']) 
             || !empty($array_value[':input_salaire_maxi'])|| !empty($array_value[':input_exps'])
-            || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
+            || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_l1']))
@@ -93,7 +97,8 @@ function searchEval($db)
             || !empty($array_value[':input_sexe']) || !empty($array_value[':input_salaire_mini']) 
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_title_futur']) 
             || !empty($array_value[':input_diplomes'])|| !empty($array_value[':input_exps'])
-            || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
+            || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_disponible']))
@@ -103,7 +108,8 @@ function searchEval($db)
             || !empty($array_value[':input_age']) || !empty($array_value[':input_sexe']) 
             || !empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_salaire_maxi']) 
             || !empty($array_value[':input_diplomes'])|| !empty($array_value[':input_exps'])
-            || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
+            || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_note']))
@@ -113,6 +119,7 @@ function searchEval($db)
             || !empty($array_value[':input_sexe']) || !empty($array_value[':input_salaire_mini']) 
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps'])|| !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_date_eval']))
@@ -121,7 +128,8 @@ function searchEval($db)
             (!empty($array_value[':input_age']) || !empty($array_value[':input_sexe']) 
             || !empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_salaire_maxi']) 
             || !empty($array_value[':input_diplomes'])|| !empty($array_value[':input_exps'])
-            || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
+            || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_age']))
@@ -130,6 +138,7 @@ function searchEval($db)
             (!empty($array_value[':input_sexe']) || !empty($array_value[':input_salaire_mini']) 
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_sexe']))
@@ -137,7 +146,8 @@ function searchEval($db)
     if (!empty($array_value[':input_sexe']) &&
             (!empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_diplomes']) 
             || !empty($array_value[':input_salaire_maxi'])|| !empty($array_value[':input_exps'])
-            || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
+            || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_salaire_mini']))
@@ -145,13 +155,15 @@ function searchEval($db)
     if (!empty($array_value[':input_salaire_mini']) &&
             (!empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_salaire_maxi']))
         $sql .= "sal_min_rech < '" . $array_value[':input_salaire_maxi'] . "' ";
     if (!empty($array_value[':input_salaire_maxi']) &&
             (!empty($array_value[':input_diplomes']) || !empty($array_value[':input_exps'])
-            || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
+            || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_diplomes'])) {
@@ -165,7 +177,8 @@ function searchEval($db)
         $sql .= ') ';
     }
     if (!empty($array_value[':input_diplomes']) &&
-            (!empty($array_value[':input_exps'] || !empty($array_value[':input_locs']))
+            (!empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
+            || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_exps'])) {
@@ -179,7 +192,8 @@ function searchEval($db)
         $sql .= ') ';
     }
     if (!empty($array_value[':input_exps']) &&
-            (!empty($array_value[':input_locs'])
+            (!empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
+            || !empty($array_value[':input_specs'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_locs'])) {
@@ -190,7 +204,35 @@ function searchEval($db)
             $nb_result_loc > 1 ? $sql .= 'OR ' : '';
             $sql .= "SUBSTR(c.postal,1,2) = '" . $value . "' ";
         endforeach;
-        $sql .= ')';
+        $sql .= ') ';
+    }
+    if (!empty($array_value[':input_locs']) &&
+            (!empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
+            ))
+        $sql .= "AND ";
+    if (!empty($array_value[':input_zones'])) {
+        $nb_result_zone = 0;
+        $sql .= '( ';
+        foreach ($array_value[':input_zones'] as $value):
+            $nb_result_zone++;
+            $nb_result_zone > 1 ? $sql .= 'OR ' : '';
+            $sql .= "secteur_actuel = '" . $value . "' ";
+        endforeach;
+        $sql .= ') ';
+    }
+    if (!empty($array_value[':input_zones']) &&
+            (!empty($array_value[':input_specs'])
+            ))
+        $sql .= "AND ";
+    if (!empty($array_value[':input_specs'])) {
+        $nb_result_zone = 0;
+        $sql .= '( ';
+        foreach ($array_value[':input_specs'] as $value):
+            $nb_result_zone++;
+            $nb_result_zone > 1 ? $sql .= 'OR ' : '';
+            $sql .= "secteur_actuel = '" . $value . "' ";
+        endforeach;
+        $sql .= ') ';
     }
     //var_dump($sql);die;
 
