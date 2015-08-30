@@ -24,7 +24,8 @@ function searchEval($db)
     
     $sql = "SELECT e.id, candidat, disponible, secteur_actuel, titre1_actuel, titre1_rech, sal_min_rech "
             . "FROM evaluation e "
-            . "LEFT JOIN  candidat c ON e.candidat = c.id ";
+            . "LEFT JOIN candidat c ON e.candidat = c.id "
+            . "LEFT JOIN eval_spec es ON e.id = es.id_eval ";
 
     if ($flag_array_empty == 1)
         $sql .= "WHERE ";
@@ -39,6 +40,7 @@ function searchEval($db)
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
             || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_phone']))
@@ -53,7 +55,8 @@ function searchEval($db)
             || !empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_salaire_maxi']) 
             || !empty($array_value[':input_diplomes']) || !empty($array_value[':input_exps'])
             || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
-            || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_specs']) || !empty($array_value[':input_titacs'])
+            || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_remarque'])){
@@ -74,6 +77,7 @@ function searchEval($db)
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
             || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_horaire']))
@@ -86,7 +90,8 @@ function searchEval($db)
             || !empty($array_value[':input_sexe']) || !empty($array_value[':input_salaire_mini']) 
             || !empty($array_value[':input_salaire_maxi'])|| !empty($array_value[':input_exps'])
             || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
-            || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_specs']) || !empty($array_value[':input_titacs'])
+            || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_l1']))
@@ -98,7 +103,8 @@ function searchEval($db)
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_title_futur']) 
             || !empty($array_value[':input_diplomes'])|| !empty($array_value[':input_exps'])
             || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
-            || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_specs']) || !empty($array_value[':input_titacs'])
+            || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_disponible']))
@@ -109,7 +115,8 @@ function searchEval($db)
             || !empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_salaire_maxi']) 
             || !empty($array_value[':input_diplomes'])|| !empty($array_value[':input_exps'])
             || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
-            || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_specs']) || !empty($array_value[':input_titacs'])
+            || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_note']))
@@ -120,6 +127,7 @@ function searchEval($db)
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps'])|| !empty($array_value[':input_locs'])
             || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_date_eval']))
@@ -129,7 +137,8 @@ function searchEval($db)
             || !empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_salaire_maxi']) 
             || !empty($array_value[':input_diplomes'])|| !empty($array_value[':input_exps'])
             || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
-            || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_specs']) || !empty($array_value[':input_titacs'])
+            || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_age']))
@@ -139,6 +148,7 @@ function searchEval($db)
             || !empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
             || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_sexe']))
@@ -147,23 +157,25 @@ function searchEval($db)
             (!empty($array_value[':input_salaire_mini']) || !empty($array_value[':input_diplomes']) 
             || !empty($array_value[':input_salaire_maxi'])|| !empty($array_value[':input_exps'])
             || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
-            || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_specs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_salaire_mini']))
-        $sql .= "sal_min_rech > '" . $array_value[':input_salaire_mini'] . "' ";
+        $sql .= "sal_min_rech >= '" . $array_value[':input_salaire_mini'] . "' ";
     if (!empty($array_value[':input_salaire_mini']) &&
             (!empty($array_value[':input_salaire_maxi']) || !empty($array_value[':input_diplomes'])
             || !empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
             || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_salaire_maxi']))
-        $sql .= "sal_min_rech < '" . $array_value[':input_salaire_maxi'] . "' ";
+        $sql .= "sal_min_rech <= '" . $array_value[':input_salaire_maxi'] . "' ";
     if (!empty($array_value[':input_salaire_maxi']) &&
             (!empty($array_value[':input_diplomes']) || !empty($array_value[':input_exps'])
             || !empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
-            || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_specs']) || !empty($array_value[':input_titacs'])
+            || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_diplomes'])) {
@@ -179,6 +191,7 @@ function searchEval($db)
     if (!empty($array_value[':input_diplomes']) &&
             (!empty($array_value[':input_exps']) || !empty($array_value[':input_locs'])
             || !empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_exps'])) {
@@ -193,7 +206,8 @@ function searchEval($db)
     }
     if (!empty($array_value[':input_exps']) &&
             (!empty($array_value[':input_locs']) || !empty($array_value[':input_zones'])
-            || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_specs']) || !empty($array_value[':input_titacs'])
+            || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_locs'])) {
@@ -208,6 +222,7 @@ function searchEval($db)
     }
     if (!empty($array_value[':input_locs']) &&
             (!empty($array_value[':input_zones']) || !empty($array_value[':input_specs'])
+            || !empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_zones'])) {
@@ -221,16 +236,49 @@ function searchEval($db)
         $sql .= ') ';
     }
     if (!empty($array_value[':input_zones']) &&
-            (!empty($array_value[':input_specs'])
+            (!empty($array_value[':input_specs']) || !empty($array_value[':input_titacs'])
+            || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
     if (!empty($array_value[':input_specs'])) {
-        $nb_result_zone = 0;
+        $nb_result_spec = 0;
         $sql .= '( ';
         foreach ($array_value[':input_specs'] as $value):
-            $nb_result_zone++;
-            $nb_result_zone > 1 ? $sql .= 'OR ' : '';
-            $sql .= "secteur_actuel = '" . $value . "' ";
+            $nb_result_spec++;
+            $nb_result_spec > 1 ? $sql .= 'OR ' : '';
+            $sql .= "es.id_spec = '" . $value . "' ";
+        endforeach;
+        $sql .= ') ';
+    }
+    if (!empty($array_value[':input_zones']) &&
+            (!empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
+            ))
+        $sql .= "AND ";
+    if (!empty($array_value[':input_titacs'])) {
+        $nb_result_titac = 0;
+        $sql .= '( ';
+        foreach ($array_value[':input_titacs'] as $value):
+            $nb_result_titac++;
+            $nb_result_titac > 1 ? $sql .= 'OR ' : '';
+            $sql .= "(titre1_actuel = '" . $value . "' "
+                    . "OR titre2_actuel = '" . $value . "' "
+                    . "OR titre3_actuel = '" . $value . "') ";
+        endforeach;
+        $sql .= ') ';
+    }
+    if (!empty($array_value[':input_titacs']) &&
+            (!empty($array_value[':input_titsos'])
+            ))
+        $sql .= "AND ";
+    if (!empty($array_value[':input_titsos'])) {
+        $nb_result_titso = 0;
+        $sql .= '( ';
+        foreach ($array_value[':input_titsos'] as $value):
+            $nb_result_titso++;
+            $nb_result_titso > 1 ? $sql .= 'OR ' : '';
+            $sql .= "(titre1_rech = '" . $value . "' "
+                    . "OR titre2_rech = '" . $value . "' "
+                    . "OR titre3_rech = '" . $value . "') ";
         endforeach;
         $sql .= ') ';
     }

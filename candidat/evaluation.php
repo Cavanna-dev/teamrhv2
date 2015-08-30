@@ -347,6 +347,84 @@ include '../functions/bootstrap.php';
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="cible_titac_left" class="col-lg-2 control-label">Poste Actuel</label>
+                                            <div class="col-lg-10">
+                                                <?php $r_titacs = getAllTitles($db); ?>
+                                                <select class="form-control" id="cible_titac_left">
+                                                    <?php
+                                                    foreach($r_titacs as $value):
+                                                        ?>
+                                                        <?php if (!in_array($value->id, $_GET['input_titacs'])) { ?>
+                                                            <option value="<?= $value->id; ?>"><?= $value->libelle; ?></option>
+                                                        <?php } ?>
+                                                        <?php
+                                                    endforeach;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="button" value="<<" id="rmv_item_titac">
+                                        <input type="button" value=">>" id="add_item_titac">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" name="input_titacs[]" 
+                                                id="cible_titac_right" multiple 
+                                                style="height:100px;">
+                                                    <?php
+                                                    foreach ($_GET['input_titacs'] as $value):
+                                                        $r = getOneTitleById($db, $value);
+                                                        ?>
+                                                <option value="<?= $r->id; ?>" selected><?= $r->libelle; ?></option>
+                                                <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="cible_titso_left" class="col-lg-2 control-label">Poste souhaité</label>
+                                            <div class="col-lg-10">
+                                                <?php $r_titsos = getAllTitles($db); ?>
+                                                <select class="form-control" id="cible_titso_left">
+                                                    <?php
+                                                    foreach($r_titsos as $value):
+                                                        ?>
+                                                        <?php if (!in_array($value->id, $_GET['input_titso'])) { ?>
+                                                            <option value="<?= $value->id; ?>"><?= $value->libelle; ?></option>
+                                                        <?php } ?>
+                                                        <?php
+                                                    endforeach;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="button" value="<<" id="rmv_item_titso">
+                                        <input type="button" value=">>" id="add_item_titso">
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" name="input_titsos[]" 
+                                                id="cible_titso_right" multiple 
+                                                style="height:100px;">
+                                                    <?php
+                                                    foreach ($_GET['input_titsos'] as $value):
+                                                        $r = getOneTitleById($db, $value);
+                                                        ?>
+                                                <option value="<?= $r->id; ?>" selected><?= $r->libelle; ?></option>
+                                                <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="input_remarque" class="col-lg-1 control-label">Remarque</label>
                                     <div class="col-lg-11">
                                         <textarea class="form-control" rows="6" name="input_remarque" id="input_remarque"><?= isset($_GET['input_remarque']) ? $_GET['input_remarque'] : '' ?></textarea>
@@ -1035,6 +1113,68 @@ include '../functions/bootstrap.php';
             });
             $('#cible_spec_right').each(function () {
                 $('#cible_spec_right option').attr("selected");
+            });
+        });
+
+        /**
+         * Ajout/Suppression des titres actuels
+         */
+        $('#add_item_titac').click(function () {
+            var id = $('#cible_titac_left').val();
+            var right = $('#cible_titac_left option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '" selected>' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_titac_right').append(option);
+            else
+                alert('Veuillez selectionner un poste actuel à gauche pour l\'ajouter.');
+            $('#cible_titac_right').each(function () {
+                $('#cible_titac_left option[value="' + id + '"]').remove();
+            });
+        });
+        $('#rmv_item_titac').click(function () {
+            var id = $('#cible_titac_right').val();
+            var right = $('#cible_titac_right option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '">' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_titac_left').append(option);
+            else
+                alert('Veuillez selectionner un poste actuel à droite pour le supprimer.');
+            $('#cible_titac_left').each(function () {
+                $('#cible_titac_right option[value="' + id + '"]').remove();
+            });
+            $('#cible_titac_right').each(function () {
+                $('#cible_titac_right option').attr("selected");
+            });
+        });
+
+        /**
+         * Ajout/Suppression des titres recherchés
+         */
+        $('#add_item_titso').click(function () {
+            var id = $('#cible_titso_left').val();
+            var right = $('#cible_titso_left option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '" selected>' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_titso_right').append(option);
+            else
+                alert('Veuillez selectionner un poste recherché à gauche pour l\'ajouter.');
+            $('#cible_titso_right').each(function () {
+                $('#cible_titso_left option[value="' + id + '"]').remove();
+            });
+        });
+        $('#rmv_item_titso').click(function () {
+            var id = $('#cible_titso_right').val();
+            var right = $('#cible_titso_right option[value="' + id + '"]').text();
+            var option = $('<option value="' + id + '">' + right + '</option>');
+            if (id != '' && right != '')
+                $('#cible_titso_left').append(option);
+            else
+                alert('Veuillez selectionner un poste recherché à droite pour le supprimer.');
+            $('#cible_titso_left').each(function () {
+                $('#cible_titso_right option[value="' + id + '"]').remove();
+            });
+            $('#cible_titso_right').each(function () {
+                $('#cible_titso_right option').attr("selected");
             });
         });
 
