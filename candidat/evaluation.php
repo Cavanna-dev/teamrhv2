@@ -354,7 +354,7 @@ include '../functions/bootstrap.php';
                                                 <?php $r_titacs = getAllTitles($db); ?>
                                                 <select class="form-control" id="cible_titac_left">
                                                     <?php
-                                                    foreach($r_titacs as $value):
+                                                    foreach ($r_titacs as $value):
                                                         ?>
                                                         <?php if (!in_array($value->id, $_GET['input_titacs'])) { ?>
                                                             <option value="<?= $value->id; ?>"><?= $value->libelle; ?></option>
@@ -393,7 +393,7 @@ include '../functions/bootstrap.php';
                                                 <?php $r_titsos = getAllTitles($db); ?>
                                                 <select class="form-control" id="cible_titso_left">
                                                     <?php
-                                                    foreach($r_titsos as $value):
+                                                    foreach ($r_titsos as $value):
                                                         ?>
                                                         <?php if (!in_array($value->id, $_GET['input_titso'])) { ?>
                                                             <option value="<?= $value->id; ?>"><?= $value->libelle; ?></option>
@@ -466,14 +466,20 @@ include '../functions/bootstrap.php';
                                     ?>
                                     <tr>
                                         <td>
-                                            <a href="upd_evaluation.php?id=<?= $r_eval->id; ?>">
+                                            <a href="upd_evaluation.php?id=<?= $r_eval->id ?>">
                                                 <?= $r_eval->id; ?>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="upd_applicant.php?id=<?= $r_eval->candidat; ?>">
-                                                <?php $r_applicant = getOneApplicantById($db, $r_eval->candidat); ?>
-                                                <?= $r_applicant ? $r_applicant->nom . " " . $r_applicant->prenom : ''; ?>
+                                            <a href="upd_applicant.php?id=<?= $r_eval->candidat; ?>"
+                                               tabindex="0" role="button" 
+                                               data-toggle="popover" 
+                                               data-trigger="hover" 
+                                               data-placement="right" 
+                                               data-html="true"
+                                               data-content="<?= str_replace('"', '\'', $r_eval->remarque) ?>">
+                                                   <?php $r_applicant = getOneApplicantById($db, $r_eval->candidat); ?>
+                                                   <?= $r_applicant ? $r_applicant->nom . " " . $r_applicant->prenom : ''; ?>
                                             </a>
                                         </td>
                                         <td>
@@ -960,6 +966,12 @@ include '../functions/bootstrap.php';
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                container: 'body'
+            });
+        });
 
         /**
          * Ajout/Suppression des diplomes

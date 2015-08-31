@@ -22,7 +22,8 @@ function searchEval($db)
     $remarque = explode(" ", $array_value[":input_remarque"]);
     //var_dump($remarque);die;
     
-    $sql = "SELECT e.id, candidat, disponible, secteur_actuel, titre1_actuel, titre1_rech, sal_min_rech "
+    $sql = "SELECT e.id, candidat, disponible, secteur_actuel, titre1_actuel, "
+            . "titre1_rech, sal_min_rech, e.remarque "
             . "FROM evaluation e "
             . "LEFT JOIN candidat c ON e.candidat = c.id "
             . "LEFT JOIN eval_spec es ON e.id = es.id_eval ";
@@ -250,7 +251,7 @@ function searchEval($db)
         endforeach;
         $sql .= ') ';
     }
-    if (!empty($array_value[':input_zones']) &&
+    if (!empty($array_value[':input_specs']) &&
             (!empty($array_value[':input_titacs']) || !empty($array_value[':input_titsos'])
             ))
         $sql .= "AND ";
@@ -260,9 +261,9 @@ function searchEval($db)
         foreach ($array_value[':input_titacs'] as $value):
             $nb_result_titac++;
             $nb_result_titac > 1 ? $sql .= 'OR ' : '';
-            $sql .= "(titre1_actuel = '" . $value . "' "
+            $sql .= "titre1_actuel = '" . $value . "' "
                     . "OR titre2_actuel = '" . $value . "' "
-                    . "OR titre3_actuel = '" . $value . "') ";
+                    . "OR titre3_actuel = '" . $value . "' ";
         endforeach;
         $sql .= ') ';
     }

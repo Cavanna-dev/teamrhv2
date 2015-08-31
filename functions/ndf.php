@@ -22,8 +22,8 @@ function searchNdf($db)
     if (!empty($year))
         $sql .= "annee like '".$year."'";
 
-    $sql .= " ORDER BY ndf.id";
-
+    $sql .= " GROUP BY ndf.id ORDER BY ndf.id";
+    //var_dump($sql);die;
     $r_decaisse = $db->prepare($sql);
     $r_decaisse->execute();
     $r = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
