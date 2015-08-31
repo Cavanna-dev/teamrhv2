@@ -19,7 +19,7 @@
                     $navbar = Array(
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
-                            "evaluation.php" => "Evaluation",
+                            "evaluation.php" => "Recherche",
                             "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
@@ -44,7 +44,7 @@
                     $navbar = Array(
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
-                            "evaluation.php" => "Evaluation",
+                            "evaluation.php" => "Recherche",
                             "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
@@ -69,7 +69,7 @@
                     $navbar = Array(
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
-                            "evaluation.php" => "Evaluation",
+                            "evaluation.php" => "Recherche",
                             "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
@@ -88,7 +88,7 @@
                     $navbar = Array(
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
-                            "evaluation.php" => "Evaluation",
+                            "evaluation.php" => "Recherche",
                             "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(
@@ -107,7 +107,7 @@
                     $navbar = Array(
                         "Candidat" => Array(
                             "applicant.php" => "Candidat",
-                            "evaluation.php" => "Evaluation",
+                            "evaluation.php" => "Recherche",
                             "birthdays.php" => "Anniversaires",
                         ),
                         "Client" => Array(

@@ -4,7 +4,7 @@ switch ($_SESSION['user']['type']):
         $navbar = Array(
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
-                "evaluation.php" => "Evaluation",
+                "evaluation.php" => "Recherche",
                 "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
@@ -29,7 +29,7 @@ switch ($_SESSION['user']['type']):
         $navbar = Array(
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
-                "evaluation.php" => "Evaluation",
+                "evaluation.php" => "Recherche",
                 "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
@@ -54,7 +54,7 @@ switch ($_SESSION['user']['type']):
         $navbar = Array(
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
-                "evaluation.php" => "Evaluation",
+                "evaluation.php" => "Recherche",
                 "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
@@ -73,7 +73,7 @@ switch ($_SESSION['user']['type']):
         $navbar = Array(
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
-                "evaluation.php" => "Evaluation",
+                "evaluation.php" => "Recherche",
                 "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
@@ -92,7 +92,7 @@ switch ($_SESSION['user']['type']):
         $navbar = Array(
             "Candidat" => Array(
                 "applicant.php" => "Candidat",
-                "evaluation.php" => "Evaluation",
+                "evaluation.php" => "Recherche",
                 "birthdays.php" => "Anniversaires",
             ),
             "Client" => Array(
