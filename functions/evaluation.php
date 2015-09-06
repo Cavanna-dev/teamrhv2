@@ -283,6 +283,7 @@ function searchEval($db)
         endforeach;
         $sql .= ') ';
     }
+    $sql .= "GROUP BY e.id";
     //var_dump($sql);die;
 
     $r = $db->prepare($sql);

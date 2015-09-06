@@ -26,8 +26,14 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_month" class="col-lg-3 control-label">Mois</label>
-                                    <div class="col-lg-9">
+                                    <label for="input_id" class="col-lg-2 control-label">ID</label>
+                                    <div class="col-lg-4">
+                                        <input class="form-control" id="input_amount" name="input_id" 
+                                               placeholder="ID" type="text" 
+                                               value="<?= isset($_GET['input_id']) ? $_GET['input_id'] : '' ?>"/>
+                                    </div>
+                                    <label for="input_month" class="col-lg-2 control-label">Mois</label>
+                                    <div class="col-lg-4">
                                         <select class="form-control" name="input_month" 
                                                 id="input_month">
                                             <option value=""></option>
@@ -47,7 +53,21 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="input_ht" class="col-lg-2 control-label">Montants</label>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" id="input_amount" name="input_ht" 
+                                               placeholder="Montant HT" type="text" 
+                                               value="<?= isset($_GET['input_ht']) ? $_GET['input_ht'] : '' ?>"/>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" id="input_amount" name="input_ttc" 
+                                               placeholder="Montant TTC" type="text" 
+                                               value="<?= isset($_GET['input_ttc']) ? $_GET['input_ttc'] : '' ?>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-lg-9">
+                                        <a href='./simple_ndf.php?<?= $_SERVER['QUERY_STRING'] ?>'><button type="button" class="btn btn-primary">Tableau simple</button></a>
                                         <button type="submit" class="btn btn-primary">Rechercher</button>
                                     </div>
                                 </div>
@@ -88,7 +108,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         //var_dump($r_ndfs);die;
                         ?>
                         
-                        <h1>Résultats - <?= count($r_ndfs) ?> notes de frais</h1>
+                        <h1>Résultats - <?= count($r_ndfs) ?> notes de frais - <?= $_GET['input_month'] ?></h1>
                         <div class="jumbotron">
                             <table class="table table-striped table-hover ">
                                 <thead>
@@ -102,9 +122,16 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                 </thead>
                                 <tbody>
                                     <?php
+                                    
                                     $total_ht_ndf = 0;
                                     $total_tva_ndf = 0;
+                                    $total_tva_0_ndf = 0;
+                                    $total_tva_5_ndf = 0;
+                                    $total_tva_10_ndf = 0;
+                                    $total_tva_20_ndf = 0;
+                                    $total_tva_unk_ndf = 0;
                                     $total_ttc_ndf = 0;
+                                    
                                     foreach ($r_ndfs as $r_ndfs) {
                                         ?>
                                         <tr>
@@ -130,6 +157,27 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         $total_ht_ndf += $r_ndfs->ht_tot_amount;
                                         $total_tva_ndf += $r_ndfs->tva_tot_amount;
                                         $total_ttc_ndf += $r_ndfs->ttc_tot_amount;
+                                        
+                                        $ndfd = getAllNdfDByNdfId($db, $r_ndfs->id);
+                                        foreach($ndfd as $k => $v):
+                                            switch ($v->TVA_PERCENT):
+                                                case '0.00':
+                                                    $total_tva_0_ndf += $v->TTC_AMOUNT;
+                                                    break;
+                                                case '5.50':
+                                                    $total_tva_5_ndf += $v->TVA_AMOUNT;
+                                                    break;
+                                                case '10.00':
+                                                    $total_tva_10_ndf += $v->TVA_AMOUNT;
+                                                    break;
+                                                case '20.00':
+                                                    $total_tva_20_ndf += $v->TVA_AMOUNT;
+                                                    break;
+                                                default:
+                                                    $total_tva_unk_ndf += $v->TVA_AMOUNT;
+                                                    break;
+                                            endswitch;
+                                        endforeach;
                                     }
                                     ?>
                                 </tbody>
@@ -151,7 +199,47 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total HT
                                     </td>
                                     <td>
-                                        <?= isset($total_ht_ndf) ? $total_ht_ndf : '' ?>
+                                        <?= isset($total_ht_ndf) ? $total_ht_ndf : 0 ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Total TVA 0%
+                                    </td>
+                                    <td>
+                                        <?= isset($total_tva_0_ndf) ? $total_tva_0_ndf : 0 ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Total TVA 5,5%
+                                    </td>
+                                    <td>
+                                        <?= isset($total_tva_5_ndf) ? $total_tva_5_ndf : 0 ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Total TVA 10%
+                                    </td>
+                                    <td>
+                                        <?= isset($total_tva_10_ndf) ? $total_tva_10_ndf : 0 ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Total TVA 20%
+                                    </td>
+                                    <td>
+                                        <?= isset($total_tva_20_ndf) ? $total_tva_20_ndf : 0 ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Total TVA inconnue
+                                    </td>
+                                    <td>
+                                        <?= isset($total_tva_unk_ndf) ? $total_tva_unk_ndf : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -159,7 +247,12 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total TVA
                                     </td>
                                     <td>
-                                        <?= isset($total_tva_ndf) ? $total_tva_ndf : '' ?>
+                                        <?= (isset($total_tva_0_ndf) ? $total_tva_0_ndf : 0) 
+                                            + (isset($total_tva_5_ndf) ? $total_tva_5_ndf : 0) 
+                                            + (isset($total_tva_10_ndf) ? $total_tva_10_ndf : 0) 
+                                            + (isset($total_tva_20_ndf) ? $total_tva_20_ndf : 0) 
+                                            + (isset($total_tva_unk_ndf) ? $total_tva_unk_ndf : 0) 
+                                        ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -167,7 +260,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total TTC
                                     </td>
                                     <td>
-                                        <?= isset($total_ttc_ndf) ? $total_ttc_ndf : '' ?>
+                                        <?= isset($total_ttc_ndf) ? $total_ttc_ndf : 0 ?>
                                     </td>
                                 </tr>
                             </tbody>
@@ -216,7 +309,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                             <?php 
                                             for($i=2002 ; $i<=date('Y') ; $i++):
                                             ?>
-                                                <option value="<?= $i ?>" ><?= $i ?></option>
+                                                <option value="<?= $i ?>" <?php if(date('Y') == $i) echo "selected"; ?>><?= $i ?></option>
                                             <?php
                                             endfor;
                                             ?>

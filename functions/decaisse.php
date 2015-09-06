@@ -15,10 +15,9 @@ function searchDecaisse($db)
     $paie_max = $_GET['input_date_paie_maxi'] ? htmlspecialchars($_GET['input_date_paie_maxi']) : '';
     
     $sql = "SELECT d.id, f.nom, d.ref_facture, d.ref_paiement, d.date_compta, d.date_paiement, "
-            . "dd.ht_amount, dd.tva_amount, dd.ttc_amount "
+            . "dec_ht_tot_amount, dec_tva_tot_amount, dec_ttc_tot_amount "
             . "FROM decaisse d "
-            . "LEFT JOIN fournisseur f ON d.fournisseur = f.id "
-            . "INNER JOIN decaisse_detail dd ON d.id = dd.fk_decaisse_id ";
+            . "LEFT JOIN fournisseur f ON d.fournisseur = f.id ";
 
     if (!empty($fourn) || !empty($ref_fac) || !empty($ref_paie) || !empty($compta_min) || !empty($compta_max)
              || !empty($paie_min) || !empty($paie_max) || !empty($amount))
@@ -45,7 +44,7 @@ function searchDecaisse($db)
     if (!empty($amount))
         $sql .= "dec_ttc_tot_amount = '".$amount."'";
 
-    $sql .= " ORDER BY date_compta desc";
+    $sql .= " ORDER BY date_compta ";
 
     $r_decaisse = $db->prepare($sql);
     $r_decaisse->execute();

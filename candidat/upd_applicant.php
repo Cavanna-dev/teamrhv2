@@ -163,7 +163,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                                 <div class="form-group">
                                     <label for="input_postal" class="col-lg-2 control-label">Code postal</label>
                                     <div class="col-lg-10">
-                                        <input type="number" class="form-control" name="input_postal" id="input_postal" value="<?= $r->postal ?>" placeholder="Code postal">
+                                        <input type="text" class="form-control" name="input_postal" id="input_postal" value="<?= $r->postal ?>" placeholder="Code postal">
                                     </div>
                                 </div>
                                 <div class="form-group">

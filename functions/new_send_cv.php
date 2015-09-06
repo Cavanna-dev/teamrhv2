@@ -56,4 +56,4 @@ foreach ($_POST['prospects'] as $prospect) :
     }
 endforeach;
 
-header('Location:../candidat/upd_applicant.php?id='.$array_value['candidat'].'&sendCv');
+header('Location:../candidat/upd_applicant.php?id=' . $array_value['candidat'] . '&sendCv');

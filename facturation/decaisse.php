@@ -163,19 +163,19 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                                 <?= date("d/m/Y", strtotime($r_decaisse->date_paiement)) ?>
                                             </td>
                                             <td class="text-right">
-                                                <?= $r_decaisse->ht_amount ?>
+                                                <?= $r_decaisse->dec_ht_tot_amount ?>
                                             </td>
                                             <td class="text-right">
-                                                <?= $r_decaisse->tva_amount ?>
+                                                <?= $r_decaisse->dec_tva_tot_amount ?>
                                             </td>
                                             <td class="text-right">
-                                                <?= $r_decaisse->ttc_amount ?>
+                                                <?= $r_decaisse->dec_ttc_tot_amount ?>
                                             </td>
                                         </tr>
                                         <?php
-                                        $amount_ht_tot += $r_decaisse->ht_amount;
-                                        $amount_tva_tot += $r_decaisse->tva_amount;
-                                        $amount_ttc_tot += $r_decaisse->ttc_amount;
+                                        $amount_ht_tot += $r_decaisse->dec_ht_tot_amount;
+                                        $amount_tva_tot += $r_decaisse->dec_tva_tot_amount;
+                                        $amount_ttc_tot += $r_decaisse->dec_ttc_tot_amount;
                                     }
                                     ?>
                                 </tbody>
