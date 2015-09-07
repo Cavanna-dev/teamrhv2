@@ -161,9 +161,6 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         $ndfd = getAllNdfDByNdfId($db, $r_ndfs->id);
                                         foreach($ndfd as $k => $v):
                                             switch ($v->TVA_PERCENT):
-                                                case '0.00':
-                                                    $total_tva_0_ndf += $v->TTC_AMOUNT;
-                                                    break;
                                                 case '5.50':
                                                     $total_tva_5_ndf += $v->TVA_AMOUNT;
                                                     break;
@@ -200,14 +197,6 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                     </td>
                                     <td>
                                         <?= isset($total_ht_ndf) ? $total_ht_ndf : 0 ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Total TVA 0%
-                                    </td>
-                                    <td>
-                                        <?= isset($total_tva_0_ndf) ? $total_tva_0_ndf : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
