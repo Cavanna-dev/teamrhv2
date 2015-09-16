@@ -91,7 +91,7 @@ function searchJobs($db)
     if (!empty($name) || !empty($customer) || !empty($contact) || !empty($statut))
         $sql .= "WHERE ";
     if (!empty($name))
-        $sql .= "libelle like '%" . $name . "%' ";
+        $sql .= "p.libelle like '%" . $name . "%' ";
     if (!empty($name) && (!empty($customer) || !empty($contact) || !empty($statut)))
         $sql .= " AND ";
     if (!empty($customer))
