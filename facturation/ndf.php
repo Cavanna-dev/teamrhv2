@@ -15,11 +15,11 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
 <div class="container">
     <h1>Gestion Notes de Frais</h1>
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#search" data-toggle="tab">Rechercher</a></li>
-        <li><a href="#add" data-toggle="tab">Ajouter</a></li>
+        <li <?= isset($_GET['tab']) ? '' : 'class="active"' ?>><a href="#search" data-toggle="tab">Rechercher</a></li>
+        <li <?= (isset($_GET['tab']) && $_GET['tab'] == 'new') ? 'class="active"' : '' ?>><a href="#add" data-toggle="tab">Ajouter</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="search">
+        <div class="tab-pane fade <?= (isset($_GET['tab']) && $_GET['tab'] == 'new') ? "" : "active in" ?>" id="search">
             <form class="form-horizontal" method="GET" action="ndf.php" id="form_customer">
                 <div class="jumbotron">
                     <div class="row">
@@ -101,7 +101,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                 </div>
 
                 <?php
-                if (!empty($_GET)) {
+                if (!empty($_GET) && !isset($_GET['tab']) ) {
                     $r_ndfs = searchNdf($db);
 
                     if ($r_ndfs) {
@@ -258,7 +258,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                 <?php } ?>
             </form>
         </div>
-        <div class="tab-pane fade" id="add">
+        <div class="tab-pane fade <?= (isset($_GET['tab']) && $_GET['tab'] == 'new') ? "active in" : "" ?>" id="add">
             <form class="form-horizontal" method="POST" action="../functions/new_ndf.php" id="form_decaisse">
                 <div class="jumbotron">
                     <div class="row">

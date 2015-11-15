@@ -77,7 +77,7 @@ try {
     $stmt->execute();
     }
     
-    header('Location:../facturation/upd_ndf.php?id='.$lastId.'&success=n');
+    header('Location:../facturation/ndf.php?tab=new');
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
 }
