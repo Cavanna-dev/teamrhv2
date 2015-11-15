@@ -76,8 +76,13 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         <div class="col-lg-6">
                             <fieldset>
                                 <div class="form-group">
-                                    <label for="input_amount" class="col-lg-3 control-label">Montant TTC</label>
-                                    <div class="col-lg-9">
+                                    <label for="input_amount" class="col-lg-2 control-label">Montants</label>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" id="input_amount" name="input_ht" 
+                                               placeholder="Montant HT" type="text" 
+                                               value="<?= isset($_GET['input_ht']) ? $_GET['input_ht'] : '' ?>"/>
+                                    </div>
+                                    <div class="col-lg-5">
                                         <input class="form-control" id="input_amount" name="input_amount" 
                                                placeholder="Montant TTC" type="text" 
                                                value="<?= isset($_GET['input_amount']) ? $_GET['input_amount'] : '' ?>"/>
@@ -197,7 +202,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total HT
                                     </td>
                                     <td>
-                                        <?= $amount_ht_tot ?>
+                                        <?= isset($amount_ht_tot) ? $amount_ht_tot : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -205,7 +210,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total TVA
                                     </td>
                                     <td>
-                                        <?= $amount_tva_tot ?>
+                                        <?= isset($amount_tva_tot) ? $amount_tva_tot : 0 ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -213,7 +218,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                         Total TTC
                                     </td>
                                     <td>
-                                        <?= $amount_ttc_tot ?>
+                                        <?= isset($amount_ttc_tot) ? $amount_ttc_tot : 0 ?>
                                     </td>
                                 </tr>
                             </tbody>

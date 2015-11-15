@@ -6,6 +6,7 @@ function searchDecaisse($db)
     //var_dump($_GET);die;
     
     $fourn = $_GET['input_fournisseur'] ? htmlspecialchars($_GET['input_fournisseur']) : '';
+    $ht = $_GET['input_ht'] ? htmlspecialchars($_GET['input_ht']) : '';
     $amount = $_GET['input_amount'] ? htmlspecialchars($_GET['input_amount']) : '';
     $ref_fac   = $_GET['input_ref_fac'] ? htmlspecialchars($_GET['input_ref_fac']) : '';
     $ref_paie   = $_GET['input_ref_paie'] ? htmlspecialchars($_GET['input_ref_paie']) : '';
@@ -20,32 +21,38 @@ function searchDecaisse($db)
             . "LEFT JOIN fournisseur f ON d.fournisseur = f.id ";
 
     if (!empty($fourn) || !empty($ref_fac) || !empty($ref_paie) || !empty($compta_min) || !empty($compta_max)
-             || !empty($paie_min) || !empty($paie_max) || !empty($amount))
+             || !empty($paie_min) || !empty($paie_max) || !empty($amount) || !empty($ht))
         $sql .= "WHERE ";
     if (!empty($fourn))
         $sql .= "fournisseur = '".$fourn."'";
     if (!empty($fourn) && (!empty($ref_fac) || !empty($ref_paie) || !empty($compta_min) || !empty($compta_max) 
-            || !empty($paie_min) || !empty($paie_max) || !empty($amount)))
+            || !empty($paie_min) || !empty($paie_max) || !empty($amount) || !empty($ht)))
         $sql .= " AND ";
     if (!empty($ref_fac))
         $sql .= "ref_facture like '%".$ref_fac."%'";
     if (!empty($ref_fac) && (!empty($ref_paie) || !empty($compta_min) || !empty($compta_max) 
-            || !empty($paie_min) || !empty($paie_max) || !empty($amount)))
+            || !empty($paie_min) || !empty($paie_max) || !empty($amount) || !empty($ht)))
         $sql .= " AND ";
     if (!empty($ref_paie))
         $sql .= "ref_paiement like '%".$ref_paie."%'";
     if (!empty($ref_paie) && (!empty($compta_min) || !empty($compta_max) 
-            || !empty($paie_min) || !empty($paie_max) || !empty($amount)))
+            || !empty($paie_min) || !empty($paie_max) || !empty($amount)
+            || !empty($ht)))
         $sql .= " AND ";
     if (!empty($compta_min) || !empty($compta_max))
         $sql .= "date_compta BETWEEN '".$compta_min."' AND '".$compta_max."'";
-    if (!empty($amount) && (!empty($compta_min) || !empty($compta_max)))
+    if ((!empty($compta_min) || !empty($compta_max)) 
+            && (!empty($amount) || !empty($ht)))
+        $sql .= " AND ";
+    if (!empty($ht))
+        $sql .= "dec_ht_tot_amount = ".$ht;
+    if (!empty($ht) && !empty($amount))
         $sql .= " AND ";
     if (!empty($amount))
-        $sql .= "dec_ttc_tot_amount = '".$amount."'";
+        $sql .= "dec_ttc_tot_amount = ".$amount;
 
     $sql .= " ORDER BY date_compta ";
-
+    //var_dump($sql);die;
     $r_decaisse = $db->prepare($sql);
     $r_decaisse->execute();
     $r = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
