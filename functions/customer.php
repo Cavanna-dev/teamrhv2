@@ -34,41 +34,49 @@ function searchCustomers($db)
     $statut = htmlspecialchars($_GET['input_statut']);
     $contact_s = htmlspecialchars($_GET['input_contact_supp']);
     $contact_l = htmlspecialchars($_GET['input_contact_law']);
+    $contactName = htmlspecialchars($_GET['input_contact_name']);
 
-    $sql = "SELECT id, nom, secteur, mngt_law, mngt_supp, tel_std "
-            . "FROM client ";
+    $sql = "SELECT c.id, c.nom, c.secteur, c.mngt_law, c.mngt_supp, c.tel_std "
+            . "FROM client c "
+            . "LEFT JOIN contact co ON co.client = c.id ";
 
     if (!empty($name) || !empty($zone) || !empty($nation) || !empty($contact_s) 
-            || !empty($contact_l) || !empty($statut))
+            || !empty($contact_l) || !empty($statut) || !empty($contactName))
         $sql .= "WHERE ";
     if (!empty($name))
-        $sql .= "nom like '%" . $name . "%' ";
+        $sql .= "c.nom like '%" . $name . "%' ";
     if (!empty($name) && (!empty($zone) || !empty($nation) || !empty($contact_s) 
-            || !empty($contact_l) || !empty($statut)))
+            || !empty($contact_l) || !empty($statut) || !empty($contactName)))
         $sql .= " AND ";
     if (!empty($nation))
-        $sql .= "nationalite = '" . $nation . "' ";
+        $sql .= "c.nationalite = '" . $nation . "' ";
     if (!empty($nation) && (!empty($zone) || !empty($contact_s) || !empty($contact_l) 
-            || !empty($statut)))
+            || !empty($statut) || !empty($contactName)))
         $sql .= " AND ";
     if (!empty($zone))
-        $sql .= "secteur = '" . $zone . "' ";
+        $sql .= "c.secteur = '" . $zone . "' ";
     if (!empty($zone) && (!empty($contact_s) || !empty($contact_l) 
-            || !empty($statut)))
+            || !empty($statut) || !empty($contactName)))
         $sql .= " AND ";
     if (!empty($contact_s))
-        $sql .= "mngt_supp = '" . $contact_s . "' ";
-    if (!empty($contact_s) && (!empty($contact_l) || !empty($statut)))
+        $sql .= "c.mngt_supp = '" . $contact_s . "' ";
+    if (!empty($contact_s) && (!empty($contact_l) || !empty($statut) || !empty($contactName)))
         $sql .= " AND ";
     if (!empty($contact_l))
-        $sql .= "mngt_law = '" . $contact_l . "' ";
-    if (!empty($contact_l) && !empty($statut))
+        $sql .= "c.mngt_law = '" . $contact_l . "' ";
+    if (!empty($contact_l) && (!empty($statut) || !empty($contactName)))
         $sql .= " AND ";
     if (!empty($statut))
-        $sql .= "status_fk = '" . $statut . "' ";
-
-    $sql .= "ORDER BY nom";
-
+        $sql .= "c.status_fk = '" . $statut . "' ";
+    if (!empty($statut) && !empty($contactName))
+        $sql .= " AND ";
+    if (!empty($contactName)){
+        $sql .= "(co.nom like '%" . $contactName . "%' OR ";
+        $sql .= "co.prenom like '%" . $contactName . "%') ";
+    }
+        
+    $sql .= "ORDER BY c.nom";
+    //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();
 

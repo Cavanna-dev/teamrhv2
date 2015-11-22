@@ -48,6 +48,13 @@ include '../functions/bootstrap.php';
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="input_contact_name" class="col-lg-3 control-label">Nom contact client</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" id="input_contact_name" name="input_contact_name" 
+                                       placeholder="Nom contact" type="text" value="<?= isset($_GET['input_contact_name']) ? $_GET['input_contact_name'] : ""; ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-lg-9">
                                 <button type="submit" class="btn btn-primary">Rechercher</button>
                             </div>
