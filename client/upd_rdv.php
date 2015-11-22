@@ -114,8 +114,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $subject_cust = "TeamRH : Confirmation d’entretien";
                                 //var_dump($r_applicant);die;
                                 if (isset($r_applicant->sexe)) {
-                                    switch ($r_applicant->sexe)
-                                    {
+                                    switch ($r_applicant->sexe) {
                                         case "M" : $body_cust = "Monsieur,";
                                             break;
                                         case "F" : $body_cust = "Madame,";
@@ -124,14 +123,14 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                             break;
                                     }
                                 }
-                                
+
                                 $body_cust .= "%0A%0ANous vous confirmons le rendez-vous avec ";
                                 $body_cust .= $r_applicant->nom . ' ' . $r_applicant->prenom;
                                 $body_cust .= " le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . ".";
                                 $body_cust .= "%0ANous restons à votre disposition.";
                                 $body_cust .= "%0A%0ATrès sincèrement. ";
                                 ?>
-                                <a href="mailto:<?= isset($mail_contact->email) ? $mail_contact->email : ''  ?>?subject=<?= $subject_cust . "&body=" . $body_cust ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
+                                <a href="mailto:<?= isset($mail_contact->email) ? $mail_contact->email : '' ?>?subject=<?= $subject_cust . "&body=" . $body_cust ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
                                 <?php
                                 $subject_appli = "TeamRH : Confirmation d’entretien";
                                 $body_appli = "******************";
@@ -141,10 +140,10 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $body_appli .= "%0A%0AVotre rendez-vous a été confirmé pour "
                                         . "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . " "
                                         . "avec ";
-                                if($mail_contact){
-                                $body_appli .= isset($mail_contact->civilite) ? $mail_contact->civilite : '' . " " .
-                                        isset($mail_contact->nom) ? $mail_contact->nom : '' . " " .
-                                        isset($mail_contact->prenom) ? $mail_contact->prenom : '';
+                                if ($mail_contact) {
+                                    $body_appli .= $mail_contact->civilite . " ";
+                                    $body_appli .= $mail_contact->nom . " ";
+                                    $body_appli .= $mail_contact->prenom;
                                 }
                                 $body_appli .= "%0A" . str_replace("&", "et", $mail_customer->nom);
                                 $body_appli .= "%0A" . $mail_customer->adresse1;
