@@ -15,7 +15,7 @@ function searchDecaisse($db)
     $paie_min = $_GET['input_date_paie_mini'] ? htmlspecialchars($_GET['input_date_paie_mini']) : '';
     $paie_max = $_GET['input_date_paie_maxi'] ? htmlspecialchars($_GET['input_date_paie_maxi']) : '';
     
-    $sql = "SELECT d.id, f.nom, d.ref_facture, d.ref_paiement, d.date_compta, d.date_paiement, "
+    $sql = "SELECT d.id, f.id as idFourn, f.nom, d.ref_facture, d.ref_paiement, d.date_compta, d.date_paiement, "
             . "dec_ht_tot_amount, dec_tva_tot_amount, dec_ttc_tot_amount "
             . "FROM decaisse d "
             . "LEFT JOIN fournisseur f ON d.fournisseur = f.id ";

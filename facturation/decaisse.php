@@ -178,7 +178,9 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                             </td>
                                         </tr>
                                         <?php
-                                        $amount_ht_tot += $r_decaisse->dec_ht_tot_amount;
+                                        if ($r_decaisse->idFourn != 37) {
+                                            $amount_ht_tot += $r_decaisse->dec_ht_tot_amount;
+                                        }
                                         $amount_tva_tot += $r_decaisse->dec_tva_tot_amount;
                                         $amount_ttc_tot += $r_decaisse->dec_ttc_tot_amount;
                                     }

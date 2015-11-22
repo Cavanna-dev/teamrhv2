@@ -55,79 +55,80 @@ $r_decaisse->execute();
 $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
 ?>
 
-<h1><?= count($r_ndfs) ?> notes de frais - <?= $_GET['input_month'] != '' ? $_GET['input_month'] : 'Aucun mois selectionne'; ?></h1>
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Description</th>
-                <th>HT</th>
-                <th>TVA</th>
-                <th>TTC</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $total_ht_ndf = 0;
-            $total_tva_ndf = 0;
-            $total_tva_0_ndf = 0;
-            $total_tva_5_ndf = 0;
-            $total_tva_10_ndf = 0;
-            $total_tva_20_ndf = 0;
-            $total_tva_unk_ndf = 0;
-            $total_ttc_ndf = 0;
-
-            foreach ($r_ndfs as $r_ndfs) {
-                ?>
+<body style="width:800px;margin: auto;">
+    <h1><?= count($r_ndfs) ?> notes de frais - <?= $_GET['input_month'] != '' ? $_GET['input_month'] : 'Aucun mois selectionne'; ?> <?= $_GET['input_year'] != '' ? $_GET['input_year'] : ''; ?></h1>
+    <div>
+        <table border="1" style="width:100%">
+            <thead>
                 <tr>
-                    <td>
-                        <?= $r_ndfs->id ?>
-                    </td>
-                    <td>
-                        <?= $r_ndfs->description ?>
-                    </td>
-                    <td>
-                        <?= $r_ndfs->ht_tot_amount ?>
-                    </td>
-                    <td>
-                        <?= $r_ndfs->tva_tot_amount ?>
-                    </td>
-                    <td>
-                        <?= $r_ndfs->ttc_tot_amount ?>
-                    </td>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>HT</th>
+                    <th>TVA</th>
+                    <th>TTC</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php
-                $total_ht_ndf += $r_ndfs->ht_tot_amount;
-                $total_tva_ndf += $r_ndfs->tva_tot_amount;
-                $total_ttc_ndf += $r_ndfs->ttc_tot_amount;
+                $total_ht_ndf = 0;
+                $total_tva_ndf = 0;
+                $total_tva_0_ndf = 0;
+                $total_tva_5_ndf = 0;
+                $total_tva_10_ndf = 0;
+                $total_tva_20_ndf = 0;
+                $total_tva_unk_ndf = 0;
+                $total_ttc_ndf = 0;
 
-                $ndfd = getAllNdfDByNdfId($db, $r_ndfs->id);
-                foreach ($ndfd as $k => $v):
-                    switch ($v->TVA_PERCENT):
-                        case '0.00':
-                            $total_tva_0_ndf += $v->TTC_AMOUNT;
-                            break;
-                        case '5.50':
-                            $total_tva_5_ndf += $v->TVA_AMOUNT;
-                            break;
-                        case '10.00':
-                            $total_tva_10_ndf += $v->TVA_AMOUNT;
-                            break;
-                        case '20.00':
-                            $total_tva_20_ndf += $v->TVA_AMOUNT;
-                            break;
-                        default:
-                            $total_tva_unk_ndf += $v->TVA_AMOUNT;
-                            break;
-                    endswitch;
-                endforeach;
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
+                foreach ($r_ndfs as $r_ndfs) {
+                    ?>
+                    <tr>
+                        <td>
+                            <?= $r_ndfs->id ?>
+                        </td>
+                        <td>
+                            <?= $r_ndfs->description ?>
+                        </td>
+                        <td style="text-align: right">
+                            <?= $r_ndfs->ht_tot_amount ?>
+                        </td>
+                        <td style="text-align: right">
+                            <?= $r_ndfs->tva_tot_amount ?>
+                        </td>
+                        <td style="text-align: right">
+                            <?= $r_ndfs->ttc_tot_amount ?>
+                        </td>
+                    </tr>
+                    <?php
+                    $total_ht_ndf += $r_ndfs->ht_tot_amount;
+                    $total_tva_ndf += $r_ndfs->tva_tot_amount;
+                    $total_ttc_ndf += $r_ndfs->ttc_tot_amount;
 
+                    $ndfd = getAllNdfDByNdfId($db, $r_ndfs->id);
+                    foreach ($ndfd as $k => $v):
+                        switch ($v->TVA_PERCENT):
+                            case '0.00':
+                                $total_tva_0_ndf += $v->TTC_AMOUNT;
+                                break;
+                            case '5.50':
+                                $total_tva_5_ndf += $v->TVA_AMOUNT;
+                                break;
+                            case '10.00':
+                                $total_tva_10_ndf += $v->TVA_AMOUNT;
+                                break;
+                            case '20.00':
+                                $total_tva_20_ndf += $v->TVA_AMOUNT;
+                                break;
+                            default:
+                                $total_tva_unk_ndf += $v->TVA_AMOUNT;
+                                break;
+                        endswitch;
+                    endforeach;
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
 <?php
 
 function getAllNdfDByNdfId($db, $id)
