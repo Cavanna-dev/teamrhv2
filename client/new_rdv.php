@@ -3,8 +3,6 @@ include '../template/header.php';
 include '../template/menu.php';
 include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
-
-$applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
 ?>
 
 <div class="container" style="font-size: 8px!important;">
@@ -17,10 +15,15 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                         <div class="form-group">
                             <label for="input_applicant" class="col-lg-2 control-label">Candidat*</label>
                             <div class="col-lg-10">
-                                <?php $r_applicant = getOneApplicantById($db, $applicantId); ?>		
+                                <?php $r_applicants = getAllApplicants($db); ?>		
                                 <select class="form-control" 
                                         name="input_applicant">
-                                    <option value="<?= $r_applicant->id ?>"   ><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?>   </option>
+                                    <option value=""></option>
+                                    <?php
+                                    while ($r_applicant = $r_applicants->fetch(PDO::FETCH_OBJ)) {
+                                        ?>
+                                        <option value="<?= $r_applicant->id ?>" <?php if (isset($_GET['candidat']) && $r_applicant->id == $_GET['candidat']) echo 'selected'; ?>><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -45,16 +48,16 @@ $applicantId = $_GET['candidat'] ? $_GET['candidat'] : '0';
                             <label for="input_job" class="col-lg-2 control-label">Poste</label>
                             <div class="col-lg-10">
                                 <?php if (isset($_GET['client'])) { ?>
-                                    <?php $r_jobs = getJobByCustomer($db, $_GET['client']); ?>
+                                    <?php $r_jobs = getJobsCustomer($db, $_GET['client']); ?>
+                                    <?php //var_dump($r_jobs); ?>    
                                     <select class="form-control" 
                                             name="input_job">
                                         <option value=""></option>
                                         <?php
-                                        //var_dump($r_jobs);die;
                                         if (count($r_jobs) != 0) {
                                             foreach ($r_jobs as $r_job) :
                                                 ?>
-                                                <option value="<?= $r_job['ID']; ?>"><?= $r_job['libelle']; ?></option>
+                                                <option value="<?= $r_job->id; ?>" <?php if (isset($_GET['poste']) && $r_job->id == $_GET['poste']) echo 'selected'; ?>><?= $r_job->libelle ?></option>
                                                 <?php
                                             endforeach;
                                         }else {

@@ -58,6 +58,9 @@ if (!$r) {
                         </div>
                         <div class="col-lg-3">
                             <h1 class="pull-right">
+                                <a href="new_rdv.php?client=<?= $_GET['id'] ?>">
+                                    <button type="button" class="btn btn-primary">Créer RDV</button>
+                                </a>
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                             </h1>
                         </div>
