@@ -66,6 +66,14 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="input_desc" class="col-lg-2 control-label">Description</label>
+                                    <div class="col-lg-10">
+                                        <textarea class="form-control" id="input_desc" name="input_desc" 
+                                               placeholder="Description"
+                                               ><?= isset($_GET['input_desc']) ? $_GET['input_desc'] : '' ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-lg-9">
                                         <a href='./simple_ndf.php?<?= $_SERVER['QUERY_STRING'] ?>'><button type="button" class="btn btn-primary">Tableau simple</button></a>
                                         <button type="submit" class="btn btn-primary">Rechercher</button>

@@ -10,34 +10,39 @@ function searchNdf($db)
     $year = $_GET['input_year'] ? htmlspecialchars($_GET['input_year']) : '';
     $ht = $_GET['input_ht'] ? htmlspecialchars($_GET['input_ht']) : '';
     $ttc = $_GET['input_ttc'] ? htmlspecialchars($_GET['input_ttc']) : '';
+    $desc = $_GET['input_desc'] ? $_GET['input_desc'] : '';
     
     $sql = "SELECT ndf.id, ndf.description, ndf.ht_tot_amount, ndf.tva_tot_amount,"
-            . "ndf.ttc_tot_amount "
+            . "ndf.ttc_tot_amount, ndf.description "
             . "FROM notesfrais ndf ";
 
     if (!empty($month) || !empty($year) || !empty($id) || !empty($ht) 
-            || !empty($ttc))
+            || !empty($ttc) || !empty($desc))
         $sql .= "WHERE ";
     if (!empty($month))
         $sql .= "mois = '".$month."'";
     if (!empty($month) && (!empty($year) || !empty($id) || !empty($ht) 
-            || !empty($ttc) ))
+            || !empty($ttc) || !empty($desc) ))
         $sql .= " AND ";
     if (!empty($year))
         $sql .= "annee = '".$year."'";
     if (!empty($year) && (!empty($id) || !empty($ht) 
-            || !empty($ttc) ))
+            || !empty($ttc) || !empty($desc) ))
         $sql .= " AND ";
     if (!empty($id))
         $sql .= "id = '".$id."'";
-    if (!empty($id) && (!empty($ht) || !empty($ttc) ))
+    if (!empty($id) && (!empty($ht) || !empty($ttc) || !empty($desc)))
         $sql .= " AND ";
     if (!empty($ht))
         $sql .= "ht_tot_amount = '".$ht."'";
-    if (!empty($ht) && (!empty($ttc) ))
+    if (!empty($ht) && (!empty($ttc) || !empty($desc)))
         $sql .= " AND ";
     if (!empty($ttc))
         $sql .= "ttc_tot_amount = '".$ttc."'";
+    if (!empty($ttc) && !empty($desc))
+        $sql .= " AND ";
+    if (!empty($desc))
+        $sql .= "description like '%".$desc."%'";
 
     $sql .= " GROUP BY id ORDER BY id";
     //var_dump($sql);die;

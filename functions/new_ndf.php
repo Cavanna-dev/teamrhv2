@@ -64,7 +64,7 @@ try {
             $sql = "INSERT INTO `notesfrais_detail`"
                     . "(`HT_AMOUNT`, `TVA_PERCENT`, `TVA_AMOUNT`, `TTC_AMOUNT`, `FK_NOTESFRAIS_ID`)"
                     . " VALUES "
-                    . "('".$line3_ht."','5,5','".$line3_tva."','".$line3_ttc."','".$lastId."')";
+                    . "('".$line3_ht."','5.5','".$line3_tva."','".$line3_ttc."','".$lastId."')";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     }
