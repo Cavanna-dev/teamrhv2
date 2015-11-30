@@ -141,9 +141,9 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                         . "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . " "
                                         . "avec ";
                                 if ($mail_contact) {
-                                    $body_appli .= $mail_contact->civilite . " ";
-                                    $body_appli .= $mail_contact->nom . " ";
-                                    $body_appli .= $mail_contact->prenom;
+                                    if($mail_contact->civilite != '') {$body_appli .= $mail_contact->civilite . " ";}
+                                    if($mail_contact->nom != '') {$body_appli .= $mail_contact->nom . " ";}
+                                    if($mail_contact->prenom != '') {$body_appli .= $mail_contact->prenom;}
                                 }
                                 $body_appli .= "%0A" . str_replace("&", "et", $mail_customer->nom);
                                 $body_appli .= "%0A" . $mail_customer->adresse1;
