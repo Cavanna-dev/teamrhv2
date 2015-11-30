@@ -75,7 +75,7 @@ function searchCustomers($db)
         $sql .= "co.prenom like '%" . $contactName . "%') ";
     }
         
-    $sql .= "ORDER BY c.nom";
+    $sql .= "GROUP BY c.id ORDER BY c.nom";
     //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();
