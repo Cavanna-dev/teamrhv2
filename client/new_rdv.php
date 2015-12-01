@@ -16,7 +16,7 @@ include '../functions/bootstrap.php';
                             <label for="input_applicant" class="col-lg-2 control-label">Candidat*</label>
                             <div class="col-lg-10">
                                 <?php $r_applicants = getAllApplicants($db); ?>	
-                                <select class="form-control" 
+                                <select class="form-control" id="input_applicant"
                                         name="input_applicant">
                                     <option value=""></option>
                                     <?php
@@ -191,7 +191,21 @@ include '../functions/bootstrap.php';
 </div>
 <script type='text/javascript'>
     $('#input_customer').change(function () {
-        window.location = 'new_rdv.php?candidat=<?= $applicantId ?>&client=' + $(this).val();
+        var url = 'new_rdv.php';
+        if ($('#input_applicant').val() != '' || $('#input_customer').val() != ''){
+            url += '?';
+        }
+        if ($('#input_applicant').val() != ''){
+            url += 'candidat=' + $('#input_applicant').val();
+        }
+        if ($('#input_applicant').val() != '' && $('#input_customer').val() != ''){
+            url += '&';
+        }
+        if ($('#input_customer').val() != ''){
+            url += 'client=' + $('#input_customer').val();
+        }
+        
+        window.location = url;
     });
 </script>
 </body>

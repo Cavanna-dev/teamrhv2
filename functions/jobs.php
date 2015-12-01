@@ -65,7 +65,7 @@ function getJobsCustomer($db, $id)
     $sql = "SELECT p.id, p.libelle "
             . "FROM poste p "
             . "LEFT JOIN client cl ON p.client = cl.id "
-            . "WHERE pourvu != 'Y' "
+            . "WHERE pourvu != 'Y' AND p.client = " . $id . " "
             . "ORDER BY p.libelle";
 
     $r_job = $db->prepare($sql);
