@@ -75,7 +75,7 @@ function searchProspect($db)
         $sql .= "cp.prenom like '%" . $contactName . "%') ";
     }
 
-    $sql .= "ORDER BY p.nom";
+    $sql .= "GROUP BY p.id ORDER BY p.nom";
 
     $r = $db->prepare($sql);
     $r->execute();
