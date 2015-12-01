@@ -75,7 +75,9 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-9">
-                                        <a href='./simple_ndf.php?<?= $_SERVER['QUERY_STRING'] ?>'><button type="button" class="btn btn-primary">Tableau simple</button></a>
+                                        <?php if (!empty($_GET)) { ?>
+                                            <a href='./simple_ndf.php?<?= $_SERVER['QUERY_STRING'] ?>'><button type="button" class="btn btn-primary">Tableau simple</button></a>
+                                        <?php } ?>
                                         <button type="submit" class="btn btn-primary">Rechercher</button>
                                     </div>
                                 </div>
@@ -321,7 +323,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
 
                         <div class="form-group">
                             <label for="input_line1" class="col-lg-2 control-label">
-                                <input type="checkbox" name="input_line1" /> 20%
+                                20% <input type="checkbox" name="input_line1" />
                             </label>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
@@ -344,7 +346,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         </div>
                         <div class="form-group">
                             <label for="input_line2" class="col-lg-2 control-label">
-                                <input type="checkbox" name="input_line2" /> 10%
+                                10% <input type="checkbox" name="input_line2" />
                             </label>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
@@ -367,7 +369,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         </div>
                         <div class="form-group">
                             <label for="input_line3" class="col-lg-2 control-label">
-                                <input type="checkbox" name="input_line3" /> 5,5%
+                                5,5% <input type="checkbox" name="input_line3" />
                             </label>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
@@ -390,7 +392,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                         </div>
                         <div class="form-group">
                             <label for="input_line4" class="col-lg-2 control-label">
-                                <input type="checkbox" name="input_line4" /> 0%
+                                0% <input type="checkbox" name="input_line4" />
                             </label>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
