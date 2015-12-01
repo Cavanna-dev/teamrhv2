@@ -15,7 +15,7 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_applicant" class="col-lg-2 control-label">Candidat*</label>
                             <div class="col-lg-10">
-                                <?php $r_applicants = getAllApplicants($db); ?>		
+                                <?php $r_applicants = getAllApplicants($db); ?>	
                                 <select class="form-control" 
                                         name="input_applicant">
                                     <option value=""></option>

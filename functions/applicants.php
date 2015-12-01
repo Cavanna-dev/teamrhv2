@@ -30,7 +30,7 @@ function searchApplicant($db)
 
 function getAllApplicants($db)
 {
-    $sql = "SELECT c.id as id, c.nom as nom, c.nom as prenom, e.id as eval_id "
+    $sql = "SELECT c.id as id, c.nom as nom, c.prenom as prenom, e.id as eval_id "
             . "FROM `candidat` c "
             . "LEFT JOIN evaluation e ON e.candidat = c.id "
             . "ORDER BY nom";
