@@ -9,6 +9,7 @@ switch ($_SESSION['user']['type']):
             ),
             "Client" => Array(
                 "client.php" => "Société",
+                "placement.php" => "Placement",
                 "job.php" => "Poste",
                 "agenda.php" => "Agenda",
             ),
@@ -34,6 +35,7 @@ switch ($_SESSION['user']['type']):
             ),
             "Client" => Array(
                 "client.php" => "Société",
+                "placement.php" => "Placement",
                 "job.php" => "Poste",
                 "agenda.php" => "Agenda",
             ),

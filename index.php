@@ -24,6 +24,7 @@
                         ),
                         "Client" => Array(
                             "client.php" => "Société",
+                            "placement.php" => "Placement",
                             "job.php" => "Poste",
                             "agenda.php" => "Agenda",
                         ),
@@ -49,6 +50,7 @@
                         ),
                         "Client" => Array(
                             "client.php" => "Société",
+                            "placement.php" => "Placement",
                             "job.php" => "Poste",
                             "agenda.php" => "Agenda",
                         ),

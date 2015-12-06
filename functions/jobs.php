@@ -5,7 +5,7 @@ function getAllJobs($db)
     $sql = "SELECT p.id, p.libelle, c.nom as 'client' "
             . "FROM poste p "
             . "LEFT JOIN client c ON p.client = c.id "
-            . "ORDER BY client";
+            . "ORDER BY libelle";
 
     $r_job = $db->prepare($sql);
     $r_job->execute();
