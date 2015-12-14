@@ -60,6 +60,20 @@ function getJobByCustomer($db, $id)
     return $r;
 }
 
+function getAllJobsByCustomer($db, $id)
+{
+    $sql = "SELECT p.id, p.libelle "
+            . "FROM poste p "
+            . "LEFT JOIN client cl ON p.client = cl.id "
+            . "WHERE p.client = " . $id . " "
+            . "ORDER BY p.libelle";
+
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetchAll(PDO::FETCH_OBJ);
+    return $r;
+}
+
 function getJobsCustomer($db, $id)
 {
     $sql = "SELECT p.id, p.libelle "

@@ -12,6 +12,34 @@ function getAllPlacements($db)
     return $r_placement;
 }
 
+function getPlacementDetailById($db, $id, $type, $n)
+{
+    $sql = "SELECT id, type, pourcentage, date, tva, montant, isFacture, "
+            . "isEncaisse "
+            . "FROM reglements "
+            . "WHERE type = '".$type."' AND number = '".$n."' AND fk_placement_id = " . $id;
+
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    return $r;
+}
+
+function getOnePlacementById($db, $id)
+{
+    $sql = "SELECT id, client, poste, candidat, consultant, apporteur, mois_placement, "
+            . "annee_placement, titre, description, contrat, duree, lieux, salaire, "
+            . "horaires, date_deb, pourcentage, remise, forfait, remarque, facture, "
+            . "encaisse, reglement "
+            . "FROM placement "
+            . "WHERE id='" . $id . "'";
+
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    return $r;
+}
+
 function searchPlacements($db)
 {
     $customer = htmlspecialchars($_GET['input_customer']);
