@@ -75,6 +75,39 @@ include '../functions/bootstrap.php';
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="input_month" class="col-lg-3 control-label">Date</label>
+                                    <div class="col-lg-5">
+                                        <select class="form-control" name="input_month" 
+                                                id="input_month">
+                                            <option value=""></option>
+                                            <option value="janvier" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'janvier') echo "selected"; ?>>Janvier</option>
+                                            <option value="février" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'février') echo "selected"; ?>>Février</option>
+                                            <option value="mars" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'mars') echo "selected"; ?>>Mars</option>
+                                            <option value="avril" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'avril') echo "selected"; ?>>Avril</option>
+                                            <option value="mai" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'mai') echo "selected"; ?>>Mai</option>
+                                            <option value="juin" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'juin') echo "selected"; ?>>Juin</option>
+                                            <option value="juillet" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'juillet') echo "selected"; ?>>Juillet</option>
+                                            <option value="août" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'août') echo "selected"; ?>>Août</option>
+                                            <option value="septembre" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'septembre') echo "selected"; ?>>Septembre</option>
+                                            <option value="octobre" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'octobre') echo "selected"; ?>>Octobre</option>
+                                            <option value="novembre" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'novembre') echo "selected"; ?>>Novembre</option>
+                                            <option value="décembre" <?php if (isset($_GET['input_month']) && $_GET['input_month'] == 'décembre') echo "selected"; ?>>Décembre</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <select class="form-control" name="input_year" id="input_year">
+                                            <option value=""></option>
+                                            <?php
+                                            for($i=date('Y');$i>=2002;$i--){
+                                                ?>
+                                                <option value="<?= $i ?>" <?php if ((isset($_GET['input_year']) && $_GET['input_year'] == $i) || $i == date('Y')) echo "selected"; ?>><?= $i ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
                             </fieldset>
                         </div>
                     </div>
@@ -95,6 +128,7 @@ include '../functions/bootstrap.php';
                                         <th>ID</th>
                                         <th>Candidat</th>
                                         <th>Poste</th>
+                                        <th>Date placement</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,6 +165,9 @@ include '../functions/bootstrap.php';
                                                     echo "Aucun";
                                                 }
                                                 ?>
+                                            </td>
+                                            <td>
+                                                <?= $r_placement->mois_placement . ' ' . $r_placement->annee_placement ?>
                                             </td>
                                         </tr>
                                         <?php

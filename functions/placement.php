@@ -45,25 +45,39 @@ function searchPlacements($db)
     $customer = htmlspecialchars($_GET['input_customer']);
     $job = htmlspecialchars($_GET['input_job']);
     $applicant = htmlspecialchars($_GET['input_applicant']);
+    $month = htmlspecialchars($_GET['input_month']);
+    $year = htmlspecialchars($_GET['input_year']);
 
-    $sql = "SELECT pl.id, pl.poste, pl.candidat "
+    $sql = "SELECT pl.id, pl.poste, pl.candidat, pl.mois_placement, pl.annee_placement "
             . "FROM placement pl "
             . "LEFT JOIN client cl ON pl.client = cl.id "
             . "LEFT JOIN poste po ON pl.poste = po.id "
             . "LEFT JOIN candidat ca ON pl.candidat = ca.id ";
 
-    if (!empty($customer) || !empty($job) || !empty($applicant))
+    if (!empty($customer) || !empty($job) || !empty($applicant) || !empty($month)
+             || !empty($year))
         $sql .= "WHERE ";
     if (!empty($customer))
         $sql .= "cl.id = '" . $customer . "' ";
-    if (!empty($customer) && (!empty($job) || !empty($applicant)))
+    if (!empty($customer) && (!empty($job) || !empty($applicant) || !empty($month)
+             || !empty($year)))
         $sql .= "AND ";
     if (!empty($job))
         $sql .= "po.id = '" . $job . "' ";
-    if (!empty($job) && !empty($applicant))
+    if (!empty($job) && (!empty($applicant) || !empty($month)
+             || !empty($year)))
         $sql .= "AND ";
     if (!empty($applicant))
         $sql .= "ca.id = '" . $applicant . "' ";
+    if (!empty($applicant) && (!empty($month)
+             || !empty($year)))
+        $sql .= "AND ";
+    if (!empty($month))
+        $sql .= "pl.mois_placement = '" . $month . "' ";
+    if (!empty($month) && !empty($year))
+        $sql .= "AND ";
+    if (!empty($year))
+        $sql .= "pl.annee_placement = '" . $year . "' ";
     
     $sql .= "ORDER BY pl.id";
     //var_dump($sql);die;
