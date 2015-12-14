@@ -5,7 +5,7 @@ include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
 ?>
 
-<div class="container">
+<div class="container-fluid">
     <h1>Gestion Placement</h1>
     <ul class="nav nav-tabs">
         <li class="active"><a href="#search" data-toggle="tab">Rechercher</a></li>
