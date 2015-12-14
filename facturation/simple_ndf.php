@@ -111,9 +111,6 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                     $ndfd = getAllNdfDByNdfId($db, $r_ndfs->id);
                     foreach ($ndfd as $k => $v):
                         switch ($v->TVA_PERCENT):
-                            case '0.00':
-                                $total_tva_0_ndf += $v->TTC_AMOUNT;
-                                break;
                             case '5.50':
                                 $total_tva_5_ndf += $v->TVA_AMOUNT;
                                 break;
@@ -142,7 +139,7 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                         Total HT
                     </td>
                     <td style="text-align: right">
-                        <?= isset($total_ht_ndf) ? $total_ht_ndf : 0 ?>
+                        <?= isset($total_ht_ndf) ? number_format($total_ht_ndf, 2, ',', ' ') : 0 ?>
                     </td>
                 </tr>
                 <tr>
@@ -150,7 +147,7 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                         Total TVA 5,5%
                     </td>
                     <td style="text-align: right">
-                        <?= isset($total_tva_5_ndf) ? $total_tva_5_ndf : 0 ?>
+                        <?= isset($total_tva_5_ndf) ? number_format($total_tva_5_ndf, 2, ',', ' ') : 0 ?>
                     </td>
                 </tr>
                 <tr>
@@ -158,7 +155,7 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                         Total TVA 10%
                     </td>
                     <td style="text-align: right">
-                        <?= isset($total_tva_10_ndf) ? $total_tva_10_ndf : 0 ?>
+                        <?= isset($total_tva_10_ndf) ? number_format($total_tva_10_ndf, 2, ',', ' ') : 0 ?>
                     </td>
                 </tr>
                 <tr>
@@ -166,7 +163,7 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                         Total TVA 20%
                     </td>
                     <td style="text-align: right">
-                        <?= isset($total_tva_20_ndf) ? $total_tva_20_ndf : 0 ?>
+                        <?= isset($total_tva_20_ndf) ? number_format($total_tva_20_ndf, 2, ',', ' ') : 0 ?>
                     </td>
                 </tr>
                 <tr>
@@ -174,7 +171,7 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                         Total TVA inconnue
                     </td>
                     <td style="text-align: right">
-                        <?= isset($total_tva_unk_ndf) ? $total_tva_unk_ndf : 0 ?>
+                        <?= isset($total_tva_unk_ndf) ? number_format($total_tva_unk_ndf, 2, ',', ' ') : 0 ?>
                     </td>
                 </tr>
                 <tr>
@@ -182,8 +179,9 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                         Total TVA
                     </td>
                     <td style="text-align: right">
-                        <?=
-                        (isset($total_tva_0_ndf) ? $total_tva_0_ndf : 0) + (isset($total_tva_5_ndf) ? $total_tva_5_ndf : 0) + (isset($total_tva_10_ndf) ? $total_tva_10_ndf : 0) + (isset($total_tva_20_ndf) ? $total_tva_20_ndf : 0) + (isset($total_tva_unk_ndf) ? $total_tva_unk_ndf : 0)
+                        <?php
+                        $total = (isset($total_tva_5_ndf) ? $total_tva_5_ndf : 0) + (isset($total_tva_10_ndf) ? $total_tva_10_ndf : 0) + (isset($total_tva_20_ndf) ? $total_tva_20_ndf : 0) + (isset($total_tva_unk_ndf) ? $total_tva_unk_ndf : 0);
+                        echo number_format($total, 2, ',', ' ');
                         ?>
                     </td>
                 </tr>
@@ -192,7 +190,7 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                         Total TTC
                     </td>
                     <td style="text-align: right">
-                        <?= isset($total_ttc_ndf) ? $total_ttc_ndf : 0 ?>
+                        <?= isset($total_ttc_ndf) ? number_format($total_ttc_ndf, 2, ',', ' ') : 0 ?>
                     </td>
                 </tr>
             </tbody>

@@ -137,7 +137,6 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                     <?php
                                     $total_ht_ndf = 0;
                                     $total_tva_ndf = 0;
-                                    $total_tva_0_ndf = 0;
                                     $total_tva_5_ndf = 0;
                                     $total_tva_10_ndf = 0;
                                     $total_tva_20_ndf = 0;
