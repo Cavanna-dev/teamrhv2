@@ -48,16 +48,15 @@ $r = getOneJobById($db, $_GET['id']);
             </div>
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-4">
                         <input type="hidden" name="input_id" value="<?= $_GET['id'] ?>"/>
                         <h1>Fiche poste</h1>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-8">
                         <h1 class="pull-right">
-                            <a href="new_rdv.php?client=<?= $r->client ?>&poste=<?= $r->id ?>">
-                                <button type="button" class="btn btn-primary">Créer RDV</button>
-                            </a>
-                            <button type = "submit" class = "btn btn-primary">Enregistrer</button>
+                            <a href="new_placement.php?c=<?= $r->client ?>&p=<?= $r->id ?>&t=<?= $r->titre ?>&pt=<?= $r->pourcentage ?>&s=<?= $r->salaire ?>"><button type="button" class="btn btn-primary">Créer Placement</button></a>
+                            <a href="new_rdv.php?client=<?= $r->client ?>&poste=<?= $r->id ?>"><button type="button" class="btn btn-primary">Créer RDV</button></a>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </h1>
                     </div>
                 </div>
