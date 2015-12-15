@@ -499,7 +499,7 @@ include '../functions/bootstrap.php';
                                     <div class="col-lg-10">
                                         <input type="text" class="form-control" 
                                                name="input_year" id="input_year" 
-                                               value="" 
+                                               value="<?= date('Y') ?>" 
                                                placeholder="Année" required>
                                     </div>
                                 </div>
@@ -544,7 +544,7 @@ include '../functions/bootstrap.php';
                                     <div class="col-lg-10">
                                         <select class="form-control" name="input_facture" id="input_facture">
                                             <option value=""></option>
-                                            <option value="N">N</option>
+                                            <option value="N" selected>N</option>
                                             <option value="Y">Y</option>
                                         </select>
                                     </div>
@@ -554,7 +554,7 @@ include '../functions/bootstrap.php';
                                     <div class="col-lg-10">
                                         <select class="form-control" name="input_encaisse" id="input_encaisse">
                                             <option value=""></option>
-                                            <option value="N">N</option>
+                                            <option value="N" selected>N</option>
                                             <option value="Y">Y</option>
                                         </select>
                                     </div>
@@ -568,7 +568,7 @@ include '../functions/bootstrap.php';
                                     <div class="col-lg-10">
                                         <select class="form-control" name="input_reglement" id="input_reglement">
                                             <option value=""></option>
-                                            <option value="N">N</option>
+                                            <option value="N" selected>N</option>
                                             <option value="Y">Y</option>
                                         </select>
                                     </div>
