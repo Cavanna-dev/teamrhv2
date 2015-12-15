@@ -51,6 +51,22 @@ include '../functions/bootstrap.php';
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="input_consult" class="col-lg-3 control-label">Consultant</label>
+                                    <div class="col-lg-9">
+                                        <?php $r_users = getAllConsults($db); ?>
+                                        <select class="form-control" name="input_consult" id="input_consult">
+                                            <option value=""></option>
+                                            <?php
+                                            foreach ($r_users as $r_user) {
+                                                ?>
+                                                <option value="<?= $r_user->id; ?>" <?php if (isset($_GET['input_consult']) && $_GET['input_consult'] == $r_user->id) echo "selected"; ?>><?= $r_user->prenom . ' ' . $r_user->nom; ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-lg-12">
                                         <button type="submit" class="btn btn-primary">Rechercher</button>
                                     </div>
@@ -99,9 +115,9 @@ include '../functions/bootstrap.php';
                                         <select class="form-control" name="input_year" id="input_year">
                                             <option value=""></option>
                                             <?php
-                                            for($i=date('Y');$i>=2002;$i--){
+                                            for ($i = date('Y'); $i >= 2002; $i--) {
                                                 ?>
-                                                <option value="<?= $i ?>" <?php if ((isset($_GET['input_year']) && $_GET['input_year'] == $i) || $i == date('Y')) echo "selected"; ?>><?= $i ?></option>
+                                                <option value="<?= $i ?>" <?php if ((isset($_GET['input_year']) && $_GET['input_year'] == $i) || ((!isset($_GET['input_year']) && $i == date('Y')))) echo "selected"; ?>><?= $i ?></option>
                                                 <?php
                                             }
                                             ?>
@@ -126,13 +142,16 @@ include '../functions/bootstrap.php';
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Consultant</th>
                                         <th>Candidat</th>
                                         <th>Poste</th>
-                                        <th>Date placement</th>
+                                        <th class="text-right">Salaire</th>
+                                        <th class="text-right">Date placement</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $totalIncome = 0;
                                     foreach ($result_search as $r_placement) {
                                         ?>
                                         <tr>
@@ -140,6 +159,16 @@ include '../functions/bootstrap.php';
                                                 <a href="upd_placement.php?id=<?= $r_placement->id; ?>">
                                                     <?= $r_placement->id; ?>
                                                 </a>
+                                            </td>
+                                            <td>
+                                                <?php $r_user = getUserById($db, $r_placement->consultant); ?>
+                                                <?php if ($r_user) { ?>
+                                                    <?= $r_user->nom ?> <?= $r_user->prenom ?>
+                                                    <?php
+                                                } else {
+                                                    echo 'Aucun';
+                                                }
+                                                ?>
                                             </td>
                                             <td>
                                                 <?php $r_applicant = getOneApplicantById($db, $r_placement->candidat); ?>
@@ -166,11 +195,15 @@ include '../functions/bootstrap.php';
                                                 }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <td class="text-right">
+                                                <?= number_format($r_placement->salaire, 2, ',', ' ') ?> €
+                                            </td>
+                                            <td class="text-right">
                                                 <?= $r_placement->mois_placement . ' ' . $r_placement->annee_placement ?>
                                             </td>
                                         </tr>
                                         <?php
+                                        $totalIncome += $r_placement->salaire;
                                     }
                                     ?>
                                 </tbody>
@@ -182,6 +215,7 @@ include '../functions/bootstrap.php';
                             <p>Aucun résultats</p>
                         </div>
                     <?php } ?>
+                    <h1>Bilan : <?= isset($totalIncome) ? number_format($totalIncome, 2, '.', ' ') : 0 ?> €</h1>
                 <?php } ?>
             </form>
         </div>

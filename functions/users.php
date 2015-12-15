@@ -13,6 +13,19 @@ function getAllUsers($db)
     return $r;
 }
 
+function getAllConsults($db)
+{
+    $sql = "SELECT id, nom, prenom, login, pwd, type, actif, color, arrival, sorting, initiale "
+            . "FROM utilisateur "
+            . "WHERE type IN ('CONSULT','ADMIN','ASSOC')"
+            . "ORDER BY sorting";
+    $r = $db->prepare($sql);
+    $r->execute();
+    $tmp = $r->fetchAll(PDO::FETCH_OBJ);
+
+    return $tmp;
+}
+
 function getUserById($db, $id)
 {
     $sql = "SELECT id, nom, prenom, login, pwd, type, actif, color, arrival, sorting, initiale "

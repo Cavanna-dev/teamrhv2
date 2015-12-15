@@ -42,44 +42,50 @@ function getOnePlacementById($db, $id)
 
 function searchPlacements($db)
 {
+    $consult = htmlspecialchars($_GET['input_consult']);
     $customer = htmlspecialchars($_GET['input_customer']);
     $job = htmlspecialchars($_GET['input_job']);
     $applicant = htmlspecialchars($_GET['input_applicant']);
     $month = htmlspecialchars($_GET['input_month']);
     $year = htmlspecialchars($_GET['input_year']);
 
-    $sql = "SELECT pl.id, pl.poste, pl.candidat, pl.mois_placement, pl.annee_placement "
+    $sql = "SELECT pl.id, pl.poste, pl.candidat, pl.mois_placement, pl.annee_placement, "
+            . "pl.consultant, pl.salaire "
             . "FROM placement pl "
             . "LEFT JOIN client cl ON pl.client = cl.id "
             . "LEFT JOIN poste po ON pl.poste = po.id "
             . "LEFT JOIN candidat ca ON pl.candidat = ca.id ";
 
     if (!empty($customer) || !empty($job) || !empty($applicant) || !empty($month)
-             || !empty($year))
+             || !empty($year) || !empty($consult))
         $sql .= "WHERE ";
     if (!empty($customer))
         $sql .= "cl.id = '" . $customer . "' ";
     if (!empty($customer) && (!empty($job) || !empty($applicant) || !empty($month)
-             || !empty($year)))
+             || !empty($year) || !empty($consult)))
         $sql .= "AND ";
     if (!empty($job))
         $sql .= "po.id = '" . $job . "' ";
     if (!empty($job) && (!empty($applicant) || !empty($month)
-             || !empty($year)))
+             || !empty($year) || !empty($consult)))
         $sql .= "AND ";
     if (!empty($applicant))
         $sql .= "ca.id = '" . $applicant . "' ";
     if (!empty($applicant) && (!empty($month)
-             || !empty($year)))
+             || !empty($year) || !empty($consult)))
         $sql .= "AND ";
     if (!empty($month))
         $sql .= "pl.mois_placement = '" . $month . "' ";
-    if (!empty($month) && !empty($year))
+    if (!empty($month) && (!empty($year) || !empty($consult)))
         $sql .= "AND ";
     if (!empty($year))
         $sql .= "pl.annee_placement = '" . $year . "' ";
+    if (!empty($year) && (!empty($consult)))
+        $sql .= "AND ";
+    if (!empty($consult))
+        $sql .= "pl.consultant = '" . $consult . "' ";
     
-    $sql .= "ORDER BY pl.id";
+    $sql .= "ORDER BY pl.id DESC";
     //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();
