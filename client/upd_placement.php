@@ -27,19 +27,330 @@ $r = getOnePlacementById($db, $_GET['id']);
         <input type="hidden" name="input_id" value="<?= $r->id ?>"/>
         <div class="row">
             <div class="col-md-6">
-                <div class="jumbotron">
-                    <div class="form-group">
-                        <label for="input_description" class="col-lg-1 control-label">Description</label>
-                        <div class="col-lg-11">
-                            <textarea class="form-control" id="input_description" name="input_description" placeholder="Description" type="text" rows="15"><?= $r->description; ?></textarea>
-                        </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <h1>Reglements</h1>
+                    </div>
+                    <div class="col-lg-3">
+                        <h1 class="pull-right">
+                            <a href="new_encaisse.php">
+                                <button type="button" class="btn btn-primary">Encaissé</button>
+                            </a>
+                        </h1>
                     </div>
                 </div>
                 <div class="jumbotron">
-                    <div class="form-group">
-                        <label for="input_remarque" class="col-lg-1 control-label">Remarque</label>
-                        <div class="col-lg-11">
-                            <textarea class="form-control" id="input_remarque" name="input_remarque" placeholder="Remarque" type="text" rows="15"><?= $r->remarque; ?></textarea>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <?php $r_detail_p1 = getPlacementDetailById($db, $r->id, 'P', 1); ?>
+                                    <h2>Pourcentage 1</h2>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="col-lg-4">
+                                                Pourcentage
+                                                <input type="text" class="form-control" 
+                                                       name="input_p1_pourcentage" id="input_p1_pourcentage" 
+                                                       value="<?= isset($r_detail_p1->pourcentage) ? $r_detail_p1->pourcentage : '' ?>" 
+                                                       placeholder="Pourcentage">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                TVA
+                                                <input type="text" class="form-control" 
+                                                       name="input_p1_tva" id="input_p1_tva" 
+                                                       value="<?= isset($r_detail_p1->tva) ? $r_detail_p1->tva : '' ?>" 
+                                                       placeholder="TVA">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                Montant
+                                                <input type="text" class="form-control" 
+                                                       name="input_p1_montant" id="input_p1_montant" 
+                                                       value="<?= isset($r_detail_p1->montant) ? $r_detail_p1->montant : '' ?>" 
+                                                       placeholder="Montant">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                Facture
+                                                <select class="form-control" name="input_p1_facture" id="input_p1_facture">
+                                                    <option value="" <?php if (isset($r_detail_p1->isFacture) && ($r_detail_p1->isFacture == "" || $r_detail_p1->isFacture == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_p1->isFacture) && $r_detail_p1->isFacture == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_p1->isFacture) && $r_detail_p1->isFacture == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                Encaisse
+                                                <select class="form-control" name="input_p1_encaisse" id="input_p1_encaisse">
+                                                    <option value="" <?php if (isset($r_detail_p1->isEncaisse) && ($r_detail_p1->isEncaisse == "" || $r_detail_p1->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_p1->isEncaisse) && $r_detail_p1->isEncaisse == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_p1->isEncaisse) && $r_detail_p1->isEncaisse == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Date
+                                                <input type="date" class="form-control" 
+                                                       name="input_p1_date" id="input_p1_date" 
+                                                       value="<?= isset($r_detail_p1->date) ? $r_detail_p1->date : '' ?>" 
+                                                       placeholder="Date">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <?php $r_detail_p2 = getPlacementDetailById($db, $r->id, 'P', 2); ?>
+                                    <h2>Pourcentage 2</h2>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="col-lg-4">
+                                                Pourcentage
+                                                <input type="text" class="form-control" 
+                                                       name="input_p2_pourcentage" id="input_p2_pourcentage" 
+                                                       value="<?= isset($r_detail_p2->pourcentage) ? $r_detail_p2->pourcentage : '' ?>" 
+                                                       placeholder="Pourcentage">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                TVA
+                                                <input type="text" class="form-control" 
+                                                       name="input_p2_tva" id="input_p2_tva" 
+                                                       value="<?= isset($r_detail_p2->tva) ? $r_detail_p2->tva : '' ?>" 
+                                                       placeholder="TVA">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                Montant
+                                                <input type="text" class="form-control" 
+                                                       name="input_p2_montant" id="input_p2_montant" 
+                                                       value="<?= isset($r_detail_p2->montant) ? $r_detail_p2->montant : '' ?>" 
+                                                       placeholder="Montant">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                Facture
+                                                <select class="form-control" name="input_p2_facture" id="input_p2_facture">
+                                                    <option value="" <?php if (isset($r_detail_p2->isFacture) && ($r_detail_p2->isFacture == "" || $r_detail_p2->isFacture == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_p2->isFacture) && $r_detail_p2->isFacture == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_p2->isFacture) && $r_detail_p2->isFacture == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                Encaisse
+                                                <select class="form-control" name="input_p2_encaisse" id="input_p3_encaisse">
+                                                    <option value="" <?php if (isset($r_detail_p2->isEncaisse) && ($r_detail_p2->isEncaisse == "" || $r_detail_p2->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_p2->isEncaisse) && $r_detail_p2->isEncaisse == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_p2->isEncaisse) && $r_detail_p2->isEncaisse == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Date
+                                                <input type="date" class="form-control" 
+                                                       name="input_p2_date" id="input_p2_date" 
+                                                       value="<?= isset($r_detail_p2->date) ? $r_detail_p2->date : '' ?>" 
+                                                       placeholder="Date">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <?php $r_detail_p3 = getPlacementDetailById($db, $r->id, 'P', 3); ?>
+                                    <h2>Pourcentage 3</h2>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="col-lg-4">
+                                                Pourcentage
+                                                <input type="text" class="form-control" 
+                                                       name="input_p3_pourcentage" id="input_p3_pourcentage" 
+                                                       value="<?= isset($r_detail_p3->pourcentage) ? $r_detail_p3->pourcentage : '' ?>" 
+                                                       placeholder="Pourcentage">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                TVA
+                                                <input type="text" class="form-control" 
+                                                       name="input_p3_tva" id="input_p3_tva" 
+                                                       value="<?= isset($r_detail_p3->tva) ? $r_detail_p3->tva : '' ?>" 
+                                                       placeholder="TVA">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                Montant
+                                                <input type="text" class="form-control" 
+                                                       name="input_p3_montant" id="input_p3_montant" 
+                                                       value="<?= isset($r_detail_p3->montant) ? $r_detail_p3->montant : '' ?>" 
+                                                       placeholder="Montant">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                Facture
+                                                <select class="form-control" name="input_p3_facture" id="input_p3_facture">
+                                                    <option value="" <?php if (isset($r_detail_p3->isFacture) && ($r_detail_p3->isFacture == "" || $r_detail_p3->isFacture == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_p3->isFacture) && $r_detail_p3->isFacture == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_p3->isFacture) && $r_detail_p3->isFacture == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                Encaisse
+                                                <select class="form-control" name="input_p3_encaisse" id="input_p3_encaisse">
+                                                    <option value="" <?php if (isset($r_detail_p3->isEncaisse) && ($r_detail_p3->isEncaisse == "" || $r_detail_p3->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_p3->isEncaisse) && $r_detail_p3->isEncaisse == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_p3->isEncaisse) && $r_detail_p3->isEncaisse == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Date
+                                                <input type="date" class="form-control" 
+                                                       name="input_p3_date" id="input_p3_date" 
+                                                       value="<?= isset($r_detail_p3->date) ? $r_detail_p3->date : '' ?>" 
+                                                       placeholder="Date">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <?php $r_detail_f1 = getPlacementDetailById($db, $r->id, 'F', 1); ?>
+                                    <h2>Forfait 1</h2>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                TVA
+                                                <input type="text" class="form-control" 
+                                                       name="input_f1_tva" id="input_f1_tva" 
+                                                       value="<?= isset($r_detail_f1->tva) ? $r_detail_f1->tva : '' ?>" 
+                                                       placeholder="TVA">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Montant
+                                                <input type="text" class="form-control" 
+                                                       name="input_f1_montant" id="input_f1_montant" 
+                                                       value="<?= isset($r_detail_f1->montant) ? $r_detail_f1->montant : '' ?>" 
+                                                       placeholder="Montant">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                Facture
+                                                <select class="form-control" name="input_f1_facture" id="input_f1_facture">
+                                                    <option value="" <?php if (isset($r_detail_f1->isFacture) && ($r_detail_f1->isFacture == "" || $r_detail_f1->isFacture == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_f1->isFacture) && $r_detail_f1->isFacture == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_f1->isFacture) && $r_detail_f1->isFacture == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                Encaisse
+                                                <select class="form-control" name="input_f1_encaisse" id="input_f1_encaisse">
+                                                    <option value="" <?php if (isset($r_detail_f1->isEncaisse) && ($r_detail_f1->isEncaisse == "" || $r_detail_f1->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_f1->isEncaisse) && $r_detail_f1->isEncaisse == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_f1->isEncaisse) && $r_detail_f1->isEncaisse == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Date
+                                                <input type="date" class="form-control" 
+                                                       name="input_f1_date" id="input_f1_date" 
+                                                       value="<?= isset($r_detail_f1->date) ? $r_detail_f1->date : '' ?>" 
+                                                       placeholder="Date">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <?php $r_detail_f2 = getPlacementDetailById($db, $r->id, 'F', 2); ?>
+                                    <h2>Forfait 2</h2>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                TVA
+                                                <input type="text" class="form-control" 
+                                                       name="input_f2_tva" id="input_f2_tva" 
+                                                       value="<?= isset($r_detail_f2->tva) ? $r_detail_f2->tva : '' ?>" 
+                                                       placeholder="TVA">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Montant
+                                                <input type="text" class="form-control" 
+                                                       name="input_f2_montant" id="input_f2_montant" 
+                                                       value="<?= isset($r_detail_f2->montant) ? $r_detail_f2->montant : '' ?>" 
+                                                       placeholder="Montant">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                Facture
+                                                <select class="form-control" name="input_f2_facture" id="input_f2_facture">
+                                                    <option value="" <?php if (isset($r_detail_f2->isFacture) && ($r_detail_f2->isFacture == "" || $r_detail_f2->isFacture == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_f2->isFacture) && $r_detail_f2->isFacture == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_f2->isFacture) && $r_detail_f2->isFacture == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                Encaisse
+                                                <select class="form-control" name="input_f2_encaisse" id="input_f3_encaisse">
+                                                    <option value="" <?php if (isset($r_detail_f2->isEncaisse) && ($r_detail_f2->isEncaisse == "" || $r_detail_f2->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if ($r_detail_f2->isEncaisse == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if ($r_detail_f2->isEncaisse == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Date
+                                                <input type="date" class="form-control" 
+                                                       name="input_f2_date" id="input_f2_date" 
+                                                       value="<?= isset($r_detail_f2->date) ? $r_detail_f2->date : '' ?>" 
+                                                       placeholder="Date">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <?php $r_detail_f3 = getPlacementDetailById($db, $r->id, 'F', 3); ?>
+                                    <h2>Forfait 3</h2>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                TVA
+                                                <input type="text" class="form-control" 
+                                                       name="input_f3_tva" id="input_f3_tva" 
+                                                       value="<?= isset($r_detail_f3->tva) ? $r_detail_f3->tva : '' ?>" 
+                                                       placeholder="TVA">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Montant
+                                                <input type="text" class="form-control" 
+                                                       name="input_f3_montant" id="input_f3_montant" 
+                                                       value="<?= isset($r_detail_f3->montant) ? $r_detail_f3->montant : '' ?>" 
+                                                       placeholder="Montant">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-3">
+                                                Facture
+                                                <select class="form-control" name="input_f3_facture" id="input_f3_facture">
+                                                    <option value="" <?php if (isset($r_detail_f3->isFacture) && ($r_detail_f3->isFacture == "" || $r_detail_f3->isFacture == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_f3->isFacture) && $r_detail_f3->isFacture == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_f3->isFacture) && $r_detail_f3->isFacture == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                Encaisse
+                                                <select class="form-control" name="input_p3_encaisse" id="input_p3_encaisse">
+                                                    <option value="" <?php if (isset($r_detail_f3->isEncaisse) && ($r_detail_f3->isEncaisse == "" || $r_detail_f3->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
+                                                    <option value="Y" <?php if (isset($r_detail_f3->isEncaisse) && $r_detail_f3->isEncaisse == "Y") echo "selected"; ?>>Y</option>
+                                                    <option value="N" <?php if (isset($r_detail_f3->isEncaisse) && $r_detail_f3->isEncaisse == "N") echo "selected"; ?>>N</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                Date
+                                                <input type="date" class="form-control" 
+                                                       name="input_f3_date" id="input_f3_date" 
+                                                       value="<?= isset($r_detail_f3->date) ? $r_detail_f3->date : '' ?>" 
+                                                       placeholder="Date">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,9 +363,6 @@ $r = getOnePlacementById($db, $_GET['id']);
                     </div>
                     <div class="col-lg-3">
                         <h1 class="pull-right">
-                            <a href="new_encaisse.php">
-                                <button type="button" class="btn btn-primary">Encaissé</button>
-                            </a>
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </h1>
                     </div>
@@ -166,12 +474,21 @@ $r = getOnePlacementById($db, $_GET['id']);
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_deb" class="col-lg-2 control-label">Date de deb.</label>
+                                    <label for="input_deb" class="col-lg-2 control-label">Date deb.</label>
                                     <div class="col-lg-10">
                                         <input type="date" class="form-control" 
                                                name="input_deb" id="input_deb" 
                                                value="<?= $r->date_deb ?>" 
                                                placeholder="Salaire" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_pourcent" class="col-lg-2 control-label">Pourcentage</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" class="form-control" 
+                                               name="input_pourcent" id="input_pourcent" 
+                                               value="<?= $r->pourcentage ?>" 
+                                               placeholder="Pourcentage" required>
                                     </div>
                                 </div>
                             </fieldset>
@@ -330,323 +647,7 @@ $r = getOnePlacementById($db, $_GET['id']);
         </div>
 
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="jumbotron">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <?php $r_detail_p1 = getPlacementDetailById($db, $r->id, 'P', 1); ?>
-                            <h2>Pourcentage 1</h2>
-                            <fieldset>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        Pourcentage
-                                        <input type="text" class="form-control" 
-                                               name="input_p1_pourcentage" id="input_p1_pourcentage" 
-                                               value="<?= isset($r_detail_p1->pourcentage) ? $r_detail_p1->pourcentage : '' ?>" 
-                                               placeholder="Pourcentage">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        Date
-                                        <input type="date" class="form-control" 
-                                               name="input_p1_date" id="input_p1_date" 
-                                               value="<?= isset($r_detail_p1->date) ? $r_detail_p1->date : '' ?>" 
-                                               placeholder="Date">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        TVA
-                                        <input type="text" class="form-control" 
-                                               name="input_p1_tva" id="input_p1_tva" 
-                                               value="<?= isset($r_detail_p1->tva) ? $r_detail_p1->tva : '' ?>" 
-                                               placeholder="TVA">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Montant
-                                        <input type="text" class="form-control" 
-                                               name="input_p1_montant" id="input_p1_montant" 
-                                               value="<?= isset($r_detail_p1->montant) ? $r_detail_p1->montant : '' ?>" 
-                                               placeholder="Montant">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-3">
-                                        Facture
-                                        <select class="form-control" name="input_p1_facture" id="input_p1_facture">
-                                            <option value="" <?php if (isset($r_detail_p1->isFacture) && ($r_detail_p1->isFacture == "" || $r_detail_p1->isFacture == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_p1->isFacture) && $r_detail_p1->isFacture == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_p1->isFacture) && $r_detail_p1->isFacture == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Encaisse
-                                        <select class="form-control" name="input_p1_encaisse" id="input_p1_encaisse">
-                                            <option value="" <?php if (isset($r_detail_p1->isEncaisse) && ($r_detail_p1->isEncaisse == "" || $r_detail_p1->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_p1->isEncaisse) && $r_detail_p1->isEncaisse == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_p1->isEncaisse) && $r_detail_p1->isEncaisse == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-lg-12">
-                            <?php $r_detail_p2 = getPlacementDetailById($db, $r->id, 'P', 2); ?>
-                            <h2>Pourcentage 2</h2>
-                            <fieldset>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        Pourcentage
-                                        <input type="text" class="form-control" 
-                                               name="input_p2_pourcentage" id="input_p2_pourcentage" 
-                                               value="<?= isset($r_detail_p2->pourcentage) ? $r_detail_p2->pourcentage : '' ?>" 
-                                               placeholder="Pourcentage">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        Date
-                                        <input type="date" class="form-control" 
-                                               name="input_p2_date" id="input_p2_date" 
-                                               value="<?= isset($r_detail_p2->date) ? $r_detail_p2->date : '' ?>" 
-                                               placeholder="Date">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        TVA
-                                        <input type="text" class="form-control" 
-                                               name="input_p2_tva" id="input_p2_tva" 
-                                               value="<?= isset($r_detail_p2->tva) ? $r_detail_p2->tva : '' ?>" 
-                                               placeholder="TVA">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Montant
-                                        <input type="text" class="form-control" 
-                                               name="input_p2_montant" id="input_p2_montant" 
-                                               value="<?= isset($r_detail_p2->montant) ? $r_detail_p2->montant : '' ?>" 
-                                               placeholder="Montant">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-3">
-                                        Facture
-                                        <select class="form-control" name="input_p2_facture" id="input_p2_facture">
-                                            <option value="" <?php if (isset($r_detail_p2->isFacture) && ($r_detail_p2->isFacture == "" || $r_detail_p2->isFacture == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_p2->isFacture) && $r_detail_p2->isFacture == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_p2->isFacture) && $r_detail_p2->isFacture == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Encaisse
-                                        <select class="form-control" name="input_p2_encaisse" id="input_p3_encaisse">
-                                            <option value="" <?php if (isset($r_detail_p2->isEncaisse) && ($r_detail_p2->isEncaisse == "" || $r_detail_p2->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_p2->isEncaisse) && $r_detail_p2->isEncaisse == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_p2->isEncaisse) && $r_detail_p2->isEncaisse == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-lg-12">
-                            <?php $r_detail_p3 = getPlacementDetailById($db, $r->id, 'P', 3); ?>
-                            <h2>Pourcentage 3</h2>
-                            <fieldset>
-                                <div class="form-group">
-                                    <div class="col-lg-2">
-                                        Pourcentage
-                                        <input type="text" class="form-control" 
-                                               name="input_p3_pourcentage" id="input_p3_pourcentage" 
-                                               value="<?= isset($r_detail_p3->pourcentage) ? $r_detail_p3->pourcentage : '' ?>" 
-                                               placeholder="Pourcentage">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        Date
-                                        <input type="date" class="form-control" 
-                                               name="input_p3_date" id="input_p3_date" 
-                                               value="<?= isset($r_detail_p3->date) ? $r_detail_p3->date : '' ?>" 
-                                               placeholder="Date">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        TVA
-                                        <input type="text" class="form-control" 
-                                               name="input_p3_tva" id="input_p3_tva" 
-                                               value="<?= isset($r_detail_p3->tva) ? $r_detail_p3->tva : '' ?>" 
-                                               placeholder="TVA">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Montant
-                                        <input type="text" class="form-control" 
-                                               name="input_p3_montant" id="input_p3_montant" 
-                                               value="<?= isset($r_detail_p3->montant) ? $r_detail_p3->montant : '' ?>" 
-                                               placeholder="Montant">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-3">
-                                        Facture
-                                        <select class="form-control" name="input_p3_facture" id="input_p3_facture">
-                                            <option value="" <?php if (isset($r_detail_p3->isFacture) && ($r_detail_p3->isFacture == "" || $r_detail_p3->isFacture == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_p3->isFacture) && $r_detail_p3->isFacture == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_p3->isFacture) && $r_detail_p3->isFacture == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Encaisse
-                                        <select class="form-control" name="input_p3_encaisse" id="input_p3_encaisse">
-                                            <option value="" <?php if (isset($r_detail_p3->isEncaisse) && ($r_detail_p3->isEncaisse == "" || $r_detail_p3->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_p3->isEncaisse) && $r_detail_p3->isEncaisse == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_p3->isEncaisse) && $r_detail_p3->isEncaisse == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="jumbotron">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <?php $r_detail_f1 = getPlacementDetailById($db, $r->id, 'F', 1); ?>
-                            <h2>Forfait 1</h2>
-                            <fieldset>
-                                <div class="form-group">
-                                    <div class="col-lg-4">
-                                        Date
-                                        <input type="date" class="form-control" 
-                                               name="input_f1_date" id="input_f1_date" 
-                                               value="<?= isset($r_detail_f1->date) ? $r_detail_f1->date : '' ?>" 
-                                               placeholder="Date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        TVA
-                                        <input type="text" class="form-control" 
-                                               name="input_f1_tva" id="input_f1_tva" 
-                                               value="<?= isset($r_detail_f1->tva) ? $r_detail_f1->tva : '' ?>" 
-                                               placeholder="TVA">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        Montant
-                                        <input type="text" class="form-control" 
-                                               name="input_f1_montant" id="input_f1_montant" 
-                                               value="<?= isset($r_detail_f1->montant) ? $r_detail_f1->montant : '' ?>" 
-                                               placeholder="Montant">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-3">
-                                        Facture
-                                        <select class="form-control" name="input_f1_facture" id="input_f1_facture">
-                                            <option value="" <?php if (isset($r_detail_f1->isFacture) && ($r_detail_f1->isFacture == "" || $r_detail_f1->isFacture == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_f1->isFacture) && $r_detail_f1->isFacture == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_f1->isFacture) && $r_detail_f1->isFacture == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Encaisse
-                                        <select class="form-control" name="input_f1_encaisse" id="input_f1_encaisse">
-                                            <option value="" <?php if (isset($r_detail_f1->isEncaisse) && ($r_detail_f1->isEncaisse == "" || $r_detail_f1->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_f1->isEncaisse) && $r_detail_f1->isEncaisse == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_f1->isEncaisse) && $r_detail_f1->isEncaisse == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-lg-12">
-                            <?php $r_detail_f2 = getPlacementDetailById($db, $r->id, 'F', 2); ?>
-                            <h2>Forfait 2</h2>
-                            <fieldset>
-                                <div class="form-group">
-                                    <div class="col-lg-4">
-                                        Date
-                                        <input type="date" class="form-control" 
-                                               name="input_f2_date" id="input_f2_date" 
-                                               value="<?= isset($r_detail_f2->date) ? $r_detail_f2->date : '' ?>" 
-                                               placeholder="Date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        TVA
-                                        <input type="text" class="form-control" 
-                                               name="input_f2_tva" id="input_f2_tva" 
-                                               value="<?= isset($r_detail_f2->tva) ? $r_detail_f2->tva : '' ?>" 
-                                               placeholder="TVA">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        Montant
-                                        <input type="text" class="form-control" 
-                                               name="input_f2_montant" id="input_f2_montant" 
-                                               value="<?= isset($r_detail_f2->montant) ? $r_detail_f2->montant : '' ?>" 
-                                               placeholder="Montant">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-3">
-                                        Facture
-                                        <select class="form-control" name="input_f2_facture" id="input_f2_facture">
-                                            <option value="" <?php if (isset($r_detail_f2->isFacture) && ($r_detail_f2->isFacture == "" || $r_detail_f2->isFacture == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_f2->isFacture) && $r_detail_f2->isFacture == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_f2->isFacture) && $r_detail_f2->isFacture == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Encaisse
-                                        <select class="form-control" name="input_f2_encaisse" id="input_f3_encaisse">
-                                            <option value="" <?php if (isset($r_detail_f2->isEncaisse) && ($r_detail_f2->isEncaisse == "" || $r_detail_f2->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if ($r_detail_f2->isEncaisse == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if ($r_detail_f2->isEncaisse == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-lg-12">
-                            <?php $r_detail_f3 = getPlacementDetailById($db, $r->id, 'F', 3); ?>
-                            <h2>Forfait 3</h2>
-                            <fieldset>
-                                <div class="form-group">
-                                    <div class="col-lg-4">
-                                        Date
-                                        <input type="date" class="form-control" 
-                                               name="input_f3_date" id="input_f3_date" 
-                                               value="<?= isset($r_detail_f3->date) ? $r_detail_f3->date : '' ?>" 
-                                               placeholder="Date">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        TVA
-                                        <input type="text" class="form-control" 
-                                               name="input_f3_tva" id="input_f3_tva" 
-                                               value="<?= isset($r_detail_f3->tva) ? $r_detail_f3->tva : '' ?>" 
-                                               placeholder="TVA">
-                                    </div>
-                                    <div class="col-lg-4">
-                                        Montant
-                                        <input type="text" class="form-control" 
-                                               name="input_f3_montant" id="input_f3_montant" 
-                                               value="<?= isset($r_detail_f3->montant) ? $r_detail_f3->montant : '' ?>" 
-                                               placeholder="Montant">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-3">
-                                        Facture
-                                        <select class="form-control" name="input_f3_facture" id="input_f3_facture">
-                                            <option value="" <?php if (isset($r_detail_f3->isFacture) && ($r_detail_f3->isFacture == "" || $r_detail_f3->isFacture == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_f3->isFacture) && $r_detail_f3->isFacture == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_f3->isFacture) && $r_detail_f3->isFacture == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Encaisse
-                                        <select class="form-control" name="input_p3_encaisse" id="input_p3_encaisse">
-                                            <option value="" <?php if (isset($r_detail_f3->isEncaisse) && ($r_detail_f3->isEncaisse == "" || $r_detail_f3->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
-                                            <option value="Y" <?php if (isset($r_detail_f3->isEncaisse) && $r_detail_f3->isEncaisse == "Y") echo "selected"; ?>>Y</option>
-                                            <option value="N" <?php if (isset($r_detail_f3->isEncaisse) && $r_detail_f3->isEncaisse == "N") echo "selected"; ?>>N</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
     </form>
 </div>

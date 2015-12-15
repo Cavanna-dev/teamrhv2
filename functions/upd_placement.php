@@ -3,8 +3,6 @@
 include './connection_db.php';
 
 $input_id = htmlspecialchars($_POST['input_id']);
-$description = $_POST['input_description'];
-$remarque = $_POST['input_remarque'];
 $customer = htmlspecialchars($_POST['input_customer']);
 $applicant = htmlspecialchars($_POST['input_applicant']);
 $consultant = htmlspecialchars($_POST['input_consult']);
@@ -33,8 +31,6 @@ try {
             . "mois_placement = :mois_placement, "
             . "annee_placement = :annee_placement, "
             . "titre = :titre, "
-            . "description = :description, "
-            . "remarque = :remarque, "
             . "contrat = :contrat, "
             . "duree = :duree, "
             . "lieux = :lieux, "
@@ -54,8 +50,6 @@ try {
     $stmt->bindParam(':mois_placement', $month, PDO::PARAM_STR);
     $stmt->bindParam(':annee_placement', $year, PDO::PARAM_STR);
     $stmt->bindParam(':titre', $title, PDO::PARAM_STR);
-    $stmt->bindParam(':description', $description, PDO::PARAM_STR);
-    $stmt->bindParam(':remarque', $remarque, PDO::PARAM_STR);
     $stmt->bindParam(':contrat', $contrat, PDO::PARAM_STR);
     $stmt->bindParam(':duree', $duree, PDO::PARAM_STR);
     $stmt->bindParam(':lieux', $lieux, PDO::PARAM_STR);
