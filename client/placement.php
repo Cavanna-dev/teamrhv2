@@ -3,6 +3,10 @@ include '../template/header.php';
 include '../template/menu.php';
 include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
+
+if($_SESSION['user']['type'] != 'ADMIN'){
+    echo 'Vous n\'avez pas accès à cette page';
+}else {
 ?>
 
 <div class="container-fluid">
@@ -214,3 +218,4 @@ include '../functions/bootstrap.php';
     </form>
 
 </div>
+<?php } ?>
