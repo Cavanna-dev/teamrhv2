@@ -54,8 +54,20 @@ $r = getOneJobById($db, $_GET['id']);
                     </div>
                     <div class="col-lg-8">
                         <h1 class="pull-right">
-                            <?php if($_SESSION['user']['type'] == 'ADMIN'){?>
-                            <a href="new_placement.php?c=<?= $r->client ?>&p=<?= $r->id ?>&t=<?= $r->titre ?>&pt=<?= $r->pourcentage ?>&s=<?= $r->salaire ?>"><button type="button" class="btn btn-primary">Créer Placement</button></a>
+                            <?php if (($_SESSION['user']['type'] == 'ADMIN' || $_SESSION['user']['type'] == 'SUPERADMIN') && $r->pourvu == 'N') { ?>
+                                <?php
+                                $geturl = 'c=' . $r->client;
+                                $geturl .= '&p=' . $r->id;
+                                $geturl .= '&t=' . $r->titre;
+                                $geturl .= '&pt=' . $r->pourcentage;
+                                $geturl .= '&s=' . $r->salaire;
+                                $geturl .= '&co=' . $r->consultant;
+                                $geturl .= '&datedeb=' . $r->date_deb;
+                                $geturl .= '&li=' . $r->lieux;
+                                $geturl .= '&con=' . $r->contrat;
+                                $geturl .= '&dur=' . $r->duree;
+                                ?>
+                                <a href="new_placement.php?<?= $geturl ?>"><button type="button" class="btn btn-primary">Créer Placement</button></a>
                             <?php } ?>
                             <a href="new_rdv.php?client=<?= $r->client ?>&poste=<?= $r->id ?>"><button type="button" class="btn btn-primary">Créer RDV</button></a>
                             <button type="submit" class="btn btn-primary">Enregistrer</button>

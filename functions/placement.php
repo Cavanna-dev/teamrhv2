@@ -50,7 +50,7 @@ function searchPlacements($db)
     $year = htmlspecialchars($_GET['input_year']);
 
     $sql = "SELECT pl.id, pl.poste, pl.candidat, pl.mois_placement, pl.annee_placement, "
-            . "pl.consultant, pl.salaire "
+            . "pl.consultant, pl.salaire, pl.pourcentage "
             . "FROM placement pl "
             . "LEFT JOIN client cl ON pl.client = cl.id "
             . "LEFT JOIN poste po ON pl.poste = po.id "

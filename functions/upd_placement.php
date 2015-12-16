@@ -10,6 +10,7 @@ $month = htmlspecialchars($_POST['input_month']);
 $year = htmlspecialchars($_POST['input_year']);
 $contrat = htmlspecialchars($_POST['input_contrat']);
 $lieux = htmlspecialchars($_POST['input_lieux']);
+$percent = htmlspecialchars($_POST['input_pourcent']);
 $dateDeb = htmlspecialchars($_POST['input_deb']);
 $job = htmlspecialchars($_POST['input_job']);
 $title = htmlspecialchars($_POST['input_title']);
@@ -34,6 +35,7 @@ try {
             . "contrat = :contrat, "
             . "duree = :duree, "
             . "lieux = :lieux, "
+            . "pourcentage = :pourcentage, "
             . "salaire = :salaire, "
             . "date_deb = :date_deb, "
             . "remise = :remise, "
@@ -51,8 +53,9 @@ try {
     $stmt->bindParam(':annee_placement', $year, PDO::PARAM_STR);
     $stmt->bindParam(':titre', $title, PDO::PARAM_STR);
     $stmt->bindParam(':contrat', $contrat, PDO::PARAM_STR);
-    $stmt->bindParam(':duree', $duree, PDO::PARAM_STR);
+    $stmt->bindParam(':duree', $duree, PDO::PARAM_INT);
     $stmt->bindParam(':lieux', $lieux, PDO::PARAM_STR);
+    $stmt->bindParam(':pourcentage', $percent, PDO::PARAM_INT);
     $stmt->bindParam(':salaire', $salaire, PDO::PARAM_STR);
     $stmt->bindParam(':date_deb', $dateDeb, PDO::PARAM_STR);
     $stmt->bindParam(':remise', $remise, PDO::PARAM_STR);

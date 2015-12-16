@@ -11,6 +11,7 @@ $month = isset($_POST['input_month']) ? htmlspecialchars($_POST['input_month']) 
 $year = isset($_POST['input_year']) ? htmlspecialchars($_POST['input_year']) : '';
 $contrat = isset($_POST['input_contrat']) ? htmlspecialchars($_POST['input_contrat']) : '';
 $lieux = isset($_POST['input_lieux']) ? htmlspecialchars($_POST['input_lieux']) : '';
+$percent = isset($_POST['input_pourcent']) ? htmlspecialchars($_POST['input_pourcent']) : '';
 $dateDeb = isset($_POST['input_deb']) ? htmlspecialchars($_POST['input_deb']) : '';
 $job = isset($_POST['input_job']) ? htmlspecialchars($_POST['input_job']) : '';
 $title = isset($_POST['input_title']) ? htmlspecialchars($_POST['input_title']) : '';

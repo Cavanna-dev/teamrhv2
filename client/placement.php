@@ -4,7 +4,7 @@ include '../template/menu.php';
 include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
 
-if($_SESSION['user']['type'] != 'ADMIN'){
+if($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERADMIN'){
     echo 'Vous n\'avez pas accès à cette page';
 }else {
 ?>
@@ -194,14 +194,15 @@ if($_SESSION['user']['type'] != 'ADMIN'){
                                         ?>
                                     </td>
                                     <td class="text-right">
-                                        <?= number_format($r_placement->salaire, 2, ',', ' ') ?> €
+                                        <?php $total = ($r_placement->pourcentage / 100)*$r_placement->salaire ?>
+                                        <?= number_format($total, 2, ',', ' ') ?> €
                                     </td>
                                     <td class="text-right">
                                         <?= $r_placement->mois_placement . ' ' . $r_placement->annee_placement ?>
                                     </td>
                                 </tr>
                                 <?php
-                                $totalIncome += $r_placement->salaire;
+                                $totalIncome += $total;
                             }
                             ?>
                         </tbody>

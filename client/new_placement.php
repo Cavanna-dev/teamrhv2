@@ -4,7 +4,7 @@ include '../template/menu.php';
 include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
 
-if($_SESSION['user']['type'] != 'ADMIN'){
+if($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERADMIN'){
     echo 'Vous n\'avez pas accès à cette page';
 }else{
 ?>
@@ -373,7 +373,7 @@ if($_SESSION['user']['type'] != 'ADMIN'){
                                             <?php
                                             while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                                 ?>
-                                                <option value="<?= $r_user->id ?>">
+                                                <option value="<?= $r_user->id ?>" <?= isset($_GET['co']) && $_GET['co'] == $r_user->id ? 'selected' : '' ?>>
                                                     <?= $r_user->prenom . ' ' . $r_user->nom ?>
                                                 </option>
                                                 <?php
@@ -407,9 +407,9 @@ if($_SESSION['user']['type'] != 'ADMIN'){
                                     <label for="input_contrat" class="col-lg-2 control-label">Contrat</label>
                                     <div class="col-lg-10">
                                         <select class="form-control" name="input_contrat" id="input_contrat">
-                                            <option value="N/A">N/A</option>
-                                            <option value="CDD">CDD</option>
-                                            <option value="CDI">CDI</option>
+                                            <option value="N/A" <?= isset($_GET['con']) && $_GET['con'] == 'N/A' ? 'selected' : '' ?>>N/A</option>
+                                            <option value="CDD" <?= isset($_GET['con']) && $_GET['con'] == 'CDD' ? 'selected' : '' ?>>CDD</option>
+                                            <option value="CDI" <?= isset($_GET['con']) && $_GET['con'] == 'CDI' ? 'selected' : '' ?>>CDI</option>
                                         </select>
                                     </div>
                                 </div>
@@ -418,7 +418,7 @@ if($_SESSION['user']['type'] != 'ADMIN'){
                                     <div class="col-lg-10">
                                         <input type="text" class="form-control" 
                                                name="input_lieux" id="input_lieux" 
-                                               value="" 
+                                               value="<?= isset($_GET['li']) ? $_GET['li'] : '' ?>"
                                                placeholder="Lieux">
                                     </div>
                                 </div>
@@ -427,7 +427,7 @@ if($_SESSION['user']['type'] != 'ADMIN'){
                                     <div class="col-lg-10">
                                         <input type="date" class="form-control" 
                                                name="input_deb" id="input_deb" 
-                                               value="" 
+                                               value="<?= isset($_GET['datedeb']) ? $_GET['datedeb'] : '' ?>" 
                                                placeholder="Salaire" required>
                                     </div>
                                 </div>
@@ -471,7 +471,7 @@ if($_SESSION['user']['type'] != 'ADMIN'){
                                             <?php
                                             foreach ($r_titles as $r_title):
                                                 ?>
-                                                <option value="<?= $r_title->id ?>"><?= $r_title->libelle ?></option>
+                                                <option value="<?= $r_title->id ?>" <?php if($r_title->id == $_GET['t'])echo 'selected'; ?>><?= $r_title->libelle ?></option>
                                                 <?php
                                             endforeach;
                                             ?>
@@ -512,7 +512,7 @@ if($_SESSION['user']['type'] != 'ADMIN'){
                                     <div class="col-lg-10">
                                         <input type="text" class="form-control" 
                                                name="input_duree" id="input_duree" 
-                                               value="" 
+                                               value="<?= isset($_GET['dur']) ? $_GET['dur'] : '' ?>" 
                                                placeholder="Durée">
                                     </div>
                                 </div>
