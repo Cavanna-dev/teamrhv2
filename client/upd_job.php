@@ -54,9 +54,9 @@ $r = getOneJobById($db, $_GET['id']);
                     </div>
                     <div class="col-lg-8">
                         <h1 class="pull-right">
-                            <?php if($_SESSION['user']['type'] == 'ADMIN'){
+                            <?php if($_SESSION['user']['type'] == 'ADMIN'){?>
                             <a href="new_placement.php?c=<?= $r->client ?>&p=<?= $r->id ?>&t=<?= $r->titre ?>&pt=<?= $r->pourcentage ?>&s=<?= $r->salaire ?>"><button type="button" class="btn btn-primary">Créer Placement</button></a>
-                            ?>
+                            <?php } ?>
                             <a href="new_rdv.php?client=<?= $r->client ?>&poste=<?= $r->id ?>"><button type="button" class="btn btn-primary">Créer RDV</button></a>
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </h1>
