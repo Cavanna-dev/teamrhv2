@@ -15,33 +15,49 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_applicant" class="col-lg-2 control-label">Candidat*</label>
                             <div class="col-lg-10">
-                                <?php $r_applicants = getAllApplicants($db); ?>	
-                                <select class="form-control" id="input_applicant"
-                                        name="input_applicant">
-                                    <option value=""></option>
-                                    <?php
-                                    while ($r_applicant = $r_applicants->fetch(PDO::FETCH_OBJ)) {
-                                        ?>
-                                        <option value="<?= $r_applicant->id ?>" <?php if (isset($_GET['candidat']) && $r_applicant->id == $_GET['candidat']) echo 'selected'; ?>><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
-                                    <?php } ?>
-                                </select>
+                                <?php if (isset($_GET['candidat'])) { ?>
+                                    <?php $r_applicant = getOneApplicantById($db, $_GET['candidat']); ?>
+                                    <select class="form-control" id="input_applicant"
+                                            name="input_applicant">
+                                        <option value="<?= $r_applicant->id ?>" selected><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
+                                    </select>
+                                <?php } else { ?>
+                                    <?php $r_applicants = getAllApplicants($db); ?>	
+                                    <select class="form-control" id="input_applicant"
+                                            name="input_applicant">
+                                        <option value=""></option>
+                                        <?php
+                                        while ($r_applicant = $r_applicants->fetch(PDO::FETCH_OBJ)) {
+                                            ?>
+                                            <option value="<?= $r_applicant->id ?>"><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
+                                        <?php } ?>
+                                    </select>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="input_customer" class="col-lg-2 control-label">Client*</label>
                             <div class="col-lg-10">
-                                <?php $r_customers = getAllCustomers($db); ?>		
-                                <select class="form-control" id="input_customer"
-                                        name="input_customer" required>
-                                    <option value=""></option>
-                                    <?php
-                                    while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                        ?>
-                                        <option value="<?php echo $r_customer->id; ?>" <?php if (isset($_GET['client']) && $r_customer->id == $_GET['client']) echo 'selected'; ?>><?php echo $r_customer->nom; ?></option>
+                                <?php if (isset($_GET['client'])) { ?>
+                                    <?php $r_customer = getOneCustomerById($db, $_GET['client']); ?>		
+                                    <select class="form-control" id="input_customer"
+                                            name="input_customer" required>
+                                        <option value="<?php echo $r_customer->id; ?>" selected><?php echo $r_customer->nom; ?></option>
+                                    </select>
+                                <?php } else { ?>
+                                    <?php $r_customers = getAllCustomers($db); ?>		
+                                    <select class="form-control" id="input_customer"
+                                            name="input_customer" required>
+                                        <option value=""></option>
                                         <?php
-                                    }
-                                    ?>
-                                </select>
+                                        while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
+                                            ?>
+                                            <option value="<?php echo $r_customer->id; ?>"><?php echo $r_customer->nom; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -192,19 +208,19 @@ include '../functions/bootstrap.php';
 <script type='text/javascript'>
     $('#input_customer').change(function () {
         var url = 'new_rdv.php';
-        if ($('#input_applicant').val() != '' || $('#input_customer').val() != ''){
+        if ($('#input_applicant').val() != '' || $('#input_customer').val() != '') {
             url += '?';
         }
-        if ($('#input_applicant').val() != ''){
+        if ($('#input_applicant').val() != '') {
             url += 'candidat=' + $('#input_applicant').val();
         }
-        if ($('#input_applicant').val() != '' && $('#input_customer').val() != ''){
+        if ($('#input_applicant').val() != '' && $('#input_customer').val() != '') {
             url += '&';
         }
-        if ($('#input_customer').val() != ''){
+        if ($('#input_customer').val() != '') {
             url += 'client=' + $('#input_customer').val();
         }
-        
+
         window.location = url;
     });
 </script>
