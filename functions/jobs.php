@@ -34,7 +34,7 @@ function getOneJobById($db, $id)
             . "commentaire, contrat, duree, lieux, salaire, horaires, "
             . "date_deb, vitesse, communication, word, excel, powerpoint, "
             . "internet, autre_appli1, autre_appli2, niveau_fr, niveau_en, "
-            . "pourvu, pourcentage, garantie, forfait, formule, consultant, signature "
+            . "pourvu, pourcentage, garantie, forfait, forfait2, forfait3, formule, consultant, signature "
             . "FROM poste "
             . "WHERE id='" . $id . "'";
 

@@ -25,6 +25,29 @@ function getPlacementDetailById($db, $id, $type, $n)
     return $r;
 }
 
+function getTotalByPlacementId($db, $id, $facture)
+{
+    $sql = "SELECT round(sum(montant), 2) as total "
+            . "FROM reglements "
+            . "WHERE isEncaisse = '".$facture."' AND isFacture = 'Y' AND fk_placement_id = " . $id;
+    
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    return $r;
+}
+function getTotalFactureByPlacementId($db, $id)
+{
+    $sql = "SELECT round(sum(montant), 2) as total "
+            . "FROM reglements "
+            . "WHERE isFacture = 'N' AND fk_placement_id = " . $id;
+    
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    return $r;
+}
+
 function getOnePlacementById($db, $id)
 {
     $sql = "SELECT id, client, poste, candidat, consultant, apporteur, mois_placement, "

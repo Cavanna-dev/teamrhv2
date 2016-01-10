@@ -154,5 +154,5 @@ try {
 ?>
 
 <SCRIPT type="text/javascript">
-document.location.href="../client/placement.php"
+document.location.href="../client/upd_placement.php?id=<?= $input_id ?>"
 </SCRIPT>

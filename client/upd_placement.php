@@ -36,9 +36,9 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                         </div>
                         <div class="col-lg-3">
                             <h1 class="pull-right">
-                                <a href="new_encaisse.php">
+                                <!--<a href="new_encaisse.php">
                                     <button type="button" class="btn btn-primary">Encaissé</button>
-                                </a>
+                                </a>-->
                             </h1>
                         </div>
                     </div>
@@ -661,4 +661,32 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
             });
         </script>
     <?php } ?>
+
+
+    <script type="text/javascript">
+
+        $(window).ready(function () {
+            var salary = $('#input_salaire').val();
+            var percent = $('#input_pourcent').val();
+            var contract = $('#input_contrat').val();
+            var duree = $('#input_duree').val();
+            var remise = $('#input_remise').val();
+
+            var benef = (salary) * (percent / 100);
+            
+            if (contract == 'CDD')
+                benef = benef * duree;
+
+            benef -= remise;
+
+    <?php for ($i = 1; $i <= 3; $i++) { ?>
+                $("#input_p<?= $i ?>_pourcentage").keyup(function () {
+                    var tmp = ($(this).val()) / 100;
+                    $('#input_p<?= $i ?>_tva').val('20');
+                    $('#input_p<?= $i ?>_montant').val(benef * tmp);
+                });
+    <?php } ?>
+        });
+
+    </script>
 <?php } ?>

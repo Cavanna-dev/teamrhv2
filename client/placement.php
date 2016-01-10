@@ -143,13 +143,17 @@ if($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERAD
                                 <th>Consultant</th>
                                 <th>Candidat</th>
                                 <th>Poste</th>
-                                <th class="text-right">Salaire</th>
+                                <th class="text-right">Honoraires non Facturés</th>
+                                <th class="text-right">Honoraires non Encaissés</th>
+                                <th class="text-right">Honoraires Encaissés</th>
                                 <th class="text-right">Date placement</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $totalIncome = 0;
+                            $totalIncomeNonFacture = 0;
+                            $totalIncomeNonRecu = 0;
+                            $totalIncomeRecu = 0;
                             foreach ($result_search as $r_placement) {
                                 ?>
                                 <tr>
@@ -194,15 +198,25 @@ if($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERAD
                                         ?>
                                     </td>
                                     <td class="text-right">
-                                        <?php $total = ($r_placement->pourcentage / 100)*$r_placement->salaire ?>
-                                        <?= number_format($total, 2, ',', ' ') ?> €
+                                        <?php $nonFacture = getTotalFactureByPlacementId($db, $r_placement->id); ?>
+                                        <span class="text-danger"><?= number_format($nonFacture->total, 2, ',', ' ') ?> €</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <?php $nonReçu = getTotalByPlacementId($db, $r_placement->id, 'N'); ?>
+                                        <span class="text-warning"><?= number_format($nonReçu->total, 2, ',', ' ') ?> €</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <?php $reçu = getTotalByPlacementId($db, $r_placement->id, 'Y'); ?>
+                                        <span class="text-success"><?= number_format($reçu->total, 2, ',', ' ') ?> €</span>
                                     </td>
                                     <td class="text-right">
                                         <?= $r_placement->mois_placement . ' ' . $r_placement->annee_placement ?>
                                     </td>
                                 </tr>
                                 <?php
-                                $totalIncome += $total;
+                                $totalIncomeNonFacture += $nonFacture->total;
+                                $totalIncomeNonRecu += $nonReçu->total;
+                                $totalIncomeRecu += $reçu->total;
                             }
                             ?>
                         </tbody>
@@ -214,7 +228,9 @@ if($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERAD
                     <p>Aucun résultats</p>
                 </div>
             <?php } ?>
-            <h1>Bilan : <?= isset($totalIncome) ? number_format($totalIncome, 2, '.', ' ') : 0 ?> €</h1>
+            <h1>Total Non Encaissé: <?= isset($totalIncomeNonFacture) ? number_format($totalIncomeNonFacture, 2, '.', ' ') : 0 ?> €</h1>
+            <h1>Total Non Encaissé: <?= isset($totalIncomeNonRecu) ? number_format($totalIncomeNonRecu, 2, '.', ' ') : 0 ?> €</h1>
+            <h1>Total Encaissé: <?= isset($totalIncomeRecu) ? number_format($totalIncomeRecu, 2, '.', ' ') : 0 ?> €</h1>
         <?php } ?>
     </form>
 

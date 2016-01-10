@@ -193,7 +193,7 @@ include '../functions/bootstrap.php';
                                             <label for="input_name" class="col-lg-2 control-label"><b>Libelle</b></label>
                                             <div class="col-lg-10">
                                                 <input class="form-control" id="input_name" 
-                                                          name="input_name" placeholder="Nom" type="text">
+                                                       name="input_name" placeholder="Nom" type="text">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -214,7 +214,7 @@ include '../functions/bootstrap.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="input_customer" class="col-lg-2 control-label">
-                                                    Client
+                                                Client
                                             </label>
                                             <div class="col-lg-10">
                                                 <?php $r_customers = getAllCustomers($db); ?>
@@ -318,9 +318,19 @@ include '../functions/bootstrap.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="input_forfait" class="col-lg-2 control-label">Forfait</label>
-                                            <div class="col-lg-10">
-                                                <input class="form-control" id="input_forfait" 
-                                                       name="input_forfait" placeholder="Forfait" 
+                                            <div class="col-lg-3">
+                                                <input class="form-control col-lg-4" id="input_forfait" 
+                                                       name="input_forfait" placeholder="1" 
+                                                       type="text">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input class="form-control col-lg-4" id="input_forfait2" 
+                                                       name="input_forfait2" placeholder="2" 
+                                                       type="text">
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <input class="form-control col-lg-4" id="input_forfait3" 
+                                                       name="input_forfait3" placeholder="3" 
                                                        type="text">
                                             </div>
                                         </div>
