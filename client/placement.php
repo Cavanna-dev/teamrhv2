@@ -228,7 +228,7 @@ if($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERAD
                     <p>Aucun résultats</p>
                 </div>
             <?php } ?>
-            <h1>Total Non Encaissé: <?= isset($totalIncomeNonFacture) ? number_format($totalIncomeNonFacture, 2, '.', ' ') : 0 ?> €</h1>
+            <h1>Total Non Facturé: <?= isset($totalIncomeNonFacture) ? number_format($totalIncomeNonFacture, 2, '.', ' ') : 0 ?> €</h1>
             <h1>Total Non Encaissé: <?= isset($totalIncomeNonRecu) ? number_format($totalIncomeNonRecu, 2, '.', ' ') : 0 ?> €</h1>
             <h1>Total Encaissé: <?= isset($totalIncomeRecu) ? number_format($totalIncomeRecu, 2, '.', ' ') : 0 ?> €</h1>
         <?php } ?>
