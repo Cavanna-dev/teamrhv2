@@ -108,7 +108,7 @@ function searchPlacements($db)
     if (!empty($consult))
         $sql .= "pl.consultant = '" . $consult . "' ";
     
-    $sql .= "ORDER BY pl.id DESC";
+    $sql .= "ORDER BY pl.id";
     //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();
