@@ -43,10 +43,12 @@ function getAllApplicants($db)
 
 function getAllBirthdaysApplicants($db)
 {
-    $sql = "SELECT id, nom, prenom, anniversaire, email "
-            . "FROM `candidat` "
-            . "WHERE dayofyear(naissance) - dayofyear(NOW()) = 0 "
-            . "OR dayofyear(naissance) + 365 - dayofyear(NOW()) = 0";
+    $sql = "SELECT C.id, c.nom, c.prenom, c.anniversaire, c.email, e.remarque 'remarque_eval' "
+            . "FROM `candidat` c "
+            . "LEFT JOIN evaluation e ON e.candidat = c.id "
+            . "WHERE dayofyear(c.naissance) - dayofyear(NOW()) = 0 "
+            . "OR dayofyear(c.naissance) + 365 - dayofyear(NOW()) = 0 "
+            . "ORDER BY c.anniversaire DESC, c.nom";
 
     $r_applicant = $db->prepare($sql);
     $r_applicant->execute();

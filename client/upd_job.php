@@ -110,16 +110,11 @@ $r = getOneJobById($db, $_GET['id']);
                                         </a>
                                     </label>
                                     <div class="col-lg-10">
-                                        <?php $r_customers = getAllCustomers($db); ?>
-                                        <select class="form-control" name="input_customer" id="input_customer">
-                                            <option value=""></option>
-                                            <?php
-                                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                                ?>
-                                                <option value="<?= $r_customer->id ?>" <?php if ($r_customer->id == $r->client) echo "selected"; ?>><?= $r_customer->nom ?></option>
-                                                <?php
-                                            }
-                                            ?>
+                                        <?php $r_client = getOneCustomerById($db, $r->client); ?>
+                                        <select class="select2-container select2-container-multi form-control" 
+                                                name="input_customer" id="input_customer" 
+                                                style="width:100%">
+                                            <option value="<?= $r_client->id ?>" selected="selected"><?= $r_client->nom ?></option>
                                         </select>
                                     </div>
                                 </div>
@@ -383,3 +378,32 @@ $r = getOneJobById($db, $_GET['id']);
         });
     </script>
 <?php } ?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#input_customer').select2({
+            ajax: {
+                url: "/teamrhv2/api/customers.php",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            theme: 'bootstrap',
+            placeholder: 'Selectionner un client',
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumInputLength: 2
+        });
+    });
+</script>

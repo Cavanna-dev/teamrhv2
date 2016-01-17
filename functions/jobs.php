@@ -106,7 +106,7 @@ function getJobByCustomerReal($db, $id)
 function searchJobs($db)
 {
     $name = htmlspecialchars($_GET['input_name']);
-    $customer = htmlspecialchars($_GET['input_customer']);
+    $customer = isset($_GET['input_customer']) ? htmlspecialchars($_GET['input_customer']) : '';
     $contact = htmlspecialchars($_GET['input_contact']);
     $statut = htmlspecialchars($_GET['input_pourvu']);
 
@@ -133,7 +133,7 @@ function searchJobs($db)
     if (!empty($statut))
         $sql .= "p.pourvu = '" . $statut . "' ";
 
-    $sql .= "ORDER BY nom, libelle, titre";
+    $sql .= "ORDER BY id DESC, nom, libelle, titre";
     //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();

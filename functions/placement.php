@@ -66,14 +66,14 @@ function getOnePlacementById($db, $id)
 function searchPlacements($db)
 {
     $consult = htmlspecialchars($_GET['input_consult']);
-    $customer = htmlspecialchars($_GET['input_customer']);
+    $customer = isset($_GET['input_customer']) ? htmlspecialchars($_GET['input_customer']) : '';
     $job = htmlspecialchars($_GET['input_job']);
     $applicant = htmlspecialchars($_GET['input_applicant']);
     $month = htmlspecialchars($_GET['input_month']);
     $year = htmlspecialchars($_GET['input_year']);
 
     $sql = "SELECT pl.id, pl.poste, pl.candidat, pl.mois_placement, pl.annee_placement, "
-            . "pl.consultant, pl.salaire, pl.pourcentage "
+            . "pl.consultant, pl.salaire, pl.pourcentage, cl.id as idclient, cl.nom as client "
             . "FROM placement pl "
             . "LEFT JOIN client cl ON pl.client = cl.id "
             . "LEFT JOIN poste po ON pl.poste = po.id "

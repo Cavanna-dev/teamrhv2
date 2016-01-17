@@ -10,9 +10,18 @@ include '../functions/bootstrap.php';
     $r_applis = getAllBirthdaysApplicants($db);
     $result_search = $r_applis->fetchAll(PDO::FETCH_OBJ);
     if ($result_search) {
+        $nb = 0;
+        $tos = '';
+        foreach ($result_search as $r_appli) {
+            if ($nb >= 1)
+                $tos .= ';';
+
+            $tos .= isset($r_appli->email) ? $r_appli->email : '';
+            $nb++;
+        }
         ?>
 
-        <h1><?= count($result_search) ?> anniversaire(s) aujourd'hui !</h1>
+        <h1><?= count($result_search) ?> anniversaire(s) aujourd'hui ! <a class="btn btn-primary" href="mailto:<?= $tos ?>" role="button">Mail groupé</a></h1>
         <div class="jumbotron">
             <table class="table table-striped table-hover ">
                 <thead>
@@ -28,7 +37,13 @@ include '../functions/bootstrap.php';
                         ?>
                         <tr>
                             <td>
-                                <a href="upd_applicant.php?id=<?= $r_appli->id ?>">
+                                <a href="upd_applicant.php?id=<?= $r_appli->id ?>" 
+                                   tabindex="0" role="button" 
+                                   data-toggle="popover" 
+                                   data-trigger="hover" 
+                                   data-placement="right" 
+                                   data-html="true"
+                                   data-content="<?= str_replace('"', '\'', $r_appli->remarque_eval) ?>">
                                        <?= $r_appli->nom . " " . $r_appli->prenom; ?>
                                 </a>
                             </td>
@@ -36,7 +51,10 @@ include '../functions/bootstrap.php';
                                 <?= isset($r_appli->anniversaire) ? $r_appli->anniversaire : ''; ?>
                             </td>
                             <td class='text-right'>
-                                <?= isset($r_appli->email) ? $r_appli->email : ''; ?>
+                                <?php $to = isset($r_appli->email) ? $r_appli->email : ''; ?>
+                                <?php if ($to != '') { ?>
+                                    <a href="mailto:<?= $to ?>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+                                <?php } ?>
                             </td>
                         </tr>
                         <?php
@@ -52,3 +70,12 @@ include '../functions/bootstrap.php';
         </div>
     <?php } ?>
 </div>
+<script type="text/javascript">
+    $(window).ready(function () {
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                container: 'body'
+            });
+        });
+    });
+</script>

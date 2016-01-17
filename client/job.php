@@ -4,7 +4,6 @@ include '../template/menu.php';
 include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
 ?>
-
 <div class="container-fluid">
     <h1>Gestion des postes</h1>
     <ul class="nav nav-tabs">
@@ -52,16 +51,13 @@ include '../functions/bootstrap.php';
                                 <div class="form-group">
                                     <label for="input_customer" class="col-lg-2 control-label">Client</label>
                                     <div class="col-lg-10">
-                                        <?php $r_customers = getAllCustomers($db); ?>
-                                        <select class="form-control" name="input_customer" id="input_customer">
-                                            <option value=""></option>
-                                            <?php
-                                            while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                                ?>
-                                                <option value="<?= $r_customer->id ?>" <?php if (isset($_GET['input_customer']) && $_GET['input_customer'] == $r_customer->id) echo "selected"; ?>><?= $r_customer->nom ?></option>
-                                                <?php
-                                            }
-                                            ?>
+                                        <select class="select2-container select2-container-multi form-control" 
+                                                name="input_customer" id="input_customer" 
+                                                style="width:100%">
+                                                    <?php if (isset($_GET['input_customer'])) { ?>
+                                                        <?php $r_client = getOneCustomerById($db, $_GET['input_customer']); ?>
+                                                <option value="<?= $r_client->id ?>"><?= $r_client->nom ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -217,16 +213,8 @@ include '../functions/bootstrap.php';
                                                 Client
                                             </label>
                                             <div class="col-lg-10">
-                                                <?php $r_customers = getAllCustomers($db); ?>
-                                                <select class="form-control" name="input_customer" id="input_customer">
-                                                    <option value=""></option>
-                                                    <?php
-                                                    while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                                        ?>
-                                                        <option value="<?= $r_customer->id ?>"><?= $r_customer->nom ?></option>
-                                                        <?php
-                                                    }
-                                                    ?>
+                                                <select class="select2-container form-control select2  select2-container--bootstrap" 
+                                                        id="input_customer_select" name="input_customer" style="width:100%;">
                                                 </select>
                                             </div>
                                         </div>
@@ -486,3 +474,57 @@ include '../functions/bootstrap.php';
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#input_customer_select').select2({
+            ajax: {
+                url: "/teamrhv2/api/customers.php",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            theme: 'bootstrap',
+            placeholder: 'Selectionner un client',
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumInputLength: 2
+        });
+
+        $('#input_customer').select2({
+            ajax: {
+                url: "/teamrhv2/api/customers.php",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            theme: 'bootstrap',
+            allowClear: true,
+            placeholder: 'Selectionner un client',
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumInputLength: 2
+        });
+    });
+</script>
