@@ -243,7 +243,7 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
         $(document).ready(function () {
             $('#input_customer').select2({
                 ajax: {
-                    url: "/teamrhv2/api/customers.php",
+                    url: "../api/customers.php",
                     dataType: 'json',
                     delay: 250,
                     data: function (params) {

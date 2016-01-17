@@ -478,7 +478,7 @@ include '../functions/bootstrap.php';
     $(document).ready(function () {
         $('#input_customer_select').select2({
             ajax: {
-                url: "/teamrhv2/api/customers.php",
+                url: "../api/customers.php",
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {
@@ -503,7 +503,7 @@ include '../functions/bootstrap.php';
 
         $('#input_customer').select2({
             ajax: {
-                url: "/teamrhv2/api/customers.php",
+                url: "../api/customers.php",
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {
