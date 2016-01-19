@@ -381,16 +381,13 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                             </a>
                                         </label>
                                         <div class="col-lg-10">
-                                            <?php $r_customers = getAllCustomers($db); ?>
-                                            <select class="form-control" name="input_customer" id="input_customer">
-                                                <option value=""></option>
-                                                <?php
-                                                while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                                    ?>
-                                                    <option value="<?= $r_customer->id ?>" <?php if ($r_customer->id == $r->client) echo "selected"; ?>><?= $r_customer->nom ?></option>
-                                                    <?php
-                                                }
-                                                ?>
+                                            <select class="select2-container select2-container-multi form-control" 
+                                                    name="input_customer" id="input_customer" 
+                                                    style="width:100%">
+                                                        <?php if (isset($r->client)) { ?>
+                                                            <?php $r_client = getOneCustomerById($db, $r->client); ?>
+                                                    <option value="<?= $r_client->id ?>"><?= $r_client->nom ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -401,18 +398,13 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                             </a>
                                         </label>
                                         <div class="col-lg-10">
-                                            <?php $r_applicants = getAllApplicants($db); ?>
-                                            <select class="form-control" name="input_applicant" id="input_applicant">
-                                                <option value=""></option>
-                                                <?php
-                                                while ($r_applicant = $r_applicants->fetch(PDO::FETCH_OBJ)) {
-                                                    ?>
-                                                    <option value="<?= $r_applicant->id ?>" <?php if ($r_applicant->id == $r->candidat) echo "selected"; ?>>
-                                                        <?= $r_applicant->nom . ' ' . $r_applicant->prenom ?>
-                                                    </option>
-                                                    <?php
-                                                }
-                                                ?>
+                                            <select class="select2-container select2-container-multi form-control" 
+                                                    name="input_applicant" id="input_applicant" 
+                                                    style="width:100%">
+                                                        <?php if (isset($r->candidat) && $r->candidat != 0) { ?>
+                                                            <?php $r_applicant = getOneApplicantById($db, $r->candidat); ?>
+                                                    <option value="<?= $r_applicant->id ?>"><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -673,7 +665,7 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
             var remise = $('#input_remise').val();
 
             var benef = (salary) * (percent / 100);
-            
+
             if (contract == 'CDD')
                 benef = benef * duree;
 
@@ -686,6 +678,51 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                     $('#input_p<?= $i ?>_montant').val(benef * tmp);
                 });
     <?php } ?>
+
+            $('#input_customer').select2({
+                ajax: {
+                    url: "../api/customers.php",
+                    dataType: 'json',
+                    delay: 50,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                minimumInputLength: 1
+            });
+            $('#input_applicant').select2({
+                ajax: {
+                    url: "../api/applicants.php",
+                    dataType: 'json',
+                    delay: 50,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 2,
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
+            });
         });
 
     </script>

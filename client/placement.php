@@ -19,16 +19,13 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                             <div class="form-group">
                                 <label for="input_applicant" class="col-lg-3 control-label">Candidat</label>
                                 <div class="col-lg-9">
-                                    <?php $r_applicants = getAllApplicants($db); ?>
-                                    <select class="form-control" name="input_applicant" id="input_applicant">
-                                        <option value=""></option>
-                                        <?php
-                                        while ($r_applicant = $r_applicants->fetch(PDO::FETCH_OBJ)) {
-                                            ?>
-                                            <option value="<?php echo $r_applicant->id; ?>" <?php if (isset($_GET['input_applicant']) && $_GET['input_applicant'] == $r_applicant->id) echo "selected"; ?>><?= $r_applicant->nom; ?> <?= $r_applicant->prenom; ?></option>
-                                            <?php
-                                        }
-                                        ?>
+                                    <select class="select2-container select2-container-multi form-control" 
+                                            name="input_applicant" id="input_applicant" 
+                                            style="width:100%">
+                                                <?php if (isset($_GET['input_applicant'])) { ?>
+                                                    <?php $r_applicant = getOneApplicantById($db, $_GET['input_applicant']); ?>
+                                            <option value="<?= $r_applicant->id ?>"><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -73,16 +70,13 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                             <div class="form-group">
                                 <label for="input_job" class="col-lg-3 control-label">Poste</label>
                                 <div class="col-lg-9">
-                                    <?php $r_jobs = getAllJobs($db); ?>
-                                    <select class="form-control" name="input_job" id="input_job">
-                                        <option value=""></option>
-                                        <?php
-                                        foreach ($r_jobs as $r_job) {
-                                            ?>
-                                            <option value="<?php echo $r_job->id; ?>" <?php if (isset($_GET['input_job']) && $_GET['input_job'] == $r_job->id) echo "selected"; ?>><?php echo $r_job->libelle; ?></option>
-                                            <?php
-                                        }
-                                        ?>
+                                    <select class="select2-container select2-container-multi form-control" 
+                                            name="input_job" id="input_job" 
+                                            style="width:100%">
+                                                <?php if (isset($_GET['input_job'])) { ?>
+                                                    <?php $r_job = getOneJobById($db, $_GET['input_job']); ?>
+                                            <option value="<?= $r_job->id ?>"><?= $r_job->libelle ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -236,7 +230,6 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                 <h1>Total Encaissé: <?= isset($totalIncomeRecu) ? number_format($totalIncomeRecu, 2, '.', ' ') : 0 ?> €</h1>
             <?php } ?>
         </form>
-
     </div>
 
     <script type="text/javascript">
@@ -245,7 +238,7 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                 ajax: {
                     url: "../api/customers.php",
                     dataType: 'json',
-                    delay: 250,
+                    delay: 50,
                     data: function (params) {
                         return {
                             q: params.term
@@ -258,13 +251,56 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                     },
                     cache: true
                 },
-                theme: 'bootstrap',
                 allowClear: true,
                 placeholder: 'Selectionner un client',
                 escapeMarkup: function (markup) {
                     return markup;
                 },
-                minimumInputLength: 2
+                minimumInputLength: 1
+            });
+            $('#input_applicant').select2({
+                ajax: {
+                    url: "../api/applicants.php",
+                    dataType: 'json',
+                    delay: 50,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 2,
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
+            });
+            $('#input_job').select2({
+                ajax: {
+                    url: "../api/jobs.php",
+                    dataType: 'json',
+                    delay: 50,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 2,
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
             });
         });
     </script>

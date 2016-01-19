@@ -19,5 +19,10 @@ if (!isset($_SESSION['user'])) {
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/jasny-bootstrap.min.js"></script>
         <script src="../js/select2/js/select2.min.js"></script>
+        <script src="../js/select2/js/i18n/fr.js"></script>
+        <script type="text/javascript">
+            $.fn.select2.defaults.set('language', 'fr');
+            $.fn.select2.defaults.set('theme', 'bootstrap');
+        </script>
     </head>
     <body>

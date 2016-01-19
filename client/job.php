@@ -480,7 +480,6 @@ include '../functions/bootstrap.php';
             ajax: {
                 url: "../api/customers.php",
                 dataType: 'json',
-                delay: 250,
                 data: function (params) {
                     return {
                         q: params.term
@@ -493,7 +492,6 @@ include '../functions/bootstrap.php';
                 },
                 cache: true
             },
-            theme: 'bootstrap',
             placeholder: 'Selectionner un client',
             escapeMarkup: function (markup) {
                 return markup;
@@ -518,7 +516,6 @@ include '../functions/bootstrap.php';
                 },
                 cache: true
             },
-            theme: 'bootstrap',
             allowClear: true,
             placeholder: 'Selectionner un client',
             escapeMarkup: function (markup) {

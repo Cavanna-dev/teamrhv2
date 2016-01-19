@@ -15,49 +15,27 @@ include '../functions/bootstrap.php';
                         <div class="form-group">
                             <label for="input_applicant" class="col-lg-2 control-label">Candidat*</label>
                             <div class="col-lg-10">
-                                <?php if (isset($_GET['candidat'])) { ?>
-                                    <?php $r_applicant = getOneApplicantById($db, $_GET['candidat']); ?>
-                                    <select class="form-control" id="input_applicant"
-                                            name="input_applicant">
-                                        <option value="<?= $r_applicant->id ?>" selected><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
-                                    </select>
-                                <?php } else { ?>
-                                    <?php $r_applicants = getAllApplicants($db); ?>	
-                                    <select class="form-control" id="input_applicant"
-                                            name="input_applicant">
-                                        <option value=""></option>
-                                        <?php
-                                        while ($r_applicant = $r_applicants->fetch(PDO::FETCH_OBJ)) {
-                                            ?>
-                                            <option value="<?= $r_applicant->id ?>"><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
-                                        <?php } ?>
-                                    </select>
-                                <?php } ?>
+                                <select class="select2-container select2-container-multi form-control" 
+                                        name="input_applicant" id="input_applicant" 
+                                        style="width:100%">
+                                            <?php if (isset($_GET['candidat'])) { ?>
+                                                <?php $r_applicant = getOneApplicantById($db, $_GET['candidat']); ?>
+                                        <option value="<?= $r_applicant->id ?>"><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="input_customer" class="col-lg-2 control-label">Client*</label>
                             <div class="col-lg-10">
-                                <?php if (isset($_GET['client'])) { ?>
-                                    <?php $r_customer = getOneCustomerById($db, $_GET['client']); ?>		
-                                    <select class="form-control" id="input_customer"
-                                            name="input_customer" required>
-                                        <option value="<?php echo $r_customer->id; ?>" selected><?php echo $r_customer->nom; ?></option>
-                                    </select>
-                                <?php } else { ?>
-                                    <?php $r_customers = getAllCustomers($db); ?>		
-                                    <select class="form-control" id="input_customer"
-                                            name="input_customer" required>
-                                        <option value=""></option>
-                                        <?php
-                                        while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                            ?>
-                                            <option value="<?php echo $r_customer->id; ?>"><?php echo $r_customer->nom; ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                <?php } ?>
+                                <select class="select2-container select2-container-multi form-control" 
+                                        name="input_customer" id="input_customer" 
+                                        style="width:100%">
+                                            <?php if (isset($_GET['client'])) { ?>
+                                                <?php $r_client = getOneCustomerById($db, $_GET['client']); ?>
+                                        <option value="<?= $r_client->id ?>"><?= $r_client->nom ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -211,10 +189,10 @@ include '../functions/bootstrap.php';
         if ($('#input_applicant').val() != '' || $('#input_customer').val() != '') {
             url += '?';
         }
-        if ($('#input_applicant').val() != '') {
+        if ($('#input_applicant').val() != '' && $('#input_applicant').val() != null) {
             url += 'candidat=' + $('#input_applicant').val();
         }
-        if ($('#input_applicant').val() != '' && $('#input_customer').val() != '') {
+        if (($('#input_applicant').val() != '' && $('#input_applicant').val() != null) && $('#input_customer').val() != '') {
             url += '&';
         }
         if ($('#input_customer').val() != '') {
@@ -222,6 +200,53 @@ include '../functions/bootstrap.php';
         }
 
         window.location = url;
+
+    });
+
+    $(document).ready(function () {
+        $('#input_customer').select2({
+            ajax: {
+                url: "../api/customers.php",
+                dataType: 'json',
+                delay: 50,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            }
+        });
+        $('#input_applicant').select2({
+            ajax: {
+                url: "../api/applicants.php",
+                dataType: 'json',
+                delay: 50,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            minimumInputLength: 2,
+            escapeMarkup: function (markup) {
+                return markup;
+            }
+        });
     });
 </script>
 </body>

@@ -67,8 +67,8 @@ function searchPlacements($db)
 {
     $consult = htmlspecialchars($_GET['input_consult']);
     $customer = isset($_GET['input_customer']) ? htmlspecialchars($_GET['input_customer']) : '';
-    $job = htmlspecialchars($_GET['input_job']);
-    $applicant = htmlspecialchars($_GET['input_applicant']);
+    $job = isset($_GET['input_job']) ? htmlspecialchars($_GET['input_job']) : '';
+    $applicant = isset($_GET['input_applicant']) ? htmlspecialchars($_GET['input_applicant']) : '';
     $month = htmlspecialchars($_GET['input_month']);
     $year = htmlspecialchars($_GET['input_year']);
 

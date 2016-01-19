@@ -398,12 +398,9 @@ $r = getOneJobById($db, $_GET['id']);
                 },
                 cache: true
             },
-            theme: 'bootstrap',
-            placeholder: 'Selectionner un client',
             escapeMarkup: function (markup) {
                 return markup;
             },
-            minimumInputLength: 2
         });
     });
 </script>

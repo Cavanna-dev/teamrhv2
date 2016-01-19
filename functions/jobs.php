@@ -133,7 +133,7 @@ function searchJobs($db)
     if (!empty($statut))
         $sql .= "p.pourvu = '" . $statut . "' ";
 
-    $sql .= "ORDER BY id DESC, nom, libelle, titre";
+    $sql .= "ORDER BY id, nom, libelle, titre";
     //var_dump($sql);die;
     $r = $db->prepare($sql);
     $r->execute();
