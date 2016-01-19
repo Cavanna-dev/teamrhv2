@@ -58,10 +58,53 @@ $sql .= " GROUP BY id ORDER BY id";
 $r_decaisse = $db->prepare($sql);
 $r_decaisse->execute();
 $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
+
+
+$month = '';
+switch ($_GET['input_month']) {
+    case 'janvier':
+        $month = '01/';
+        break;
+    case 'février':
+        $month = '02/';
+        break;
+    case 'mars':
+        $month = '03/';
+        break;
+    case 'avril':
+        $month = '04/';
+        break;
+    case 'mai':
+        $month = '05/';
+        break;
+    case 'juin':
+        $month = '06/';
+        break;
+    case 'juillet':
+        $month = '07/';
+        break;
+    case 'août':
+        $month = '08/';
+        break;
+    case 'septembre':
+        $month = '09/';
+        break;
+    case 'octobre':
+        $month = '10/';
+        break;
+    case 'novembre':
+        $month = '11/';
+        break;
+    case 'décembre':
+        $month = '12/';
+        break;
+    default :
+        break;
+}
 ?>
 
 <body style="width:800px;margin: auto;">
-    <h1><?= count($r_ndfs) ?> notes de frais - <?= $_GET['input_month'] != '' ? $_GET['input_month'] : 'Aucun mois selectionne'; ?>/<?= $_GET['input_year'] != '' ? $_GET['input_year'] : ''; ?></h1>
+    <h1><?= count($r_ndfs) ?> notes de frais - <?= $month ?><?= $_GET['input_year'] != '' ? $_GET['input_year'] : ''; ?></h1>
     <div>
         <table border="1" style="width:100%">
             <thead>
@@ -91,7 +134,7 @@ $r_ndfs = $r_decaisse->fetchAll(PDO::FETCH_OBJ);
                             <?= $r_ndfs->id ?>
                         </td>
                         <td>
-                            <?= $r_ndfs->description ?>
+                            <?= utf8_decode($r_ndfs->description) ?>
                         </td>
                         <td style="text-align: right">
                             <?= $r_ndfs->ht_tot_amount ?>

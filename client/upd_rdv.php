@@ -115,7 +115,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 //var_dump($r_applicant);die;
                                 if (isset($r_applicant->sexe)) {
                                     switch ($r_applicant->sexe) {
-                                        case "M" : $body_cust = "Monsieur,";
+                                        case "H" : $body_cust = "Monsieur,";
                                             break;
                                         case "F" : $body_cust = "Madame,";
                                             break;
@@ -125,7 +125,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 }
 
                                 $body_cust .= "%0A%0ANous vous confirmons le rendez-vous avec ";
-                                $body_cust .= $r_applicant->nom . ' ' . $r_applicant->prenom;
+                                $body_cust .= $r_applicant->prenom . ' ' . $r_applicant->nom;
                                 $body_cust .= " le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . ".";
                                 $body_cust .= "%0ANous restons à votre disposition.";
                                 $body_cust .= "%0A%0ATrès sincèrement. ";
@@ -136,14 +136,25 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $body_appli = "******************";
                                 $body_appli .= "*     Merci de nous confirmer la lecture de ce mail              *";
                                 $body_appli .= "******************";
-                                $body_appli .= "%0A%0A%0A%0AChère " . $r_applicant->prenom . ",";
+                                
+                                if (isset($r_applicant->sexe)) {
+                                    switch ($r_applicant->sexe) {
+                                        case "H" : $body_cust .= "%0A%0A%0A%0ACher ";
+                                            break;
+                                        case "F" : $body_cust .= "%0A%0A%0A%0AChère ";
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                                $body_appli .= $r_applicant->prenom . ",";
                                 $body_appli .= "%0A%0AVotre rendez-vous a été confirmé pour "
                                         . "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . " "
                                         . "avec ";
                                 if ($mail_contact) {
                                     if($mail_contact->civilite != '') {$body_appli .= $mail_contact->civilite . " ";}
-                                    if($mail_contact->nom != '') {$body_appli .= $mail_contact->nom . " ";}
-                                    if($mail_contact->prenom != '') {$body_appli .= $mail_contact->prenom;}
+                                    if($mail_contact->prenom != '') {$body_appli .= $mail_contact->prenom . " ";}
+                                    if($mail_contact->nom != '') {$body_appli .= $mail_contact->nom;}
                                 }
                                 $body_appli .= "%0A" . str_replace("&", "et", $mail_customer->nom);
                                 $body_appli .= "%0A" . $mail_customer->adresse1;

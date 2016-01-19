@@ -35,6 +35,10 @@ table, .table {
     white-space:pre-wrap;
 }
 
+.popover a{
+    color:white;
+}
+
 .jumbotron{
     padding-top:5px;
     padding-bottom:5px;

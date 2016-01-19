@@ -67,8 +67,6 @@ $r = getOneJobById($db, $_GET['id']);
                                 $geturl .= '&con=' . $r->contrat;
                                 $geturl .= '&dur=' . $r->duree;
                                 $geturl .= '&f1=' . $r->forfait;
-                                $geturl .= '&f2=' . $r->forfait2;
-                                $geturl .= '&f3=' . $r->forfait3;
                                 ?>
                                 <a href="new_placement.php?<?= $geturl ?>"><button type="button" class="btn btn-primary">Créer Placement</button></a>
                             <?php } ?>
@@ -205,20 +203,10 @@ $r = getOneJobById($db, $_GET['id']);
                                 </div>
                                 <div class="form-group">
                                     <label for="input_forfait" class="col-lg-2 control-label">Forfait</label>
-                                    <div class="col-lg-3">
-                                        <input class="form-control col-lg-4" id="input_forfait" 
-                                               name="input_forfait" placeholder="1" 
+                                    <div class="col-lg-10">
+                                        <input class="form-control col-lg-12" id="input_forfait" 
+                                               name="input_forfait" placeholder="Forfait" 
                                                type="text" value="<?= $r->forfait; ?>">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <input class="form-control col-lg-4" id="input_forfait2" 
-                                               name="input_forfait2" placeholder="2" 
-                                               type="text" value="<?= $r->forfait2; ?>">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <input class="form-control col-lg-4" id="input_forfait3" 
-                                               name="input_forfait3" placeholder="3" 
-                                               type="text" value="<?= $r->forfait3; ?>">
                                     </div>
                                 </div>
                             </fieldset>
@@ -244,10 +232,20 @@ $r = getOneJobById($db, $_GET['id']);
                                 </div>
                                 <div class="form-group">
                                     <label for="input_formule" class="col-lg-2 control-label">Formule</label>
-                                    <div class="col-lg-10">
-                                        <textarea class="form-control" id="input_formule" 
-                                                  name="input_formule" placeholder="Formule" 
-                                                  type="text"><?= $r->formule; ?></textarea>
+                                    <div class="col-lg-3">
+                                        <input class="form-control col-lg-4" id="input_forfait" 
+                                               name="input_formule" placeholder="1" 
+                                               type="text" value="<?= $r->formule; ?>">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <input class="form-control col-lg-4" id="input_forfait2" 
+                                               name="input_formule2" placeholder="2" 
+                                               type="text" value="<?= $r->formule2; ?>">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <input class="form-control col-lg-4" id="input_forfait3" 
+                                               name="input_formule3" placeholder="3" 
+                                               type="text" value="<?= $r->formule3; ?>">
                                     </div>
                                 </div>
                             </fieldset>

@@ -14,7 +14,7 @@ $r_applicant = getOneApplicantById($db, $r->candidat);
         <input type="hidden" name="input_id_applicant" id="input_id" value="<?= $r_applicant->id ?>" />
         <div class="row">
             <div class="col-lg-9">
-                <h1>Commentaire : <a href="upd_client.php?id=<?= $r_applicant->id ?> "><?= $r_applicant->nom ?></a></h1>
+                <h1>Commentaire : <a href="upd_applicant.php?id=<?= $r_applicant->id ?> "><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></a></h1>
             </div>
             <div class="col-lg-3">
                 <h1 class="pull-right"><button type="submit" class="btn btn-primary">Enregistrer commentaire</button></h1>

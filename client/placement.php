@@ -135,6 +135,7 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                     <th>Client</th>
                                     <th>Candidat</th>
                                     <th>Poste</th>
+                                    <th>Secteur</th>
                                     <th class="text-right">Honoraires non Facturés</th>
                                     <th class="text-right">Honoraires non Encaissés</th>
                                     <th class="text-right">Honoraires Encaissés</th>
@@ -194,6 +195,9 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                             }
                                             ?>
                                         </td>
+                                        <td>
+                                            <?= $r_placement->secteur ?>
+                                        </td>
                                         <td class="text-right">
                                             <?php $nonFacture = getTotalFactureByPlacementId($db, $r_placement->id); ?>
                                             <span class="text-danger"><?= number_format($nonFacture->total, 2, ',', ' ') ?> €</span>
@@ -207,7 +211,48 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                             <span class="text-success"><?= number_format($reçu->total, 2, ',', ' ') ?> €</span>
                                         </td>
                                         <td class="text-right">
-                                            <?= $r_placement->mois_placement . ' ' . $r_placement->annee_placement ?>
+                                            <?php
+                                            $month = '';
+                                            switch ($r_placement->mois_placement) {
+                                                case 'janvier':
+                                                    $month = '01';
+                                                    break;
+                                                case 'février':
+                                                    $month = '02';
+                                                    break;
+                                                case 'mars':
+                                                    $month = '03';
+                                                    break;
+                                                case 'avril':
+                                                    $month = '04';
+                                                    break;
+                                                case 'mai':
+                                                    $month = '05';
+                                                    break;
+                                                case 'juin':
+                                                    $month = '06';
+                                                    break;
+                                                case 'juillet':
+                                                    $month = '07';
+                                                    break;
+                                                case 'août':
+                                                    $month = '08';
+                                                    break;
+                                                case 'septembre':
+                                                    $month = '09';
+                                                    break;
+                                                case 'octobre':
+                                                    $month = '10';
+                                                    break;
+                                                case 'novembre':
+                                                    $month = '11';
+                                                    break;
+                                                case 'décembre':
+                                                    $month = '12';
+                                                    break;
+                                            }
+                                            ?>
+                                            <?= $month . '/' . $r_placement->annee_placement ?>
                                         </td>
                                     </tr>
                                     <?php
