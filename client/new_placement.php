@@ -329,16 +329,13 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                             Client
                                         </label>
                                         <div class="col-lg-10">
-                                            <?php $r_customers = getAllCustomers($db); ?>
-                                            <select class="form-control" name="input_customer" id="input_customer">
-                                                <option value=""></option>
-                                                <?php
-                                                while ($r_customer = $r_customers->fetch(PDO::FETCH_OBJ)) {
-                                                    ?>
-                                                    <option value="<?= $r_customer->id ?>" <?php if ($r_customer->id == $_GET['c']) echo 'selected'; ?>><?= $r_customer->nom ?></option>
-                                                    <?php
-                                                }
-                                                ?>
+                                            <select class="select2-container select2-container-multi form-control" 
+                                                    name="input_customer" id="input_customer" 
+                                                    style="width:100%">
+                                                        <?php if (isset($_GET['c'])) { ?>
+                                                            <?php $r_client = getOneCustomerById($db, $_GET['c']); ?>
+                                                    <option value="<?= $r_client->id ?>"><?= $r_client->nom ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -347,18 +344,13 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                             Candidat
                                         </label>
                                         <div class="col-lg-10">
-                                            <?php $r_applicants = getAllApplicants($db); ?>
-                                            <select class="form-control" name="input_applicant" id="input_applicant">
-                                                <option value=""></option>
-                                                <?php
-                                                while ($r_applicant = $r_applicants->fetch(PDO::FETCH_OBJ)) {
-                                                    ?>
-                                                    <option value="<?= $r_applicant->id ?>">
-                                                        <?= $r_applicant->nom . ' ' . $r_applicant->prenom ?>
-                                                    </option>
-                                                    <?php
-                                                }
-                                                ?>
+                                            <select class="select2-container select2-container-multi form-control" 
+                                                    name="input_applicant" id="input_applicant" 
+                                                    style="width:100%">
+                                                        <?php if (isset($_GET['input_applicant'])) { ?>
+                                                            <?php $r_applicant = getOneApplicantById($db, $_GET['input_applicant']); ?>
+                                                    <option value="<?= $r_applicant->id ?>"><?= $r_applicant->nom . ' ' . $r_applicant->prenom ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -609,7 +601,53 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                     $('#input_p<?= $i ?>_montant').val(benef * tmp);
                 });
     <?php } ?>
-        });
 
+            $('#input_customer').select2({
+                ajax: {
+                    url: "../api/customers.php",
+                    dataType: 'json',
+                    delay: 50,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                placeholder: 'Selectionner un client',
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                minimumInputLength: 1
+            });
+            $('#input_applicant').select2({
+                ajax: {
+                    url: "../api/applicants.php",
+                    dataType: 'json',
+                    delay: 50,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 2,
+                placeholder: 'Selectionner un candidat',
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
+            });
+        });
     </script>
 <?php } ?>
