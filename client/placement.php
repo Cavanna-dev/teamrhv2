@@ -276,6 +276,7 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                     cache: true
                 },
                 minimumInputLength: 2,
+                placeholder: 'Selectionner un candidat',
                 escapeMarkup: function (markup) {
                     return markup;
                 }
@@ -298,6 +299,7 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                     cache: true
                 },
                 minimumInputLength: 2,
+                placeholder: 'Selectionner un poste',
                 escapeMarkup: function (markup) {
                     return markup;
                 }
