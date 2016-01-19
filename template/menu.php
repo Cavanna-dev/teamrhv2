@@ -18,11 +18,10 @@ switch ($_SESSION['user']['type']):
             ),
             "Fournisseur" => Array(
             ),
-            "Facturation" => Array(
+            "Comptabilite" => Array(
                 "decaisse.php" => "Décaissé",
                 "ndf.php" => "Note de Frais",
-            ),
-            "Comptabilité" => Array(
+                "resultats.php" => "Résultats",
             ),
         );
         break;
@@ -44,11 +43,10 @@ switch ($_SESSION['user']['type']):
             ),
             "Fournisseur" => Array(
             ),
-            "Facturation" => Array(
+            "Comptabilite" => Array(
                 "decaisse.php" => "Décaissé",
                 "ndf.php" => "Note de Frais",
-            ),
-            "Comptabilité" => Array(
+                "resultats.php" => "Résultats",
             ),
         );
         break;
@@ -66,8 +64,6 @@ switch ($_SESSION['user']['type']):
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
-            ),
-            "Fournisseur" => Array(
             )
         );
         break;
@@ -85,8 +81,6 @@ switch ($_SESSION['user']['type']):
             ),
             "Prospect" => Array(
                 "prospect.php" => "Prospect",
-            ),
-            "Fournisseur" => Array(
             )
         );
         break;

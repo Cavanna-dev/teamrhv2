@@ -343,8 +343,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                 <?php
                 $tmp1 = $param - 1;
                 ?>
-                &nbsp;&nbsp;&nbsp;<A class="lien"  href="#" onclick="location.href = 'resultats.php?&par
-                            am =<?php echo $tmp1 ?>';">Ann&eacute;e pr&eacute;c&eacute;dente</A>
+                &nbsp;&nbsp;&nbsp;<A class="lien"  href="#" onclick="location.href = 'resultats.php?&param=<?php echo $tmp1 ?>';">Ann&eacute;e pr&eacute;c&eacute;dente</A>
             </TD>
             <TD colspan="2" align="center">
                 <select name="tva"  onchange="window.location.href = 'resultats.php?tva=<?= $tva == 'Y' ? 'N' : 'Y' ?>&param=<?php echo $param; ?>'">
@@ -356,8 +355,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                 <?php
                 $tmp2 = $param + 1;
                 ?>
-                <A class="lien" href="#" onclick="location.href = 'resultats.php?&par
-                                    am =<?php echo $tmp2 ?>';">Ann&eacute;e suivante</A>&nbsp;&nbsp;&nbsp;
+                <A class="lien" href="#" onclick="location.href = 'resultats.php?&param=<?php echo $tmp2 ?>';">Ann&eacute;e suivante</A>&nbsp;&nbsp;&nbsp;
             </TD>
         </TR>
         <TR>
