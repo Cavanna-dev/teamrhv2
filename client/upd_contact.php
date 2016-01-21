@@ -76,7 +76,7 @@ $r_client = getOneCustomerById($db, $r->client);
                 <div class="col-lg-6">
                     <fieldset>
                         <div class="form-group">
-                            <label for="input_mail" class="col-lg-2 control-label">Email</label>
+                            <label for="input_mail" class="col-lg-2 control-label"><a href="mailto:<?= $r->email ?>">Email</a></label>
                             <div class="col-lg-10">
                                 <input type="email" class="form-control" name="input_mail" 
                                        id="input_mail" placeholder="Email" 

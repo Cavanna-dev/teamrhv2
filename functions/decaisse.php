@@ -51,7 +51,7 @@ function searchDecaisse($db)
     if (!empty($amount))
         $sql .= "dec_ttc_tot_amount = ".$amount;
 
-    $sql .= " ORDER BY date_compta ";
+    $sql .= " ORDER BY id ";
     //var_dump($sql);die;
     $r_decaisse = $db->prepare($sql);
     $r_decaisse->execute();
