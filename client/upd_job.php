@@ -66,7 +66,10 @@ $r = getOneJobById($db, $_GET['id']);
                                 $geturl .= '&li=' . $r->lieux;
                                 $geturl .= '&con=' . $r->contrat;
                                 $geturl .= '&dur=' . $r->duree;
-                                $geturl .= '&f1=' . $r->forfait;
+                                $geturl .= '&forf=' . $r->forfait;
+                                $geturl .= '&form1=' . $r->formule;
+                                $geturl .= '&form2=' . $r->formule2;
+                                $geturl .= '&form3=' . $r->formule3;
                                 ?>
                                 <a href="new_placement.php?<?= $geturl ?>"><button type="button" class="btn btn-primary">Créer Placement</button></a>
                             <?php } ?>

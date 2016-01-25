@@ -594,13 +594,24 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
 
             benef -= remise;
 
+            var formule = <?= $_GET['forf'] ?>;
+            var forfait1 = <?= $_GET['form1'] != 0 ? $_GET['form1'] : 0 ?>;
+            var forfait2 = <?= $_GET['form2'] != 0 ? $_GET['form2'] : 0 ?>;
+            var forfait3 = <?= $_GET['form3'] != 0 ? $_GET['form3'] : 0 ?>;
+
     <?php for ($i = 1; $i <= 3; $i++) { ?>
                 $("#input_p<?= $i ?>_pourcentage").keyup(function () {
                     var tmp = ($(this).val()) / 100;
                     $('#input_p<?= $i ?>_tva').val('20');
                     $('#input_p<?= $i ?>_montant').val(benef * tmp);
                 });
+
+                if (forfait<?= $i ?> != 0) {
+                    $('#input_f<?= $i ?>_tva').val('20');
+                    $('#input_f<?= $i ?>_montant').val(formule * (forfait<?= $i ?> / 100));
+                };
     <?php } ?>
+
 
             $('#input_customer').select2({
                 ajax: {
