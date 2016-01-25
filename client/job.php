@@ -186,10 +186,11 @@ include '../functions/bootstrap.php';
                                 <div class="col-lg-6">
                                     <fieldset>
                                         <div class="form-group">
-                                            <label for="input_name" class="col-lg-2 control-label"><b>Libelle</b></label>
+                                            <label for="input_name" class="col-lg-2 control-label"><b>Libelle*</b></label>
                                             <div class="col-lg-10">
                                                 <input class="form-control" id="input_name" 
-                                                       name="input_name" placeholder="Nom" type="text">
+                                                       name="input_name" required
+                                                       placeholder="Nom" type="text">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -210,11 +211,12 @@ include '../functions/bootstrap.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="input_customer" class="col-lg-2 control-label">
-                                                Client
+                                                Client*
                                             </label>
                                             <div class="col-lg-10">
                                                 <select class="select2-container form-control select2  select2-container--bootstrap" 
-                                                        id="input_customer_select" name="input_customer" style="width:100%;">
+                                                        id="input_customer_select" required
+                                                        name="input_customer" style="width:100%;">
                                                 </select>
                                             </div>
                                         </div>
@@ -254,9 +256,10 @@ include '../functions/bootstrap.php';
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="input_pourvu" class="col-lg-2 control-label">Statut</label>
+                                            <label for="input_pourvu" class="col-lg-2 control-label">Statut*</label>
                                             <div class="col-lg-10">
-                                                <select name="input_pourvu" id="input_pourvu" class="form-control">
+                                                <select name="input_pourvu" required
+                                                        id="input_pourvu" class="form-control">
                                                     <option value=""></option>
                                                     <option value="Y">Poste Fermé</option>
                                                     <option value="N">Poste Ouvert</option>
@@ -264,10 +267,11 @@ include '../functions/bootstrap.php';
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="input_contact" class="col-lg-2 control-label">Consultant</label>
+                                            <label for="input_contact" class="col-lg-2 control-label">Consultant*</label>
                                             <div class="col-lg-10">
                                                 <?php $r_users = getAllUsers($db); ?>
-                                                <select class="form-control" name="input_contact" id="input_contact">
+                                                <select class="form-control" required
+                                                        name="input_contact" id="input_contact">
                                                     <option value=""></option>
                                                     <?php
                                                     while ($user_r = $r_users->fetch(PDO::FETCH_OBJ)) {
