@@ -33,11 +33,10 @@
                         ),
                         "Fournisseur" => Array(
                         ),
-                        "Facturation" => Array(
+                        "Comptabilite" => Array(
                             "decaisse.php" => "Décaissé",
                             "ndf.php" => "Note de Frais",
-                        ),
-                        "Comptabilité" => Array(
+                            "resultats.php" => "Résultats",
                         ),
                     );
                     break;
@@ -59,11 +58,10 @@
                         ),
                         "Fournisseur" => Array(
                         ),
-                        "Facturation" => Array(
+                        "Comptabilite" => Array(
                             "decaisse.php" => "Décaissé",
                             "ndf.php" => "Note de Frais",
-                        ),
-                        "Comptabilité" => Array(
+                            "resultats.php" => "Résultats",
                         ),
                     );
                     break;
