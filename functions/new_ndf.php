@@ -77,7 +77,7 @@ try {
     $stmt->execute();
     }
     
-    header('Location:../facturation/ndf.php?tab=new');
+    header('Location:../comptabilite/ndf.php?tab=new');
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
 }

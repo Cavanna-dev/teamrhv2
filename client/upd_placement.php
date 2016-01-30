@@ -35,11 +35,6 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                             <h1>Reglements</h1>
                         </div>
                         <div class="col-lg-3">
-                            <h1 class="pull-right">
-                                <!--<a href="new_encaisse.php">
-                                    <button type="button" class="btn btn-primary">Encaissé</button>
-                                </a>-->
-                            </h1>
                         </div>
                     </div>
                     <div class="jumbotron">
@@ -48,7 +43,9 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <?php $r_detail_p1 = getPlacementDetailById($db, $r->id, 'P', 1); ?>
-                                        <h2>Pourcentage 1</h2>
+                                        <h2>Pourcentage 1 
+                                            <?php if ($r_detail_p1) { ?><a href="../comptabilite/new_encaisse.php?p=<?= $r->id ?>&c=<?= $r->client ?>&detail=<?= $r_detail_p1->id ? $r_detail_p1->id : '' ?>"><button type="button" class="btn btn-primary">Encaissé</button></a> <?php } ?>
+                                        </h2>
                                         <fieldset>
                                             <div class="form-group">
                                                 <div class="col-lg-4">
@@ -102,7 +99,10 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                     </div>
                                     <div class="col-lg-12">
                                         <?php $r_detail_p2 = getPlacementDetailById($db, $r->id, 'P', 2); ?>
-                                        <h2>Pourcentage 2</h2>
+                                        <h2>
+                                            Pourcentage 2    
+                                            <?php if ($r_detail_p2) { ?><a href="../comptabilite/new_encaisse.php?p=<?= $r->id ?>&c=<?= $r->client ?>&detail=<?= $r_detail_p2->id ? $r_detail_p2->id : '' ?>"><button type="button" class="btn btn-primary">Encaissé</button></a> <?php } ?>
+                                        </h2>
                                         <fieldset>
                                             <div class="form-group">
                                                 <div class="col-lg-4">
@@ -156,7 +156,10 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                     </div>
                                     <div class="col-lg-12">
                                         <?php $r_detail_p3 = getPlacementDetailById($db, $r->id, 'P', 3); ?>
-                                        <h2>Pourcentage 3</h2>
+                                        <h2>
+                                            Pourcentage 3
+                                            <?php if ($r_detail_p3) { ?><a href="../comptabilite/new_encaisse.php?p=<?= $r->id ?>&c=<?= $r->client ?>&detail=<?= $r_detail_p3->id ? $r_detail_p3->id : '' ?>"><button type="button" class="btn btn-primary">Encaissé</button></a> <?php } ?>
+                                        </h2>
                                         <fieldset>
                                             <div class="form-group">
                                                 <div class="col-lg-4">
@@ -214,7 +217,10 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <?php $r_detail_f1 = getPlacementDetailById($db, $r->id, 'F', 1); ?>
-                                        <h2>Forfait 1</h2>
+                                        <h2>
+                                            Forfait 1
+                                            <?php if ($r_detail_f1) { ?><a href="../comptabilite/new_encaisse.php?p=<?= $r->id ?>&c=<?= $r->client ?>&detail=<?= $r_detail_f1->id ? $r_detail_f1->id : '' ?>"><button type="button" class="btn btn-primary">Encaissé</button></a> <?php } ?>
+                                        </h2>
                                         <fieldset>
                                             <div class="form-group">
                                                 <div class="col-lg-6">
@@ -261,7 +267,10 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                     </div>
                                     <div class="col-lg-12">
                                         <?php $r_detail_f2 = getPlacementDetailById($db, $r->id, 'F', 2); ?>
-                                        <h2>Forfait 2</h2>
+                                        <h2>
+                                            Forfait 2
+                                            <?php if ($r_detail_f2) { ?><a href="../comptabilite/new_encaisse.php?p=<?= $r->id ?>&c=<?= $r->client ?>&detail=<?= $r_detail_f2->id ? $r_detail_f2->id : '' ?>"><button type="button" class="btn btn-primary">Encaissé</button></a> <?php } ?>
+                                        </h2>
                                         <fieldset>
                                             <div class="form-group">
                                                 <div class="col-lg-6">
@@ -308,7 +317,10 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                     </div>
                                     <div class="col-lg-12">
                                         <?php $r_detail_f3 = getPlacementDetailById($db, $r->id, 'F', 3); ?>
-                                        <h2>Forfait 3</h2>
+                                        <h2>
+                                            Forfait 3
+                                            <?php if ($r_detail_f3) { ?><a href="../comptabilite/new_encaisse.php?p=<?= $r->id ?>&c=<?= $r->client ?>&detail=<?= $r_detail_f3->id ? $r_detail_f3->id : '' ?>"><button type="button" class="btn btn-primary">Encaissé</button></a> <?php } ?>
+                                        </h2>
                                         <fieldset>
                                             <div class="form-group">
                                                 <div class="col-lg-6">

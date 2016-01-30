@@ -89,7 +89,7 @@ try {
         $stmt->execute();
     }
     
-    header('Location:../facturation/upd_decaisse.php?id='.$id_decaisse.'&success=upd');
+    header('Location:../comptabilite/upd_decaisse.php?id='.$id_decaisse.'&success=upd');
 } catch (Exception $ex) {
     
 }

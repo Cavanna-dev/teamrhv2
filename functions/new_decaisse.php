@@ -80,7 +80,7 @@ try {
     $stmt->execute();
     }
     
-    header('Location:../facturation/upd_decaisse.php?id='.$lastId.'&success=n');
+    header('Location:../comptabilite/upd_decaisse.php?id='.$lastId.'&success=n');
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
 }

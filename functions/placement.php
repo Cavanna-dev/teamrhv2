@@ -63,6 +63,19 @@ function getOnePlacementById($db, $id)
     return $r;
 }
 
+function getOnePlacementDetailById($db, $id)
+{
+    $sql = "SELECT id, type, pourcentage, date, tva, montant, isFacture, "
+            . "isEncaisse "
+            . "FROM reglements "
+            . "WHERE id=" . $id;
+
+    $r_job = $db->prepare($sql);
+    $r_job->execute();
+    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    return $r;
+}
+
 function searchPlacements($db)
 {
     $consult = htmlspecialchars($_GET['input_consult']);

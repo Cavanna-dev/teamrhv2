@@ -7,6 +7,7 @@ include '../functions/country.php';
 include '../functions/customer.php';
 include '../functions/decaisse.php';
 include '../functions/diplome.php';
+include '../functions/encaisse.php';
 include '../functions/evaluation.php';
 include '../functions/fournisseur.php';
 include '../functions/jobs.php';

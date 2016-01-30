@@ -34,6 +34,7 @@
                         "Fournisseur" => Array(
                         ),
                         "Comptabilite" => Array(
+                            "encaisse.php" => "Encaissé",
                             "decaisse.php" => "Décaissé",
                             "ndf.php" => "Note de Frais",
                             "resultats.php" => "Résultats",
@@ -59,6 +60,7 @@
                         "Fournisseur" => Array(
                         ),
                         "Comptabilite" => Array(
+                            "encaisse.php" => "Encaissé",
                             "decaisse.php" => "Décaissé",
                             "ndf.php" => "Note de Frais",
                             "resultats.php" => "Résultats",

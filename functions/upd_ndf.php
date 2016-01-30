@@ -83,7 +83,7 @@ try {
         $stmt->execute();
     }
     
-    header('Location:../facturation/upd_ndf.php?id='.$id_ndf.'&success=upd');
+    header('Location:../comptabilite/upd_ndf.php?id='.$id_ndf.'&success=upd');
 } catch (Exception $ex) {
     
 }

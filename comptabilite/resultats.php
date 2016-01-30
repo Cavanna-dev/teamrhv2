@@ -22,7 +22,7 @@ if ($param == "") {
 }
 
 if ($tva == "")
-    $tva = "Y";
+    $tva = "N";
 
 // Factures encaiss&eacute;es
 $clause = " 1 = 1 ";
