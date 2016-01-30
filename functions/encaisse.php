@@ -54,9 +54,16 @@ function searchEncaisse($db)
 
 function getOneEncaisseById($db, $id)
 {
-    $sql = "SELECT * "
-            . "FROM encaisse d "
-            . "WHERE id='" . $id . "'";
+    $sql = "SELECT e.id, c.id idClient, c.nom nomClient, pla.id idPlacement, "
+            . "pos.libelle, can.nom nomCandidat, can.prenom prenomCandidat, e.date_envoi, "
+            . "e.date_paiement, e.ref_facture, e.ref_paiement, e.mode_paiement, e.montant, "
+            . "e.tva, e.enc_ttc_tot_amount, e.enc_tva_tot_amount, e.description "
+            . "FROM encaisse e "
+            . "LEFT JOIN client c ON c.id = e.client "
+            . "LEFT JOIN placement pla ON pla.id = e.placement "
+            . "LEFT JOIN poste pos ON pla.poste = pos.id "
+            . "LEFT JOIN candidat can ON pla.candidat = can.id "
+            . "WHERE e.id='" . $id . "'";
     $r_rdv = $db->prepare($sql);
     $r_rdv->execute();
     $r = $r_rdv->fetch(PDO::FETCH_OBJ);
