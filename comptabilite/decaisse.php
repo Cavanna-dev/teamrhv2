@@ -337,19 +337,19 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line2_ht" 
-                                       id="input_line1_ht" 
+                                       id="input_line2_ht" 
                                        placeholder="Montant HT" />
                             </div>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line2_tva" 
-                                       id="input_line1_tva"  
+                                       id="input_line2_tva"  
                                        placeholder="Montant Tva" />
                             </div>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line2_ttc" 
-                                       id="input_line1_ttc"  
+                                       id="input_line2_ttc"  
                                        placeholder="Montant TTC" />
                             </div>
                         </div>
@@ -360,19 +360,19 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line3_ht" 
-                                       id="input_line1_ht" 
+                                       id="input_line3_ht" 
                                        placeholder="Montant HT" />
                             </div>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line3_tva" 
-                                       id="input_line1_tva"  
+                                       id="input_line3_tva"  
                                        placeholder="Montant Tva" />
                             </div>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line3_ttc" 
-                                       id="input_line1_ttc"  
+                                       id="input_line3_ttc"  
                                        placeholder="Montant TTC" />
                             </div>
                         </div>
@@ -383,19 +383,19 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line4_ht" 
-                                       id="input_line1_ht" 
+                                       id="input_line4_ht" 
                                        placeholder="Montant HT" />
                             </div>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line4_tva" 
-                                       id="input_line1_tva"  
+                                       id="input_line4_tva"  
                                        placeholder="Montant Tva" />
                             </div>
                             <div class="col-lg-3">
                                 <input type="text" class="form-control" 
                                        name="input_line4_ttc" 
-                                       id="input_line1_ttc"  
+                                       id="input_line4_ttc"  
                                        placeholder="Montant TTC" />
                             </div>
                         </div>
@@ -414,3 +414,98 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                 </div>
             </form>
         </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(window).ready(function () {
+<?php for ($i = 1; $i <= 4; $i++) { ?>
+            $('#input_line<?= $i ?>_ht').keyup(function () {
+                var amountHt<?= $i ?> = parseInt($(this).val());
+                var tva<?= $i ?> =
+    <?php
+    switch ($i) {
+        case 1:
+            echo 20;
+            break;
+        case 2:
+            echo 10;
+            break;
+        case 3:
+            echo 5.5;
+            break;
+        case 4:
+            echo 0;
+            break;
+    }
+    ?>;
+
+                var amountTva<?= $i ?> = amountHt<?= $i ?> * (tva<?= $i ?> / 100);
+                var roundTva<?= $i ?> = Math.round(amountTva<?= $i ?> * 100) / 100;
+                $('#input_line<?= $i ?>_tva').val(roundTva<?= $i ?>);
+
+                var amountTtc<?= $i ?> = amountHt<?= $i ?> + amountTva<?= $i ?>;
+                $('#input_line<?= $i ?>_ttc').val(amountTtc<?= $i ?>);
+            });
+
+            $('#input_line<?= $i ?>_tva').keyup(function () {
+                var amountTva<?= $i ?> = parseInt($(this).val());
+                var tva<?= $i ?> =
+    <?php
+    switch ($i) {
+        case 1:
+            echo 20;
+            break;
+        case 2:
+            echo 10;
+            break;
+        case 3:
+            echo 5.5;
+            break;
+        case 4:
+            echo 0;
+            break;
+    }
+    ?>;
+                if (tva<?= $i ?> != 0) {
+                    var amountHt<?= $i ?> = amountTva<?= $i ?> / (tva<?= $i ?> / 100);
+                    var roundAmountHt<?= $i ?> = Math.round(amountHt<?= $i ?> * 100) / 100;
+                    $('#input_line<?= $i ?>_ht').val(roundAmountHt<?= $i ?>);
+
+                    var amountTtc<?= $i ?> = amountHt<?= $i ?> + amountTva<?= $i ?>;
+                    var roundAmountTtc<?= $i ?> = Math.round(amountTtc<?= $i ?> * 100) / 100;
+                    $('#input_line<?= $i ?>_ttc').val(roundAmountTtc<?= $i ?>);
+                }
+            });
+
+
+            $('#input_line<?= $i ?>_ttc').keyup(function () {
+                var amountTtc<?= $i ?> = parseInt($(this).val());
+                var tva<?= $i ?> =
+    <?php
+    switch ($i) {
+        case 1:
+            echo 20;
+            break;
+        case 2:
+            echo 10;
+            break;
+        case 3:
+            echo 5.5;
+            break;
+        case 4:
+            echo 0;
+            break;
+    }
+    ?>;
+
+                var amountTva<?= $i ?> = amountTtc<?= $i ?> * tva<?= $i ?> / (tva<?= $i ?> + 100);
+                var roundAmountTva<?= $i ?> = Math.round(amountTva<?= $i ?> * 100) / 100;
+                $('#input_line<?= $i ?>_tva').val(roundAmountTva<?= $i ?>);
+
+                var amountHt<?= $i ?> = amountTtc<?= $i ?> - roundAmountTva<?= $i ?>;
+                var roundAmountTva<?= $i ?> = Math.round(amountHt<?= $i ?> * 100) / 100;
+                $('#input_line<?= $i ?>_ht').val(roundAmountTva<?= $i ?>);
+            });
+<?php } ?>
+    });
+</script>
