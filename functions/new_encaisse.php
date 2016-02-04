@@ -18,9 +18,8 @@ try {
             . ":input_tva, :input_ttc, :input_amount_tva, :input_description)";
     $stmt = $db->prepare($sql);
     $stmt->execute($array_value);
-    $lastId = $db->lastInsertId();
     
-    header('Location:../comptabilite/upd_decaisse.php?id='.$lastId.'&success=n');
+    header('Location:../client/upd_placement.php?id='.$array_value[':input_placement'].'&success=n');
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
 }
