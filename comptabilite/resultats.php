@@ -314,7 +314,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
 }
 ?>
 <div class="container">
-    <TABLE cellpadding="0" cellspacing="0" border="1" bordercolor="white">
+    <TABLE cellpadding="0" cellspacing="0" border="1" bordercolor="white" class="table table-bordered">
         <TR>
             <TD colspan="4" class="titre" align="middle">
                 <BR>Compte de r&eacute;sultat simplifi&eacute; pour l'ann&eacute;e <?php echo $param ?>.
@@ -379,13 +379,13 @@ if (isset($annuler) && $Annuler == "Annuler") {
                     Description
                 </TD>
                 <TD class="normal" align="middle">
-                    &nbsp; Montant TTC en euro &nbsp;
+                    &nbsp; Montant en euro &nbsp;
                 </TD>
                 <TD class="normal" align="middle">
                     Description
                 </TD>
                 <TD class="normal" align="middle">
-                    &nbsp; Montant TTC en euro &nbsp;
+                    &nbsp; Montant en euro &nbsp;
                 </TD>
             </TR>
             <?php
@@ -399,7 +399,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
-                <TD align="left"  class="normal">
+                <TD align="left" class="normal">
                     <?php
                     foreach ($resultat2_jan->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
                         echo "&nbsp;&nbsp;";
@@ -408,7 +408,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de janvier
+                    <BR>&nbsp;&nbsp;<b>Total du mois de janvier</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -425,9 +425,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_jan, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
 
@@ -440,7 +440,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de janvier
+                    <BR>&nbsp;&nbsp;<b>Total du mois de janvier</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -457,9 +457,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_jan, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -484,7 +484,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de f&eacute;vrier
+                    <BR>&nbsp;&nbsp;<b>Total du mois de f&eacute;vrier</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -501,9 +501,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_fev, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -515,7 +515,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de f&eacute;vrier
+                    <BR>&nbsp;&nbsp;<b>Total du mois de f&eacute;vrier</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -532,9 +532,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_fev, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -559,7 +559,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de mars
+                    <BR>&nbsp;&nbsp;<b>Total du mois de mars</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -576,9 +576,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_mar, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -590,7 +590,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de mars
+                    <BR>&nbsp;&nbsp;<b>Total du mois de mars</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -607,9 +607,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_mar, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -635,7 +635,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de avril
+                    <BR>&nbsp;&nbsp;<b>Total du mois de avril</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -652,9 +652,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_avr, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -666,7 +666,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de avril
+                    <BR>&nbsp;&nbsp;<b>Total du mois de avril</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -683,9 +683,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_avr, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -710,7 +710,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de mai
+                    <BR>&nbsp;&nbsp;<b>Total du mois de mai</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -727,9 +727,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_mai, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -741,7 +741,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de mai
+                    <BR>&nbsp;&nbsp;<b>Total du mois de mai</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -758,9 +758,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_mai, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -785,7 +785,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de juin
+                    <BR>&nbsp;&nbsp;<b>Total du mois de juin</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -802,9 +802,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_jun, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -816,7 +816,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de juin
+                    <BR>&nbsp;&nbsp;<b>Total du mois de juin</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -833,9 +833,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_jun, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -860,7 +860,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de juillet
+                    <BR>&nbsp;&nbsp;<b>Total du mois de juillet</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -877,9 +877,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_jui, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -891,7 +891,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de juillet
+                    <BR>&nbsp;&nbsp;<b>Total du mois de juillet</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -908,9 +908,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_jui, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -935,7 +935,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de ao&ucirc;t
+                    <BR>&nbsp;&nbsp;<b>Total du mois de ao&ucirc;t</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -952,9 +952,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_aou, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -966,7 +966,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de ao&ucirc;t
+                    <BR>&nbsp;&nbsp;<b>Total du mois de ao&ucirc;t</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -983,9 +983,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_aou, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -1010,7 +1010,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de septembre
+                    <BR>&nbsp;&nbsp;<b>Total du mois de septembre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -1027,9 +1027,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_sep, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -1041,7 +1041,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de septembre
+                    <BR>&nbsp;&nbsp;<b>Total du mois de septembre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -1058,9 +1058,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_sep, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -1086,7 +1086,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de octobre
+                    <BR>&nbsp;&nbsp;<b>Total du mois de octobre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -1103,9 +1103,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_oct, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -1117,7 +1117,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de octobre
+                    <BR>&nbsp;&nbsp<b>;Total du mois de octobre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -1134,9 +1134,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_oct, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -1161,7 +1161,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de novembre
+                    <BR>&nbsp;&nbsp;<b>Total du mois de novembre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -1178,9 +1178,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_nov, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -1192,7 +1192,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de novembre
+                    <BR>&nbsp;&nbsp;<b>Total du mois de novembre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -1209,9 +1209,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_nov, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
@@ -1236,7 +1236,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de d&eacute;cembre
+                    <BR>&nbsp;&nbsp;<b>Total du mois de d&eacute;cembre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -1253,9 +1253,9 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_dec_dec, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
 
                 <TD align="left"  class="normal">
@@ -1267,7 +1267,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp;Total du mois de d&eacute;cembre
+                    <BR>&nbsp;&nbsp;<b>Total du mois de d&eacute;cembre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
@@ -1284,45 +1284,45 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         }
                         echo "<BR>";
                     }
-                    echo "<BR>";
+                    echo "<BR><b>";
                     echo number_format($total_enc_dec, 2, ',', ' ');
-                    ?>
+                    ?></b>
 
                 </TD>
             </TR>
             <TR bordercolor="#FF9640" valign="bottom">
                 <TD class="normal" align="left">
-                    <BR>&nbsp;&nbsp;Total d&eacute;bit
+                    <BR>&nbsp;&nbsp;<b>Total d&eacute;bit</b>
                 </TD>
                 <TD class="normal" align="right">
                     <BR>
-                    <?php
+                    <b><?php
                     $total_dec = $total_dec_jan + $total_dec_fev + $total_dec_mar + $total_dec_avr + $total_dec_mai + $total_dec_jun;
                     $total_dec = $total_dec + $total_dec_jui + $total_dec_aou + $total_dec_sep + $total_dec_oct + $total_dec_nov + $total_dec_dec;
                     echo number_format($total_dec, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
                 <TD class="normal" align="left">
-                    <BR>&nbsp;&nbsp;Total cr&eacute;dit
+                    <BR>&nbsp;&nbsp;<b>Total cr&eacute;dit</b>
                 </TD>
                 <TD class="normal" align="right">
                     <BR>
-                    <?php
+                    <b><?php
                     $total_enc = $total_enc_jan + $total_enc_fev + $total_enc_mar + $total_enc_avr + $total_enc_mai + $total_enc_jun;
                     $total_enc = $total_enc + $total_enc_jui + $total_enc_aou + $total_enc_sep + $total_enc_oct + $total_enc_nov + $total_enc_dec;
                     echo number_format($total_enc, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
             </TR>
             <TR bordercolor="#FF9640" valign="bottom">
                 <TD class="titre" align="left" colspan="2">
-                    <BR>&nbsp;&nbsp;Solde pour l'exercice <?php echo $param ?>
+                    <BR>&nbsp;&nbsp;<b>Solde pour l'exercice <?php echo $param ?></b>
                 </TD>
                 <TD class="titre" align="right" colspan="2">
                     <BR>
-                    <?php
+                    <b><?php
                     echo number_format($total_enc - $total_dec, 2, ',', ' ');
-                    ?>
+                    ?></b>
                 </TD>
             </TR>
             <TR>
