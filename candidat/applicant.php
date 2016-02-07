@@ -114,7 +114,7 @@ include '../functions/bootstrap.php';
                                                         </span>
                                                     </a>
                                                 <?php else : ?>
-                                                    <a href="evaluation.php?tab=new&id=<?= $r_appli->id; ?>">
+                                                    <a href="new_evaluation.php?id=<?= $r_appli->id; ?>">
                                                         <span class="glyphicon glyphicon-plus" aria-hidden="true">
                                                         </span>
                                                     </a>
