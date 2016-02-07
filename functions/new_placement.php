@@ -147,6 +147,10 @@ try {
             . "'" . $f3_facture . "', '" . $f3_encaisse . "', '" . $input_id . "') ";
     $stmt = $db->prepare($sql);
     $stmt->execute();
+    
+    $sql = "UPDATE `poste` SET `POURVU`='Y' WHERE id='".$job."'";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
 
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
