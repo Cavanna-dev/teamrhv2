@@ -328,7 +328,7 @@ $r = getOneApplicantById($db, $_GET['id']);
                                         <?php if ($r->eval_id) { ?>
                                             <a href="upd_evaluation.php?id=<?= $r->eval_id ?>"><button type="button" class="btn btn-primary">Evaluation</button></a>
                                         <?php } else { ?>
-                                            <a href="evaluation.php?tab=new&id=<?= $r->id ?>"><button type="button" class="btn btn-primary">Créer Evaluation</button></a>
+                                            <a href="new_evaluation.php?id=<?= $r->id ?>"><button type="button" class="btn btn-primary">Créer Evaluation</button></a>
                                         <?php } ?>
                                     </div>
                                 </div>
