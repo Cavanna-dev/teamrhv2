@@ -230,29 +230,29 @@ $ndf = getOneNdfById($db, $_GET['id']);
 <?php for ($i = 1; $i <= 4; $i++) { ?>
             $('#input_line<?= $i ?>_ht').keyup(function () {
                 var amountHt<?= $i ?> = parseFloat($(this).val());
-                var tva<?= $i ?> = parseFloat($('#input_line<?= $i ?>_tva'));
-
+                var tva<?= $i ?> = parseFloat($('#input_line<?= $i ?>_percent').val());
+				
                 var amountTva<?= $i ?> = amountHt<?= $i ?> * (tva<?= $i ?> / 100);
-                var roundTva<?= $i ?> = Math.round(amountTva<?= $i ?> * 100) / 100;
-                $('#input_line<?= $i ?>_tva').val(roundTva<?= $i ?>);
+                var roundTva<?= $i ?> = Math.ceil(amountTva<?= $i ?> * 100) / 100;
+                $('#input_line<?= $i ?>_percent').val(roundTva<?= $i ?>);
 
                 var amountTtc<?= $i ?> = amountHt<?= $i ?> + amountTva<?= $i ?>;
-                var roundTtc<?= $i ?> = Math.round(amountTtc<?= $i ?> * 100) / 100;
+                var roundTtc<?= $i ?> = Math.ceil(amountTtc<?= $i ?> * 100) / 100;
                 $('#input_line<?= $i ?>_ttc').val(roundTtc<?= $i ?>);
             });
 
-            $('#input_line<?= $i ?>_tva').keyup(function () {
+            $('#input_line<?= $i ?>_percent').keyup(function () {
                 var amountTva<?= $i ?> = parseFloat($(this).val());
-                var tva<?= $i ?> = parseFloat($('#input_line<?= $i ?>_tva'));
+                var tva<?= $i ?> = parseFloat($('#input_line<?= $i ?>_percent').val());
                 if (tva<?= $i ?> != 0) {
 
                     var amountTtc<?= $i ?> = amountTva<?= $i ?> * (tva<?= $i ?> + 100) / tva<?= $i ?>;
-                    var roundAmountTtc<?= $i ?> = Math.round(amountTtc<?= $i ?> * 100) / 100;
+                    var roundAmountTtc<?= $i ?> = Math.ceil(amountTtc<?= $i ?> * 100) / 100;
                     $('#input_line<?= $i ?>_ttc').val(roundAmountTtc<?= $i ?>);
 
 
                     var amountHt<?= $i ?> = amountTtc<?= $i ?> - amountTva<?= $i ?>;
-                    var roundAmountHt<?= $i ?> = Math.round(amountHt<?= $i ?> * 100) / 100;
+                    var roundAmountHt<?= $i ?> = Math.ceil(amountHt<?= $i ?> * 100) / 100;
                     $('#input_line<?= $i ?>_ht').val(roundAmountHt<?= $i ?>);
                 }
             });
@@ -260,14 +260,14 @@ $ndf = getOneNdfById($db, $_GET['id']);
 
             $('#input_line<?= $i ?>_ttc').keyup(function () {
                 var amountTtc<?= $i ?> = parseFloat($(this).val());
-                var tva<?= $i ?> = parseFloat($('#input_line<?= $i ?>_tva'));
+                var tva<?= $i ?> = parseFloat($('#input_line<?= $i ?>_percent').val());
 
                 var amountTva<?= $i ?> = amountTtc<?= $i ?> * tva<?= $i ?> / (tva<?= $i ?> + 100);
-                var roundAmountTva<?= $i ?> = Math.round(amountTva<?= $i ?> * 100) / 100;
-                $('#input_line<?= $i ?>_tva').val(roundAmountTva<?= $i ?>);
+                var roundAmountTva<?= $i ?> = Math.ceil(amountTva<?= $i ?> * 100) / 100;
+                $('#input_line<?= $i ?>_percent').val(roundAmountTva<?= $i ?>);
 
                 var amountHt<?= $i ?> = amountTtc<?= $i ?> - roundAmountTva<?= $i ?>;
-                var roundAmountTva<?= $i ?> = Math.round(amountHt<?= $i ?> * 100) / 100;
+                var roundAmountTva<?= $i ?> = Math.ceil(amountHt<?= $i ?> * 100) / 100;
                 $('#input_line<?= $i ?>_ht').val(roundAmountTva<?= $i ?>);
             });
 <?php } ?>
