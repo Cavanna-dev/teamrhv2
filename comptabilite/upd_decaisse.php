@@ -231,6 +231,32 @@ $decaisse = getOneDecaisseById($db, $_GET['id']);
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="input_line4" class="col-lg-2 control-label">
+                        Total
+                    </label>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" 
+                               name="input_amount_lines_ht" 
+                               id="input_amount_lines_ht" 
+                               value="<?= $decaisse->DEC_HT_TOT_AMOUNT ?>"
+                               placeholder="Total HT" />
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" 
+                               name="input_amount_lines_tva" 
+                               id="input_amount_lines_tva"  
+                               value="<?= $decaisse->DEC_TVA_TOT_AMOUNT ?>"
+                               placeholder="Total Tva" />
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" 
+                               name="input_amount_lines_ttc" 
+                               id="input_amount_lines_ttc"  
+                               value="<?= $decaisse->DEC_TTC_TOT_AMOUNT ?>"
+                               placeholder="Total TTC" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="input_description" class="col-lg-1 control-label">Description</label>
                     <div class="col-lg-10">
                         <textarea class="form-control" name="input_description" placeholder="Description"><?= $decaisse->DESCRIPTION ?></textarea>
@@ -258,9 +284,9 @@ $decaisse = getOneDecaisseById($db, $_GET['id']);
                 var amountHt<?= $i ?> = parseFloat($(this).val());
                 var tva<?= $i ?> = parseFloat($('#input_line<?= $i ?>_percent').val());
 
-				if(tva<?= $i ?> == 0)
-					tva = 1;
-				
+                if (tva<?= $i ?> == 0)
+                    tva = 1;
+
                 var amountTva<?= $i ?> = amountHt<?= $i ?> * (tva<?= $i ?> / 100);
                 var roundTva<?= $i ?> = Math.ceil(amountTva<?= $i ?> * 100) / 100;
                 $('#input_line<?= $i ?>_percent').val(roundTva<?= $i ?>);

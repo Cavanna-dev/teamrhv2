@@ -536,7 +536,6 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                     var roundAmountHt<?= $i ?> = Math.ceil(amountHt<?= $i ?> * 100) / 100;
                     $('#input_line<?= $i ?>_ht').val(roundAmountHt<?= $i ?>);
 
-
                     var val1 = $('#input_line1_ht').val() != '' ? parseFloat($('#input_line1_ht').val()) : 0;
                     var val2 = $('#input_line2_ht').val() != '' ? parseFloat($('#input_line2_ht').val()) : 0;
                     var val3 = $('#input_line3_ht').val() != '' ? parseFloat($('#input_line3_ht').val()) : 0;
@@ -590,7 +589,6 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                 var amountHt<?= $i ?> = amountTtc<?= $i ?> - roundAmountTva<?= $i ?>;
                 var roundAmountTva<?= $i ?> = Math.ceil(amountHt<?= $i ?> * 100) / 100;
                 $('#input_line<?= $i ?>_ht').val(roundAmountTva<?= $i ?>);
-
 
                 var val1 = $('#input_line1_ht').val() != '' ? parseFloat($('#input_line1_ht').val()) : 0;
                 var val2 = $('#input_line2_ht').val() != '' ? parseFloat($('#input_line2_ht').val()) : 0;

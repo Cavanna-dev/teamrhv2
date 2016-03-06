@@ -400,6 +400,29 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="input_line_total" class="col-lg-2 control-label">
+                                Total
+                            </label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" 
+                                       name="input_amount_lines_ht" 
+                                       id="input_amount_lines_ht" 
+                                       placeholder="Total HT" />
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" 
+                                       name="input_amount_lines_tva" 
+                                       id="input_amount_lines_tva"  
+                                       placeholder="Total Tva" />
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" 
+                                       name="input_amount_lines_ttc" 
+                                       id="input_amount_lines_ttc"  
+                                       placeholder="Total TTC" />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="input_description" class="col-lg-1 control-label">Description</label>
                             <div class="col-lg-10">
                                 <textarea class="form-control" name="input_description" placeholder="Description"></textarea>
@@ -446,6 +469,30 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                 var amountTtc<?= $i ?> = amountHt<?= $i ?> + amountTva<?= $i ?>;
                 var roundTtc<?= $i ?> = Math.round(amountTtc<?= $i ?> * 100) / 100;
                 $('#input_line<?= $i ?>_ttc').val(roundTtc<?= $i ?>);
+
+                var val1 = $('#input_line1_ht').val() != '' ? parseFloat($('#input_line1_ht').val()) : 0;
+                var val2 = $('#input_line2_ht').val() != '' ? parseFloat($('#input_line2_ht').val()) : 0;
+                var val3 = $('#input_line3_ht').val() != '' ? parseFloat($('#input_line3_ht').val()) : 0;
+                var val4 = $('#input_line4_ht').val() != '' ? parseFloat($('#input_line4_ht').val()) : 0;
+
+                var totalHt = val1 + val2 + val3 + val4;
+                $('#input_amount_lines_ht').val(totalHt);
+
+                var valTva1 = $('#input_line1_tva').val() != '' ? parseFloat($('#input_line1_tva').val()) : 0;
+                var valTva2 = $('#input_line2_tva').val() != '' ? parseFloat($('#input_line2_tva').val()) : 0;
+                var valTva3 = $('#input_line3_tva').val() != '' ? parseFloat($('#input_line3_tva').val()) : 0;
+                var valTva4 = $('#input_line4_tva').val() != '' ? parseFloat($('#input_line4_tva').val()) : 0;
+
+                var totalTva = valTva1 + valTva2 + valTva3 + valTva4;
+                $('#input_amount_lines_tva').val(totalTva);
+
+                var valTtc1 = $('#input_line1_ttc').val() != '' ? parseFloat($('#input_line1_ttc').val()) : 0;
+                var valTtc2 = $('#input_line2_ttc').val() != '' ? parseFloat($('#input_line2_ttc').val()) : 0;
+                var valTtc3 = $('#input_line3_ttc').val() != '' ? parseFloat($('#input_line3_ttc').val()) : 0;
+                var valTtc4 = $('#input_line4_ttc').val() != '' ? parseFloat($('#input_line4_ttc').val()) : 0;
+
+                var totalTtc = valTtc1 + valTtc2 + valTtc3 + valTtc4;
+                $('#input_amount_lines_ttc').val(totalTtc);
             });
 
             $('#input_line<?= $i ?>_tva').keyup(function () {
@@ -477,6 +524,30 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                     var amountHt<?= $i ?> = amountTtc<?= $i ?> - amountTva<?= $i ?>;
                     var roundAmountHt<?= $i ?> = Math.round(amountHt<?= $i ?> * 100) / 100;
                     $('#input_line<?= $i ?>_ht').val(roundAmountHt<?= $i ?>);
+
+                    var val1 = $('#input_line1_ht').val() != '' ? parseFloat($('#input_line1_ht').val()) : 0;
+                    var val2 = $('#input_line2_ht').val() != '' ? parseFloat($('#input_line2_ht').val()) : 0;
+                    var val3 = $('#input_line3_ht').val() != '' ? parseFloat($('#input_line3_ht').val()) : 0;
+                    var val4 = $('#input_line4_ht').val() != '' ? parseFloat($('#input_line4_ht').val()) : 0;
+
+                    var totalHt = val1 + val2 + val3 + val4;
+                    $('#input_amount_lines_ht').val(totalHt);
+
+                    var valTva1 = $('#input_line1_tva').val() != '' ? parseFloat($('#input_line1_tva').val()) : 0;
+                    var valTva2 = $('#input_line2_tva').val() != '' ? parseFloat($('#input_line2_tva').val()) : 0;
+                    var valTva3 = $('#input_line3_tva').val() != '' ? parseFloat($('#input_line3_tva').val()) : 0;
+                    var valTva4 = $('#input_line4_tva').val() != '' ? parseFloat($('#input_line4_tva').val()) : 0;
+
+                    var totalTva = valTva1 + valTva2 + valTva3 + valTva4;
+                    $('#input_amount_lines_tva').val(totalTva);
+
+                    var valTtc1 = $('#input_line1_ttc').val() != '' ? parseFloat($('#input_line1_ttc').val()) : 0;
+                    var valTtc2 = $('#input_line2_ttc').val() != '' ? parseFloat($('#input_line2_ttc').val()) : 0;
+                    var valTtc3 = $('#input_line3_ttc').val() != '' ? parseFloat($('#input_line3_ttc').val()) : 0;
+                    var valTtc4 = $('#input_line4_ttc').val() != '' ? parseFloat($('#input_line4_ttc').val()) : 0;
+
+                    var totalTtc = valTtc1 + valTtc2 + valTtc3 + valTtc4;
+                    $('#input_amount_lines_ttc').val(totalTtc);
                 }
             });
 
@@ -508,6 +579,30 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                 var amountHt<?= $i ?> = amountTtc<?= $i ?> - roundAmountTva<?= $i ?>;
                 var roundAmountTva<?= $i ?> = Math.round(amountHt<?= $i ?> * 100) / 100;
                 $('#input_line<?= $i ?>_ht').val(roundAmountTva<?= $i ?>);
+
+                var val1 = $('#input_line1_ht').val() != '' ? parseFloat($('#input_line1_ht').val()) : 0;
+                var val2 = $('#input_line2_ht').val() != '' ? parseFloat($('#input_line2_ht').val()) : 0;
+                var val3 = $('#input_line3_ht').val() != '' ? parseFloat($('#input_line3_ht').val()) : 0;
+                var val4 = $('#input_line4_ht').val() != '' ? parseFloat($('#input_line4_ht').val()) : 0;
+
+                var totalHt = val1 + val2 + val3 + val4;
+                $('#input_amount_lines_ht').val(totalHt);
+
+                var valTva1 = $('#input_line1_tva').val() != '' ? parseFloat($('#input_line1_tva').val()) : 0;
+                var valTva2 = $('#input_line2_tva').val() != '' ? parseFloat($('#input_line2_tva').val()) : 0;
+                var valTva3 = $('#input_line3_tva').val() != '' ? parseFloat($('#input_line3_tva').val()) : 0;
+                var valTva4 = $('#input_line4_tva').val() != '' ? parseFloat($('#input_line4_tva').val()) : 0;
+
+                var totalTva = valTva1 + valTva2 + valTva3 + valTva4;
+                $('#input_amount_lines_tva').val(totalTva);
+
+                var valTtc1 = $('#input_line1_ttc').val() != '' ? parseFloat($('#input_line1_ttc').val()) : 0;
+                var valTtc2 = $('#input_line2_ttc').val() != '' ? parseFloat($('#input_line2_ttc').val()) : 0;
+                var valTtc3 = $('#input_line3_ttc').val() != '' ? parseFloat($('#input_line3_ttc').val()) : 0;
+                var valTtc4 = $('#input_line4_ttc').val() != '' ? parseFloat($('#input_line4_ttc').val()) : 0;
+
+                var totalTtc = valTtc1 + valTtc2 + valTtc3 + valTtc4;
+                $('#input_amount_lines_ttc').val(totalTtc);
             });
 <?php } ?>
     });

@@ -40,10 +40,12 @@ if(isset($_POST['input_line4']) && $_POST['input_line4'] == 'on'){
     $line4_ttc = $_POST['input_line4_ttc'];
 }
 
-$total_ht = $line1_ht + $line2_ht + $line3_ht + $line4_ht;
-$total_tva = $line1_tva + $line2_tva + $line3_tva + $line4_tva;
-$total_ttc = $line1_ttc + $line2_ttc + $line3_ttc + $line4_ttc;
-
+//$total_ht = $line1_ht + $line2_ht + $line3_ht + $line4_ht;
+//$total_tva = $line1_tva + $line2_tva + $line3_tva + $line4_tva;
+//$total_ttc = $line1_ttc + $line2_ttc + $line3_ttc + $line4_ttc;
+$total_ht = $_POST['input_amount_lines_ht'];
+$total_tva = $_POST['input_amount_lines_tva'];
+$total_ttc = $_POST['input_amount_lines_ttc'];
 
 try {
     $sql = "UPDATE `decaisse` "
