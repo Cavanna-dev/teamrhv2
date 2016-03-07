@@ -112,16 +112,13 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 ?>
                                 <?php
                                 $subject_cust = "TeamRH : Confirmation d’entretien";
-                                //var_dump($r_applicant);die;
-                                if (isset($r_applicant->sexe)) {
-                                    switch ($r_applicant->sexe) {
-                                        case "H" : $body_cust = "Monsieur,";
-                                            break;
-                                        case "F" : $body_cust = "Madame,";
-                                            break;
-                                        default: $body_cust = "Madame/Monsieur,";
-                                            break;
-                                    }
+                                switch ($mail_contact->civilite) {
+                                    case "Melle" : $body_cust = "Mademoiselle,";
+                                        break;
+                                    case "Mme" : $body_cust = "Madame,";
+                                        break;
+                                    default: $body_cust = "Monsieur,";
+                                        break;
                                 }
 
                                 $body_cust .= "%0A%0ANous vous confirmons le rendez-vous avec ";
@@ -136,15 +133,15 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                 $body_appli = "******************";
                                 $body_appli .= "*     Merci de nous confirmer la lecture de ce mail              *";
                                 $body_appli .= "******************";
-                                
+
                                 switch ($r_applicant->sexe) {
-                                    case "F" : $body_appli .= "%0A%0AMadame ";
+                                    case "F" : $body_appli .= "%0A%0AChère ";
                                         break;
-                                    default: $body_appli .= "%0A%0AMonsieur ";
+                                    default: $body_appli .= "%0A%0ACher ";
                                         break;
                                 }
 
-                                $body_appli .= $r_applicant->nom . ",";
+                                $body_appli .= $r_applicant->prenom . ",";
                                 $body_appli .= "%0A%0AVotre rendez-vous a été confirmé pour "
                                         . "le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . " "
                                         . "avec ";
@@ -182,7 +179,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                         <div class="form-group">
                             <label for="input_consult" class="col-lg-2 control-label">Consult.*</label>
                             <div class="col-lg-10">	
-                                    <?php $r_users = getAllImportantUsers($db); ?>
+<?php $r_users = getAllImportantUsers($db); ?>
                                 <select class="form-control" 
                                         name="input_consult" 
                                         id="input_contact_law" required>
@@ -191,9 +188,9 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                     while ($r_user = $r_users->fetch(PDO::FETCH_OBJ)) {
                                         ?>
                                         <option value="<?php echo $r_user->id; ?>" <?php if ($r_user->id == $rdv->CONSULTANT) echo "selected"; ?>><?php echo $r_user->nom . " " . $r_user->prenom; ?></option>
-    <?php
-}
-?>
+                                        <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -202,8 +199,8 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
 <?php if (!empty($rdv->CONTACT)) { ?><a href="./upd_contact.php?id=<?= $rdv->CONTACT ?>">Contact</a><?php } else { ?>Contact<?php } ?>
                             </label>
                             <div class="col-lg-10">
-                                    <?php if (isset($_GET['client'])) { ?>
-                                        <?php $r_contacts = getContactActifByClient($db, $_GET['client']); ?>
+                                <?php if (isset($_GET['client'])) { ?>
+    <?php $r_contacts = getContactActifByClient($db, $_GET['client']); ?>
                                     <select class="form-control" 
                                             name="input_contact">
                                         <option value=""></option>
@@ -211,12 +208,12 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                         foreach ($r_contacts as $r_contact) :
                                             ?>
                                             <option value="<?php echo $r_contact->id; ?>" <?php if ($r_contact->id == $rdv->CONTACT) echo "selected"; ?>><?php echo $r_contact->nom . ' ' . $r_contact->prenom; ?></option>
-        <?php
-    endforeach;
-    ?>
+                                            <?php
+                                        endforeach;
+                                        ?>
                                     </select>
-                                    <?php } else { ?>	
-                                        <?php $r_contacts = getAllContact($db); ?>
+                                <?php } else { ?>	
+    <?php $r_contacts = getAllContact($db); ?>
                                     <select class="form-control" 
                                             name="input_contact">
                                         <option value=""></option>
@@ -224,9 +221,9 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                         while ($r_contact = $r_contacts->fetch(PDO::FETCH_OBJ)) {
                                             ?>
                                             <option value="<?= $r_contact->id; ?>" <?php if ($r_contact->id == $rdv->CONTACT) echo "selected"; ?>><?= $r_contact->nom . ' ' . $r_contact->prenom; ?></option>
-        <?php
-    }
-    ?>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
 <?php } ?>
                             </div>
