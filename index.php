@@ -37,6 +37,7 @@
                             "encaisse.php" => "Encaissé",
                             "decaisse.php" => "Décaissé",
                             "ndf.php" => "Note de Frais",
+                            "memo.php" => "Mémo",
                             "resultats.php" => "Résultats",
                         ),
                     );
@@ -63,6 +64,7 @@
                             "encaisse.php" => "Encaissé",
                             "decaisse.php" => "Décaissé",
                             "ndf.php" => "Note de Frais",
+                            "memo.php" => "Mémo",
                             "resultats.php" => "Résultats",
                         ),
                     );

@@ -22,6 +22,7 @@ switch ($_SESSION['user']['type']):
                 "encaisse.php" => "Encaissé",
                 "decaisse.php" => "Décaissé",
                 "ndf.php" => "Note de Frais",
+                "memo.php" => "Mémo",
                 "resultats.php" => "Résultats",
             ),
         );
@@ -48,6 +49,7 @@ switch ($_SESSION['user']['type']):
                 "encaisse.php" => "Encaissé",
                 "decaisse.php" => "Décaissé",
                 "ndf.php" => "Note de Frais",
+                "memo.php" => "Mémo",
                 "resultats.php" => "Résultats",
             ),
         );
