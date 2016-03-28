@@ -95,6 +95,7 @@ function getJobByCustomerReal($db, $id)
             . "LEFT JOIN entretien on poste.id = entretien.poste "
             . "LEFT join candidat on entretien.candidat = candidat.id "
             . "WHERE pourvu != 'Y' and poste.client = " . $id . " "
+            . "GROUP BY poste.ID "
             . "ORDER BY poste.ID, candidat.nom, date_rdv ";
 
     $r_job = $db->prepare($sql);
