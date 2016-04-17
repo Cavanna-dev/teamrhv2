@@ -314,7 +314,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
 }
 ?>
 <div class="container">
-    <TABLE cellpadding="0" cellspacing="0" border="1" bordercolor="white" class="table table-bordered">
+    <TABLE cellpadding="0" cellspacing="0" border="1" bordercolor="white" class="table table-bordered" id="resultats">
         <TR>
             <TD colspan="4" class="titre" align="middle">
                 <BR>Compte de r&eacute;sultat simplifi&eacute; pour l'ann&eacute;e <?php echo $param ?>.
@@ -346,10 +346,10 @@ if (isset($annuler) && $Annuler == "Annuler") {
                 &nbsp;&nbsp;&nbsp;<A class="lien"  href="#" onclick="location.href = 'resultats.php?&param=<?php echo $tmp1 ?>';">Ann&eacute;e pr&eacute;c&eacute;dente</A>
             </TD>
             <TD colspan="2" align="center">
-                <select name="tva"  onchange="window.location.href = 'resultats.php?tva=<?= $tva == 'Y' ? 'N' : 'Y' ?>&param=<?php echo $param; ?>'">
+                <select name="tva" onchange="window.location.href = 'resultats.php?tva=<?= $tva == 'Y' ? 'N' : 'Y' ?>&param=<?php echo $param; ?>'">
                     <option value="Y" <?php if ($tva == "Y") echo "selected"; ?> >Avec TVA</option>
                     <option value="N" <?php if ($tva == "N") echo "selected"; ?> >Sans TVA</option>
-                </select>				
+                </select>
             </TD>
             <TD align="right" class="normal">
                 <?php
