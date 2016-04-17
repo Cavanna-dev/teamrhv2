@@ -350,6 +350,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                     <option value="Y" <?php if ($tva == "Y") echo "selected"; ?> >Avec TVA</option>
                     <option value="N" <?php if ($tva == "N") echo "selected"; ?> >Sans TVA</option>
                 </select>
+                <a href="resultatstocsv.php"><button class="btn">Télécharger</button></a>
             </TD>
             <TD align="right" class="normal">
                 <?php
@@ -1297,10 +1298,10 @@ if (isset($annuler) && $Annuler == "Annuler") {
                 <TD class="normal" align="right">
                     <BR>
                     <b><?php
-                    $total_dec = $total_dec_jan + $total_dec_fev + $total_dec_mar + $total_dec_avr + $total_dec_mai + $total_dec_jun;
-                    $total_dec = $total_dec + $total_dec_jui + $total_dec_aou + $total_dec_sep + $total_dec_oct + $total_dec_nov + $total_dec_dec;
-                    echo number_format($total_dec, 2, ',', ' ');
-                    ?></b>
+                        $total_dec = $total_dec_jan + $total_dec_fev + $total_dec_mar + $total_dec_avr + $total_dec_mai + $total_dec_jun;
+                        $total_dec = $total_dec + $total_dec_jui + $total_dec_aou + $total_dec_sep + $total_dec_oct + $total_dec_nov + $total_dec_dec;
+                        echo number_format($total_dec, 2, ',', ' ');
+                        ?></b>
                 </TD>
                 <TD class="normal" align="left">
                     <BR>&nbsp;&nbsp;<b>Total cr&eacute;dit</b>
@@ -1308,10 +1309,10 @@ if (isset($annuler) && $Annuler == "Annuler") {
                 <TD class="normal" align="right">
                     <BR>
                     <b><?php
-                    $total_enc = $total_enc_jan + $total_enc_fev + $total_enc_mar + $total_enc_avr + $total_enc_mai + $total_enc_jun;
-                    $total_enc = $total_enc + $total_enc_jui + $total_enc_aou + $total_enc_sep + $total_enc_oct + $total_enc_nov + $total_enc_dec;
-                    echo number_format($total_enc, 2, ',', ' ');
-                    ?></b>
+                        $total_enc = $total_enc_jan + $total_enc_fev + $total_enc_mar + $total_enc_avr + $total_enc_mai + $total_enc_jun;
+                        $total_enc = $total_enc + $total_enc_jui + $total_enc_aou + $total_enc_sep + $total_enc_oct + $total_enc_nov + $total_enc_dec;
+                        echo number_format($total_enc, 2, ',', ' ');
+                        ?></b>
                 </TD>
             </TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -1321,8 +1322,8 @@ if (isset($annuler) && $Annuler == "Annuler") {
                 <TD class="titre" align="right" colspan="2">
                     <BR>
                     <b><?php
-                    echo number_format($total_enc - $total_dec, 2, ',', ' ');
-                    ?></b>
+                        echo number_format($total_enc - $total_dec, 2, ',', ' ');
+                        ?></b>
                 </TD>
             </TR>
             <TR>
