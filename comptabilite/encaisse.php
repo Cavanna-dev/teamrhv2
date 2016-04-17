@@ -169,7 +169,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                                 </tr>
                                 <?php
                                 $amount_ht_tot += $r_encaisse->montant;
-                                $amount_tva_tot += $r_encaisse->tva;
+                                $amount_tva_tot += $r_encaisse->amountTva;
                                 $amount_ttc_tot += $r_encaisse->ttc;
                             }
                             ?>
