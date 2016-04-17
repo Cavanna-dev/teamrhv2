@@ -20,9 +20,14 @@ foreach ($r as $placement) {
     else
         $montant = $placement->forfait;
 
+    if ($placement->pourcentage != 0)
+        $type = 'P';
+    else
+        $type = 'F';
+
     $sql_reg = "INSERT INTO `reglements`"
             . "(`type`, `number`, `pourcentage`, `date`, `tva`, `montant`, `isFacture`, `isEncaisse`, `fk_placement_id`) "
-            . "VALUES ('F','1','100','" . $placement->date_deb . "','20','" . $montant . "','Y','Y','" . $placement->id . "')";
+            . "VALUES ('" . $type . "','1','100','" . $placement->date_deb . "','20','" . $montant . "','Y','Y','" . $placement->id . "')";
 
     $new_reg = $db->prepare($sql_reg);
     $new_reg->execute();

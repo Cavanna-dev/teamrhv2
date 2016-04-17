@@ -18,6 +18,7 @@ $apporteur = htmlspecialchars($_POST['input_apporteur']);
 $duree = htmlspecialchars($_POST['input_duree']);
 $salaire = htmlspecialchars($_POST['input_salaire']);
 $remise = htmlspecialchars($_POST['input_remise']);
+$forfait = htmlspecialchars($_POST['input_forfait']);
 $isFacture = htmlspecialchars($_POST['input_facture']);
 $isEncaisse = htmlspecialchars($_POST['input_encaisse']);
 $isReglement = htmlspecialchars($_POST['input_reglement']);
@@ -39,6 +40,7 @@ try {
             . "salaire = :salaire, "
             . "date_deb = :date_deb, "
             . "remise = :remise, "
+            . "forfait = :forfait, "
             . "facture = :facture, "
             . "encaisse = :encaisse, "
             . "reglement = :reglement "
@@ -59,6 +61,7 @@ try {
     $stmt->bindParam(':salaire', $salaire, PDO::PARAM_STR);
     $stmt->bindParam(':date_deb', $dateDeb, PDO::PARAM_STR);
     $stmt->bindParam(':remise', $remise, PDO::PARAM_STR);
+    $stmt->bindParam(':forfait', $forfait, PDO::PARAM_STR);
     $stmt->bindParam(':facture', $isFacture, PDO::PARAM_STR);
     $stmt->bindParam(':encaisse', $isEncaisse, PDO::PARAM_STR);
     $stmt->bindParam(':reglement', $isReglement, PDO::PARAM_STR);
@@ -84,22 +87,25 @@ try {
     $p3_facture = $_POST['input_p3_facture'];
     $p3_encaisse = $_POST['input_p3_encaisse'];
 
+    $f1_pourcentage = $_POST['input_f1_pourcentage'];
     $f1_date = $_POST['input_f1_date'];
     $f1_tva = $_POST['input_f1_tva'];
     $f1_montant = $_POST['input_f1_montant'];
     $f1_facture = $_POST['input_f1_facture'];
     $f1_encaisse = $_POST['input_f1_encaisse'];
+    $f2_pourcentage = $_POST['input_f2_pourcentage'];
     $f2_date = $_POST['input_f2_date'];
     $f2_tva = $_POST['input_f2_tva'];
     $f2_montant = $_POST['input_f2_montant'];
     $f2_facture = $_POST['input_f2_facture'];
     $f2_encaisse = $_POST['input_f2_encaisse'];
+    $f3_pourcentage = $_POST['input_f3_pourcentage'];
     $f3_date = $_POST['input_f3_date'];
     $f3_tva = $_POST['input_f3_tva'];
     $f3_montant = $_POST['input_f3_montant'];
     $f3_facture = $_POST['input_f3_facture'];
     $f3_encaisse = $_POST['input_f3_encaisse'];
-    
+
     $sql = "DELETE FROM REGLEMENTS WHERE fk_placement_id = " . $input_id;
     $stmt = $db->prepare($sql);
     $stmt->execute();
@@ -133,12 +139,12 @@ try {
             . "'" . $input_id . "') ";
     $stmt = $db->prepare($sql);
     $stmt->execute();
-    
+
     $sql = "INSERT INTO REGLEMENTS";
     $sql .= " (type, number, pourcentage, date, tva, montant, isFacture, isEncaisse, "
             . "fk_placement_id) ";
     $sql .= " values ";
-    $sql .= "('F', '1', null, '" . $f1_date . "', '" . $f1_tva . "', '" . $f1_montant . "', "
+    $sql .= "('F', '1', '" . $f1_pourcentage . "', '" . $f1_date . "', '" . $f1_tva . "', '" . $f1_montant . "', "
             . "'" . $f1_facture . "', '" . $f1_encaisse . "', '" . $input_id . "') ";
     $stmt = $db->prepare($sql);
     $stmt->execute();
@@ -147,7 +153,7 @@ try {
     $sql .= " (type, number, pourcentage, date, tva, montant, isFacture, isEncaisse, "
             . "fk_placement_id) ";
     $sql .= " values ";
-    $sql .= "('F', '2', null, '" . $f2_date . "', '" . $f2_tva . "', '" . $f2_montant . "', "
+    $sql .= "('F', '2', '" . $f2_pourcentage . "', '" . $f2_date . "', '" . $f2_tva . "', '" . $f2_montant . "', "
             . "'" . $f2_facture . "', '" . $f2_encaisse . "', '" . $input_id . "') ";
     $stmt = $db->prepare($sql);
     $stmt->execute();
@@ -156,7 +162,7 @@ try {
     $sql .= " (type, number, pourcentage, date, tva, montant, isFacture, isEncaisse, "
             . "fk_placement_id) ";
     $sql .= " values ";
-    $sql .= "('F', '3', null, '" . $f3_date . "', '" . $f3_tva . "', '" . $f3_montant . "', "
+    $sql .= "('F', '3', '" . $f3_pourcentage . "', '" . $f3_date . "', '" . $f3_tva . "', '" . $f3_montant . "', "
             . "'" . $f3_facture . "', '" . $f3_encaisse . "', '" . $input_id . "') ";
     $stmt = $db->prepare($sql);
     $stmt->execute();
