@@ -39,6 +39,7 @@
                             "ndf.php" => "Note de Frais",
                             "memo.php" => "Mémo",
                             "resultats.php" => "Résultats",
+                            "tvafacture.php" => "TVA",
                         ),
                     );
                     break;
@@ -66,6 +67,7 @@
                             "ndf.php" => "Note de Frais",
                             "memo.php" => "Mémo",
                             "resultats.php" => "Résultats",
+                            "tvafacture.php" => "TVA",
                         ),
                     );
                     break;

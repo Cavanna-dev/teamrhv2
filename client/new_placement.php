@@ -30,9 +30,12 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                             <div class="form-group">
                                                 <div class="col-lg-4">
                                                     Pourcentage
-                                                    <input type="text" class="form-control" 
-                                                           name="input_p1_pourcentage" id="input_p1_pourcentage" 
-                                                           placeholder="Pourcentage">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" 
+                                                               name="input_p1_pourcentage" id="input_p1_pourcentage" 
+                                                               placeholder="Pourcentage" aria-describedby="percent">
+                                                        <span class="input-group-addon" id="percent">%</span>
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     TVA
@@ -179,17 +182,23 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                         <h2>Forfait 1</h2>
                                         <fieldset>
                                             <div class="form-group">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
+                                                    Pourcentage
+                                                    <input type="text" class="form-control" 
+                                                           name="input_f1_pourcentage" id="input_f1_pourcentage" 
+                                                           placeholder="Pourcentage">
+                                                </div>
+                                                <div class="col-lg-4">
                                                     TVA
                                                     <input type="text" class="form-control" 
                                                            name="input_f1_tva" id="input_f1_tva" 
-                                                           placeholder="TVA" value="<?= isset($_GET['f1']) ? '20' : '' ?>">
+                                                           placeholder="TVA">
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     Montant
                                                     <input type="text" class="form-control" 
                                                            name="input_f1_montant" id="input_f1_montant" 
-                                                           placeholder="Montant" value="<?= isset($_GET['f1']) ? $_GET['f1'] : '' ?>">
+                                                           placeholder="Montant">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -222,17 +231,23 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                         <h2>Forfait 2</h2>
                                         <fieldset>
                                             <div class="form-group">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
+                                                    Pourcentage
+                                                    <input type="text" class="form-control" 
+                                                           name="input_f2_pourcentage" id="input_f2_pourcentage" 
+                                                           placeholder="Pourcentage">
+                                                </div>
+                                                <div class="col-lg-4">
                                                     TVA
                                                     <input type="text" class="form-control" 
                                                            name="input_f2_tva" id="input_f2_tva" 
-                                                           placeholder="TVA" value="<?= isset($_GET['f2']) ? '20' : '' ?>">
+                                                           placeholder="TVA">
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     Montant
                                                     <input type="text" class="form-control" 
                                                            name="input_f2_montant" id="input_f2_montant" 
-                                                           placeholder="Montant" value="<?= isset($_GET['f2']) ? $_GET['f2'] : '' ?>">
+                                                           placeholder="Montant">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -246,10 +261,10 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                                 </div>
                                                 <div class="col-lg-3">
                                                     Encaisse
-                                                    <select class="form-control" name="input_f2_encaisse" id="input_f3_encaisse">
+                                                    <select class="form-control" name="input_f2_encaisse" id="input_f2_encaisse">
                                                         <option value="" <?php if (isset($r_detail_f2->isEncaisse) && ($r_detail_f2->isEncaisse == "" || $r_detail_f2->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
-                                                        <option value="Y" <?php if ($r_detail_f2->isEncaisse == "Y") echo "selected"; ?>>Y</option>
-                                                        <option value="N" <?php if ($r_detail_f2->isEncaisse == "N") echo "selected"; ?>>N</option>
+                                                        <option value="Y" <?php if (isset($r_detail_f2->isEncaisse) && $r_detail_f2->isEncaisse == "Y") echo "selected"; ?>>Y</option>
+                                                        <option value="N" <?php if (isset($r_detail_f2->isEncaisse) && $r_detail_f2->isEncaisse == "N") echo "selected"; ?>>N</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -265,17 +280,23 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                         <h2>Forfait 3</h2>
                                         <fieldset>
                                             <div class="form-group">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
+                                                    Pourcentage
+                                                    <input type="text" class="form-control" 
+                                                           name="input_f3_pourcentage" id="input_f3_pourcentage" 
+                                                           placeholder="Pourcentage">
+                                                </div>
+                                                <div class="col-lg-4">
                                                     TVA
                                                     <input type="text" class="form-control" 
                                                            name="input_f3_tva" id="input_f3_tva" 
-                                                           placeholder="TVA" value="<?= isset($_GET['f3']) ? '20' : '' ?>">
+                                                           placeholder="TVA">
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     Montant
                                                     <input type="text" class="form-control" 
-                                                           name="input_f3_montant" id="input_f3_montant"  
-                                                           placeholder="Montant" value="<?= isset($_GET['f3']) ? $_GET['f3'] : '' ?>">
+                                                           name="input_f3_montant" id="input_f3_montant" 
+                                                           placeholder="Montant">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -289,7 +310,7 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                                 </div>
                                                 <div class="col-lg-3">
                                                     Encaisse
-                                                    <select class="form-control" name="input_p3_encaisse" id="input_p3_encaisse">
+                                                    <select class="form-control" name="input_f3_encaisse" id="input_f3_encaisse">
                                                         <option value="" <?php if (isset($r_detail_f3->isEncaisse) && ($r_detail_f3->isEncaisse == "" || $r_detail_f3->isEncaisse == NULL)) echo "selected"; ?>>N/A</option>
                                                         <option value="Y" <?php if (isset($r_detail_f3->isEncaisse) && $r_detail_f3->isEncaisse == "Y") echo "selected"; ?>>Y</option>
                                                         <option value="N" <?php if (isset($r_detail_f3->isEncaisse) && $r_detail_f3->isEncaisse == "N") echo "selected"; ?>>N</option>
@@ -526,6 +547,15 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                                    placeholder="Remise">
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="input_forfait" class="col-lg-2 control-label">Forfait</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" 
+                                                   name="input_forfait" id="input_forfait" 
+                                                   value="<?= isset($_GET['forf']) ? $_GET['forf'] : '' ?>" 
+                                                   placeholder="Forfait" required>
+                                        </div>
+                                    </div>
                                 </fieldset>
                             </div>
                         </div>
@@ -582,22 +612,26 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
 
         $(window).ready(function () {
             var salary = $('#input_salaire').val();
-            var percent = $('#input_pourcent').val();
             var contract = $('#input_contrat').val();
             var duree = $('#input_duree').val();
             var remise = $('#input_remise').val();
 
-            var benef = (salary) * (percent / 100);
+            var percent = $('#input_pourcent').val();
+            var forfait = $('#input_forfait').val();
 
+            if (percent != 0) {
+                var benef = (salary) * (percent / 100);
+            } else {
+                var benef = forfait;
+            }
             if (contract == 'CDD')
                 benef = benef * duree;
 
             benef -= remise;
 
-            var formule = <?= $_GET['forf'] ?>;
-            var forfait1 = <?= $_GET['form1'] != 0 ? $_GET['form1'] : 0 ?>;
-            var forfait2 = <?= $_GET['form2'] != 0 ? $_GET['form2'] : 0 ?>;
-            var forfait3 = <?= $_GET['form3'] != 0 ? $_GET['form3'] : 0 ?>;
+            var formule1 = <?= $_GET['form1'] != 0 ? $_GET['form1'] : 0 ?>;
+            var formule2 = <?= $_GET['form2'] != 0 ? $_GET['form2'] : 0 ?>;
+            var formule3 = <?= $_GET['form3'] != 0 ? $_GET['form3'] : 0 ?>;
 
     <?php for ($i = 1; $i <= 3; $i++) { ?>
                 $("#input_p<?= $i ?>_pourcentage").keyup(function () {
@@ -605,11 +639,20 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                     $('#input_p<?= $i ?>_tva').val('20');
                     $('#input_p<?= $i ?>_montant').val(benef * tmp);
                 });
-
-                if (forfait<?= $i ?> != 0) {
+                $("#input_f<?= $i ?>_pourcentage").keyup(function () {
+                    var tmp = ($(this).val()) / 100;
                     $('#input_f<?= $i ?>_tva').val('20');
-                    $('#input_f<?= $i ?>_montant').val(formule * (forfait<?= $i ?> / 100));
-                };
+                    $('#input_f<?= $i ?>_montant').val(benef * tmp);
+                });
+
+                if (formule<?= $i ?> != 0 && forfait != 0) {
+                    $('#input_f<?= $i ?>_pourcentage').val(formule<?= $i ?>);
+                    $('#input_f<?= $i ?>_tva').val('20');
+                    $('#input_f<?= $i ?>_montant').val(forfait * (formule<?= $i ?> / 100));
+                    $("#input_f<?= $i ?>_facture").val("N");
+                    $("#input_f<?= $i ?>_encaisse").val("N");
+                }
+                ;
     <?php } ?>
 
 

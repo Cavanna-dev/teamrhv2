@@ -223,14 +223,21 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                         </h2>
                                         <fieldset>
                                             <div class="form-group">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
+                                                    Pourcentage
+                                                    <input type="text" class="form-control" 
+                                                           name="input_f1_pourcentage" id="input_f1_pourcentage" 
+                                                           value="<?= isset($r_detail_f1->pourcentage) ? $r_detail_f1->pourcentage : '' ?>" 
+                                                           placeholder="Pourcentage">
+                                                </div>
+                                                <div class="col-lg-4">
                                                     TVA
                                                     <input type="text" class="form-control" 
                                                            name="input_f1_tva" id="input_f1_tva" 
                                                            value="<?= isset($r_detail_f1->tva) ? $r_detail_f1->tva : '' ?>" 
                                                            placeholder="TVA">
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     Montant
                                                     <input type="text" class="form-control" 
                                                            name="input_f1_montant" id="input_f1_montant" 
@@ -273,14 +280,21 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                         </h2>
                                         <fieldset>
                                             <div class="form-group">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
+                                                    Pourcentage
+                                                    <input type="text" class="form-control" 
+                                                           name="input_f2_pourcentage" id="input_f2_pourcentage" 
+                                                           value="<?= isset($r_detail_f2->pourcentage) ? $r_detail_f2->pourcentage : '' ?>" 
+                                                           placeholder="Pourcentage">
+                                                </div>
+                                                <div class="col-lg-4">
                                                     TVA
                                                     <input type="text" class="form-control" 
                                                            name="input_f2_tva" id="input_f2_tva" 
                                                            value="<?= isset($r_detail_f2->tva) ? $r_detail_f2->tva : '' ?>" 
                                                            placeholder="TVA">
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     Montant
                                                     <input type="text" class="form-control" 
                                                            name="input_f2_montant" id="input_f2_montant" 
@@ -323,14 +337,21 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                         </h2>
                                         <fieldset>
                                             <div class="form-group">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
+                                                    Pourcentage
+                                                    <input type="text" class="form-control" 
+                                                           name="input_f3_pourcentage" id="input_f3_pourcentage" 
+                                                           value="<?= isset($r_detail_f3->pourcentage) ? $r_detail_f3->pourcentage : '' ?>" 
+                                                           placeholder="Pourcentage">
+                                                </div>
+                                                <div class="col-lg-4">
                                                     TVA
                                                     <input type="text" class="form-control" 
                                                            name="input_f3_tva" id="input_f3_tva" 
                                                            value="<?= isset($r_detail_f3->tva) ? $r_detail_f3->tva : '' ?>" 
                                                            placeholder="TVA">
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     Montant
                                                     <input type="text" class="form-control" 
                                                            name="input_f3_montant" id="input_f3_montant" 
@@ -601,6 +622,15 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                                                    name="input_remise" id="input_remise" 
                                                    value="<?= $r->remise ?>" 
                                                    placeholder="Remise">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input_forfait" class="col-lg-2 control-label">Forfait</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" 
+                                                   name="input_forfait" id="input_forfait" 
+                                                   value="<?= $r->forfait ?>" 
+                                                   placeholder="Forfait" required>
                                         </div>
                                     </div>
                                 </fieldset>

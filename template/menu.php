@@ -24,6 +24,7 @@ switch ($_SESSION['user']['type']):
                 "ndf.php" => "Note de Frais",
                 "memo.php" => "Mémo",
                 "resultats.php" => "Résultats",
+                "tvafacture.php" => "TVA",
             ),
         );
         break;
@@ -51,6 +52,7 @@ switch ($_SESSION['user']['type']):
                 "ndf.php" => "Note de Frais",
                 "memo.php" => "Mémo",
                 "resultats.php" => "Résultats",
+                "tvafacture.php" => "TVA",
             ),
         );
         break;

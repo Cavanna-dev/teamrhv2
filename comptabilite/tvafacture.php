@@ -160,10 +160,10 @@ if ($Rechercher == "Rechercher") {
                     </TD>
                 </TR>
                 <TR>
-                    <TD align="right" class="normal">
+                    <TD align="left" class="normal">
                         Mois:
                     </TD>
-                    <TD align="right" class="normal">
+                    <TD align="left" class="normal">
                         <select name="mois_facture" size="1" >
                             <option <?php if ($mois_facture == "") echo "selected" ?> value=""   >         </option>
                             <option <?php if ($mois_facture == "01") echo "selected" ?> value="01" >janvier  </option>
@@ -182,10 +182,10 @@ if ($Rechercher == "Rechercher") {
                     </TD>
                 </TR>
                 <TR>
-                    <TD align="right" class="normal">
+                    <TD align="left" class="normal">
                         Ann&eacute;e:
                     </TD>
-                    <TD align="right" class="normal">
+                    <TD align="left" class="normal">
                         <select name="annee_facture" size="1" >
                             <option <?php if ($annee_facture == "") echo "selected" ?> value=""     >    </option>
                             <?php
@@ -200,7 +200,7 @@ if ($Rechercher == "Rechercher") {
                     </TD>
                 </TR>
                 <TR>
-                    <TD align="right" colspan=2>
+                    <TD align="left" colspan=2>
                         <input type="submit" name="Rechercher" value="Rechercher">
                     </TD>
                 </TR>

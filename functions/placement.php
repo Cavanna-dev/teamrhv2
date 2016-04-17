@@ -19,9 +19,9 @@ function getPlacementDetailById($db, $id, $type, $n)
             . "FROM reglements "
             . "WHERE type = '".$type."' AND number = '".$n."' AND fk_placement_id = " . $id;
 
-    $r_job = $db->prepare($sql);
-    $r_job->execute();
-    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    $r_placement = $db->prepare($sql);
+    $r_placement->execute();
+    $r = $r_placement->fetch(PDO::FETCH_OBJ);
     return $r;
 }
 
@@ -31,9 +31,9 @@ function getTotalByPlacementId($db, $id, $facture)
             . "FROM reglements "
             . "WHERE isEncaisse = '".$facture."' AND isFacture = 'Y' AND fk_placement_id = " . $id;
     
-    $r_job = $db->prepare($sql);
-    $r_job->execute();
-    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    $r_placement = $db->prepare($sql);
+    $r_placement->execute();
+    $r = $r_placement->fetch(PDO::FETCH_OBJ);
     return $r;
 }
 function getTotalFactureByPlacementId($db, $id)
@@ -42,9 +42,9 @@ function getTotalFactureByPlacementId($db, $id)
             . "FROM reglements "
             . "WHERE isFacture = 'N' AND fk_placement_id = " . $id;
     
-    $r_job = $db->prepare($sql);
-    $r_job->execute();
-    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    $r_placement = $db->prepare($sql);
+    $r_placement->execute();
+    $r = $r_placement->fetch(PDO::FETCH_OBJ);
     return $r;
 }
 
@@ -57,9 +57,9 @@ function getOnePlacementById($db, $id)
             . "FROM placement "
             . "WHERE id='" . $id . "'";
 
-    $r_job = $db->prepare($sql);
-    $r_job->execute();
-    $r = $r_job->fetch(PDO::FETCH_OBJ);
+    $r_placement = $db->prepare($sql);
+    $r_placement->execute();
+    $r = $r_placement->fetch(PDO::FETCH_OBJ);
     return $r;
 }
 
