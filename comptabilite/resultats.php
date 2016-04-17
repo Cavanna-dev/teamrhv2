@@ -350,7 +350,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                     <option value="Y" <?php if ($tva == "Y") echo "selected"; ?> >Avec TVA</option>
                     <option value="N" <?php if ($tva == "N") echo "selected"; ?> >Sans TVA</option>
                 </select>
-                <a href="resultatstocsv.php"><button class="btn">Télécharger</button></a>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>"><button class="btn">Télécharger</button></a>
             </TD>
             <TD align="right" class="normal">
                 <?php
@@ -397,7 +397,8 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Janvier</I></font>
-                </TD>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=01&month=Janvier"><button class="btn">Télécharger</button></a>
+                </TD> 
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
                 <TD align="left" class="normal">
@@ -473,6 +474,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>F&eacute;vrier</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=02&month=Fevrier"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -548,6 +550,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Mars</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=03&month=Mars"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -624,6 +627,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Avril</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=04&month=Avril"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -699,6 +703,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Mai</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=05&month=Mai"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -774,6 +779,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Juin</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=06&month=Juin"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -849,6 +855,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Juillet</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=07&month=Juillet"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -924,6 +931,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Ao&ucirc;t</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=08&month=Aout"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -999,6 +1007,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Septembre</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=09&month=Septembre"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -1075,6 +1084,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Octobre</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=10&month=Octobre"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -1150,6 +1160,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>Novembre</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=11&month=Novembre"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
@@ -1225,6 +1236,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
             <TR bordercolor="#FF9640">
                 <TD align="middle"  class="normal" colspan=4>
                     &nbsp;&nbsp;&nbsp;<font color="#FF9640"><I>D&eacute;cembre</I></font>
+                <a href="resultatstocsv.php?param=<?= $param ?>&tva=<?= $tva ?>&numberMonth=12&month=Decembre"><button class="btn">Télécharger</button></a>
                 </TD>
             <TR>
             <TR bordercolor="#FF9640" valign="bottom">
