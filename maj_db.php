@@ -11,9 +11,6 @@ $r_placement = $db->prepare($sql);
 $r_placement->execute();
 $r = $r_placement->fetchAll(PDO::FETCH_OBJ);
 
-var_dump($r);
-die;
-
 foreach ($r as $placement) {
     if ($placement->forfait == "" || $placement->forfait == 0)
         if ($placement->contrat == 'CDI')
