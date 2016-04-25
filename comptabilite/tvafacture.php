@@ -62,17 +62,22 @@ if ($Rechercher == "Rechercher") {
     $requete1 .= "FROM CLIENT, ENCAISSE ";
     $requete1 .= "WHERE " . $clause . " AND ENCAISSE.client = CLIENT.id ORDER BY DATE_PAIEMENT, DESCRIPTION DESC";
 
-    $requete2 = " select DECAISSE.ID, mid(DECAISSE.DESCRIPTION, 1, 20)  'DESCRIPTION', DECAISSE_DETAIL.TTC_AMOUNT 'TTC'," . PHP_EOL;
-    $requete2 .= " DECAISSE_DETAIL.TVA_PERCENT 'TVA_DEC', DECAISSE_DETAIL.HT_AMOUNT 'HT_AMOUNT_DEC', " . PHP_EOL;
-    $requete2 .= " DECAISSE_DETAIL.TVA_AMOUNT 'TVA_AMOUNT_DEC', DATE_FORMAT(DECAISSE.date_paiement,'%d/%m/%Y') 'DATE_PAIEMENT', " . PHP_EOL;
+//    $requete2 = " select DECAISSE.ID, mid(DECAISSE.DESCRIPTION, 1, 20)  'DESCRIPTION', DECAISSE_DETAIL.TTC_AMOUNT 'TTC'," . PHP_EOL;
+//    $requete2 .= " DECAISSE_DETAIL.TVA_PERCENT 'TVA_DEC', DECAISSE_DETAIL.HT_AMOUNT 'HT_AMOUNT_DEC', " . PHP_EOL;
+//    $requete2 .= " DECAISSE_DETAIL.TVA_AMOUNT 'TVA_AMOUNT_DEC', DATE_FORMAT(DECAISSE.date_paiement,'%d/%m/%Y') 'DATE_PAIEMENT', " . PHP_EOL;
+//    $requete2 .= " DATE_FORMAT(DECAISSE.DATE_PAIEMENT,'%Y/%m/%d') 'DATE_ORDRE' " . PHP_EOL;
+//    $requete2 .= " from DECAISSE, DECAISSE_DETAIL" . PHP_EOL;
+//    $requete2 .= " where DECAISSE.ID = DECAISSE_DETAIL.FK_DECAISSE_ID and " . $clause . " ORDER BY DATE_PAIEMENT, DESCRIPTION DESC";
+    
+    $requete2 = " select DECAISSE.ID, mid(DECAISSE.DESCRIPTION, 1, 20)  'DESCRIPTION', DECAISSE.DEC_TTC_TOT_AMOUNT 'TTC'," . PHP_EOL;
+    $requete2 .= " DECAISSE.DEC_HT_TOT_AMOUNT 'HT_AMOUNT_DEC', " . PHP_EOL;
+    $requete2 .= " DECAISSE.DEC_TVA_TOT_AMOUNT 'TVA_AMOUNT_DEC', DATE_FORMAT(DECAISSE.date_paiement,'%d/%m/%Y') 'DATE_PAIEMENT', " . PHP_EOL;
     $requete2 .= " DATE_FORMAT(DECAISSE.DATE_PAIEMENT,'%Y/%m/%d') 'DATE_ORDRE' " . PHP_EOL;
-    $requete2 .= " from DECAISSE, DECAISSE_DETAIL" . PHP_EOL;
-    $requete2 .= " where DECAISSE.ID = DECAISSE_DETAIL.FK_DECAISSE_ID and " . $clause . " ORDER BY DATE_PAIEMENT, DESCRIPTION DESC";
-    //$resultat2 = mysql_query($requete2);
+    $requete2 .= " from DECAISSE ";
+    $requete2 .= " where $clause ORDER BY DATE_PAIEMENT, DESCRIPTION desc";
     $resultat2 = $db->prepare($requete2);
     $resultat2->execute();
 
-    //$resultat1 = mysql_query($requete1);
     $resultat1 = $db->prepare($requete1);
     $resultat1->execute();
 
@@ -87,13 +92,17 @@ if ($Rechercher == "Rechercher") {
             
         }
     }
-
-    $rq_totaux = "SELECT DECAISSE_DETAIL.TVA_PERCENT 'TVA_PERCENT', SUM( TVA_AMOUNT ) 'TVA_AMOUNT', SUM( HT_AMOUNT ) 'HT_AMOUNT', " . PHP_EOL;
-    $rq_totaux .= "  SUM( TTC_AMOUNT ) 'TTC_AMOUNT' " . PHP_EOL;
-    $rq_totaux .= "FROM DECAISSE_DETAIL, DECAISSE " . PHP_EOL;
+//$rq_totaux = "SELECT DECAISSE_DETAIL.TVA_PERCENT 'TVA_PERCENT', SUM( TVA_AMOUNT ) 'TVA_AMOUNT', SUM( HT_AMOUNT ) 'HT_AMOUNT', " . PHP_EOL;
+//    $rq_totaux .= "  SUM( TTC_AMOUNT ) 'TTC_AMOUNT' " . PHP_EOL;
+//    $rq_totaux .= "FROM DECAISSE_DETAIL, DECAISSE " . PHP_EOL;
+//    $rq_totaux .= "WHERE " . $clause . " " . PHP_EOL;
+//    $rq_totaux .= "AND DECAISSE.ID = DECAISSE_DETAIL.FK_DECAISSE_ID " . PHP_EOL;
+//    $rq_totaux .= "GROUP BY DECAISSE_DETAIL.TVA_PERCENT";
+    
+    $rq_totaux = "SELECT SUM( DEC_TVA_TOT_AMOUNT ) 'TVA_AMOUNT', SUM( DEC_HT_TOT_AMOUNT ) 'HT_AMOUNT', " . PHP_EOL;
+    $rq_totaux .= "  SUM( DEC_TTC_TOT_AMOUNT ) 'TTC_AMOUNT' " . PHP_EOL;
+    $rq_totaux .= "FROM DECAISSE " . PHP_EOL;
     $rq_totaux .= "WHERE " . $clause . " " . PHP_EOL;
-    $rq_totaux .= "AND DECAISSE.ID = DECAISSE_DETAIL.FK_DECAISSE_ID " . PHP_EOL;
-    $rq_totaux .= "GROUP BY DECAISSE_DETAIL.TVA_PERCENT";
 
     //$res_totaux = mysql_query($rq_totaux);
     $res_totaux = $db->prepare($rq_totaux);
@@ -104,24 +113,6 @@ if ($Rechercher == "Rechercher") {
         $total_ht_amount_dec = $total_ht_amount_dec + $enregistrement_totaux[HT_AMOUNT];
 
         $total_ttc_amount_dec = $total_ttc_amount_dec + $enregistrement_totaux[TTC_AMOUNT];
-
-        if ($enregistrement_totaux['TVA_PERCENT'] == '20.00') {
-            $total_tva_vingt_amount_dec = $enregistrement_totaux['TVA_AMOUNT'];
-        } elseif ($enregistrement_totaux['TVA_PERCENT'] == '19.60') {
-            $total_tva_dix_neuf_amount_dec = $enregistrement_totaux['TVA_AMOUNT'];
-        } elseif ($enregistrement_totaux['TVA_PERCENT'] == '10.00') {
-            $total_tva_dix_amount_dec = $enregistrement_totaux['TVA_AMOUNT'];
-        } elseif ($enregistrement_totaux['TVA_PERCENT'] == '7.00') {
-            $total_tva_sept_amount_dec = $enregistrement_totaux['TVA_AMOUNT'];
-        } elseif ($enregistrement_totaux['TVA_PERCENT'] == '5.50') {
-            $total_tva_cinq_cinq_amount_dec = $enregistrement_totaux['TVA_AMOUNT'];
-        } elseif ($enregistrement_totaux['TVA_PERCENT'] == '5.00') {
-            $total_tva_cinq_amount_dec = $enregistrement_totaux['TVA_AMOUNT'];
-        } elseif ($enregistrement_totaux['TVA_PERCENT'] == '0.00') {
-            $total_tva_zero_amount_dec = $enregistrement_totaux['TVA_AMOUNT'];
-        } else {
-            $total_tva_unknown_amount_dec = $total_tva_unknown_amount_dec + $enregistrement_totaux['TVA_AMOUNT'];
-        }
 
         $total_tva_amount_dec = $total_tva_amount_dec + $enregistrement_totaux['TVA_AMOUNT'];
     }
@@ -324,10 +315,10 @@ else {
                                         <TD align="left"  class="normal">
                                             <?php
                                             //$resultat2 = mysql_query($requete2);
-    $resultat2 = $db->prepare($requete2);
-    $resultat2->execute();
-    foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
-                                            //while ($enregistrement2 = mysql_fetch_array($resultat2)) {
+                                            $resultat2 = $db->prepare($requete2);
+                                            $resultat2->execute();
+                                            foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
+                                                //while ($enregistrement2 = mysql_fetch_array($resultat2)) {
                                                 echo "&nbsp;&nbsp;";
                                                 echo $enregistrement2['DESCRIPTION'];
                                                 echo "&nbsp;&nbsp;";
@@ -339,9 +330,9 @@ else {
                                             <?php
 //                                            $resultat2 = mysql_query($requete2);
 //                                            while ($enregistrement2 = mysql_fetch_array($resultat2)) {
-    $resultat2 = $db->prepare($requete2);
-    $resultat2->execute();
-    foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
+                                            $resultat2 = $db->prepare($requete2);
+                                            $resultat2->execute();
+                                            foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
                                                 $total_ht_dec = $total_ht_dec + $enregistrement2['HT_AMOUNT_DEC'];
                                                 echo number_format($enregistrement2['HT_AMOUNT_DEC'], 2, ',', ' ');
                                                 echo "<BR>";
@@ -352,30 +343,12 @@ else {
                                             <?php
 //                                            $resultat2 = mysql_query($requete2);
 //                                            while ($enregistrement2 = mysql_fetch_array($resultat2)) {
-    $resultat2 = $db->prepare($requete2);
-    $resultat2->execute();
-    foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
+                                            $resultat2 = $db->prepare($requete2);
+                                            $resultat2->execute();
+                                            foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
                                                 $total_tva_dec = $total_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
                                                 echo number_format($enregistrement2['TVA_AMOUNT_DEC'], 2, ',', ' ');
                                                 echo "<BR>";
-
-                                                if ($enregistrement2['TVA_DEC'] == "0.00") {
-                                                    $total_zero_tva_dec = $total_zero_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
-                                                } elseif ($enregistrement2['TVA_DEC'] == "20.00") {
-                                                    $total_vingt_tva_dec = $total_vingt_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
-                                                } elseif ($enregistrement2['TVA_DEC'] == "19.60") {
-                                                    $total_dix_neuf_tva_dec = $total_dix_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
-                                                } elseif ($enregistrement2['TVA_DEC'] == "10.00") {
-                                                    $total_dix_tva_dec = $total_dix_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
-                                                } elseif ($enregistrement2['TVA_DEC'] == "7.00") {
-                                                    $total_sept_tva_dec = $total_sept_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
-                                                } elseif ($enregistrement2['TVA_DEC'] == "5.50") {
-                                                    $total_cinq_cinq_tva_dec = $total_cinq_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
-                                                } elseif ($enregistrement2['TVA_DEC'] == "5.00") {
-                                                    $total_cinq_tva_dec = $total_dix_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
-                                                } else {
-                                                    $total_unknown = $total_unknown + $enregistrement2['TVA_AMOUNT_DEC'];
-                                                }
                                             }
                                             ?>
                                         </TD>
@@ -383,9 +356,9 @@ else {
                                             <?php
 //                                            $resultat2 = mysql_query($requete2);
 //                                            while ($enregistrement2 = mysql_fetch_array($resultat2)) {
-    $resultat2 = $db->prepare($requete2);
-    $resultat2->execute();
-    foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
+                                            $resultat2 = $db->prepare($requete2);
+                                            $resultat2->execute();
+                                            foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
                                                 $total_ttc_dec = $total_ttc_dec + $enregistrement2['TTC'];
                                                 echo number_format($enregistrement2['TTC'], 2, ',', ' ');
                                                 echo "<BR>";
@@ -407,8 +380,7 @@ else {
 
                                     <TD align="left"  class="normal">
                                         <?php
-                                        //while ($enregistrement1 = mysql_fetch_array($resultat1)) {
-    foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
+                                        foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
                                             echo "&nbsp;&nbsp;";
                                             echo ucfirst(strtolower($enregistrement1['DESCRIPTION']));
                                             echo "&nbsp;&nbsp;";
@@ -418,11 +390,9 @@ else {
                                     </TD>
                                     <TD align="right"  class="normal">
                                         <?php
-//                                        $resultat1 = mysql_query($requete1);
-//                                        while ($enregistrement1 = mysql_fetch_array($resultat1)) {
-    $resultat1 = $db->prepare($requete1);
-    $resultat1->execute();
-    foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
+                                        $resultat1 = $db->prepare($requete1);
+                                        $resultat1->execute();
+                                        foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
                                             if ($enregistrement1['TVA_ENC'] != "0" && $enregistrement1['TVA_ENC'] != "")
                                                 $total_ht_enc = $total_ht_enc + $enregistrement1['HT'];
                                             else
@@ -435,11 +405,9 @@ else {
                                     </TD>
                                     <TD align="right"  class="normal">
                                         <?php
-//                                        $resultat1 = mysql_query($requete1);
-//                                        while ($enregistrement1 = mysql_fetch_array($resultat1)) {
-    $resultat1 = $db->prepare($requete1);
-    $resultat1->execute();
-    foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
+                                        $resultat1 = $db->prepare($requete1);
+                                        $resultat1->execute();
+                                        foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
                                             $total_tva_enc = $total_tva_enc + $enregistrement1['TVA_AMOUNT_ENC'];
                                             echo number_format($enregistrement1['TVA_AMOUNT_ENC'], 2, ',', ' ');
                                             echo "<BR>";
@@ -460,9 +428,9 @@ else {
                                         <?php
 //                                        $resultat1 = mysql_query($requete1);
 //                                        while ($enregistrement1 = mysql_fetch_array($resultat1)) {
-    $resultat1 = $db->prepare($requete1);
-    $resultat1->execute();
-    foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
+                                        $resultat1 = $db->prepare($requete1);
+                                        $resultat1->execute();
+                                        foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
                                             $total_ttc_enc = $total_ttc_enc + $enregistrement1['TTC_AMOUNT_ENC'];
                                             echo number_format($enregistrement1['TTC_AMOUNT_ENC'], 2, ',', ' ');
                                             echo "<BR>";
@@ -484,20 +452,6 @@ else {
                                         Le montant total HT des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_ht_amount_dec, 2, ',', ' '); ?> euros.
                                         <BR><BR>
                                         Le montant total de la TVA des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_tva_amount_dec, 2, ',', ' '); ?> euros.
-                                        <BR>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;Le montant de la TVA à 20% des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_tva_vingt_amount_dec, 2, ',', ' '); ?> euros.
-                                        <BR>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;Le montant de la TVA à 19,6% des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_tva_dix_neuf_amount_dec, 2, ',', ' '); ?> euros.
-                                        <BR>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;Le montant de la TVA à 10% des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_tva_dix_amount_dec, 2, ',', ' '); ?> euros.
-                                        <BR>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;Le montant de la TVA à 7% des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_tva_sept_amount_dec, 2, ',', ' '); ?> euros.
-                                        <BR>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;Le montant de la TVA à 5,5% des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_tva_cinq_cinq_amount_dec, 2, ',', ' '); ?> euros.
-                                        <BR>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;Le montant de la TVA à 5% des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_tva_cinq_amount_dec, 2, ',', ' '); ?> euros.
-                                        <BR>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;Le montant de la TVA, pour les taux de TVA inconnus, des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_tva_unknown_amount_dec, 2, ',', ' '); ?> euros.
                                         <BR><BR>
                                         Le montant total TTC des factures s&eacute;lectionn&eacute;es s'&eacute;l&egrave;ve &agrave; <?php echo number_format($total_ttc_amount_dec, 2, ',', ' '); ?> euros.
                                         <BR>
