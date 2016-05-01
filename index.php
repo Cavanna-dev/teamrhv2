@@ -32,6 +32,7 @@
                             "prospect.php" => "Prospect",
                         ),
                         "Fournisseur" => Array(
+                            "fournisseur.php" => "Fournisseur",
                         ),
                         "Comptabilite" => Array(
                             "encaisse.php" => "Encaissé",
@@ -60,6 +61,7 @@
                             "prospect.php" => "Prospect",
                         ),
                         "Fournisseur" => Array(
+                            "fournisseur.php" => "Fournisseur",
                         ),
                         "Comptabilite" => Array(
                             "encaisse.php" => "Encaissé",
@@ -85,8 +87,6 @@
                         ),
                         "Prospect" => Array(
                             "prospect.php" => "Prospect",
-                        ),
-                        "Fournisseur" => Array(
                         )
                     );
                     break;
@@ -104,8 +104,6 @@
                         ),
                         "Prospect" => Array(
                             "prospect.php" => "Prospect",
-                        ),
-                        "Fournisseur" => Array(
                         )
                     );
                     break;
@@ -124,7 +122,8 @@
                             "prospect.php" => "Prospect",
                         ),
                         "Fournisseur" => Array(
-                        )
+                            "fournisseur.php" => "Fournisseur",
+                        ),
                     );
                     break;
                 default:

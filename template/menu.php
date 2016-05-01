@@ -17,6 +17,7 @@ switch ($_SESSION['user']['type']):
                 "prospect.php" => "Prospect",
             ),
             "Fournisseur" => Array(
+                "fournisseur.php" => "Fournisseur",
             ),
             "Comptabilite" => Array(
                 "encaisse.php" => "Encaissé",
@@ -45,6 +46,7 @@ switch ($_SESSION['user']['type']):
                 "prospect.php" => "Prospect",
             ),
             "Fournisseur" => Array(
+                "fournisseur.php" => "Fournisseur",
             ),
             "Comptabilite" => Array(
                 "encaisse.php" => "Encaissé",
@@ -106,7 +108,8 @@ switch ($_SESSION['user']['type']):
                 "prospect.php" => "Prospect",
             ),
             "Fournisseur" => Array(
-            )
+                "fournisseur.php" => "Fournisseur",
+            ),
         );
         break;
     default:
