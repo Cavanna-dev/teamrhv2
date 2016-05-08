@@ -34,7 +34,11 @@ function searchEncaisse($db)
         $sql .= " AND ";
     if (!empty($compta_min) || !empty($compta_max))
         $sql .= "date_envoi BETWEEN '" . $compta_min . "' AND '" . $compta_max . "'";
-    if ((!empty($compta_min) || !empty($compta_max)) && (!empty($amount) || !empty($ht)))
+    if ((!empty($compta_min) || !empty($compta_max)) && (!empty($amount) || !empty($ht) || !empty($paie_min) || !empty($paie_max)))
+        $sql .= " AND ";
+    if (!empty($paie_min) || !empty($paie_max))
+        $sql .= "date_paiement BETWEEN '" . $paie_min . "' AND '" . $paie_max . "'";
+    if ((!empty($paie_min) || !empty($paie_max)) && (!empty($amount) || !empty($ht)))
         $sql .= " AND ";
     if (!empty($ht))
         $sql .= "montant = " . $ht;

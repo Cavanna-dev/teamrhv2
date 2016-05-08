@@ -117,7 +117,7 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
                 </div>
 
                 <?php
-                if (!empty($_GET)) {
+                if (!empty($_GET) && !isset($_GET['success'])) {
                     $r_decaisses = searchDecaisse($db);
 
                     if ($r_decaisses) {
@@ -606,4 +606,9 @@ if (!($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPE
             });
 <?php } ?>
     });
+<?php if (isset($_GET['success']) && $_GET['success'] == 'upd') { ?>
+        $(window).load(function () {
+            alert('Facture ajoutée avec succès');
+        });
+<?php } ?>
 </script>

@@ -70,7 +70,7 @@ try {
             $sql = "INSERT INTO `decaisse_detail`"
                     . "(`HT_AMOUNT`, `TVA_PERCENT`, `TVA_AMOUNT`, `TTC_AMOUNT`, `FK_DECAISSE_ID`)"
                     . " VALUES "
-                    . "('".$line3_ht."','5,5','".$line3_tva."','".$line3_ttc."','".$lastId."')";
+                    . "('".$line3_ht."','5.5','".$line3_tva."','".$line3_ttc."','".$lastId."')";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     }
@@ -83,7 +83,7 @@ try {
     $stmt->execute();
     }
     
-    header('Location:../comptabilite/upd_decaisse.php?id='.$lastId.'&success=n');
+    header('Location:../comptabilite/decaisse.php?success=upd');
 } catch (PDOException $e) {
     die("Error : " . $e->getMessage());
 }

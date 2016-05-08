@@ -103,32 +103,33 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                         <div class="form-group">
                             <div class="col-lg-12 col-lg-offset-2">
                                 <?php
-                                if (strtotime('+2 week', strtotime($rdv->DATE_RDV)) > strtotime("now")) {
+                                if (strtotime('+2 week', strtotime($rdv->DATE_RDV)) > strtotime("now") || (($_SESSION['user']['type'] == "ADMIN" || $_SESSION['user']['type'] == "SUPERADMIN"))) {
                                     ?>
                                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                                     <a href="../functions/del_rdv_customer.php?id=<?= $rdv->ID ?>"><button type="button" class="btn btn-primary">Supprimer</button></a>
                                     <?php
                                 }
-                                ?>
-                                <?php
-                                $subject_cust = "TeamRH : Confirmation d’entretien";
-                                switch ($mail_contact->civilite) {
-                                    case "Melle" : $body_cust = "Mademoiselle,";
-                                        break;
-                                    case "Mme" : $body_cust = "Madame,";
-                                        break;
-                                    default: $body_cust = "Monsieur,";
-                                        break;
-                                }
 
-                                $body_cust .= "%0A%0ANous vous confirmons le rendez-vous avec ";
-                                $body_cust .= $r_applicant->prenom . ' ' . $r_applicant->nom;
-                                $body_cust .= " le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . ".";
-                                $body_cust .= "%0ANous restons à votre disposition.";
-                                $body_cust .= "%0A%0ATrès sincèrement. ";
-                                ?>
-                                <a href="mailto:<?= isset($mail_contact->email) ? $mail_contact->email : '' ?>?subject=<?= $subject_cust . "&body=" . $body_cust ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
-                                <?php
+                                if ($mail_contact) {
+                                    $subject_cust = "TeamRH : Confirmation d’entretien";
+                                    switch ($mail_contact->civilite) {
+                                        case "Melle" : $body_cust = "Mademoiselle,";
+                                            break;
+                                        case "Mme" : $body_cust = "Madame,";
+                                            break;
+                                        default: $body_cust = "Monsieur,";
+                                            break;
+                                    }
+
+                                    $body_cust .= "%0A%0ANous vous confirmons le rendez-vous avec ";
+                                    $body_cust .= $r_applicant->prenom . ' ' . $r_applicant->nom;
+                                    $body_cust .= " le " . date("d/m/Y", strtotime($rdv->DATE_RDV)) . " à " . $rdv->HORAIRE . ".";
+                                    $body_cust .= "%0ANous restons à votre disposition.";
+                                    $body_cust .= "%0A%0ATrès sincèrement. ";
+                                    ?>
+                                    <a href="mailto:<?= isset($mail_contact->email) ? $mail_contact->email : '' ?>?subject=<?= $subject_cust . "&body=" . $body_cust ?>"><button type="button" class="btn btn-primary">Confirmation Client</button></a>
+                                    <?php
+                                }
                                 $subject_appli = "TeamRH : Confirmation d’entretien";
                                 $body_appli = "******************";
                                 $body_appli .= "*     Merci de nous confirmer la lecture de ce mail              *";
@@ -179,7 +180,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                         <div class="form-group">
                             <label for="input_consult" class="col-lg-2 control-label">Consult.*</label>
                             <div class="col-lg-10">	
-<?php $r_users = getAllImportantUsers($db); ?>
+                                <?php $r_users = getAllImportantUsers($db); ?>
                                 <select class="form-control" 
                                         name="input_consult" 
                                         id="input_contact_law" required>
@@ -196,11 +197,11 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                         </div>
                         <div class="form-group">
                             <label for="input_contact" class="col-lg-2 control-label">
-<?php if (!empty($rdv->CONTACT)) { ?><a href="./upd_contact.php?id=<?= $rdv->CONTACT ?>">Contact</a><?php } else { ?>Contact<?php } ?>
+                                <?php if (!empty($rdv->CONTACT)) { ?><a href="./upd_contact.php?id=<?= $rdv->CONTACT ?>">Contact</a><?php } else { ?>Contact<?php } ?>
                             </label>
                             <div class="col-lg-10">
                                 <?php if (isset($_GET['client'])) { ?>
-    <?php $r_contacts = getContactActifByClient($db, $_GET['client']); ?>
+                                    <?php $r_contacts = getContactActifByClient($db, $_GET['client']); ?>
                                     <select class="form-control" 
                                             name="input_contact">
                                         <option value=""></option>
@@ -213,7 +214,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                         ?>
                                     </select>
                                 <?php } else { ?>	
-    <?php $r_contacts = getAllContact($db); ?>
+                                    <?php $r_contacts = getAllContact($db); ?>
                                     <select class="form-control" 
                                             name="input_contact">
                                         <option value=""></option>
@@ -225,7 +226,7 @@ $mail_job = getOneJobById($db, $rdv->POSTE);
                                         }
                                         ?>
                                     </select>
-<?php } ?>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-group">
