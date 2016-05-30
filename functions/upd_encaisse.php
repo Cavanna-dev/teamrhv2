@@ -7,11 +7,12 @@ $array_post = array();
 foreach($_POST as $key => $value):
     $array_value[':'.$key] = $value;
 endforeach;
+//var_dump($array_value);die;
 
 try {
     $sql = "UPDATE `encaisse` "
             . "SET `PLACEMENT`=:input_placement,`CLIENT`=:input_customer,"
-            . "`DATE_ENVOI`=:input_date_send,`DATE_PAIEMENT`=:input_date_pay,`REF_FACTURE`=:input_ref_pay,"
+            . "`DATE_ENVOI`=:input_date_send,`DATE_PAIEMENT`=:input_date_pay,`REF_FACTURE`=:input_ref_fac,"
             . "`MODE_PAIEMENT`=:input_mode_paiement,`REF_PAIEMENT`=:input_ref_pay,`MONTANT`=:input_ht,"
             . "`TVA`=:input_tva,`ENC_TTC_TOT_AMOUNT`=:input_ttc,`ENC_TVA_TOT_AMOUNT`=:input_amount_tva,`DESCRIPTION`=:input_description "
             . "WHERE id = :input_id";
