@@ -7,7 +7,6 @@ $array_post = array();
 foreach($_POST as $key => $value):
     $array_value[':'.$key] = $value;
 endforeach;
-//var_dump($array_value);die;
 
 try {
     $sql = "UPDATE `encaisse` "
