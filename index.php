@@ -42,6 +42,9 @@
                             "resultats.php" => "Résultats",
                             "tvafacture.php" => "TVA",
                         ),
+                        "Statistique" => Array(
+                            "entretien.php" => "Entretien",
+                        ),
                     );
                     break;
                 case "ADMIN":
@@ -70,6 +73,9 @@
                             "memo.php" => "Mémo",
                             "resultats.php" => "Résultats",
                             "tvafacture.php" => "TVA",
+                        ),
+                        "Statistique" => Array(
+                            "entretien.php" => "Entretien",
                         ),
                     );
                     break;

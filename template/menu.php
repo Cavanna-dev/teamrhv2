@@ -27,6 +27,9 @@ switch ($_SESSION['user']['type']):
                 "resultats.php" => "Résultats",
                 "tvafacture.php" => "TVA",
             ),
+            "Statistique" => Array(
+                "entretien.php" => "Entretien",
+            ),
         );
         break;
     case "ADMIN":
@@ -55,6 +58,9 @@ switch ($_SESSION['user']['type']):
                 "memo.php" => "Mémo",
                 "resultats.php" => "Résultats",
                 "tvafacture.php" => "TVA",
+            ),
+            "Statistique" => Array(
+                "entretien.php" => "Entretien",
             ),
         );
         break;
