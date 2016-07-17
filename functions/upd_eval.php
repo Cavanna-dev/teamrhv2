@@ -2,6 +2,7 @@
 
 include './connection_db.php';
 
+error_reporting(0);
 //var_dump($_POST);die;
 //var_dump($_FILES['photo']);die;
 
@@ -44,7 +45,7 @@ try {
             . "`SAL_MIN_RECH`=:input_salaire_rech,`CONTRAT1_RECH`=:input_contrat_1,"
             . "`CONTRAT2_RECH`=:input_contrat_2,`HORAIRES1_RECH`=:input_horaires_1,"
             . "`HORAIRES2_RECH`=:input_horaires_2,`PREAVIS`=:input_preavis,"
-            . "`REMARQUE`=:input_remarque,`NOTE`=:input_note_gen, `MODIFICATION`=now() WHERE id=:input_eval";
+            . "`REMARQUE`=:input_remarque,`NOTE`=:input_note_gen,`DATE_SERMENT`=:input_serment,`MODIFICATION`=now() WHERE id=:input_eval";
     $stmt = $db->prepare($sql);
     $stmt->execute($array_value);
 

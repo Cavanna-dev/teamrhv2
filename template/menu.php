@@ -19,7 +19,7 @@ switch ($_SESSION['user']['type']):
             "Fournisseur" => Array(
                 "fournisseur.php" => "Fournisseur",
             ),
-            "Comptabilite" => Array(
+            "Comptabilité" => Array(
                 "encaisse.php" => "Encaissé",
                 "decaisse.php" => "Décaissé",
                 "ndf.php" => "Note de Frais",
@@ -29,6 +29,7 @@ switch ($_SESSION['user']['type']):
             ),
             "Statistique" => Array(
                 "entretien.php" => "Entretien",
+                            "placement.php" => "Placement",
             ),
         );
         break;
@@ -51,7 +52,7 @@ switch ($_SESSION['user']['type']):
             "Fournisseur" => Array(
                 "fournisseur.php" => "Fournisseur",
             ),
-            "Comptabilite" => Array(
+            "Comptabilité" => Array(
                 "encaisse.php" => "Encaissé",
                 "decaisse.php" => "Décaissé",
                 "ndf.php" => "Note de Frais",
@@ -61,6 +62,7 @@ switch ($_SESSION['user']['type']):
             ),
             "Statistique" => Array(
                 "entretien.php" => "Entretien",
+                "placement.php" => "Placement",
             ),
         );
         break;
@@ -162,7 +164,7 @@ endswitch;
             <?php if (isset($_SESSION['user'])) { ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Bienvenue <?php echo $_SESSION['user']['first'] . " " . $_SESSION['user']['last'] ?>!</a></li>
-                    <li><a href="../logout.php">Se deconnecter!</a></li>
+                    <li><a href="../logout.php">Se déconnecter!</a></li>
                 </ul>
             <?php } ?>
         </div>

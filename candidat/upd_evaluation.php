@@ -5,6 +5,7 @@ include '../functions/connection_db.php';
 include '../functions/bootstrap.php';
 
 $r = getOneEvalById($db, $_GET['id']);
+//var_dump($r);die;
 ?>
 
 <?php if (isset($_GET['success'])) { ?>
@@ -334,32 +335,6 @@ $r = getOneEvalById($db, $_GET['id']);
                                        value="<?= isset($r->SAL_MIN_RECH) ? $r->SAL_MIN_RECH : '' ?>">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="input_horaires_1" class="col-lg-2 control-label">Horaires rech. 1</label>
-                            <div class="col-lg-4">
-                                <select class="form-control" 
-                                        name="input_horaires_1" id="input_horaires_1">
-                                    <option value="" <?= $r->HORAIRES1_RECH == '' ? 'selected' : '' ?>></option>
-                                    <option value="matinée" <?= $r->HORAIRES1_RECH == 'matinée' ? 'selected' : '' ?>>Matinée</option>
-                                    <option value="jour" <?= $r->HORAIRES1_RECH == 'jour' ? 'selected' : '' ?>>Jour</option>
-                                    <option value="après-midi" <?= $r->HORAIRES1_RECH == 'après-midi' ? 'selected' : '' ?>>Après-midi</option>
-                                    <option value="soirée" <?= $r->HORAIRES1_RECH == 'soirée' ? 'selected' : '' ?>>Soirée</option>
-                                    <option value="nuit" <?= $r->HORAIRES1_RECH == 'nuit' ? 'selected' : '' ?>>Nuit</option>
-                                </select>
-                            </div>
-                            <label for="input_horaires_2" class="col-lg-2 control-label">Horaires rech. 2</label>
-                            <div class="col-lg-4">
-                                <select class="form-control" 
-                                        name="input_horaires_2" id="input_horaires_2">
-                                    <option value="" <?= $r->HORAIRES2_RECH == '' ? 'selected' : '' ?>></option>
-                                    <option value="matinée" <?= $r->HORAIRES2_RECH == 'matinée' ? 'selected' : '' ?>>Matinée</option>
-                                    <option value="jour" <?= $r->HORAIRES2_RECH == 'jour' ? 'selected' : '' ?>>Jour</option>
-                                    <option value="après-midi" <?= $r->HORAIRES2_RECH == 'après-midi' ? 'selected' : '' ?>>Après-midi</option>
-                                    <option value="soirée" <?= $r->HORAIRES2_RECH == 'soirée' ? 'selected' : '' ?>>Soirée</option>
-                                    <option value="nuit" <?= $r->HORAIRES2_RECH == 'nuit' ? 'selected' : '' ?>>Nuit</option>
-                                </select>
-                            </div>
-                        </div>
                     </fieldset>
                 </div>
                 <div class="col-lg-6">
@@ -431,7 +406,7 @@ $r = getOneEvalById($db, $_GET['id']);
                         <div class="col-lg-4">
                             <?php $specs = getAllSpec($db); ?>
                             <select class="form-control" 
-                                    name="spec[]" id="spec[]" multiple="multiple" size="8">
+                                    name="spec[]" id="spec" multiple="multiple" size="8">
                                         <?php
                                         while ($spec = $specs->fetch(PDO::FETCH_OBJ)) {
                                             ?>
@@ -450,21 +425,12 @@ $r = getOneEvalById($db, $_GET['id']);
                                 ?>
                             </select>
                         </div>
-                        <label for="spec[]" class="col-lg-2 control-label">Choisies</label>
+                        <label for="input_serment" class="col-lg-2 control-label">Date de Serment</label>
                         <div class="col-lg-4">
-                            <?php $r_specs = getAllSpecByEval($db, $r->ID); ?>
-                            <select class="form-control" 
-                                    name="" id="spec[]" multiple="multiple" size="8" disabled>
-                                        <?php
-                                        while ($r_spec = $r_specs->fetch(PDO::FETCH_OBJ)) {
-                                            ?>
-                                    <option value="<?= $r_spec->id; ?>" >
-                                        <?= $r_spec->libelle; ?>
-                                    </option>
-                                    <?php
-                                }
-                                ?>
-                            </select>
+                            <input type="date" class="form-control" 
+                                   name="input_serment" 
+                                   id="input_serment" 
+                                   value="<?= $r->DATE_SERMENT != '0000-00-00' ? $r->DATE_SERMENT : '' ?>">
                         </div>
                     </div>
                 </div>
@@ -496,6 +462,34 @@ $r = getOneEvalById($db, $_GET['id']);
                     </div>
                     </fieldset>
                 </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="input_horaires_1" class="col-lg-2 control-label">Horaires rech. 1</label>
+                        <div class="col-lg-4">
+                            <select class="form-control" 
+                                    name="input_horaires_1" id="input_horaires_1">
+                                <option value="" <?= $r->HORAIRES1_RECH == '' ? 'selected' : '' ?>></option>
+                                <option value="matinée" <?= $r->HORAIRES1_RECH == 'matinée' ? 'selected' : '' ?>>Matinée</option>
+                                <option value="jour" <?= $r->HORAIRES1_RECH == 'jour' ? 'selected' : '' ?>>Jour</option>
+                                <option value="après-midi" <?= $r->HORAIRES1_RECH == 'après-midi' ? 'selected' : '' ?>>Après-midi</option>
+                                <option value="soirée" <?= $r->HORAIRES1_RECH == 'soirée' ? 'selected' : '' ?>>Soirée</option>
+                                <option value="nuit" <?= $r->HORAIRES1_RECH == 'nuit' ? 'selected' : '' ?>>Nuit</option>
+                            </select>
+                        </div>
+                        <label for="input_horaires_2" class="col-lg-2 control-label">Horaires rech. 2</label>
+                        <div class="col-lg-4">
+                            <select class="form-control" 
+                                    name="input_horaires_2" id="input_horaires_2">
+                                <option value="" <?= $r->HORAIRES2_RECH == '' ? 'selected' : '' ?>></option>
+                                <option value="matinée" <?= $r->HORAIRES2_RECH == 'matinée' ? 'selected' : '' ?>>Matinée</option>
+                                <option value="jour" <?= $r->HORAIRES2_RECH == 'jour' ? 'selected' : '' ?>>Jour</option>
+                                <option value="après-midi" <?= $r->HORAIRES2_RECH == 'après-midi' ? 'selected' : '' ?>>Après-midi</option>
+                                <option value="soirée" <?= $r->HORAIRES2_RECH == 'soirée' ? 'selected' : '' ?>>Soirée</option>
+                                <option value="nuit" <?= $r->HORAIRES2_RECH == 'nuit' ? 'selected' : '' ?>>Nuit</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-12">
                     <fieldset>
                         <div class="form-group">
@@ -516,3 +510,8 @@ $r = getOneEvalById($db, $_GET['id']);
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#spec").select2();
+    });
+</script>

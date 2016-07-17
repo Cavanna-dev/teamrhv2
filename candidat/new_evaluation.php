@@ -309,32 +309,6 @@ include '../functions/bootstrap.php';
                                        value="">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="input_horaires_1" class="col-lg-2 control-label">Horaires rech. 1</label>
-                            <div class="col-lg-4">
-                                <select class="form-control" 
-                                        name="input_horaires_1" id="input_horaires_1">
-                                    <option value=""></option>
-                                    <option value="matinée">Matinée</option>
-                                    <option value="jour">Jour</option>
-                                    <option value="après-midi">Après-midi</option>
-                                    <option value="soirée">Soirée</option>
-                                    <option value="nuit">Nuit</option>
-                                </select>
-                            </div>
-                            <label for="input_horaires_2" class="col-lg-2 control-label">Horaires rech. 2</label>
-                            <div class="col-lg-4">
-                                <select class="form-control" 
-                                        name="input_horaires_2" id="input_horaires_2">
-                                    <option value=""></option>
-                                    <option value="matinée">Matinée</option>
-                                    <option value="jour">Jour</option>
-                                    <option value="après-midi">Après-midi</option>
-                                    <option value="soirée">Soirée</option>
-                                    <option value="nuit">Nuit</option>
-                                </select>
-                            </div>
-                        </div>
                     </fieldset>
                 </div>
                 <div class="col-lg-6">
@@ -406,7 +380,7 @@ include '../functions/bootstrap.php';
                         <div class="col-lg-4">
                             <?php $specs = getAllSpec($db); ?>
                             <select class="form-control" 
-                                    name="spec[]" id="spec[]" multiple="multiple" size="8">
+                                    name="spec[]" id="spec" multiple="multiple" size="8">
                                         <?php
                                         while ($spec = $specs->fetch(PDO::FETCH_OBJ)) {
                                             ?>
@@ -418,7 +392,12 @@ include '../functions/bootstrap.php';
                                 ?>
                             </select>
                         </div>
-                        <p class="text-warning" style="font-size: 12px;">*Maintenir Ctrl pour faire une selection multiple.</p>
+                        <label for="input_serment" class="col-lg-2 control-label">Date de Serment</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" 
+                                   name="input_serment" 
+                                   id="input_serment">
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -449,6 +428,34 @@ include '../functions/bootstrap.php';
                     </div>
                     </fieldset>
                 </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="input_horaires_1" class="col-lg-2 control-label">Horaires rech. 1</label>
+                        <div class="col-lg-4">
+                            <select class="form-control" 
+                                    name="input_horaires_1" id="input_horaires_1">
+                                <option value=""></option>
+                                <option value="matinée">Matinée</option>
+                                <option value="jour">Jour</option>
+                                <option value="après-midi">Après-midi</option>
+                                <option value="soirée">Soirée</option>
+                                <option value="nuit">Nuit</option>
+                            </select>
+                        </div>
+                        <label for="input_horaires_2" class="col-lg-2 control-label">Horaires rech. 2</label>
+                        <div class="col-lg-4">
+                            <select class="form-control" 
+                                    name="input_horaires_2" id="input_horaires_2">
+                                <option value=""></option>
+                                <option value="matinée">Matinée</option>
+                                <option value="jour">Jour</option>
+                                <option value="après-midi">Après-midi</option>
+                                <option value="soirée">Soirée</option>
+                                <option value="nuit">Nuit</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-12">
                     <fieldset>
                         <div class="form-group">
@@ -468,3 +475,8 @@ include '../functions/bootstrap.php';
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#spec").select2();
+    });
+</script>
