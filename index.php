@@ -194,7 +194,7 @@
             ?>
             <div class="container">
                 <div class="jumbotron">
-                    <p>Veuillez vous identifiez,</p>
+                    <p>Veuillez vous identifier,</p>
                 </div>
 
                 <form class="form-horizontal" action="login.php" method="POST">
