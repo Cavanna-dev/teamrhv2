@@ -426,12 +426,26 @@ $r = getOneEvalById($db, $_GET['id']);
                             </select>
                         </div>
                         <label for="input_serment" class="col-lg-2 control-label">Date de Serment</label>
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <input type="date" class="form-control" 
                                    name="input_serment" 
                                    id="input_serment" 
                                    value="<?= $r->DATE_SERMENT != '0000-00-00' ? $r->DATE_SERMENT : '' ?>">
                         </div>
+                        <label class="col-lg-2 control-label">
+                            <?php
+                            if ($r->DATE_SERMENT && $r->DATE_SERMENT != '0000-00-00') {
+                                $am = explode('/', date('d/m/Y', strtotime($r->DATE_SERMENT)));
+                                $an = explode('/', date('d/m/Y'));
+
+                                if (($am[1] < $an[1]) || (($am[1] == $an[1]) && ($am[0] <= $an[0])))
+                                    echo $an[2] - $am[2];
+                                else
+                                    echo $an[2] - $am[2] - 1;
+                                ?>
+                                an(s)
+                            <?php } ?>
+                        </label>
                     </div>
                 </div>
                 <div class="col-lg-6">

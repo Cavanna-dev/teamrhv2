@@ -50,7 +50,7 @@ echo "</script>";
 ?>
 
 <div class="container">
-    <TABLE cellpadding="0" cellspacing="0" class="" border="1" bordercolor="white">
+    <TABLE cellpadding="0" cellspacing="0" class="table table-bordered" border="1" bordercolor="white">
         <TR>
             <TD colspan="15" class="titre" align="middle">
                 <BR>&nbsp;&nbsp;&nbsp;&nbsp;Rapport des entretiens client pour l'ann&eacute;e <?php echo $param ?>.

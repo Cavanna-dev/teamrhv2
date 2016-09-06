@@ -3,7 +3,8 @@
 function getAllSpec($db)
 {
     $sql = "SELECT id, libelle "
-            . "FROM specialite";
+            . "FROM specialite "
+            . "ORDER BY libelle";
     $r = $db->prepare($sql);
     $r->execute();
     
@@ -15,7 +16,8 @@ function getAllSpecByEval($db, $id)
     $sql = "SELECT es.id_eval, es.id_spec, s.libelle, s.id "
             . "FROM eval_spec es "
             . "LEFT JOIN specialite s ON s.id = es.id_spec "
-            . "WHERE es.ID_EVAL='".$id."'";
+            . "WHERE es.ID_EVAL='".$id."' "
+            . "ORDER BY s.libelle";
     $r = $db->prepare($sql);
     $r->execute();
     
