@@ -217,28 +217,29 @@ $res_rec_dec_tva->execute();
         if ($result_req_placement->rowCount() != 0) {
             ?>
             <TR>
-                <TD class="titre" align="left" class="col-sm-1">
+                <TD align="left" class="col-sm-1">
                     ID
                 </TD>
-                <TD class="titre" align="left" class="col-sm-2">
+                <TD align="left" class="col-sm-2">
                     Client
                 </TD>
-                <TD class="titre" align="left" class="col-sm-2">
+                <TD align="left" class="col-sm-2">
                     Poste
                 </TD>
-                <TD class="titre" align="left" class="col-sm-2">
+                <TD align="left" class="col-sm-2">
                     Candidat
                 </TD>
-                <TD class="titre" align="left" class="col-sm-1">
+                <TD align="left" class="col-sm-1">
                     Mois/Année
                 </TD>
-                <TD class="titre" align="right" class="col-sm-4">
+                <TD align="right" class="col-sm-1">
                     HT		 
                 </TD>
             </TR>
             <?php
             $cpt = 0;
             $total = 0;
+            $final = 0;
             foreach ($result_req_placement->fetchAll(PDO::FETCH_ASSOC) as $enregistrement) {
                 if (($enregistrement['REGLEMENT'] == "N" && $enregistrement['FACTURE'] == "N" && $enregistrement['ENCAISSE'] == "N") || ($enregistrement['REGLEMENT'] == "Y" && $enregistrement['RFACTURE'] == "N" && $enregistrement['RENCAISSE'] == "N")) {
                     ?>
@@ -307,6 +308,8 @@ $res_rec_dec_tva->execute();
         </table>
 
         <?php
+        $final += $total;
+
         $req_placement = "select p.id ID, P.client CLIENT, c.nom NomClient, p.poste POSTE, po.libelle NomPoste, p.mois_placement MOIS_PLACEMENT, 
 		p.annee_placement ANNEE_PLACEMENT, p.candidat CANDIDAT, concat(ca.nom, ' ', ca.prenom) 'NomCandidat', p.reglement REGLEMENT,
 		r.montant MONTANT_REGLEMENT, p.salaire SALAIRE, p.pourcentage POURCENTAGE, p.contrat CONTRAT, p.duree DUREE,p.forfait FORFAIT, 
@@ -351,22 +354,22 @@ $res_rec_dec_tva->execute();
             if ($result_req_placement->rowCount() != 0) {
                 ?>
                 <TR>
-                    <TD class="titre" align="left" class="col-sm-1">
+                    <TD align="left" class="col-sm-1">
                         ID
                     </TD>
-                    <TD class="titre" align="left" class="col-sm-2">
+                    <TD align="left" class="col-sm-2">
                         Client
                     </TD>
-                    <TD class="titre" align="left" class="col-sm-2">
+                    <TD align="left" class="col-sm-2">
                         Poste
                     </TD>
-                    <TD class="titre" align="left" class="col-sm-2">
+                    <TD align="left" class="col-sm-2">
                         Candidat
                     </TD>
-                    <TD class="titre" align="left" class="col-sm-1">
+                    <TD align="left" class="col-sm-1">
                         Mois/Année
                     </TD>
-                    <TD class="titre" align="right" class="col-sm-4">
+                    <TD align="right" class="col-sm-1">
                         HT		 
                     </TD>
                 </TR>
@@ -440,10 +443,16 @@ $res_rec_dec_tva->execute();
                 </TR>
                 <?php
             }
+            $final += $total;
             ?>
             <TR>
-                <TD colspan="7">
-                    &nbsp;
+                <TD colspan="7" class="normal">
+                    &nbsp;Le montant total des placements s'&eacute;l&egrave;ve &agrave; <?php echo number_format($final, 2, ',', ' '); ?> euros HT.
+                </TD>
+            </TR>
+            <TR>
+                <TD colspan="7" class="normal">
+                    &nbsp;Le montant total du chiffre d'affaire s'&eacute;l&egrave;ve &agrave; <?php echo number_format($dif_ht + $final, 2, ',', ' '); ?> euros HT.
                 </TD>
             </TR>
         </TABLE>
