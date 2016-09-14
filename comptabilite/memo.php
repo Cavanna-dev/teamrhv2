@@ -452,7 +452,7 @@ $res_rec_dec_tva->execute();
             </TR>
             <TR>
                 <TD colspan="7" class="normal">
-                    &nbsp;Le montant total du chiffre d'affaire s'&eacute;l&egrave;ve &agrave; <?php echo number_format($dif_ht + $final, 2, ',', ' '); ?> euros HT.
+                    &nbsp;<b>Le montant total du chiffre d'affaire s'&eacute;l&egrave;ve &agrave; <?php echo number_format($dif_ht + $final, 2, ',', ' '); ?> euros HT.</b>
                 </TD>
             </TR>
         </TABLE>
