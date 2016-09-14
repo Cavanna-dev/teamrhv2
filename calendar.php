@@ -394,7 +394,7 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                              style="position:absolute; left:0px; top:<?= $test + 200 ?>px;padding:10px;font-size:18px;
                              width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#FF45DA;">
                             <p>
-                                <strong>Annuler</strong>
+                                <strong>Annulé</strong>
                             </p>
                         </div>
                     </div>
