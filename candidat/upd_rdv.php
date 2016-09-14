@@ -98,8 +98,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 $body = '';
 
                                 if (isset($rdv->CIVILITE)) {
-                                    switch ($rdv->CIVILITE)
-                                    {
+                                    switch ($rdv->CIVILITE) {
                                         case "Mr" : $body .= "Monsieur,";
                                             break;
                                         case "Mme" : $body .= "Madame,";
@@ -123,6 +122,14 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                         <?= isset($r->email) ? $r->email : '' ?>
                                     </a>
                                 </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_cancelled" class="col-lg-2 control-label">Annuler</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="input_cancelled" id="input_cancelled" type="checkbox" value="1" <?php if($rdv->CANCELLED == 1) echo 'checked'; ?>>
+                                </label>
                             </div>
                         </div>
                     </fieldset>
@@ -180,11 +187,12 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 <select class="form-control" 
                                         name="input_hdeb" 
                                         id="input_title" required>
-                                    <?php
-                                    for ($i = 8; $i <= 20; $i++):
-                                        ?>
+                                            <?php
+                                            for ($i = 8; $i <= 20; $i++):
+                                                ?>
                                         <option value="<?= $i ?>" 
-                                        <?php if ($rdv->HEURE_DEB == $i)
+                                        <?php
+                                        if ($rdv->HEURE_DEB == $i)
                                             echo 'selected';
                                         ?>><?= $i ?>
                                         </option>
@@ -208,9 +216,9 @@ $rdv = getOneRdvById($db, $_GET['id']);
                                 <select class="form-control" 
                                         name="input_hfin" 
                                         id="input_title" required>
-                                    <?php
-                                    for ($i = 8; $i <= 20; $i++):
-                                        ?>
+                                            <?php
+                                            for ($i = 8; $i <= 20; $i++):
+                                                ?>
                                         <option value="<?= $i ?>" <?php if ($rdv->HEURE_FIN == $i) echo 'selected'; ?>><?= $i ?></option>
                                         <?php
                                     endfor;

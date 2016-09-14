@@ -121,7 +121,8 @@ $requete = "SELECT RESA_SALLE.ID, mid(RESA_SALLE.nom,1,10) 'CANDIDAT', DATE_FORM
 $requete .= "  DATE_FORMAT(jour,'%Y/%m/%d') 'ORDRE', HEURE_DEB, MINUTE_DEB, HEURE_FIN, MINUTE_FIN, RESA_SALLE.TYPE 'TYPE', CLIENT.NOM 'NOMCLIENT', ";
 $requete .= "  concat(mid(UTILISATEUR.PRENOM,1,1),'.',UTILISATEUR.NOM) 'CONSULTANT', UTILISATEUR.NOM 'NOMCONSULT', NUMSALLE , JOUR, ";
 $requete .= "  RESA_SALLE.NOM 'NOMCANDIDAT', RESA_SALLE.PRENOM 'PRENOMCANDIDAT', RESA_SALLE.CIVILITE, TITRE.LIBELLE, ";
-$requete .= "  concat(mid(ACCOMP.PRENOM,1,1),'.',ACCOMP.NOM) 'ACCOMPAGNE', ACCOMP.INITIALE 'ACCOMPAGNE2', ACCOMP.COLOR 'COLOR2', UTILISATEUR.COLOR ";
+$requete .= "  concat(mid(ACCOMP.PRENOM,1,1),'.',ACCOMP.NOM) 'ACCOMPAGNE', ACCOMP.INITIALE 'ACCOMPAGNE2', ACCOMP.COLOR 'COLOR2', UTILISATEUR.COLOR, ";
+$requete .= "  RESA_SALLE.CANCELLED ";
 $requete .= "FROM UTILISATEUR, RESA_SALLE " . PHP_EOL;
 $requete .= "	left join UTILISATEUR ACCOMP on ACCOMP.ID = RESA_SALLE.CONSULTANT2 " . PHP_EOL;
 $requete .= "  left join CLIENT on RESA_SALLE.CLIENT = CLIENT.ID " . PHP_EOL;
@@ -388,6 +389,14 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                                 <strong>Personnel</strong>
                             </p>
                         </div>
+
+                        <div id="ann" 
+                             style="position:absolute; left:0px; top:<?= $test + 200 ?>px;padding:10px;font-size:18px;
+                             width:<?= $widthBlock ?>px; overflow:hidden; height:40px; background-color:#FF45DA;">
+                            <p>
+                                <strong>Annuler</strong>
+                            </p>
+                        </div>
                     </div>
                     <?php
                     if ($consultant != "")
@@ -506,6 +515,9 @@ $r = $resultat->fetchAll(PDO::FETCH_ASSOC);
                             $color = "E8BDE4";
                         elseif (strtoupper($enregistrement[TYPE]) == "INTERNE")
                             $color = "00FF80";
+                        
+                        if ($enregistrement['CANCELLED'] == 1)
+                            $color = "FF45DA";
 
                         // on gère le libell&eacute;
                         if (strtoupper($enregistrement[TYPE]) == "CANDIDAT") {

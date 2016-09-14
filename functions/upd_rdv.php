@@ -7,6 +7,10 @@ foreach ($_POST as $key => $value):
 endforeach;
 //var_dump($array_value);die;
 
+if(!isset($array_value[':input_cancelled'])){
+    $array_value[':input_cancelled'] = '0';
+}
+
 try {
     $sql = "UPDATE `resa_salle` SET "
             . "`CONSULTANT1`=:input_consult1, "
@@ -22,7 +26,8 @@ try {
             . "`HEURE_DEB`=:input_hdeb, "
             . "`MINUTE_DEB`=:input_mdeb, "
             . "`HEURE_FIN`=:input_hfin, "
-            . "`MINUTE_FIN`=:input_mfin "
+            . "`MINUTE_FIN`=:input_mfin, "
+            . "`CANCELLED`=:input_cancelled "
             . "WHERE id=:input_id";		
     
     $stmt = $db->prepare($sql);
