@@ -125,7 +125,7 @@ $rdv = getOneRdvById($db, $_GET['id']);
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="input_cancelled" class="col-lg-2 control-label">Annuler</label>
+                            <label for="input_cancelled" class="col-lg-2 control-label">Annulé</label>
                             <div class="checkbox">
                                 <label>
                                     <input name="input_cancelled" id="input_cancelled" type="checkbox" value="1" <?php if($rdv->CANCELLED == 1) echo 'checked'; ?>>
