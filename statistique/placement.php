@@ -101,11 +101,6 @@ echo "</script>";
             </TD>
         </TR>
         <TR>
-            <TD>
-                <BR>&nbsp;
-            </TD>
-        </TR>
-        <TR>
             <?php
             if ($erreur == "oui") {
                 ?>
@@ -127,11 +122,6 @@ echo "</script>";
                         }
                         ?>
                         <TR>
-                            <TD colspan="8">
-                                &nbsp;
-                            </TD>
-                        </TR>
-                        <TR>
                             <TD>
                                 &nbsp;
                             </TD>
@@ -149,40 +139,22 @@ echo "</script>";
                             </TD>
                         </TR>
                         <TR>
-                            <TD colspan="14">
+                            <TD colspan="2">
                                 &nbsp;
                             </TD>
-                        </TR>
-                        <TR>
-                            <TD colspan="3">
-                                &nbsp;
-                            </TD>
-                            <TD align="left"  class="normal" colspan="5">
+                            <TD align="right"  class="normal" colspan="6">
                                 <?php
                                 $tmp1 = $param;
                                 $ord1 = urlencode("3, 4")
                                 ?>
-                                <A class="lien"  href="#" onclick="location.href = 'placement.php?&param=<?= $tmp1; ?>&order=<?= $ord1; ?>';">Class&eacute; par mois</A>
+                                <A class="lien"  href="#" onclick="location.href = 'entretien.php?&param=<?= $tmp1; ?>&order=<?= $ord1; ?>';">Class&eacute; par mois</A>
                             </TD>
-                            <TD align="right"  class="normal"  colspan="5">
+                            <TD align="right"  class="normal"  colspan="7">
                                 <?php
                                 $tmp2 = $param;
                                 $ord2 = urlencode("4, 3")
                                 ?>
-                                <A class="lien"  href="#" onclick="location.href = 'placement.php?&param=<?= $tmp1; ?>&order=<?= $ord2; ?>';">Class&eacute; par client</A>
-                            </TD>
-                            <TD colspan="3">
-                                &nbsp;
-                            </TD>
-                        </TR>
-                        <TR>
-                            <TD colspan="14">
-                                &nbsp;
-                            </TD>
-                        </TR>
-                        <TR>
-                            <TD colspan="14">
-                                &nbsp;
+                                <A class="lien"  href="#" onclick="location.href = 'entretien.php?&param=<?= $tmp1; ?>&order=<?= $ord2; ?>';">Class&eacute; par client</A>
                             </TD>
                         </TR>
                         <?php

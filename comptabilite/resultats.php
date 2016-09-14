@@ -1128,7 +1128,7 @@ if (isset($annuler) && $Annuler == "Annuler") {
                         echo "<BR>";
                     }
                     ?>
-                    <BR>&nbsp;&nbsp<b>;Total du mois de octobre</b>
+                    <BR>&nbsp;&nbsp<b>Total du mois de octobre</b>
                 </TD>
                 <TD align="right"  class="normal">
                     <?php
