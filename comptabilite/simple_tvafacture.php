@@ -1,4 +1,6 @@
 <?php
+header('content-type: text/html; charset=utf-8');
+
 /* CONSTANTES  */
 define('CONST_PROJECT_NAME', 'TeamRH');
 define('CONST_HOST', 'localhost');
@@ -45,6 +47,7 @@ $totalTvaEnc = 0;
 $totalTtcEnc = 0;
 ?>
 <html lang="fr">
+
     <body style="width:1200px;margin: auto;">
         <h1>TVA Factures - 
             <?= isset($_GET['month']) && $_GET['month'] != '' ? $_GET['month'] : '' ?>
