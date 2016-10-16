@@ -100,7 +100,7 @@ $totalTtcEnc = 0;
                             $resultat2->execute();
                             foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
                                 echo "&nbsp;&nbsp;";
-                                echo utf8_decode($enregistrement2['DESCRIPTION']);
+                                echo $enregistrement2['DESCRIPTION'];
                                 echo "&nbsp;&nbsp;";
                                 echo "<BR>";
                             }
@@ -145,7 +145,7 @@ $totalTtcEnc = 0;
                             $resultat1->execute();
                             foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
                                 echo "&nbsp;&nbsp;";
-                                echo utf8_decode(ucfirst(strtolower($enregistrement1['DESCRIPTION'])));
+                                echo ucfirst(strtolower($enregistrement1['DESCRIPTION']));
                                 echo "&nbsp;&nbsp;";
                                 echo "<BR>";
                             }
