@@ -12,6 +12,7 @@ define('CONST_URI', $_SERVER['DOCUMENT_ROOT'] . '\\' . CONST_PROJECT_NAME);
 try {
     $db = new PDO('mysql:host=' . CONST_HOST . ';dbname=' . CONST_DATABASE_NAME, CONST_DATABASE_USER, CONST_DATABASE_PWD);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->exec("SET CHARACTER SET utf8");
 } catch (PDOException $e) {
     print "Erreur !: " . $e->getMessage() . "<br/>";
     die();
@@ -96,7 +97,7 @@ $totalTtcEnc = 0;
                             $resultat2->execute();
                             foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
                                 echo "&nbsp;&nbsp;";
-                                echo utf8_encode($enregistrement2['DESCRIPTION']);
+                                echo utf8_decode($enregistrement2['DESCRIPTION']);
                                 echo "&nbsp;&nbsp;";
                                 echo "<BR>";
                             }
@@ -141,7 +142,7 @@ $totalTtcEnc = 0;
                             $resultat1->execute();
                             foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
                                 echo "&nbsp;&nbsp;";
-                                echo utf8_encode(ucfirst(strtolower($enregistrement1['DESCRIPTION'])));
+                                echo utf8_decode(ucfirst(strtolower($enregistrement1['DESCRIPTION'])));
                                 echo "&nbsp;&nbsp;";
                                 echo "<BR>";
                             }
