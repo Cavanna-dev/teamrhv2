@@ -15,45 +15,17 @@ error_reporting(0);
 foreach ($_POST as $key => $value) {
     $$key = $value;
 }
+
 /**
  * Search Function
  */
 if ($Rechercher == "Rechercher") {
 
     $clause = " 1 = 1 ";
-    $clause1 = " 1 = 1 ";
     if ($mois_facture != '')
         $clause .= " and  DATE_FORMAT(date_paiement,'%m')   = '$mois_facture'    ";
     if ($annee_facture != '')
         $clause .= " and  DATE_FORMAT(date_paiement,'%Y')   = '$annee_facture'   ";
-
-
-    if ($mois_facture == '01')
-        $clause1 .= " and  mois = 'janvier'   ";
-    if ($mois_facture == '02')
-        $clause1 .= " and  mois = 'février'   ";
-    if ($mois_facture == '03')
-        $clause1 .= " and  mois = 'mars'      ";
-    if ($mois_facture == '04')
-        $clause1 .= " and  mois = 'avril'     ";
-    if ($mois_facture == '05')
-        $clause1 .= " and  mois = 'mai'       ";
-    if ($mois_facture == '06')
-        $clause1 .= " and  mois = 'juin'      ";
-    if ($mois_facture == '07')
-        $clause1 .= " and  mois = 'juillet'   ";
-    if ($mois_facture == '08')
-        $clause1 .= " and  mois = 'août'      ";
-    if ($mois_facture == '09')
-        $clause1 .= " and  mois = 'septembre' ";
-    if ($mois_facture == '10')
-        $clause1 .= " and  mois = 'octobre'   ";
-    if ($mois_facture == '11')
-        $clause1 .= " and  mois = 'novembre'  ";
-    if ($mois_facture == '12')
-        $clause1 .= " and  mois = 'décembre'  ";
-    if ($annee_facture != '')
-        $clause1 .= " and  annee   = '$annee_facture'   ";
 
     $requete1 = "SELECT ENCAISSE.ID, concat(mid(CLIENT.NOM, 1, 20),'.')  'DESCRIPTION', ENCAISSE.MONTANT 'HT', " . PHP_EOL;
     $requete1 .= "  ENCAISSE.ENC_TTC_TOT_AMOUNT 'TTC_AMOUNT_ENC', ENCAISSE.ENC_TVA_TOT_AMOUNT 'TVA_AMOUNT_ENC', " . PHP_EOL;
@@ -62,19 +34,13 @@ if ($Rechercher == "Rechercher") {
     $requete1 .= "FROM CLIENT, ENCAISSE ";
     $requete1 .= "WHERE " . $clause . " AND ENCAISSE.client = CLIENT.id ORDER BY DATE_PAIEMENT, DESCRIPTION DESC";
 
-//    $requete2 = " select DECAISSE.ID, mid(DECAISSE.DESCRIPTION, 1, 20)  'DESCRIPTION', DECAISSE_DETAIL.TTC_AMOUNT 'TTC'," . PHP_EOL;
-//    $requete2 .= " DECAISSE_DETAIL.TVA_PERCENT 'TVA_DEC', DECAISSE_DETAIL.HT_AMOUNT 'HT_AMOUNT_DEC', " . PHP_EOL;
-//    $requete2 .= " DECAISSE_DETAIL.TVA_AMOUNT 'TVA_AMOUNT_DEC', DATE_FORMAT(DECAISSE.date_paiement,'%d/%m/%Y') 'DATE_PAIEMENT', " . PHP_EOL;
-//    $requete2 .= " DATE_FORMAT(DECAISSE.DATE_PAIEMENT,'%Y/%m/%d') 'DATE_ORDRE' " . PHP_EOL;
-//    $requete2 .= " from DECAISSE, DECAISSE_DETAIL" . PHP_EOL;
-//    $requete2 .= " where DECAISSE.ID = DECAISSE_DETAIL.FK_DECAISSE_ID and " . $clause . " ORDER BY DATE_PAIEMENT, DESCRIPTION DESC";
-    
     $requete2 = " select DECAISSE.ID, mid(DECAISSE.DESCRIPTION, 1, 20)  'DESCRIPTION', DECAISSE.DEC_TTC_TOT_AMOUNT 'TTC'," . PHP_EOL;
     $requete2 .= " DECAISSE.DEC_HT_TOT_AMOUNT 'HT_AMOUNT_DEC', " . PHP_EOL;
     $requete2 .= " DECAISSE.DEC_TVA_TOT_AMOUNT 'TVA_AMOUNT_DEC', DATE_FORMAT(DECAISSE.date_paiement,'%d/%m/%Y') 'DATE_PAIEMENT', " . PHP_EOL;
     $requete2 .= " DATE_FORMAT(DECAISSE.DATE_PAIEMENT,'%Y/%m/%d') 'DATE_ORDRE' " . PHP_EOL;
     $requete2 .= " from DECAISSE ";
     $requete2 .= " where $clause ORDER BY DATE_PAIEMENT, DESCRIPTION desc";
+
     $resultat2 = $db->prepare($requete2);
     $resultat2->execute();
 
@@ -92,28 +58,18 @@ if ($Rechercher == "Rechercher") {
             
         }
     }
-//$rq_totaux = "SELECT DECAISSE_DETAIL.TVA_PERCENT 'TVA_PERCENT', SUM( TVA_AMOUNT ) 'TVA_AMOUNT', SUM( HT_AMOUNT ) 'HT_AMOUNT', " . PHP_EOL;
-//    $rq_totaux .= "  SUM( TTC_AMOUNT ) 'TTC_AMOUNT' " . PHP_EOL;
-//    $rq_totaux .= "FROM DECAISSE_DETAIL, DECAISSE " . PHP_EOL;
-//    $rq_totaux .= "WHERE " . $clause . " " . PHP_EOL;
-//    $rq_totaux .= "AND DECAISSE.ID = DECAISSE_DETAIL.FK_DECAISSE_ID " . PHP_EOL;
-//    $rq_totaux .= "GROUP BY DECAISSE_DETAIL.TVA_PERCENT";
-    
+
     $rq_totaux = "SELECT SUM( DEC_TVA_TOT_AMOUNT ) 'TVA_AMOUNT', SUM( DEC_HT_TOT_AMOUNT ) 'HT_AMOUNT', " . PHP_EOL;
     $rq_totaux .= "  SUM( DEC_TTC_TOT_AMOUNT ) 'TTC_AMOUNT' " . PHP_EOL;
     $rq_totaux .= "FROM DECAISSE " . PHP_EOL;
     $rq_totaux .= "WHERE " . $clause . " " . PHP_EOL;
 
-    //$res_totaux = mysql_query($rq_totaux);
     $res_totaux = $db->prepare($rq_totaux);
     $res_totaux->execute();
 
     foreach ($res_totaux->fetchAll(PDO::FETCH_ASSOC) as $enregistrement_totaux) {
-        //while ($enregistrement_totaux = mysql_fetch_array($res_totaux)) {
-        $total_ht_amount_dec = $total_ht_amount_dec + $enregistrement_totaux[HT_AMOUNT];
-
-        $total_ttc_amount_dec = $total_ttc_amount_dec + $enregistrement_totaux[TTC_AMOUNT];
-
+        $total_ht_amount_dec = $total_ht_amount_dec + $enregistrement_totaux['HT_AMOUNT'];
+        $total_ttc_amount_dec = $total_ttc_amount_dec + $enregistrement_totaux['TTC_AMOUNT'];
         $total_tva_amount_dec = $total_tva_amount_dec + $enregistrement_totaux['TVA_AMOUNT'];
     }
 }
@@ -220,9 +176,6 @@ else {
                             <?php
                         } else {
                             ?>
-                            <TD colspan="5">
-                                &nbsp;
-                            </TD>
                             </TR>
 
                             <?php
@@ -259,7 +212,7 @@ else {
                                         $i = 1;
                                         echo "TVA pour les factures du $mois_facture/$annee_facture";
                                         ?>
-
+                                        <a href='./simple_tvafacture.php?month=<?= $mois_facture ?>&year=<?= $annee_facture ?>'><button type="button" class="btn btn-primary">Tableau simple</button></a>
                                     </TD>
                                 </TR>
                                 <TR>
@@ -314,11 +267,9 @@ else {
                                     <TR bordercolor="#FF9640">
                                         <TD align="left"  class="normal">
                                             <?php
-                                            //$resultat2 = mysql_query($requete2);
                                             $resultat2 = $db->prepare($requete2);
                                             $resultat2->execute();
                                             foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
-                                                //while ($enregistrement2 = mysql_fetch_array($resultat2)) {
                                                 echo "&nbsp;&nbsp;";
                                                 echo $enregistrement2['DESCRIPTION'];
                                                 echo "&nbsp;&nbsp;";
@@ -328,12 +279,10 @@ else {
                                         </TD>
                                         <TD align="right"  class="normal">
                                             <?php
-//                                            $resultat2 = mysql_query($requete2);
-//                                            while ($enregistrement2 = mysql_fetch_array($resultat2)) {
                                             $resultat2 = $db->prepare($requete2);
                                             $resultat2->execute();
                                             foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
-                                                $total_ht_dec = $total_ht_dec + $enregistrement2['HT_AMOUNT_DEC'];
+                                                $total_ht_dec += $enregistrement2['HT_AMOUNT_DEC'];
                                                 echo number_format($enregistrement2['HT_AMOUNT_DEC'], 2, ',', ' ');
                                                 echo "<BR>";
                                             }
@@ -341,12 +290,10 @@ else {
                                         </TD>
                                         <TD align="right"  class="normal">
                                             <?php
-//                                            $resultat2 = mysql_query($requete2);
-//                                            while ($enregistrement2 = mysql_fetch_array($resultat2)) {
                                             $resultat2 = $db->prepare($requete2);
                                             $resultat2->execute();
                                             foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
-                                                $total_tva_dec = $total_tva_dec + $enregistrement2['TVA_AMOUNT_DEC'];
+                                                $total_tva_dec += $enregistrement2['TVA_AMOUNT_DEC'];
                                                 echo number_format($enregistrement2['TVA_AMOUNT_DEC'], 2, ',', ' ');
                                                 echo "<BR>";
                                             }
@@ -354,12 +301,10 @@ else {
                                         </TD>
                                         <TD align="right"  class="normal">
                                             <?php
-//                                            $resultat2 = mysql_query($requete2);
-//                                            while ($enregistrement2 = mysql_fetch_array($resultat2)) {
                                             $resultat2 = $db->prepare($requete2);
                                             $resultat2->execute();
                                             foreach ($resultat2->fetchAll(PDO::FETCH_ASSOC) as $enregistrement2) {
-                                                $total_ttc_dec = $total_ttc_dec + $enregistrement2['TTC'];
+                                                $total_ttc_dec += $enregistrement2['TTC'];
                                                 echo number_format($enregistrement2['TTC'], 2, ',', ' ');
                                                 echo "<BR>";
                                             }
@@ -394,9 +339,7 @@ else {
                                         $resultat1->execute();
                                         foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {
                                             if ($enregistrement1['TVA_ENC'] != "0" && $enregistrement1['TVA_ENC'] != "")
-                                                $total_ht_enc = $total_ht_enc + $enregistrement1['HT'];
-                                            else
-                                                $total_ht_enc_sans_tva = $total_ht_enc_sans_tva + $enregistrement1['HT'];
+                                                $total_ht_enc += $enregistrement1['HT'];
 
                                             echo number_format($enregistrement1['HT'], 2, ',', ' ');
                                             echo "<BR>";
@@ -426,8 +369,6 @@ else {
                                     </TD>
                                     <TD align="right"  class="normal">
                                         <?php
-//                                        $resultat1 = mysql_query($requete1);
-//                                        while ($enregistrement1 = mysql_fetch_array($resultat1)) {
                                         $resultat1 = $db->prepare($requete1);
                                         $resultat1->execute();
                                         foreach ($resultat1->fetchAll(PDO::FETCH_ASSOC) as $enregistrement1) {

@@ -22,7 +22,7 @@ include '../functions/bootstrap.php';
             Il y a eut un problème avec l'action. Veuillez rééssayé ultérieurement.
         </div>
     <?php } ?>
-    <h1>Gestion Evaluation</h1>
+    <h1>Recherche</h1>
     <form class="form-horizontal" method="GET" action="evaluation.php" id="form_customer">
         <div class="jumbotron">
             <div class="row">

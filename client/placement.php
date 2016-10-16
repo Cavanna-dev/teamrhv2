@@ -270,9 +270,11 @@ if ($_SESSION['user']['type'] != 'ADMIN' && $_SESSION['user']['type'] != 'SUPERA
                         <p>Aucun résultats</p>
                     </div>
                 <?php } ?>
-                <h1>Total Non Facturé: <?= isset($totalIncomeNonFacture) ? number_format($totalIncomeNonFacture, 2, '.', ' ') : 0 ?> €</h1>
-                <h1>Total Non Encaissé: <?= isset($totalIncomeNonRecu) ? number_format($totalIncomeNonRecu, 2, '.', ' ') : 0 ?> €</h1>
-                <h1>Total Encaissé: <?= isset($totalIncomeRecu) ? number_format($totalIncomeRecu, 2, '.', ' ') : 0 ?> €</h1>
+                <h3>Total Non Facturé: <?= isset($totalIncomeNonFacture) ? number_format($totalIncomeNonFacture, 2, '.', ' ') : 0 ?> €</h3>
+                <h3>Total Non Encaissé: <?= isset($totalIncomeNonRecu) ? number_format($totalIncomeNonRecu, 2, '.', ' ') : 0 ?> €</h3>
+                <h3>Total Encaissé: <?= isset($totalIncomeRecu) ? number_format($totalIncomeRecu, 2, '.', ' ') : 0 ?> €</h3>
+                <?php $total = $totalIncomeNonFacture + $totalIncomeNonRecu + $totalIncomeRecu; ?>
+                <h3>Total : <?= number_format($total, 2, '.', ' ') ?> €</h3>
             <?php } ?>
         </form>
     </div>
