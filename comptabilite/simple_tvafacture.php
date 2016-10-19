@@ -196,6 +196,10 @@ $totalTtcEnc = 0;
                         <td style="text-align: right"><?= number_format($totalTvaEnc, 2, ',', ' ') ?></td>
                         <td style="text-align: right"><?= number_format($totalTtcEnc, 2, ',', ' ') ?></td>
                     </tr>
+                    <tr>
+                        <td>Total TVA a déclarer</td>
+                        <td style="text-align: right"><?= number_format($totalTvaEnc - $totalTvaDec, 2, ',', ' ') ?></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
